@@ -1,0 +1,133 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/ui/Button.astro";
+import Input from "@/components/ui/Input.astro";
+import Textarea from "@/components/ui/Textarea.astro";
+import Label from "@/components/ui/Label.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import Icon from "@/components/Icon.astro";
+import InquiryAntiSpamFields from "@/components/InquiryAntiSpamFields.astro";
+import { SITE_CONTACT } from "@/lib/site";
+import { localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = ui(locale);
+const lp = (p: string) => localizedPath(locale, p);
+---
+
+<BaseLayout
+  title={`${t.contact.heading} | CoolerFit`}
+  description={t.contact.subtext}
+  canonicalPath={lp("/contact")}
+  alternatePath="/contact"
+  locale={locale}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container max-w-3xl">
+      <div class="text-center mb-14">
+        <span class="section-hd-label">{t.contact.label}</span>
+        <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">{t.contact.heading}</h1>
+        <p class="text-muted-foreground max-w-2xl mx-auto">{t.contact.subtext}</p>
+      </div>
+
+      <Card class="border border-border/60 shadow-md">
+        <CardContent class="p-8">
+          <form class="relative space-y-6" data-contact-form data-locale={locale}>
+            <InquiryAntiSpamFields />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <Label for="name">{t.form.name}</Label>
+                <Input id="name" name="name" required maxlength={100} />
+              </div>
+              <div class="space-y-2">
+                <Label for="email">{t.form.email}</Label>
+                <Input id="email" name="email" type="email" required maxlength={255} />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <Label for="company">{t.form.company}</Label>
+                <Input id="company" name="company" maxlength={100} />
+              </div>
+              <div class="space-y-2">
+                <Label for="phone">{t.form.phone}</Label>
+                <Input id="phone" name="phone" placeholder={SITE_CONTACT.phone} maxlength={20} />
+              </div>
+            </div>
+            <div class="space-y-2">
+              <Label for="details">{t.form.details}</Label>
+              <Textarea id="details" name="details" rows={5} maxlength={2000} />
+            </div>
+            <Button type="submit" size="lg" data-contact-submit>
+              <Icon name="Send" class="me-2" size={18} />
+              <span data-submit-label>{t.contact.send}</span>
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { submitInquiry, validateInquiryContact } from "@/lib/inquiry";
+  import { SITE_CONTACT } from "@/lib/site";
+  import { toast } from "@/lib/toast";
+
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  if (form) {
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
+    const submitButton = form.querySelector<HTMLButtonElement>("[data-contact-submit]");
+    const submitLabel = form.querySelector<HTMLElement>("[data-submit-label]");
+    const idle = submitLabel?.textContent ?? "Send";
+    const locale = form.dataset.locale ?? "en";
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const value = (name: string) => field(name)?.value.trim() ?? "";
+      const err = validateInquiryContact(value("name"), value("email"));
+      if (err) {
+        toast({ title: err, variant: "destructive" });
+        return;
+      }
+      if (submitButton) submitButton.disabled = true;
+      if (submitLabel) submitLabel.textContent = locale === "es" ? "Enviando…" : locale === "ar" ? "جارٍ الإرسال…" : "Sending…";
+      try {
+        const result = await submitInquiry(
+          {
+            formType: "contact",
+            name: value("name"),
+            email: value("email"),
+            phone: value("phone") || undefined,
+            company: value("company") || undefined,
+            message: value("details") || undefined,
+            pageUrl: window.location.href,
+          },
+          null,
+          {
+            formStartedAt: Number(field("formStartedAt")?.value ?? Date.now()),
+            honeypot: field("website")?.value ?? "",
+          },
+        );
+        if (result.ok) {
+          toast({
+            title: locale === "es" ? "Solicitud enviada" : locale === "ar" ? "تم إرسال الطلب" : "Quote request sent",
+            description: `→ ${SITE_CONTACT.email}`,
+          });
+          form.reset();
+        } else {
+          toast({ title: result.error ?? "Error", variant: "destructive" });
+        }
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+        if (submitLabel) submitLabel.textContent = idle;
+      }
+    });
+  }
+</script>

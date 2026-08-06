@@ -1,0 +1,135 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/ui/Button.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import Icon from "@/components/Icon.astro";
+import ProductImageCard from "@/components/ProductImageCard.astro";
+import QuoteLink from "@/components/QuoteLink.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import { productItems } from "@/data/product-items";
+import { cn } from "@/lib/utils";
+
+const filters = [
+  { id: "all", label: "All Products" },
+  { id: "popular", label: "Popular" },
+] as const;
+
+/** Initial `useState` value; the script takes over from here. */
+const active: (typeof filters)[number]["id"] = "all";
+
+const activeClass = "bg-foreground text-background border-foreground shadow-xs";
+const inactiveClass =
+  "bg-background text-foreground/70 border-border/60 hover:text-foreground hover:border-foreground/30 hover:shadow-xs";
+---
+
+<BaseLayout
+  title="Evaporative Cooler Covers by Category | CoolerFit"
+  description="Browse evaporative, rooftop, commercial, and custom cooler covers. Request a quote for bulk or made-to-measure covers."
+  canonicalPath="/products"
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <div class="text-center mb-12">
+        <span class="section-hd-label">Our Products</span>
+        <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">Product Catalog</h1>
+        <p class="text-muted-foreground max-w-xl mx-auto">Sample product configurations — each cover is manufactured to your dimensions and options. <a href="/custom-solutions" class="text-primary hover:underline">Customize any model</a> or browse by <a href="/products/evaporative-cooler-covers" class="text-primary hover:underline">evaporative cooler covers</a>.</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-2 mb-10">
+        {
+          filters.map((cat) => (
+            <button
+              type="button"
+              data-product-filter={cat.id}
+              class={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-200 ${
+                active === cat.id ? activeClass : inactiveClass
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {
+          productItems.map((p) => (
+            <Card
+              data-product-card
+              data-popular={p.popular ? "true" : "false"}
+              class="group h-full border border-border/60 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+            >
+              <div class="aspect-[4/3] overflow-hidden bg-gradient-to-b from-secondary/50 to-secondary flex items-center justify-center p-4 md:p-5">
+                <ProductImageCard
+                  src={p.image}
+                  alt={p.imageAlt ?? p.name}
+                  class="w-full h-full transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                />
+              </div>
+              <CardContent class="p-6 flex flex-col flex-1">
+                {p.popular ? (
+                  <span class="text-[11px] font-semibold text-primary uppercase tracking-wider">Popular</span>
+                ) : (
+                  <span class="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">Cover</span>
+                )}
+                <h3 class="font-display font-semibold text-foreground mt-1 mb-2">{p.name}</h3>
+                <p class="text-sm text-muted-foreground mb-4 flex-1 leading-relaxed">{p.summary}</p>
+                <div class="flex gap-2">
+                  <QuoteLink
+                    quote={{
+                      productSlug: p.slug,
+                      productName: p.name,
+                      ref: `/product/${p.slug}`,
+                    }}
+                    class={cn(buttonVariants({ size: "sm" }))}
+                  >
+                    Request Quote
+                  </QuoteLink>
+                  <Button size="sm" variant="outline" href={`/product/${p.slug}`}>
+                    Details <Icon name="ChevronRight" size={14} />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Stands in for the `useState` filter: every card is in the DOM and the
+  // non-matching ones are hidden, so the rendered result matches React's.
+  const ACTIVE = ["bg-foreground", "text-background", "border-foreground", "shadow-xs"];
+  const INACTIVE = [
+    "bg-background",
+    "text-foreground/70",
+    "border-border/60",
+    "hover:text-foreground",
+    "hover:border-foreground/30",
+    "hover:shadow-xs",
+  ];
+
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-product-filter]"));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-product-card]"));
+
+  function apply(active: string) {
+    for (const button of buttons) {
+      const isActive = button.dataset.productFilter === active;
+      button.classList.remove(...(isActive ? INACTIVE : ACTIVE));
+      button.classList.add(...(isActive ? ACTIVE : INACTIVE));
+    }
+    for (const card of cards) {
+      card.hidden = active === "popular" && card.dataset.popular !== "true";
+    }
+  }
+
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      const id = button.dataset.productFilter;
+      if (id) apply(id);
+    });
+  }
+</script>

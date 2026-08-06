@@ -1,0 +1,128 @@
+---
+/**
+ * Replaces the Radix accordion (`type="single" collapsible`) used for FAQ
+ * blocks. The DOM shape and `data-state` attributes mirror Radix so the class
+ * strings carried over from the React components keep working unchanged.
+ */
+import Icon from "@/components/Icon.astro";
+import { cn } from "@/lib/utils";
+
+export type Faq = {
+  q: string;
+  a: string;
+};
+
+interface Props {
+  faqs: Faq[];
+  class?: string;
+  triggerClass?: string;
+  contentClass?: string;
+  idPrefix?: string;
+}
+
+const {
+  faqs,
+  class: className,
+  triggerClass = "text-left text-base font-medium",
+  contentClass = "text-muted-foreground leading-relaxed",
+  idPrefix = "faq",
+} = Astro.props;
+---
+
+<div class={cn("w-full", className)} data-accordion data-orientation="vertical">
+  {
+    faqs.map((f, i) => {
+      const triggerId = `${idPrefix}-trigger-${i}`;
+      const contentId = `${idPrefix}-content-${i}`;
+      return (
+        <div
+          data-accordion-item
+          data-state="closed"
+          data-orientation="vertical"
+          class="border-b border-border/60 last:border-b-0 px-4 rounded-lg transition-colors duration-200 data-[state=open]:bg-secondary/40 data-[state=open]:border-primary/10"
+        >
+          <h3 data-orientation="vertical" data-state="closed" class="flex">
+            <button
+              type="button"
+              id={triggerId}
+              aria-controls={contentId}
+              aria-expanded="false"
+              data-accordion-trigger
+              data-state="closed"
+              class={cn(
+                "flex flex-1 items-center justify-between gap-3 py-4 font-medium text-foreground transition-all duration-200 hover:text-primary rounded-md focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=open]:text-primary [&[data-state=open]>span]:bg-primary/10 [&[data-state=open]>span]:text-primary [&[data-state=open]>span>svg]:rotate-180 hover:[&>span]:bg-primary/10 hover:[&>span]:text-primary",
+                triggerClass,
+              )}
+            >
+              {f.q}
+              <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary/80 text-muted-foreground transition-all duration-300">
+                <Icon name="ChevronDown" class="h-4 w-4 transition-transform duration-300" />
+              </span>
+            </button>
+          </h3>
+          <div
+            id={contentId}
+            role="region"
+            aria-labelledby={triggerId}
+            data-accordion-content
+            data-state="closed"
+            hidden
+            class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          >
+            <div class={cn("pb-4 pt-0", contentClass)}>{f.a}</div>
+          </div>
+        </div>
+      );
+    })
+  }
+</div>
+
+<script>
+  type State = "open" | "closed";
+
+  function setState(item: HTMLElement, state: State) {
+    const trigger = item.querySelector<HTMLElement>("[data-accordion-trigger]");
+    const content = item.querySelector<HTMLElement>("[data-accordion-content]");
+    const header = item.querySelector<HTMLElement>("h3");
+    if (!trigger || !content) return;
+
+    item.dataset.state = state;
+    trigger.dataset.state = state;
+    if (header) header.dataset.state = state;
+    trigger.setAttribute("aria-expanded", String(state === "open"));
+
+    if (state === "open") {
+      content.hidden = false;
+      // Measured before the class flips so the keyframe has a concrete target.
+      content.style.setProperty("--accordion-content-height", `${content.scrollHeight}px`);
+      content.dataset.state = "open";
+    } else {
+      content.style.setProperty("--accordion-content-height", `${content.scrollHeight}px`);
+      content.dataset.state = "closed";
+      const onEnd = (e: AnimationEvent) => {
+        if (e.target !== content) return;
+        if (content.dataset.state === "closed") content.hidden = true;
+        content.removeEventListener("animationend", onEnd);
+      };
+      content.addEventListener("animationend", onEnd);
+    }
+  }
+
+  function init(root: HTMLElement) {
+    const items = [...root.querySelectorAll<HTMLElement>("[data-accordion-item]")];
+
+    for (const item of items) {
+      const trigger = item.querySelector<HTMLElement>("[data-accordion-trigger]");
+      trigger?.addEventListener("click", () => {
+        const isOpen = item.dataset.state === "open";
+        // type="single": opening one closes the rest. collapsible: re-clicking closes.
+        for (const other of items) {
+          if (other !== item && other.dataset.state === "open") setState(other, "closed");
+        }
+        setState(item, isOpen ? "closed" : "open");
+      });
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-accordion]").forEach(init);
+</script>

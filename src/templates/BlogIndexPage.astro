@@ -1,0 +1,74 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/ui/Card.astro";
+import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import Icon from "@/components/Icon.astro";
+import { getPillarPosts, getClusterPosts, blogSlug, toBlogPost } from "@/lib/content";
+import { localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = ui(locale);
+const lp = (p: string) => localizedPath(locale, p);
+const pillars = (await getPillarPosts(locale)).map(toBlogPost);
+---
+
+<BaseLayout
+  title={`${t.nav.blog} | CoolerFit`}
+  description={t.home.heroBody}
+  canonicalPath={lp("/blog")}
+  alternatePath="/blog"
+  locale={locale}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <Breadcrumb class="mb-6" items={[{ label: t.common.home, href: lp("/") }, { label: t.nav.blog }]} />
+      <div class="text-center mb-12">
+        <span class="section-hd-label">{t.nav.resources}</span>
+        <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">
+          {locale === "es" ? "Base de conocimiento" : locale === "ar" ? "قاعدة المعرفة" : "Cooler Cover Knowledge Base"}
+        </h1>
+      </div>
+      <div class="space-y-8">
+        {
+          await Promise.all(
+            pillars.map(async (pillar) => {
+              const clusters = (await getClusterPosts(pillar.slug, locale)).map(toBlogPost);
+              return (
+                <Card class="border border-border/60 shadow-xs overflow-hidden">
+                  <div class="p-6 bg-secondary border-b border-border">
+                    <a href={lp(`/blog/${pillar.slug}`)} class="group">
+                      <div class="flex items-center gap-2 mb-2">
+                        <Icon name="BookOpen" size={16} class="text-primary" />
+                        <span class="text-xs font-semibold text-primary uppercase tracking-wider">{t.common.pillarGuide}</span>
+                      </div>
+                      <h2 class="text-xl font-display font-bold text-foreground group-hover:text-primary transition-colors">
+                        {pillar.title}
+                      </h2>
+                      <p class="text-sm text-muted-foreground mt-2">{pillar.excerpt}</p>
+                    </a>
+                  </div>
+                  {clusters.length > 0 && (
+                    <ul class="p-4 grid sm:grid-cols-2 gap-2">
+                      {clusters.map((c) => (
+                        <li>
+                          <a href={lp(`/blog/${c.slug}`)} class="text-sm text-primary hover:underline">
+                            {c.title}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </Card>
+              );
+            }),
+          )
+        }
+      </div>
+    </div>
+  </div>
+</BaseLayout>

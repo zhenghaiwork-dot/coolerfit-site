@@ -1,0 +1,171 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/ui/Button.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import ProductImageCard from "@/components/ProductImageCard.astro";
+import { organizationJsonLd } from "@/lib/site";
+import { getProductEntries, toProductItem } from "@/lib/content";
+import { getPageEntry } from "@/lib/content";
+import { localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+import type { IconName } from "@/lib/icons";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = ui(locale);
+const lp = (p: string) => localizedPath(locale, p);
+const page = await getPageEntry("home", locale);
+
+const featuredSlugs = [
+  "standard-side-draft-cover",
+  "heavy-duty-industrial-cover",
+  "uv-shield-cover",
+  "custom-logo-cover",
+  "waterproof-premium-cover",
+  "small-batch-prototype-cover",
+] as const;
+
+const products = (await getProductEntries(locale)).map(toProductItem);
+const featured = featuredSlugs.map((slug) => products.find((p) => p.slug === slug)).filter(Boolean);
+
+const sellingPoints: { icon: IconName; title: string; desc: string }[] =
+  locale === "es"
+    ? [
+        { icon: "ShieldCheck", title: "Antipolvo", desc: "Mantén el enfriador limpio y eficiente." },
+        { icon: "Wind", title: "Antiviento", desc: "Ajuste seguro ante ráfagas y tormentas." },
+        { icon: "Sun", title: "Protección UV", desc: "Materiales que resisten el sol y el desteñido." },
+        { icon: "Palette", title: "Marca propia", desc: "Logo, colores e impresión promocional." },
+      ]
+    : locale === "ar"
+      ? [
+          { icon: "ShieldCheck", title: "مقاوم للغبار", desc: "يحافظ على نظافة وكفاءة المبرّد." },
+          { icon: "Wind", title: "مقاوم للرياح", desc: "تثبيت آمن ضد العواصف والرياح القوية." },
+          { icon: "Sun", title: "حماية من الأشعة", desc: "خامات تقاوم الشمس والبهتان." },
+          { icon: "Palette", title: "علامة تجارية", desc: "شعار وألوان وطباعة ترويجية." },
+        ]
+      : [
+          { icon: "ShieldCheck", title: "Dustproof", desc: "Keep your cooler clean and efficient with premium dust protection." },
+          { icon: "Wind", title: "Windproof", desc: "Secure fitting design that withstands strong winds and storms." },
+          { icon: "Sun", title: "UV Protection", desc: "UV-resistant materials that prevent sun damage and fading." },
+          { icon: "Palette", title: "Custom Branding", desc: "Add your logo, colors, and branding for promotional use." },
+        ];
+---
+
+<BaseLayout
+  title={page?.data.title ?? t.home.h1Accent}
+  description={page?.data.description ?? t.home.heroBody}
+  canonicalPath={lp("/")}
+  alternatePath="/"
+  locale={locale}
+  jsonLd={organizationJsonLd()}
+>
+  <section class="relative pt-32 pb-16 md:pt-44 md:pb-28 bg-secondary overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-24 -end-24 w-96 h-96 rounded-full bg-primary/5 blur-3xl"></div>
+      <div class="absolute -bottom-32 -start-32 w-[30rem] h-[30rem] rounded-full bg-primary/3 blur-3xl"></div>
+    </div>
+    <div class="container relative grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div class="text-center lg:text-start">
+        <p class="text-primary font-semibold text-sm uppercase tracking-widest mb-4">{t.home.eyebrow}</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-[1.08] mb-6 text-balance">
+          {t.home.h1Before}{" "}
+          <span class="text-primary">{t.home.h1Accent}</span>
+        </h1>
+        <p class="text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-4 leading-relaxed">{t.home.heroBody}</p>
+        <p class="text-sm text-muted-foreground/80 max-w-xl mx-auto lg:mx-0 mb-8">{t.home.heroMeta}</p>
+        <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+          <Button size="lg" href={lp("/contact")} class="shadow-md hover:shadow-lg">
+            {t.home.ctaQuote} <Icon name="ArrowRight" class="ms-2" size={18} />
+          </Button>
+          <Button size="lg" variant="outline" href={lp("/custom-solutions")}>{t.home.ctaHow}</Button>
+        </div>
+      </div>
+      <div class="aspect-[4/3] overflow-hidden rounded-2xl bg-background shadow-lg ring-1 ring-border/40">
+        <img
+          src="/images/site/hero-home.webp"
+          alt={t.home.h1Accent}
+          width={1200}
+          height={900}
+          loading="eager"
+          decoding="async"
+          class="w-full h-full object-cover hover:scale-[1.02] transition-transform duration-700 ease-out"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="relative py-16 md:py-24 section-edge">
+    <div class="container relative">
+      <SectionHeader label="CoolerFit" heading={locale === "es" ? "¿Por qué nuestras fundas?" : locale === "ar" ? "لماذا أغطيتنا؟" : "Why Choose Our Covers?"} />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {
+          sellingPoints.map((sp) => (
+            <Card class="group border border-border/60 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+              <CardContent class="p-8 text-center">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/8 to-primary-accent flex items-center justify-center mx-auto mb-4 transition-transform duration-300 group-hover:scale-110">
+                  <Icon name={sp.icon} class="text-primary" size={24} />
+                </div>
+                <h3 class="font-display font-semibold text-lg text-foreground mb-2">{sp.title}</h3>
+                <p class="text-sm text-muted-foreground leading-relaxed">{sp.desc}</p>
+              </CardContent>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="relative py-16 md:py-24 bg-secondary section-edge">
+    <div class="container">
+      <SectionHeader label={t.nav.products} heading={locale === "es" ? "Nuestra gama" : locale === "ar" ? "مجموعة منتجاتنا" : "Our Product Range"} />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          featured.map(
+            (p) =>
+              p && (
+                <a href={lp(`/product/${p.slug}`)} class="group block">
+                  <Card class="h-full border border-border/60 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                    <div class="aspect-[4/3] overflow-hidden bg-gradient-to-b from-secondary/50 to-secondary flex items-center justify-center p-4 md:p-5">
+                      <ProductImageCard
+                        src={p.image}
+                        alt={p.imageAlt ?? p.name}
+                        class="w-full h-full transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <CardContent class="p-6">
+                      <h3 class="font-display font-semibold text-foreground mt-1 mb-2">{p.name}</h3>
+                      <span class="inline-flex items-center text-sm font-medium text-primary">
+                        {t.common.learnMore} <Icon name="ChevronRight" size={14} class="ms-1" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </a>
+              ),
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="relative py-16 md:py-24 section-edge">
+    <div class="container">
+      <div class="text-center bg-foreground rounded-2xl p-12 md:p-20 relative overflow-hidden">
+        <div class="relative">
+          <h2 class="text-3xl md:text-4xl font-display font-bold text-background mb-4">
+            {locale === "es" ? "¿Listo para empezar?" : locale === "ar" ? "هل أنت مستعد للبدء؟" : "Ready to Get Started?"}
+          </h2>
+          <p class="text-background/65 max-w-lg mx-auto mb-8 text-lg">{t.contact.subtext}</p>
+          <Button size="lg" variant="secondary" href={lp("/contact")} class="shadow-lg">
+            {t.home.ctaQuote} <Icon name="ArrowRight" class="ms-2" size={18} />
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

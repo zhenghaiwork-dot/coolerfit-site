@@ -1,0 +1,445 @@
+---
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import Label from "@/components/ui/Label.astro";
+import Input from "@/components/ui/Input.astro";
+import Textarea from "@/components/ui/Textarea.astro";
+import Button from "@/components/ui/Button.astro";
+import Select from "@/components/ui/Select.astro";
+import Icon from "@/components/Icon.astro";
+import InquiryAntiSpamFields from "@/components/InquiryAntiSpamFields.astro";
+import QuoteLink from "@/components/QuoteLink.astro";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  productName: string;
+  productSlug: string;
+}
+
+const { productName, productSlug } = Astro.props;
+
+const PRESET_COLORS = [
+  { name: "Charcoal", value: "#374151" },
+  { name: "Navy", value: "#1e3a5f" },
+  { name: "Gray", value: "#9ca3af" },
+  { name: "Beige", value: "#d4c5a9" },
+  { name: "Silver", value: "#c0c0c0" },
+  { name: "Black", value: "#1a1a1a" },
+  { name: "Forest Green", value: "#2d5a3d" },
+  { name: "Desert Sand", value: "#c2a878" },
+];
+
+const materialOptions = [
+  "600D Oxford Polyester",
+  "900D Industrial Canvas",
+  "300D Polyester + PVC",
+  "420D Polyester",
+  "High-Density Mesh",
+  "Thermal Insulated Composite",
+].map((m) => ({ value: m, label: m }));
+
+const unitOptions = [
+  { value: "cm", label: "cm" },
+  { value: "in", label: "inch" },
+  { value: "mm", label: "mm" },
+];
+
+const logoPositionOptions = [
+  { value: "center", label: "Center" },
+  { value: "top-left", label: "Top Left" },
+  { value: "top-right", label: "Top Right" },
+  { value: "bottom-center", label: "Bottom Center" },
+  { value: "full", label: "Full Cover" },
+];
+
+const openingOptions = [
+  { value: "none", label: "No Openings" },
+  { value: "vent-top", label: "Top Ventilation" },
+  { value: "vent-side", label: "Side Ventilation" },
+  { value: "pipe-cutout", label: "Pipe Cutout" },
+  { value: "drain-hole", label: "Drainage Hole" },
+  { value: "full-custom", label: "Custom (Describe Below)" },
+];
+---
+
+<Card
+  id="inquiry"
+  class="border border-primary/20 bg-primary/[0.02] scroll-mt-28 transition-shadow duration-300"
+  data-customizer
+  data-product-name={productName}
+  data-product-slug={productSlug}
+>
+  <CardContent class="p-6 md:p-8">
+    <div class="mb-6">
+      <div class="flex items-center gap-2 mb-2">
+        <Icon name="Palette" size={20} class="text-primary" />
+        <h3 class="text-xl font-display font-semibold text-foreground">Customize This Cover</h3>
+      </div>
+      <p class="text-sm text-muted-foreground">
+        Send us your drawings, photos, or dimension list — we manufacture to your exact spec.
+      </p>
+    </div>
+
+    <form class="relative space-y-6" data-customizer-form>
+      <InquiryAntiSpamFields />
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-lg bg-secondary/60 border border-border">
+        <div class="space-y-2 sm:col-span-1">
+          <Label for="custom-name">Your Name *</Label>
+          <Input id="custom-name" name="name" maxlength={100} required />
+        </div>
+        <div class="space-y-2 sm:col-span-1">
+          <Label for="custom-email">Email *</Label>
+          <Input id="custom-email" name="email" type="email" maxlength={255} required />
+        </div>
+        <div class="space-y-2 sm:col-span-1">
+          <Label for="custom-phone">Phone (optional)</Label>
+          <Input id="custom-phone" name="phone" maxlength={20} />
+        </div>
+      </div>
+
+      <div>
+        <Label class="text-sm font-medium text-foreground mb-3 flex items-center gap-1.5">
+          <Icon name="Palette" size={14} class="text-primary" /> Color
+        </Label>
+        <div class="flex flex-wrap gap-2 mt-2">
+          {
+            PRESET_COLORS.map((c) => (
+              <button
+                type="button"
+                data-color-swatch
+                data-color-name={c.name}
+                data-color-value={c.value}
+                class="w-11 h-11 rounded-full border-2 transition-all hover:scale-110 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border-border"
+                style={`background-color: ${c.value}`}
+                title={c.name}
+              />
+            ))
+          }
+          <div class="relative">
+            <input
+              type="color"
+              value="#888888"
+              data-custom-hex
+              class="absolute inset-0 w-11 h-11 opacity-0 cursor-pointer"
+              aria-label="Custom color"
+            />
+            <div
+              data-custom-hex-preview
+              class="w-11 h-11 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all border-dashed border-muted-foreground/40"
+            >
+              <span class="text-muted-foreground" data-custom-hex-plus>+</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-xs text-muted-foreground mt-2" data-color-label hidden>
+          Selected: <span class="font-medium text-foreground" data-color-label-text></span>
+        </p>
+        <input type="hidden" name="color" value="" data-color-input />
+      </div>
+
+      <div>
+        <Label class="text-sm font-medium text-foreground flex items-center gap-1.5">
+          <Icon name="Layers" size={14} class="text-primary" /> Material
+        </Label>
+        <Select name="material" class="mt-2" placeholder="Select material..." options={materialOptions} />
+      </div>
+
+      <div>
+        <Label class="text-sm font-medium text-foreground flex items-center gap-1.5">
+          <Icon name="Ruler" size={14} class="text-primary" /> Custom Dimensions
+        </Label>
+        <div class="grid grid-cols-4 gap-2 mt-2">
+          <Input name="width" placeholder="Width" type="number" min="0" aria-label="Width" />
+          <Input name="height" placeholder="Height" type="number" min="0" aria-label="Height" />
+          <Input name="depth" placeholder="Depth" type="number" min="0" aria-label="Depth" />
+          <Select name="sizeUnit" options={unitOptions} value="cm" />
+        </div>
+      </div>
+
+      <div>
+        <Label class="text-sm font-medium text-foreground flex items-center gap-1.5">
+          <Icon name="Image" size={14} class="text-primary" /> Logo / Branding
+        </Label>
+        <div class="mt-2">
+          <div class="flex items-start gap-4" data-logo-preview-wrap hidden>
+            <div class="relative w-20 h-20 rounded-lg border border-border overflow-hidden bg-secondary">
+              <img src="" alt="Logo preview" class="w-full h-full object-contain" width={80} height={80} data-logo-img />
+              <button
+                type="button"
+                data-logo-remove
+                class="absolute -top-1.5 -right-1.5 w-7 h-7 bg-destructive text-destructive-foreground rounded-full flex items-center justify-center hover:bg-destructive/90 transition-colors"
+                aria-label="Remove logo"
+              >
+                <Icon name="X" size={14} />
+              </button>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm text-foreground font-medium" data-logo-name></p>
+              <p class="text-xs text-muted-foreground" data-logo-size></p>
+              <Select
+                name="logoPosition"
+                class="mt-2"
+                triggerClass="h-8 text-xs"
+                placeholder="Logo position..."
+                options={logoPositionOptions}
+              />
+            </div>
+          </div>
+          <button
+            type="button"
+            data-logo-trigger
+            class="w-full border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/40 hover:bg-primary/[0.02] transition-colors"
+          >
+            <Icon name="Upload" size={24} class="mx-auto mb-2 text-muted-foreground" />
+            <p class="text-sm text-muted-foreground">Click to upload logo artwork</p>
+            <p class="text-xs text-muted-foreground/60 mt-1">
+              PNG, JPG, SVG — Max 5MB · Sent with your quote request
+            </p>
+          </button>
+          <input type="file" accept="image/*,.svg" class="hidden" data-logo-input />
+        </div>
+      </div>
+
+      <div>
+        <Label class="text-sm font-medium text-foreground">Opening / Cutout Design</Label>
+        <Select
+          name="openingDesign"
+          class="mt-2"
+          placeholder="Select opening style..."
+          options={openingOptions}
+        />
+      </div>
+
+      <div>
+        <Label class="text-sm font-medium text-foreground">Additional Notes</Label>
+        <Textarea
+          name="notes"
+          placeholder="Quantity, reference photos, pipe locations, Pantone color, special fasteners…"
+          class="mt-2 min-h-[80px]"
+          maxlength={1000}
+        />
+      </div>
+
+      <Button type="submit" size="lg" class="w-full" data-customizer-submit>
+        <Icon name="Send" size={16} class="mr-2" />
+        <span data-customizer-label>Request Custom Quote for {productName}</span>
+      </Button>
+      <p class="text-xs text-muted-foreground text-center">
+        All selections above are included in your inquiry email to our team. We respond within 24 hours.
+        Prefer a simpler form?{" "}
+        <QuoteLink
+          quote={{
+            productSlug,
+            productName,
+            ref: `/product/${productSlug}`,
+          }}
+          class="text-primary hover:underline font-medium"
+        >
+          Use our contact form
+        </QuoteLink>
+        .
+      </p>
+    </form>
+  </CardContent>
+</Card>
+
+<script>
+  import { submitInquiry, validateInquiryContact } from "@/lib/inquiry";
+  import { toast } from "@/lib/toast";
+  import { cn } from "@/lib/utils";
+
+  const root = document.querySelector<HTMLElement>("[data-customizer]");
+  const form = root?.querySelector<HTMLFormElement>("[data-customizer-form]");
+  if (!root || !form) throw new Error("ProductCustomizer missing");
+
+  const productName = root.dataset.productName ?? "";
+  const productSlug = root.dataset.productSlug ?? "";
+
+  const colorInput = form.querySelector<HTMLInputElement>("[data-color-input]")!;
+  const colorLabel = form.querySelector<HTMLElement>("[data-color-label]")!;
+  const colorLabelText = form.querySelector<HTMLElement>("[data-color-label-text]")!;
+  const swatches = [...form.querySelectorAll<HTMLButtonElement>("[data-color-swatch]")];
+  const customHex = form.querySelector<HTMLInputElement>("[data-custom-hex]")!;
+  const customPreview = form.querySelector<HTMLElement>("[data-custom-hex-preview]")!;
+  const customPlus = form.querySelector<HTMLElement>("[data-custom-hex-plus]")!;
+
+  const logoInput = form.querySelector<HTMLInputElement>("[data-logo-input]")!;
+  const logoTrigger = form.querySelector<HTMLButtonElement>("[data-logo-trigger]")!;
+  const logoPreviewWrap = form.querySelector<HTMLElement>("[data-logo-preview-wrap]")!;
+  const logoImg = form.querySelector<HTMLImageElement>("[data-logo-img]")!;
+  const logoName = form.querySelector<HTMLElement>("[data-logo-name]")!;
+  const logoSize = form.querySelector<HTMLElement>("[data-logo-size]")!;
+  const logoRemove = form.querySelector<HTMLButtonElement>("[data-logo-remove]")!;
+  let logoFile: File | null = null;
+
+  const submitButton = form.querySelector<HTMLButtonElement>("[data-customizer-submit]")!;
+  const submitLabel = form.querySelector<HTMLElement>("[data-customizer-label]")!;
+  const idleLabel = submitLabel.textContent ?? "";
+
+  const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
+  const value = (name: string) => field(name)?.value.trim() ?? "";
+
+  const setColor = (hex: string, label: string, isCustom: boolean) => {
+    colorInput.value = hex;
+    swatches.forEach((s) => {
+      const on = !isCustom && s.dataset.colorValue === hex;
+      s.className = cn(
+        "w-11 h-11 rounded-full border-2 transition-all hover:scale-110 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        on ? "border-primary ring-2 ring-primary/30 scale-110" : "border-border",
+      );
+    });
+    customPreview.className = cn(
+      "w-11 h-11 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all",
+      isCustom ? "border-primary ring-2 ring-primary/30" : "border-dashed border-muted-foreground/40",
+    );
+    customPreview.style.backgroundColor = isCustom ? hex : "transparent";
+    if (customPlus) customPlus.hidden = isCustom;
+    if (hex) {
+      colorLabel.hidden = false;
+      colorLabelText.textContent = label;
+    } else {
+      colorLabel.hidden = true;
+    }
+  };
+
+  swatches.forEach((s) => {
+    s.addEventListener("click", () => {
+      customHex.value = "#888888";
+      setColor(s.dataset.colorValue ?? "", s.dataset.colorName ?? "", false);
+    });
+  });
+
+  customHex.addEventListener("input", () => {
+    setColor(customHex.value, customHex.value, true);
+  });
+
+  logoTrigger.addEventListener("click", () => logoInput.click());
+
+  logoInput.addEventListener("change", () => {
+    const file = logoInput.files?.[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      toast({ title: "File too large", description: "Logo must be under 5MB.", variant: "destructive" });
+      logoInput.value = "";
+      return;
+    }
+    logoFile = file;
+    logoName.textContent = file.name;
+    logoSize.textContent = `${(file.size / 1024).toFixed(0)} KB`;
+    const reader = new FileReader();
+    reader.onload = () => {
+      logoImg.src = String(reader.result);
+      logoPreviewWrap.hidden = false;
+      logoTrigger.hidden = true;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  logoRemove.addEventListener("click", () => {
+    logoFile = null;
+    logoInput.value = "";
+    logoImg.src = "";
+    logoPreviewWrap.hidden = true;
+    logoTrigger.hidden = false;
+  });
+
+  // Hero CTA scrolls here and briefly highlights the card.
+  if (window.location.hash === "#inquiry") {
+    requestAnimationFrame(() => {
+      root.classList.add("ring-2", "ring-primary/60", "ring-offset-2", "shadow-lg");
+      root.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.setTimeout(() => {
+        root.classList.remove("ring-2", "ring-primary/60", "ring-offset-2", "shadow-lg");
+      }, 2000);
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-scroll-inquiry]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      root.scrollIntoView({ behavior: "smooth", block: "start" });
+      root.classList.add("ring-2", "ring-primary/60", "ring-offset-2", "shadow-lg");
+      window.setTimeout(() => {
+        root.classList.remove("ring-2", "ring-primary/60", "ring-offset-2", "shadow-lg");
+      }, 2000);
+      history.replaceState(null, "", "#inquiry");
+    });
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const err = validateInquiryContact(value("name"), value("email"));
+    if (err) {
+      toast({ title: err, variant: "destructive" });
+      return;
+    }
+    if (
+      !value("material") &&
+      !value("width") &&
+      !colorInput.value &&
+      !logoFile &&
+      !value("notes") &&
+      !value("openingDesign")
+    ) {
+      toast({ title: "Please fill in at least one customization option", variant: "destructive" });
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitLabel.textContent = "Sending…";
+
+    try {
+      const result = await submitInquiry(
+        {
+          formType: "custom",
+          name: value("name"),
+          email: value("email"),
+          phone: value("phone") || undefined,
+          productName,
+          productSlug,
+          material: value("material") || undefined,
+          color: colorLabelText.textContent || colorInput.value || undefined,
+          width: value("width") || undefined,
+          height: value("height") || undefined,
+          depth: value("depth") || undefined,
+          sizeUnit: value("sizeUnit") || "cm",
+          logoPosition: value("logoPosition") || undefined,
+          openingDesign: value("openingDesign") || undefined,
+          notes: value("notes") || undefined,
+          pageUrl: window.location.href,
+        },
+        logoFile,
+        {
+          formStartedAt: Number(field("formStartedAt")?.value ?? Date.now()),
+          honeypot: field("website")?.value ?? "",
+        },
+      );
+
+      if (result.ok && result.method === "api") {
+        toast({
+          title: "Customization request sent",
+          description: "We'll prepare a quote based on your specifications within 24 hours.",
+        });
+        const notes = field("notes");
+        if (notes) notes.value = "";
+      } else if (result.ok && result.method === "mailto") {
+        toast({
+          title: "Complete in your email app",
+          description: "Attach your logo file manually if needed, then send the message.",
+        });
+      } else {
+        toast({
+          title: "Could not send request",
+          description: result.error ?? "Please use the contact form or email us directly.",
+          variant: "destructive",
+        });
+      }
+    } catch {
+      toast({ title: "Something went wrong", description: "Please email us directly.", variant: "destructive" });
+    } finally {
+      submitButton.disabled = false;
+      submitLabel.textContent = idleLabel;
+    }
+  });
+</script>

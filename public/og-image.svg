@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2F6FA"/>
+      <stop offset="100%" stop-color="#E8EDF2"/>
+    </linearGradient>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B8CE3"/>
+      <stop offset="100%" stop-color="#2EB89E"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <!-- Subtle decorative circles -->
+  <circle cx="1000" cy="100" r="280" fill="#1B8CE3" opacity="0.04"/>
+  <circle cx="200" cy="500" r="200" fill="#2EB89E" opacity="0.04"/>
+  <!-- Logo mark (centered) -->
+  <g transform="translate(124, 155)">
+    <rect width="320" height="320" rx="68" fill="url(#logoGrad)"/>
+    <rect x="104" y="128" width="48" height="64" rx="24" fill="#FFFFFF"/>
+    <path d="M 136 160 Q 188 148 240 160" stroke="#FFFFFF" stroke-width="32" stroke-linecap="round" fill="none"/>
+    <path d="M 136 192 Q 176 184 218 192" stroke="#FFFFFF" stroke-width="32" stroke-linecap="round" fill="none"/>
+    <path d="M 136 224 Q 188 216 240 224" stroke="#FFFFFF" stroke-width="32" stroke-linecap="round" fill="none"/>
+  </g>
+  <!-- Brand name -->
+  <text x="500" y="320" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-size="120" font-weight="800" fill="#1F2329" letter-spacing="-1">CoolerFit</text>
+  <text x="504" y="380" font-family="'Inter', 'Segoe UI', sans-serif" font-size="32" font-weight="600" fill="#1B8CE3" letter-spacing="12">CUSTOM COOLER COVERS</text>
+  <!-- Bottom tagline -->
+  <text x="600" y="520" font-family="'Inter', 'Segoe UI', sans-serif" font-size="26" fill="#6b7280" text-anchor="middle">
+    Built to your exact specifications — dustproof, UV-resistant, custom branded covers
+  </text>
+  <!-- URL -->
+  <text x="600" y="570" font-family="'Inter', 'Segoe UI', sans-serif" font-size="20" fill="#9ca3af" text-anchor="middle">
+    aircoolercover.com
+  </text>
+</svg>

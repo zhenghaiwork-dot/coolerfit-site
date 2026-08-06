@@ -1,0 +1,71 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/ui/Button.astro";
+import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import Icon from "@/components/Icon.astro";
+import ProductGallery from "@/components/ProductGallery.astro";
+import ProductCustomizer from "@/components/ProductCustomizer.astro";
+import type { ProductItem } from "@/data/product-items";
+import { getProductGallery } from "@/lib/product-images";
+import { productDetailMetaTitle, productDetailPageH1 } from "@/lib/category-seo";
+import { localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale: Locale;
+  product: ProductItem;
+}
+
+const { locale, product } = Astro.props;
+const t = ui(locale);
+const lp = (p: string) => localizedPath(locale, p);
+const gallery = getProductGallery(product);
+const pageH1 = productDetailPageH1(product.name);
+---
+
+<BaseLayout
+  title={productDetailMetaTitle(product.name)}
+  description={product.summary}
+  canonicalPath={lp(`/product/${product.slug}`)}
+  alternatePath={`/product/${product.slug}`}
+  locale={locale}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <Breadcrumb
+        class="mb-6"
+        items={[
+          { label: t.common.home, href: lp("/") },
+          { label: t.nav.products, href: lp("/products") },
+          { label: product.name },
+        ]}
+      />
+      <a href={lp("/products")} class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8">
+        <Icon name="ArrowLeft" size={16} /> {t.common.backToProducts}
+      </a>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <ProductGallery gallery={gallery} />
+        <div>
+          <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-2">{pageH1}</h1>
+          <p class="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
+          <h3 class="font-display font-semibold text-foreground mb-3">{t.common.features}</h3>
+          <ul class="space-y-2 mb-8">
+            {
+              product.features.map((f) => (
+                <li class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Icon name="Check" size={16} class="text-primary shrink-0" /> {f}
+                </li>
+              ))
+            }
+          </ul>
+          <Button size="lg" href="#inquiry" data-scroll-inquiry>
+            {t.common.customizeQuote} <Icon name="ChevronDown" class="ms-2" size={18} />
+          </Button>
+        </div>
+      </div>
+      <div class="mt-12">
+        <ProductCustomizer productName={product.name} productSlug={product.slug} />
+      </div>
+    </div>
+  </div>
+</BaseLayout>

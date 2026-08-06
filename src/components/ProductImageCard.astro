@@ -1,0 +1,26 @@
+---
+/**
+ * Card-sized variant of ProductImage. `contain` shows the full unit;
+ * `cover` fills the frame and may crop.
+ */
+import ProductImage from "@/components/ProductImage.astro";
+import { PRODUCT_IMAGE_CARD_PX } from "@/lib/product-images";
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  fit?: "cover" | "contain";
+}
+
+const { src, alt, class: className, fit = "contain" } = Astro.props;
+---
+
+<ProductImage
+  src={src}
+  alt={alt}
+  width={PRODUCT_IMAGE_CARD_PX}
+  height={PRODUCT_IMAGE_CARD_PX}
+  class={className}
+  imgClass={`${fit === "contain" ? "object-contain" : "object-cover"} ${className ?? ""}`}
+/>

@@ -1,0 +1,19 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B8CE3"/>
+      <stop offset="100%" stop-color="#2EB89E"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="108" fill="url(#logoGrad)"/>
+  <!-- Stylized "C" made of cooling wave lines -->
+  <!-- Left vertical stem -->
+  <rect x="108" y="140" width="52" height="232" rx="26" fill="#FFFFFF"/>
+  <!-- Top wave -->
+  <path d="M 138 194 Q 258 148 382 194" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round" fill="none"/>
+  <!-- Middle wave (slightly shorter) -->
+  <path d="M 138 256 Q 242 234 344 256" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round" fill="none"/>
+  <!-- Bottom wave -->
+  <path d="M 138 318 Q 258 300 382 318" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round" fill="none"/>
+</svg>

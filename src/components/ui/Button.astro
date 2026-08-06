@@ -1,0 +1,31 @@
+---
+/**
+ * Port of the shadcn Button. The React version used Radix `asChild` to render
+ * a router Link; here passing `href` renders an anchor instead of a button.
+ */
+import type { HTMLAttributes } from "astro/types";
+import { buttonVariants, type ButtonVariantProps } from "@/components/ui/button-variants";
+import { cn } from "@/lib/utils";
+
+type Props = ButtonVariantProps &
+  Omit<HTMLAttributes<"button">, "size"> &
+  HTMLAttributes<"a"> & {
+    href?: string;
+    type?: "button" | "submit" | "reset";
+  };
+
+const { variant, size, class: className, href, type, ...rest } = Astro.props as Props;
+const classes = cn(buttonVariants({ variant, size }), className);
+---
+
+{
+  href ? (
+    <a href={href} class={classes} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type ?? "button"} class={classes} {...rest}>
+      <slot />
+    </button>
+  )
+}

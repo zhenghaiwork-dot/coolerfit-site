@@ -1,0 +1,228 @@
+---
+/**
+ * Replaces the Radix Select. Trigger and panel class strings are carried over
+ * verbatim (minus the `outline-none` -> `outline-hidden` v4 rename), and the
+ * same `data-state` / `data-side` attributes drive the open/close animation.
+ *
+ * Radix rendered the panel through a portal; here it is absolutely positioned
+ * inside a relative wrapper, which looks the same for these forms and avoids
+ * shipping a positioning engine. The selected value rides on a hidden input so
+ * the surrounding form posts it like any other field.
+ */
+import Icon from "@/components/Icon.astro";
+import { cn } from "@/lib/utils";
+
+export type SelectOption = {
+  value: string;
+  label: string;
+};
+
+interface Props {
+  name: string;
+  options: SelectOption[];
+  placeholder?: string;
+  value?: string;
+  id?: string;
+  class?: string;
+  triggerClass?: string;
+  required?: boolean;
+}
+
+const { name, options, placeholder = "", value = "", id, class: className, triggerClass, required } = Astro.props;
+
+const selected = options.find((o) => o.value === value);
+const listboxId = `${id ?? name}-listbox`;
+---
+
+<div class={cn("relative", className)} data-select data-value={value}>
+  <input type="hidden" name={name} value={value} data-select-input required={required} />
+
+  <button
+    type="button"
+    id={id}
+    role="combobox"
+    aria-controls={listboxId}
+    aria-expanded="false"
+    aria-haspopup="listbox"
+    data-select-trigger
+    data-state="closed"
+    data-placeholder={selected ? undefined : ""}
+    class={cn(
+      "flex h-10 w-full items-center justify-between rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-all duration-200 ease-out focus:outline-hidden focus:ring-2 focus:ring-primary/15 focus:border-primary/40 focus:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 hover:border-primary/25",
+      triggerClass,
+    )}
+  >
+    <span data-select-value style="pointer-events:none">{selected ? selected.label : placeholder}</span>
+    <Icon name="ChevronDown" class="h-4 w-4 opacity-50" />
+  </button>
+
+  <div
+    id={listboxId}
+    role="listbox"
+    tabindex="-1"
+    data-select-content
+    data-state="closed"
+    data-side="bottom"
+    hidden
+    class="absolute left-0 top-full z-50 mt-1 max-h-96 min-w-[8rem] w-full overflow-auto rounded-lg border border-border/60 bg-popover text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=bottom]:translate-y-1"
+  >
+    <div class="p-1">
+      {
+        options.map((o) => (
+          <div
+            role="option"
+            tabindex="-1"
+            data-select-item
+            data-value={o.value}
+            aria-selected={o.value === value ? "true" : "false"}
+            class="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-hidden data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground"
+          >
+            <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+              <span data-select-indicator hidden={o.value !== value}>
+                <Icon name="Check" class="h-4 w-4" />
+              </span>
+            </span>
+            <span>{o.label}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  function initSelect(root: HTMLElement) {
+    const trigger = root.querySelector<HTMLButtonElement>("[data-select-trigger]")!;
+    const content = root.querySelector<HTMLElement>("[data-select-content]")!;
+    const input = root.querySelector<HTMLInputElement>("[data-select-input]")!;
+    const valueLabel = root.querySelector<HTMLElement>("[data-select-value]")!;
+    const items = [...root.querySelectorAll<HTMLElement>("[data-select-item]")];
+    const placeholder = valueLabel.textContent ?? "";
+
+    let highlighted = -1;
+
+    const setHighlight = (i: number) => {
+      items.forEach((el, idx) => {
+        if (idx === i) el.setAttribute("data-highlighted", "");
+        else el.removeAttribute("data-highlighted");
+      });
+      highlighted = i;
+      if (i >= 0) items[i].scrollIntoView({ block: "nearest" });
+    };
+
+    const open = () => {
+      content.hidden = false;
+      content.dataset.state = "open";
+      trigger.dataset.state = "open";
+      trigger.setAttribute("aria-expanded", "true");
+      const current = items.findIndex((el) => el.dataset.value === input.value);
+      setHighlight(current >= 0 ? current : 0);
+      document.addEventListener("pointerdown", onOutside, true);
+    };
+
+    const close = () => {
+      content.dataset.state = "closed";
+      trigger.dataset.state = "closed";
+      trigger.setAttribute("aria-expanded", "false");
+      setHighlight(-1);
+      document.removeEventListener("pointerdown", onOutside, true);
+      const onEnd = () => {
+        if (content.dataset.state === "closed") content.hidden = true;
+        content.removeEventListener("animationend", onEnd);
+      };
+      content.addEventListener("animationend", onEnd);
+      // Fallback for reduced-motion, where no animationend fires.
+      setTimeout(() => {
+        if (content.dataset.state === "closed") content.hidden = true;
+      }, 250);
+    };
+
+    const isOpen = () => content.dataset.state === "open";
+
+    function onOutside(e: Event) {
+      if (!root.contains(e.target as Node)) close();
+    }
+
+    const select = (el: HTMLElement) => {
+      const v = el.dataset.value ?? "";
+      input.value = v;
+      root.dataset.value = v;
+      valueLabel.textContent = el.querySelector("span:last-child")?.textContent ?? placeholder;
+      if (v) trigger.removeAttribute("data-placeholder");
+      else trigger.setAttribute("data-placeholder", "");
+      items.forEach((other) => {
+        const on = other === el;
+        other.setAttribute("aria-selected", String(on));
+        const ind = other.querySelector<HTMLElement>("[data-select-indicator]");
+        if (ind) ind.hidden = !on;
+      });
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+      close();
+      trigger.focus();
+    };
+
+    trigger.addEventListener("click", () => (isOpen() ? close() : open()));
+
+    // form.reset() restores the hidden input but leaves the trigger label and
+    // the check mark showing the old choice, so they are re-synced by hand.
+    root.closest("form")?.addEventListener("reset", () => {
+      requestAnimationFrame(() => {
+        root.dataset.value = input.value;
+        const match = items.find((el) => el.dataset.value === input.value);
+        valueLabel.textContent = match?.querySelector("span:last-child")?.textContent ?? placeholder;
+        if (input.value) trigger.removeAttribute("data-placeholder");
+        else trigger.setAttribute("data-placeholder", "");
+        items.forEach((el) => {
+          const on = el === match;
+          el.setAttribute("aria-selected", String(on));
+          const ind = el.querySelector<HTMLElement>("[data-select-indicator]");
+          if (ind) ind.hidden = !on;
+        });
+      });
+    });
+
+    items.forEach((el, i) => {
+      el.addEventListener("click", () => select(el));
+      el.addEventListener("pointermove", () => setHighlight(i));
+    });
+
+    trigger.addEventListener("keydown", (e) => {
+      if (!isOpen()) {
+        if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown" || e.key === "ArrowUp") {
+          e.preventDefault();
+          open();
+        }
+        return;
+      }
+      switch (e.key) {
+        case "Escape":
+          e.preventDefault();
+          close();
+          break;
+        case "ArrowDown":
+          e.preventDefault();
+          setHighlight(Math.min(highlighted + 1, items.length - 1));
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          setHighlight(Math.max(highlighted - 1, 0));
+          break;
+        case "Home":
+          e.preventDefault();
+          setHighlight(0);
+          break;
+        case "End":
+          e.preventDefault();
+          setHighlight(items.length - 1);
+          break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          if (highlighted >= 0) select(items[highlighted]);
+          break;
+      }
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-select]").forEach(initSelect);
+</script>

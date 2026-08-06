@@ -1,0 +1,597 @@
+[
+  {
+    "title": "Custom Logo Printing",
+    "description": "Screen print, heat transfer, and embroidery options for branded evaporative cooler covers — file specs, colors, and volume pricing for contractors and property managers.",
+    "relatedLinks": [
+      {
+        "label": "Logo Printing Blog",
+        "path": "/blog/logo-printing-on-cooler-covers"
+      },
+      {
+        "label": "Custom Covers",
+        "path": "/products/custom-evaporative-cooler-covers"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Printing Methods",
+        "body": "Screen printing suits solid spot colors and larger production runs. Heat transfer handles full-color logos on polyester bases. Embroidery adds premium texture on 600D and canvas covers but is limited by panel thickness and seam placement.",
+        "bullets": [
+          "Screen print: economical at 50+ units, excellent fade resistance on UV-rated inks",
+          "Heat transfer: full-color logos, ideal for property management branding",
+          "Embroidery: high-end contractor branding on chest-panel placements",
+          "Single-color logo often included on commercial orders of 50+ units — confirm at quote"
+        ]
+      },
+      {
+        "heading": "File Requirements",
+        "body": "Supply vector art when possible (AI, EPS, PDF with outlined fonts). Minimum 300 DPI raster art at final print size for heat transfer. Specify print width in inches and placement (front panel, top, or wrap band).",
+        "bullets": [
+          "Vector preferred: AI, EPS, SVG, or PDF (outlined)",
+          "Raster: PNG or TIFF, 300 DPI at print dimensions",
+          "Indicate PMS colors for brand matching",
+          "We provide a digital mockup before production on new artwork"
+        ]
+      },
+      {
+        "heading": "Color Options",
+        "body": "Match corporate palettes using Pantone references on white, gray, beige, navy, or charcoal cover stock. Dark covers may need an underbase for bright logos. Reflective silver and white tops are popular on rooftop units in hot climates.",
+        "bullets": [
+          "Standard cover colors: gray, beige, navy, charcoal, black, silver",
+          "Custom dye-matched fabric available on volume orders",
+          "Light logos on dark fabric may need white underbase — affects hand-feel slightly",
+          "UV-resistant inks recommended for all outdoor placements"
+        ]
+      },
+      {
+        "heading": "Pricing",
+        "body": "Logo pricing depends on print size, color count, method, and quantity. A single-color chest logo on a standard residential cover differs from a full-wrap multi-color industrial panel. Volume tiers start around 25–50 units for meaningful per-unit discounts.",
+        "bullets": [
+          "One-color screen: lowest cost per unit at volume",
+          "Full-color transfer: higher setup, best for complex logos",
+          "Setup fees amortize across reorders using stored screens or digital files",
+          "Request a bundled quote: covers + printing + shipping to your warehouse"
+        ]
+      }
+    ],
+    "slug": "custom/logo-printing",
+    "intro": "Branded covers turn equipment protection into on-site marketing for HVAC contractors, hotels, and facility management companies. Logo printing is available on most cover types and materials, with methods chosen based on color count, durability needs, and order quantity."
+  },
+  {
+    "title": "Custom Cover Materials",
+    "description": "Select the right fabric, coating, and lining for your custom evaporative cooler cover — with sample options and performance ratings for B2B orders.",
+    "relatedLinks": [
+      {
+        "label": "Custom Cover Materials Blog",
+        "path": "/blog/custom-cover-materials"
+      },
+      {
+        "label": "Materials Overview",
+        "path": "/materials"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Material Selection",
+        "body": "Start with environment: desert sun → UV-stabilized 600D or reflective silver topcoat; coastal salt air → heavier PU or TPU lamination; heavy rain → PVC-backed or fully sealed vinyl; winter off-season → insulated laminate. Indoor or warehouse storage may only need 300D polyester.",
+        "bullets": [
+          "600D Oxford + PU: default for most custom residential and light commercial jobs",
+          "900D + TPU: industrial and extra-large cabinets",
+          "300D + PVC backing: maximum waterproofing at moderate weight",
+          "Mesh: in-season pest and debris barrier — not a winter solution"
+        ]
+      },
+      {
+        "heading": "Material Samples",
+        "body": "For repeat B2B buyers and new commercial accounts, we can ship swatches of shortlisted fabrics before production. Samples help facilities teams approve color, stiffness, and coating hand-feel for brand guidelines.",
+        "bullets": [
+          "Request swatches when specifying a new material code for the first time",
+          "Include your climate zone and installation type (rooftop, wall, window)",
+          "Logo printing samples available on 600D and vinyl bases",
+          "Note fire-retardant or chemical-resistant requirements at quote stage"
+        ]
+      },
+      {
+        "heading": "Performance Ratings",
+        "body": "Compare materials on waterproof rating (mm H₂O), UV stability, abrasion resistance, and operating temperature — not denier alone. A 600D UV-stabilized fabric often outlasts untreated 900D in direct sun.",
+        "bullets": [
+          "Water-resistant (PU): sheds rain and dust; breathable hem recommended",
+          "Waterproof (sealed seams + PVC): for standing water and snow load regions",
+          "UPF 50+ coatings: for rooftop and southwest exposure",
+          "Insulated (foam core): freeze protection and draft blocking in winter"
+        ]
+      }
+    ],
+    "slug": "custom/materials",
+    "intro": "Custom orders let you pair fabric weight, coatings, and colors to each job site. Contractors often standardize on one 600D PU spec across a fleet while specifying 900D or vinyl for exposed rooftops. We can hold the same material code across reorders for multi-property maintenance programs."
+  },
+  {
+    "title": "Custom Opening Design",
+    "description": "Ventilation cutouts, service panels, and duct openings for side-draft and down-draft cooler covers — designed to your cabinet layout.",
+    "relatedLinks": [
+      {
+        "label": "Opening Designs Blog",
+        "path": "/blog/custom-opening-designs"
+      },
+      {
+        "label": "Side Draft Covers",
+        "path": "/products/side-draft-cooler-covers"
+      },
+      {
+        "label": "Down Draft Covers",
+        "path": "/products/down-draft-cooler-covers"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Opening Types",
+        "body": "Common openings include screened vents (mesh-backed), zippered access flaps, split corners for electrical boxes, grommeted drain points, and full perimeter drop skirts for units mounted on curbs.",
+        "bullets": [
+          "Screened vents: reduce condensation while blocking debris",
+          "Zippered panels: service access without removing the entire cover",
+          "Grommets: drainage and tie-down anchor points",
+          "Split corner: clears exterior disconnect boxes on commercial side-draft units"
+        ]
+      },
+      {
+        "heading": "Side Draft Openings",
+        "body": "Wall-mounted side-draft coolers often need low-side clearance for water lines and high-side relief for warm air paths. Mark pipe exits on your dimension sheet; we position openings away from prevailing wind when possible.",
+        "bullets": [
+          "Keep water line cutouts above typical splash height",
+          "Reinforce edges with binding tape on high-wear openings",
+          "Match opening to pad frame — not only to outer cabinet line",
+          "Browse side-draft cooler covers for standard configurations"
+        ]
+      },
+      {
+        "heading": "Down Draft Openings",
+        "body": "Rooftop down-draft units may need top ventilation or skirt clearance around the curb. Specify if the cover must clear a crane lift lid or maintenance hatch. Drainage openings prevent water weight from collapsing lightweight tops.",
+        "bullets": [
+          "Top panel: reflective or reinforced depending on sun load",
+          "Curb-mounted units: measure curb OD separately from cabinet OD",
+          "Wind exposure: fewer large openings on prevailing-wind side",
+          "See down-draft product category for rooftop-ready features"
+        ]
+      },
+      {
+        "heading": "Custom Configurations",
+        "body": "Send a sketch or annotated photos for unusual layouts — dual ducts, offset motors, or combined cooler + heat exchanger cabinets. We engineer one-off patterns and can replicate approved designs on future reorders by pattern ID.",
+        "bullets": [
+          "Pattern ID stored for repeat commercial orders",
+          "Multiple openings per face allowed with reinforced seams",
+          "Velcro, zipper, or laced closure per opening — specify access frequency",
+          "Request a quote with photos for complex layouts"
+        ]
+      }
+    ],
+    "slug": "custom/opening-design",
+    "intro": "A cover that blocks required airflow or traps heat can damage pads and motors. Opening design balances protection with function: screened vents for off-season breathing, zippered panels for service access, and reinforced hems around cutouts so fabric does not tear at stress points."
+  },
+  {
+    "title": "Custom Cover Sizes",
+    "description": "Order evaporative cooler covers in any dimension — submission format, size limits, and solutions for irregular cabinets and mixed fleets.",
+    "relatedLinks": [
+      {
+        "label": "Custom Sizes Blog",
+        "path": "/blog/custom-cover-sizes"
+      },
+      {
+        "label": "How to Measure",
+        "path": "/sizes/how-to-measure"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Submitting Dimensions",
+        "body": "Email or quote form: company name, quantity, material preference, and a dimension table per unit model. One row per unique size; attach photos if the shape is non-rectangular. We confirm slack policy (typically +1–2 in. on width and depth) before cutting.",
+        "bullets": [
+          "Format: Model name | Width | Depth | Height | Notes (openings, color)",
+          "Photos of all four sides reduce back-and-forth",
+          "Bulk CSV/spreadsheet accepted for 25+ unit mixed-size orders",
+          "Prototype cover available on small-batch line before full production"
+        ]
+      },
+      {
+        "heading": "Minimum and Maximum Sizes",
+        "body": "We produce from single small window units up to large industrial evaporative coolers exceeding 50 in. per side. Extremely compact or oversized units may require reinforced panels or panelized construction — flagged at quote review.",
+        "bullets": [
+          "Small window units: often 20–30 in. per side — specify frame overlap needs",
+          "Standard residential: 28–42 in. footprints most common",
+          "Commercial / industrial: 45–60+ in. — reinforced stress points included",
+          "No strict minimum quantity on small-batch custom line"
+        ]
+      },
+      {
+        "heading": "Irregular Shapes",
+        "body": "Round cylinders, tapered hoods, and offset duct bumps are common on older swamp coolers. We flat-pattern or segment covers with darts, gussets, or zippered access panels so the fabric does not fight the geometry.",
+        "bullets": [
+          "Round: provide diameter at the widest point plus straight-side height",
+          "Offset vents: mark XY position from a consistent corner on your photo",
+          "Split corners for junction boxes — specify side and height from base",
+          "See opening design options for duct and service panel cutouts"
+        ]
+      }
+    ],
+    "slug": "custom/sizes",
+    "intro": "Every cooler model has a unique cabinet outline. Custom sizing removes the guesswork of one-size-fits-all retail covers. Send outside W×D×H dimensions (or diameter × height for round units) and we cut patterns with appropriate slack, hem style, and tie-down placement."
+  },
+  {
+    "title": "Cooler Cover Materials Guide",
+    "description": "Compare polyester, canvas, vinyl, mesh, and insulated fabrics for evaporative cooler covers — and choose the right material for your climate and installation.",
+    "relatedLinks": [
+      {
+        "label": "Insulated Covers",
+        "path": "/products/insulated-cooler-covers"
+      },
+      {
+        "label": "Mesh Covers",
+        "path": "/products/mesh-cooler-covers"
+      },
+      {
+        "label": "Waterproof Covers",
+        "path": "/products/waterproof-cooler-covers"
+      }
+    ],
+    "deepDiveLinks": [
+      {
+        "label": "Waterproof vs. Water-Resistant — Deep Dive",
+        "path": "/blog/waterproof-vs-water-resistant"
+      },
+      {
+        "label": "UV Protection: Why It Matters",
+        "path": "/blog/uv-protection-for-cooler-covers"
+      },
+      {
+        "label": "Vented vs. Closed Cover Designs",
+        "path": "/blog/vented-vs-closed-cover"
+      },
+      {
+        "label": "Choosing Material for Custom Covers",
+        "path": "/blog/custom-cover-materials"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Polyester (300D–900D Oxford)",
+        "body": "Polyester is the most common cooler-cover fabric because it balances cost, weight, and weather resistance. Denier (D) indicates thread thickness: 300D is lighter and suited to sheltered installs; 600D is the industry workhorse for residential and light commercial units; 900D canvas-style polyester handles large spans and rooftop exposure.",
+        "bullets": [
+          "PU (polyurethane) coating: water-resistant, good for most dry and mixed climates",
+          "UV stabilizers: essential for rooftop and desert sun — pair with our UV-shield products for direct exposure",
+          "Typical weight: 0.8–2.0 kg depending on size and denier",
+          "Best for: side-draft, down-draft, and standard custom covers where you need durability without vinyl stiffness"
+        ]
+      },
+      {
+        "heading": "Canvas",
+        "body": "Canvas covers use a heavier woven base (often cotton-poly blend or polyester canvas) with a rugged hand-feel. They resist abrasion and punctures better than light polyester, which matters on industrial sites and rooftop units with sharp flashing or gravel.",
+        "bullets": [
+          "Heavier than 600D polyester — plan for stronger tie-downs on large covers",
+          "Often paired with PU or wax-style treatments for water resistance (not fully waterproof without lamination)",
+          "Popular on commercial and extra-large cooler covers",
+          "Allow extra drying time after rain before storage to prevent mildew on natural-fiber blends"
+        ]
+      },
+      {
+        "heading": "Vinyl & PVC-Backed Fabrics",
+        "body": "Vinyl and PVC-backed polyester deliver the highest rain protection. Sealed seams and a waterproof rating (e.g. 5000 mm hydrostatic head) keep water out of pads and cabinets during off-season storage. These fabrics are stiffer and louder in wind than oxford polyester.",
+        "bullets": [
+          "Ideal for heavy-rain regions and units left covered through wet seasons",
+          "PVC backing adds stiffness — specify split corners or zippers if you need access to disconnect boxes",
+          "Anti-mildew treatments recommended for humid climates",
+          "See our waterproof premium cover line for fully sealed construction"
+        ]
+      },
+      {
+        "heading": "Mesh",
+        "body": "High-density polyester mesh blocks leaves, dust, and pests while allowing airflow. Mesh is not a winter cover — use it in-season or in mild climates where condensation under a solid cover is a concern.",
+        "bullets": [
+          "Typical mesh aperture: ~1 mm for debris filtration without starving airflow",
+          "Ultra-light (0.3–0.6 kg) — easy on/off during operating season",
+          "Pairs well with solid winter covers: mesh in summer, insulated or solid cover in winter",
+          "Browse mesh cooler covers for breathable protection options"
+        ]
+      },
+      {
+        "heading": "Insulated Materials",
+        "body": "Insulated covers add a foam or thermal lining (commonly 3–5 mm) to reduce freeze risk, block drafts, and slow temperature swing inside the cabinet. They are thicker and need slightly larger clearances than uninsulated covers.",
+        "bullets": [
+          "Recommended for winter storage and cold-climate off-season protection",
+          "Condensation management: ensure the unit is dry before covering; vented hem designs help",
+          "Heavier than standard polyester — use reinforced corners on rooftop units",
+          "Compare insulated vs. mesh vs. solid covers in our material comparison blog"
+        ]
+      }
+    ],
+    "slug": "materials",
+    "intro": "Fabric choice drives waterproofing, UV resistance, weight, and lifespan. Most swamp cooler and evaporative cooler covers use coated polyester (300D–900D), canvas, vinyl-backed fabrics, breathable mesh, or insulated laminates. Use this guide to match material to how and where your unit runs."
+  },
+  {
+    "title": "Cooler Cover Installation Guide",
+    "description": "How to install evaporative and swamp cooler covers on wall-mount, rooftop, and window units — including wind tie-down and safety checks.",
+    "relatedLinks": [
+      {
+        "label": "Maintenance Guide",
+        "path": "/resources/maintenance"
+      },
+      {
+        "label": "How to Measure",
+        "path": "/sizes/how-to-measure"
+      }
+    ],
+    "deepDiveLinks": [
+      {
+        "label": "Advanced Installation: High-Wind & Rooftop",
+        "path": "/blog/advanced-installation-high-wind-rooftop"
+      },
+      {
+        "label": "Troubleshooting Cover Issues",
+        "path": "/blog/troubleshooting-cooler-cover-issues"
+      },
+      {
+        "label": "Winterizing Your Cooler",
+        "path": "/blog/winterizing-evaporative-cooler"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Pre-Installation Checklist",
+        "body": "Confirm the cooler is off, water drained, and pads are dry. Remove debris from the cabinet top and verify your cover orientation (tagged front/back if applicable). Inspect tie-down straps, drawcords, and grommets before climbing to a rooftop unit.",
+        "bullets": [
+          "Power off at disconnect — never cover a running unit",
+          "Drain pan and water lines; dry 24 hours minimum",
+          "Clear leaves and grit from the cabinet top",
+          "Lay out cover and identify front, back, and opening alignment"
+        ]
+      },
+      {
+        "heading": "Basic Installation Steps",
+        "body": "Drape the cover over the cabinet starting from the highest point on down-draft units (or from the back on side-draft wall units). Pull the hem evenly around all sides before tightening. Secure the elastic hem or drawcord last so fabric seats flat without twisting.",
+        "bullets": [
+          "Down-draft: align top panel first, then pull skirt down over corners",
+          "Side-draft: fit over top, then work hem under bottom flange",
+          "Zippered openings: close zippers after hem is positioned",
+          "Stand back and check for bunched fabric that can hold water"
+        ]
+      },
+      {
+        "heading": "Rooftop Installation",
+        "body": "Use fall protection and a helper when possible. Route tie-downs to structural anchors — not loose conduit or pipe straps. Corner webbing on rooftop-grade covers accepts bungee or ratchet straps; avoid overtightening which can tear grommets.",
+        "bullets": [
+          "OSHA-compliant ladder and harness for roof work",
+          "Four-point tie-down in high-wind zones",
+          "Reflective top panel faces up — verify orientation",
+          "Do not trap standing water — confirm drainage grommets are open"
+        ]
+      },
+      {
+        "heading": "Securing in High Winds",
+        "body": "In sustained winds above 40 mph (64 km/h), use all provided tie-down points and choose 600D or heavier fabric. Cross straps over the top can supplement corner ties on extra-large covers. Inspect after major storms and retighten when fabric relaxes.",
+        "bullets": [
+          "Ratchet straps preferred over single bungees for large commercial covers",
+          "Avoid sharp edges — use corner protectors if straps contact metal flashing",
+          "Re-tighten 48 hours after first install — fabric relaxes initially",
+          "Remove cover before high-wind events if not rated for your exposure class"
+        ]
+      }
+    ],
+    "slug": "resources/installation",
+    "intro": "Proper installation keeps covers in place through wind and weather without stressing seams. Always shut down and disconnect power before covering, drain the reservoir, and let internal components dry 24 hours to prevent mildew under the fabric."
+  },
+  {
+    "title": "Cooler Cover Maintenance Guide",
+    "description": "Clean, store, and repair evaporative cooler covers to extend fabric life — by material type and season.",
+    "relatedLinks": [
+      {
+        "label": "Installation Guide",
+        "path": "/resources/installation"
+      },
+      {
+        "label": "Materials Guide",
+        "path": "/materials"
+      }
+    ],
+    "deepDiveLinks": [
+      {
+        "label": "Troubleshooting & Repair Issues",
+        "path": "/blog/troubleshooting-cooler-cover-issues"
+      },
+      {
+        "label": "Winterizing Checklist",
+        "path": "/blog/winterizing-evaporative-cooler"
+      },
+      {
+        "label": "Waterproof vs. Water-Resistant Fabrics",
+        "path": "/blog/waterproof-vs-water-resistant"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Regular Cleaning",
+        "body": "Brush off dry dust monthly during the covered season. Wash once per year (or before off-season storage) with mild soap and cool water — never bleach unless the fabric supplier specifies it. Rinse thoroughly and air-dry fully before folding.",
+        "bullets": [
+          "Polyester / canvas: soft brush + mild detergent, cold water rinse",
+          "Vinyl: wipe with damp cloth; avoid petroleum solvents",
+          "Mesh: hose down gently; do not machine wash with agitators",
+          "Insulated: spot-clean when possible to preserve foam core"
+        ]
+      },
+      {
+        "heading": "Stain Removal",
+        "body": "Treat bird droppings and sap promptly — they etch coatings if baked in sun. Use a soft cloth and diluted mild detergent; for stubborn marks on vinyl, a dedicated marine/vinyl cleaner is safer than household solvents.",
+        "bullets": [
+          "Act within 48 hours on organic stains",
+          "No chlorine bleach on PU-coated polyester",
+          "Test cleaner on an inside hem first",
+          "Rinse soap residue — it attracts dust when dry"
+        ]
+      },
+      {
+        "heading": "Seasonal Storage",
+        "body": "Fold loosely along existing creases; do not compress insulated covers under heavy items. Store in a breathable bag or box in a dry, rodent-free space. Silica gel packs help in humid warehouses.",
+        "bullets": [
+          "Ensure cover is 100% dry before bagging",
+          "Avoid hot attics above 120°F (49°C) for PVC-backed fabrics",
+          "Hang large commercial covers on a rod if folding creases stress seams",
+          "Label bag with size and model for faster reinstall next season"
+        ]
+      },
+      {
+        "heading": "Repair Tips",
+        "body": "Small tears in polyester can be patched with outdoor fabric repair tape or sewn with UV-rated thread. Replace torn grommets rather than pulling straps through ripped holes. Seams showing white PU failure may need professional re-coating or replacement on high-value commercial covers.",
+        "bullets": [
+          "Tape patches: round the corners of patch pieces to prevent peel",
+          "Restitch loose hems before they propagate",
+          "Replace missing drawcord before wind season",
+          "Contact us for bulk repair or replacement on fleet accounts"
+        ]
+      }
+    ],
+    "slug": "resources/maintenance",
+    "intro": "Covers last longer when cleaned before storage and kept dry between seasons. Mud, bird droppings, and tree sap break down PU coatings over time. Follow material-specific cleaning to avoid stripping waterproof layers or melting heat-transfer logos."
+  },
+  {
+    "title": "How to Measure Your Cooler for a Cover",
+    "description": "Step-by-step instructions to measure width, depth, and height of your evaporative cooler for a custom-fit cover — including protrusions and rooftop units.",
+    "relatedLinks": [
+      {
+        "label": "Standard Size Chart",
+        "path": "/sizes"
+      },
+      {
+        "label": "Common Sizing Mistakes",
+        "path": "/blog/common-cover-sizing-mistakes"
+      },
+      {
+        "label": "Custom Sizes",
+        "path": "/custom/sizes"
+      }
+    ],
+    "deepDiveLinks": [
+      {
+        "label": "Custom Cooler Cover Sizes",
+        "path": "/blog/custom-cover-sizes"
+      },
+      {
+        "label": "What Is an Evaporative Cooler Cover?",
+        "path": "/blog/what-is-evaporative-cooler-cover"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Tools Needed",
+        "body": "A steel tape measure (preferred over cloth), notepad or phone camera, and optionally a helper for large rooftop units. For down-draft coolers, use a ladder with fall protection and measure from the roof deck to the top of the cabinet.",
+        "bullets": [
+          "Tape measure (ft/in or metric)",
+          "Camera — photos speed up custom quotes",
+          "Ladder and harness for rooftop units",
+          "Model nameplate photo (optional but helpful)"
+        ]
+      },
+      {
+        "heading": "Step 1: Measure Width",
+        "body": "Width is the longest horizontal side of the cabinet footprint, usually the left-to-right dimension when facing the access panel. Measure at the widest point including corner trim — not across the pad opening inside the hood.",
+        "bullets": [
+          "Measure twice at mid-height and near the top in case the cabinet tapers",
+          "Include side flanges or motor humps that extend past the main box",
+          "Record in inches to the nearest ¼ in. (or mm)"
+        ]
+      },
+      {
+        "heading": "Step 2: Measure Depth",
+        "body": "Depth is the front-to-back dimension of the exterior cabinet. On side-draft units mounted to a wall, depth is from the wall surface to the outermost point of the cooler housing (not the pad frame only).",
+        "bullets": [
+          "Account for water lines, float valves, and brackets that project beyond the cabinet",
+          "If a pipe exits the side, mark its location for a custom opening",
+          "Wall-mount units: measure from the wall to the farthest protrusion"
+        ]
+      },
+      {
+        "heading": "Step 3: Measure Height",
+        "body": "Height runs from the mounting surface (roof curb or wall bracket base) to the highest point of the cabinet — often a vent cap or lift lid. For down-draft units, include the rain collar if it projects above the roof line.",
+        "bullets": [
+          "Do not compress the measurement if a spring-loaded hood rises above the frame",
+          "Flat-top units: add note if water pools — we can specify drainage grommets",
+          "Round units: measure height on the straight side, then diameter separately"
+        ]
+      },
+      {
+        "heading": "Step 4: Note Protrusions",
+        "body": "List every item that breaks the rectangular outline: electrical disconnect boxes, side ducts, overflow drains, service panels, and guy-wire anchors. Custom openings or split corners prevent stretched fabric and torn seams.",
+        "bullets": [
+          "Mark disconnect box location (common on side-draft commercial units)",
+          "Photograph all four sides — one missing side causes fit issues",
+          "Specify if the cover must clear a locked access door",
+          "See common sizing mistakes before you submit your quote request"
+        ]
+      }
+    ],
+    "slug": "sizes/how-to-measure",
+    "intro": "Accurate measurements prevent gaps that let in dust, wind, and rain. Measure the outside of the metal or plastic cabinet — not the pad, not the internal frame. Record width, depth, and height at the widest points, then note any obstructions that need cutouts or extra slack."
+  },
+  {
+    "title": "Cooler Cover Sizes",
+    "description": "Standard evaporative cooler cover sizes, custom sizing, and how to pick the right fit for side-draft, down-draft, and commercial units.",
+    "relatedLinks": [
+      {
+        "label": "How to Measure",
+        "path": "/sizes/how-to-measure"
+      },
+      {
+        "label": "Round Covers",
+        "path": "/products/round-cooler-covers"
+      },
+      {
+        "label": "Oversized Covers",
+        "path": "/products/oversized-cooler-covers"
+      }
+    ],
+    "deepDiveLinks": [
+      {
+        "label": "Common Sizing Mistakes to Avoid",
+        "path": "/blog/common-cover-sizing-mistakes"
+      },
+      {
+        "label": "Custom Cooler Cover Sizes",
+        "path": "/blog/custom-cover-sizes"
+      },
+      {
+        "label": "Swamp Cooler Size Guide",
+        "path": "/blog/swamp-cooler-cover-sizes"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Standard Size Chart",
+        "body": "Many residential swamp coolers fall into recurring cabinet footprints. Side-draft and window units often range from roughly 22×18×28 in. up to 40×40×45 in. Down-draft rooftop units commonly run 28×28×29 in. through 38×38×44 in. Commercial and industrial cabinets can exceed 50×50×54 in.",
+        "bullets": [
+          "Side-draft / wall-mount: typically narrower depth, wider width — verify electrical boxes on the exterior",
+          "Down-draft / rooftop: allow extra height for vent caps and rain collars",
+          "Round / cylindrical units: size by diameter and height, not rectangular W×D×H",
+          "Always confirm against your actual measurements — model charts vary by brand and pad thickness"
+        ]
+      },
+      {
+        "heading": "Custom Sizing",
+        "body": "When your cabinet does not match a standard chart, custom covers are cut to your submitted dimensions. We add controlled slack on width and depth (typically 1–2 in.) unless you specify a compression fit for indoor storage. Height is usually matched closely to avoid pooling rain on flat tops.",
+        "bullets": [
+          "Submit outside dimensions in inches or millimeters — include photos for non-standard shapes",
+          "Mixed batch orders: send a spreadsheet of unit sizes for multi-site rollouts",
+          "No minimum order on small-batch custom line — prototypes available before bulk runs",
+          "Lead time: commonly 10–14 business days for custom specs (confirm at quote stage)"
+        ]
+      },
+      {
+        "heading": "How to Choose",
+        "body": "Match cover type to installation: rooftop down-draft covers need drainage and wind tie-downs; side-draft covers need clearance for wall brackets; window units need frame-friendly hems. If the unit stays outdoors year-round in sun, prioritize UV-rated or reflective top panels over the lightest fabric.",
+        "bullets": [
+          "Between two sizes → size up, then adjust with elastic hem, drawcord, or straps",
+          "Units with exterior junction boxes → request split-corner or notch openings",
+          "High-wind roofs → choose 600D+ fabric and four-point tie-down",
+          "Still unsure? Use our measuring guide or request a quote with your dimensions"
+        ]
+      }
+    ],
+    "slug": "sizes",
+    "intro": "Cooler covers are sized by outside cabinet dimensions — width × depth × height — not pad size or model name alone. Manufacturers build in 1–2 inches (25–50 mm) of leeway so covers slide over hardware, pad frames, and minor model variations. When your measurements fall between two sizes, choose the larger cover and tighten with drawcord or straps."
+  }
+]

@@ -1,0 +1,21 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import { blogPosts } from "@/data/blog";
+
+export function getStaticPaths() {
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<BlogLayout
+  post={post}
+  title={`${post.title} | CoolerFit Blog`}
+  description={post.excerpt}
+  canonicalPath={`/blog/${post.slug}`}
+  noIndex={post.noIndex !== false}
+/>

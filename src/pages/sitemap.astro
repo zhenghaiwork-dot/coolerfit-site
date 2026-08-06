@@ -1,0 +1,89 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import { blogPosts } from "@/data/blog";
+import { featurePages } from "@/data/features";
+import { productItems } from "@/data/product-items";
+import { productCategories } from "@/data/products";
+import { resourcePages } from "@/data/resources";
+
+type SitemapLink = { label: string; path: string };
+
+const mainPages: SitemapLink[] = [
+  { label: "Home", path: "/" },
+  { label: "Products", path: "/products" },
+  { label: "Custom Solutions", path: "/custom-solutions" },
+  { label: "About", path: "/about" },
+  { label: "Contact", path: "/contact" },
+  { label: "Privacy Policy", path: "/privacy" },
+  { label: "Blog", path: "/blog" },
+];
+
+const categoryLinks: SitemapLink[] = productCategories.map((c) => ({
+  label: c.title,
+  path: `/products/${c.slug}`,
+}));
+
+const productLinks: SitemapLink[] = productItems.map((p) => ({
+  label: p.name,
+  path: `/product/${p.slug}`,
+}));
+
+const blogLinks: SitemapLink[] = blogPosts.map((p) => ({
+  label: p.title,
+  path: `/blog/${p.slug}`,
+}));
+
+const featureLinks: SitemapLink[] = featurePages.map((f) => ({
+  label: f.title,
+  path: `/features/${f.slug}`,
+}));
+
+const resourceLinks: SitemapLink[] = resourcePages.map((r) => ({
+  label: r.title,
+  path: `/${r.slug}`,
+}));
+
+const sections: { title: string; links: SitemapLink[] }[] = [
+  { title: "Main Pages", links: mainPages },
+  { title: "Product Categories", links: categoryLinks },
+  { title: "Products", links: productLinks },
+  { title: "Features", links: featureLinks },
+  { title: "Resources & Guides", links: resourceLinks },
+  { title: "Blog", links: blogLinks },
+];
+---
+
+<BaseLayout
+  title="Site Map | CoolerFit"
+  description="Browse all pages on CoolerFit — product categories, individual products, blog articles, features, and resource guides."
+  canonicalPath="/sitemap"
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container max-w-5xl">
+      <Breadcrumb class="mb-6" items={[{ label: "Home", href: "/" }, { label: "Site Map" }]} />
+
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">Site Map</h1>
+      <p class="text-muted-foreground mb-10 max-w-2xl">
+        A complete index of all pages on this site. Search engines can also use our <a href="/sitemap.xml" class="text-primary hover:underline">XML sitemap</a>.
+      </p>
+
+      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        {sections.map((section) => (
+          <section>
+            <h2 class="text-lg font-display font-semibold text-foreground mb-3">{section.title}</h2>
+            <ul class="space-y-1.5">
+              {section.links.map((link) => (
+                <li>
+                  <a href={link.path} class="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

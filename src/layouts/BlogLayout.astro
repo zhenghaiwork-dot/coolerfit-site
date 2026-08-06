@@ -1,0 +1,317 @@
+---
+/**
+ * Article chrome for /blog/:slug — breadcrumb, article column and sidebar.
+ *
+ * The React version was a plain component rendered underneath `<Seo>`; here it
+ * owns the page shell instead, so the SEO values still come from the page and
+ * are forwarded straight to `BaseLayout`.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import InternalLinkCard from "@/components/InternalLinkCard.astro";
+import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import Icon from "@/components/Icon.astro";
+import QuoteLink from "@/components/QuoteLink.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import { cn } from "@/lib/utils";
+import type { BlogPost } from "@/data/blog";
+import { getClusterPosts, getBlogBySlug, getBlogReadingMinutes } from "@/data/blog";
+import type { JsonLd } from "@/lib/seo";
+import { defaultLocale, type Locale } from "@/i18n/locales";
+
+interface Props {
+  post: BlogPost;
+  title: string;
+  description?: string;
+  canonicalPath?: string;
+  jsonLd?: JsonLd;
+  noIndex?: boolean;
+  locale?: Locale;
+}
+
+const { post, title, description, canonicalPath, jsonLd, noIndex, locale = defaultLocale } = Astro.props;
+
+const pillar = post.pillarSlug ? getBlogBySlug(post.pillarSlug) : null;
+const siblings = post.pillarSlug ? getClusterPosts(post.pillarSlug).filter((p) => p.slug !== post.slug) : [];
+const clusters = post.isPillar && post.clusterSlugs ? getClusterPosts(post.slug) : [];
+const readingMinutes = getBlogReadingMinutes(post);
+const showIntro = Boolean(post.intro?.trim()) && post.intro!.trim() !== post.excerpt.trim();
+
+const crumbs: { label: string; href?: string }[] = [
+  { label: "Home", href: "/" },
+  { label: "Blog", href: "/blog" },
+  ...(pillar ? [{ label: pillar.title, href: `/blog/${pillar.slug}` }] : []),
+  { label: post.title },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  alternatePath={`/blog/${post.slug}`}
+  locale={locale}
+  jsonLd={jsonLd}
+  noIndex={noIndex}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <Breadcrumb class="mb-6" items={crumbs} />
+
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-10">
+        <article class="min-w-0">
+          {
+            post.isPillar && (
+              <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
+                Pillar Page
+              </span>
+            )
+          }
+          <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">{post.title}</h1>
+          <p class="text-xs text-muted-foreground mb-3">{readingMinutes} min read</p>
+          <p class="text-lg text-muted-foreground mb-6 leading-snug">{post.excerpt}</p>
+          {
+            showIntro ? (
+              <div class="mb-6 space-y-3">
+                {post.intro!.split("\n\n").map((para) => (
+                  <p class="text-muted-foreground leading-relaxed text-sm">{para}</p>
+                ))}
+              </div>
+            ) : null
+          }
+
+          {
+            post.companionResource ? (
+              <div class="mb-8 rounded-lg border border-primary/25 bg-primary/[0.04] px-4 py-3 text-sm">
+                <p class="text-muted-foreground">
+                  <Icon name="BookMarked" class="inline mr-1.5 text-primary" size={16} />
+                  Need the quick reference first?{" "}
+                  <a href={post.companionResource.path} class="font-medium text-primary hover:underline">
+                    {post.companionResource.label}
+                  </a>
+                </p>
+              </div>
+            ) : null
+          }
+
+          {
+            post.isPillar && clusters.length > 0 && (
+              <div class="mb-10">
+                <h2 class="text-xl font-display font-semibold text-foreground mb-4">In This Guide</h2>
+                <div class="grid gap-2">
+                  {clusters.map((c) => (
+                    <a
+                      href={`/blog/${c.slug}`}
+                      class="group flex items-center gap-3 p-3 rounded-lg border border-border/60 hover:border-primary/25 hover:shadow-xs transition-all duration-200"
+                    >
+                      <Icon name="BookOpen" size={16} class="text-primary shrink-0" />
+                      <div>
+                        <p class="font-medium text-sm text-foreground group-hover:text-primary transition-colors">
+                          {c.title}
+                        </p>
+                        <p class="text-xs text-muted-foreground mt-0.5">{c.excerpt}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+
+          {
+            post.content.map((section) => (
+              <section class="mb-8">
+                {section.heading ? (
+                  section.level === "h2" ? (
+                    <h2 class="text-2xl font-display font-semibold text-foreground mb-3">{section.heading}</h2>
+                  ) : (
+                    <h3 class="text-xl font-display font-semibold text-foreground mb-2">{section.heading}</h3>
+                  )
+                ) : null}
+                {section.body.trim()
+                  ? section.body
+                      .split("\n\n")
+                      .map((para) => (
+                        <p class="text-muted-foreground leading-relaxed mb-3 last:mb-0 text-sm">{para}</p>
+                      ))
+                  : null}
+                {section.bullets && section.bullets.length > 0 ? (
+                  <ul class="mt-3 space-y-2 list-disc pl-5">
+                    {section.bullets.map((item) => (
+                      <li class="text-muted-foreground leading-relaxed text-sm">{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                {section.sectionLinks && section.sectionLinks.length > 0 ? (
+                  <div class="mt-4 flex flex-col gap-2">
+                    {section.sectionLinks.map((link) => (
+                      <a href={link.path} class="text-sm font-medium text-primary hover:underline">
+                        {link.label} →
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
+                {section.table && section.table.length > 0 ? (
+                  <div class="mt-4 overflow-x-auto rounded-lg border border-border">
+                    <table class="w-full text-sm">
+                      <thead>
+                        <tr class="border-b border-border bg-secondary/50">
+                          <th class="px-4 py-3 text-left font-semibold text-foreground" scope="col"></th>
+                          <th class="px-4 py-3 text-left font-semibold text-foreground" scope="col">
+                            Without a Cover
+                          </th>
+                          <th class="px-4 py-3 text-left font-semibold text-foreground" scope="col">
+                            With a Cover
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {section.table.map((row) => (
+                          <tr class="border-b border-border last:border-0">
+                            <th class="px-4 py-3 text-left font-medium text-foreground align-top" scope="row">
+                              {row.label}
+                            </th>
+                            <td class="px-4 py-3 text-muted-foreground align-top">{row.without}</td>
+                            <td class="px-4 py-3 text-muted-foreground align-top">{row.with}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : null}
+                {section.dataTable && section.dataTable.rows.length > 0 ? (
+                  <div class="mt-4 overflow-x-auto rounded-lg border border-border">
+                    <table class="w-full text-sm">
+                      <thead>
+                        <tr class="border-b border-border bg-secondary/50">
+                          {section.dataTable.headers.map((header) => (
+                            <th
+                              class="px-4 py-3 text-left font-semibold text-foreground whitespace-nowrap"
+                              scope="col"
+                            >
+                              {header}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {section.dataTable.rows.map((row) => (
+                          <tr class="border-b border-border last:border-0">
+                            {row.map((cell, ci) =>
+                              ci === 0 ? (
+                                <th
+                                  class="px-4 py-3 text-left font-medium text-foreground align-top whitespace-nowrap"
+                                  scope="row"
+                                >
+                                  {cell}
+                                </th>
+                              ) : (
+                                <td class="px-4 py-3 text-muted-foreground align-top">{cell}</td>
+                              ),
+                            )}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : null}
+              </section>
+            ))
+          }
+
+          {
+            post.internalLinks.length > 0 && (
+              <div class="mt-12">
+                <h2 class="text-xl font-display font-semibold text-foreground mb-4">Related Resources</h2>
+                <div class="grid gap-3 sm:grid-cols-2">
+                  {post.internalLinks.map((link) => (
+                    <InternalLinkCard label={link.label} path={link.path} />
+                  ))}
+                </div>
+              </div>
+            )
+          }
+
+          <div class="mt-12 p-8 bg-secondary rounded-2xl text-center border border-border/20">
+            <h3 class="font-display font-semibold text-foreground mb-2">Need a Custom Cover?</h3>
+            <p class="text-sm text-muted-foreground mb-4">Get a free quote for your exact specifications.</p>
+            <QuoteLink
+              quote={{
+                coverType: post.title,
+                ref: `/blog/${post.slug}`,
+              }}
+              class={cn(buttonVariants(), "shadow-md")}
+            >
+              Request a Quote
+            </QuoteLink>
+          </div>
+        </article>
+
+        <aside class="space-y-6">
+          {
+            pillar && (
+              <Card class="border border-border/60 shadow-xs">
+                <CardContent class="p-4">
+                  <a
+                    href={`/blog/${pillar.slug}`}
+                    class="flex items-center gap-2 text-sm text-primary hover:underline"
+                  >
+                    <Icon name="ArrowLeft" size={14} /> Back to: {pillar.title}
+                  </a>
+                </CardContent>
+              </Card>
+            )
+          }
+
+          {
+            siblings.length > 0 && (
+              <Card class="border border-border/60 shadow-xs">
+                <CardContent class="p-4">
+                  <h4 class="font-display font-semibold text-sm text-foreground mb-3 flex items-center gap-2">
+                    <Icon name="BookMarked" size={14} class="text-primary shrink-0" />
+                    More in This Series
+                  </h4>
+                  <div class="space-y-1.5">
+                    {siblings.map((s) => (
+                      <a
+                        href={`/blog/${s.slug}`}
+                        class="block text-sm text-muted-foreground hover:text-primary transition-colors py-1 px-2 -mx-2 rounded hover:bg-secondary/50"
+                      >
+                        {s.title}
+                      </a>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          }
+
+          <Card class="border border-border/60 shadow-xs">
+            <CardContent class="p-4">
+              <h4 class="font-display font-semibold text-sm text-foreground mb-3 flex items-center gap-2">
+                <Icon name="ShoppingBag" size={14} class="text-primary shrink-0" />
+                Shop Covers
+              </h4>
+              <div class="space-y-1">
+                <a
+                  href="/products/evaporative-cooler-covers"
+                  class="block text-sm text-muted-foreground hover:text-primary transition-colors py-1 px-2 -mx-2 rounded hover:bg-secondary/50"
+                  >Evaporative Cooler Covers</a
+                >
+                <a
+                  href="/products/custom-evaporative-cooler-covers"
+                  class="block text-sm text-muted-foreground hover:text-primary transition-colors py-1 px-2 -mx-2 rounded hover:bg-secondary/50"
+                  >Custom Covers</a
+                >
+                <a href="/products" class="block text-sm text-primary font-medium hover:underline mt-2"
+                  >View All Products →</a
+                >
+              </div>
+            </CardContent>
+          </Card>
+        </aside>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

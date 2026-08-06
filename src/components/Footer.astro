@@ -1,0 +1,141 @@
+---
+import Icon from "@/components/Icon.astro";
+import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
+import { SITE_CONTACT } from "@/lib/site";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const t = ui(locale);
+const lp = (path: string) => localizedPath(locale, path);
+
+const quickLinks = [
+  { label: t.nav.products, path: "/products" },
+  { label: t.nav.customSolutions, path: "/custom-solutions" },
+  { label: t.nav.about, path: "/about" },
+  { label: t.nav.contact, path: "/contact" },
+];
+
+const productLinks = [
+  { label: "Evaporative Cooler Covers", path: "/products/evaporative-cooler-covers" },
+  { label: "UV-Resistant Covers", path: "/products/uv-resistant-cooler-covers" },
+  { label: "Waterproof Covers", path: "/products/waterproof-cooler-covers" },
+  { label: "Winter Covers", path: "/products/winter-cooler-covers" },
+  { label: "Custom Size Covers", path: "/products/custom-size-cooler-covers" },
+  { label: "Oversized Covers", path: "/products/oversized-cooler-covers" },
+];
+
+const resourceLinks = [
+  { label: t.nav.blog, path: "/blog" },
+  { label: "Materials Guide", path: "/materials" },
+  { label: "Installation Guide", path: "/resources/installation" },
+  { label: "Maintenance Guide", path: "/resources/maintenance" },
+  { label: "How to Measure", path: "/sizes/how-to-measure" },
+  { label: "Site Map", path: "/sitemap" },
+];
+
+const linkClass =
+  "text-sm opacity-55 hover:opacity-100 hover:translate-x-0.5 rtl:hover:-translate-x-0.5 transition-all duration-200 inline-block";
+const headingClass = "font-display font-semibold text-xs uppercase tracking-widest mb-4 opacity-50";
+const contactItemClass = "flex items-start gap-3 text-sm opacity-55 hover:opacity-80 transition-opacity duration-200";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-foreground text-background relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+    <div
+      class="w-full h-full"
+      style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 32px 32px;"
+    >
+    </div>
+  </div>
+
+  <div class="container relative py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      <div class="lg:col-span-1">
+        <div class="flex items-center gap-2 mb-4">
+          <img src="/logo.svg" alt="CoolerFit" width="160" height="32" class="h-8 w-auto brightness-0 invert" />
+        </div>
+        <p class="text-sm opacity-55 leading-relaxed mb-4">
+          Custom evaporative cooler covers manufactured to your specs.
+        </p>
+        <LanguageSwitcher locale={locale} />
+      </div>
+
+      <div>
+        <h3 class={headingClass}>Quick Links</h3>
+        <ul class="space-y-2.5">
+          {
+            quickLinks.map((l) => (
+              <li>
+                <a href={lp(l.path)} class={linkClass}>
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class={headingClass}>{t.nav.products}</h3>
+        <ul class="space-y-2.5">
+          {
+            productLinks.map((l) => (
+              <li>
+                <a href={lp(l.path)} class={linkClass}>
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class={headingClass}>{t.nav.resources}</h3>
+        <ul class="space-y-2.5">
+          {
+            resourceLinks.map((l) => (
+              <li>
+                <a href={lp(l.path)} class={linkClass}>
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class={headingClass}>Contact</h3>
+        <ul class="space-y-3">
+          <li class={contactItemClass}>
+            <Icon name="Mail" size={16} class="mt-0.5 shrink-0 opacity-50" />
+            <span>{SITE_CONTACT.email}</span>
+          </li>
+          <li class={contactItemClass}>
+            <Icon name="Phone" size={16} class="mt-0.5 shrink-0 opacity-50" />
+            <span>{SITE_CONTACT.phone}</span>
+          </li>
+          <li class={contactItemClass}>
+            <Icon name="MapPin" size={16} class="mt-0.5 shrink-0 opacity-50" />
+            <span>{SITE_CONTACT.address}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="border-t border-background/8 mt-14 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm opacity-35"
+    >
+      <span>© {year} CoolerFit. {t.common.allRights}</span>
+      <a href={lp("/privacy")} class="hover:opacity-70 transition-opacity duration-200">{t.common.privacy}</a>
+    </div>
+  </div>
+</footer>

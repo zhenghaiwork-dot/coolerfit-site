@@ -1,0 +1,15 @@
+---
+import ProductDetailPage from "@/templates/ProductDetailPage.astro";
+import { getProductEntries, productSlug, toProductItem } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const entries = await getProductEntries("es");
+  return entries.map((e) => ({
+    params: { slug: productSlug(e) },
+    props: { product: toProductItem(e) },
+  }));
+}
+
+const { product } = Astro.props;
+---
+<ProductDetailPage locale="es" product={product} />

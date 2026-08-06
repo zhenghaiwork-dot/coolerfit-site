@@ -1,0 +1,128 @@
+---
+/**
+ * Product image carousel with thumbnail strip.
+ *
+ * Replaces the Embla-backed shadcn Carousel. Slide layout and the prev/next
+ * button styling are unchanged; the sliding itself now uses native CSS scroll
+ * snapping instead of a transform-driven JS engine, so swiping and keyboard
+ * scrolling come from the browser and only the arrows, disabled states and
+ * active-thumbnail tracking need script.
+ */
+import Icon from "@/components/Icon.astro";
+import ProductImage from "@/components/ProductImage.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import { cn } from "@/lib/utils";
+import type { ProductGalleryItem } from "@/lib/product-images";
+
+interface Props {
+  gallery: ProductGalleryItem[];
+}
+
+const { gallery } = Astro.props;
+
+const navClass = cn(buttonVariants({ variant: "outline", size: "icon" }), "absolute h-10 w-10 rounded-full");
+---
+
+{
+  gallery.length > 1 ? (
+    <div data-pattern="product-gallery" data-gallery>
+      <div class="relative" role="region" aria-roledescription="carousel">
+        <div class="overflow-x-auto scrollbar-hide snap-x snap-mandatory" data-gallery-viewport>
+          <div class="flex -ml-4">
+            {gallery.map((item) => (
+              <div role="group" aria-roledescription="slide" class="min-w-0 shrink-0 grow-0 basis-full pl-4 snap-start">
+                <div class="aspect-square rounded-xl overflow-hidden bg-secondary">
+                  <ProductImage src={item.src} alt={item.alt} class="w-full h-full" loading="eager" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <button type="button" data-gallery-prev class={cn(navClass, "left-3 top-1/2 -translate-y-1/2")} disabled>
+          <Icon name="ArrowLeft" class="h-4 w-4" />
+          <span class="sr-only">Previous slide</span>
+        </button>
+        <button type="button" data-gallery-next class={cn(navClass, "right-3 top-1/2 -translate-y-1/2")}>
+          <Icon name="ArrowRight" class="h-4 w-4" />
+          <span class="sr-only">Next slide</span>
+        </button>
+      </div>
+      <div class="mt-4 grid grid-cols-5 gap-2">
+        {gallery.map((item, i) => (
+          <button
+            type="button"
+            data-gallery-thumb
+            data-index={i}
+            aria-label={`Show image ${i + 1}: ${item.alt}`}
+            class={cn(
+              "aspect-square rounded-md overflow-hidden bg-secondary border-2 transition-colors",
+              i === 0 ? "border-primary" : "border-transparent hover:border-border",
+            )}
+          >
+            <ProductImage src={item.src} alt="" class="w-full h-full" pendingLabel="" />
+          </button>
+        ))}
+      </div>
+    </div>
+  ) : (
+    <div class="aspect-square rounded-xl overflow-hidden bg-secondary">
+      <ProductImage src={gallery[0].src} alt={gallery[0].alt} class="w-full h-full" loading="eager" />
+    </div>
+  )
+}
+
+<script>
+  function initGallery(root: HTMLElement) {
+    const viewport = root.querySelector<HTMLElement>("[data-gallery-viewport]");
+    const prev = root.querySelector<HTMLButtonElement>("[data-gallery-prev]");
+    const next = root.querySelector<HTMLButtonElement>("[data-gallery-next]");
+    const thumbs = [...root.querySelectorAll<HTMLButtonElement>("[data-gallery-thumb]")];
+    if (!viewport || !prev || !next) return;
+
+    const slides = [...viewport.querySelectorAll<HTMLElement>('[aria-roledescription="slide"]')];
+    let current = 0;
+
+    const scrollTo = (i: number) => {
+      const slide = slides[i];
+      if (slide) viewport.scrollTo({ left: slide.offsetLeft - slides[0].offsetLeft, behavior: "smooth" });
+    };
+
+    const sync = () => {
+      const index = slides.findIndex((s) => Math.abs(s.offsetLeft - slides[0].offsetLeft - viewport.scrollLeft) < s.offsetWidth / 2);
+      current = index < 0 ? 0 : index;
+
+      prev.disabled = current === 0;
+      next.disabled = current === slides.length - 1;
+
+      thumbs.forEach((t, i) => {
+        t.classList.toggle("border-primary", i === current);
+        t.classList.toggle("border-transparent", i !== current);
+        t.classList.toggle("hover:border-border", i !== current);
+      });
+    };
+
+    prev.addEventListener("click", () => scrollTo(current - 1));
+    next.addEventListener("click", () => scrollTo(current + 1));
+    thumbs.forEach((t) => t.addEventListener("click", () => scrollTo(Number(t.dataset.index))));
+
+    let frame = 0;
+    viewport.addEventListener("scroll", () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(sync);
+    });
+
+    root.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        scrollTo(current - 1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        scrollTo(current + 1);
+      }
+    });
+
+    sync();
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-gallery]").forEach(initGallery);
+</script>

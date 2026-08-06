@@ -1,0 +1,523 @@
+[
+  {
+    "name": "Custom Logo & Branding Cover",
+    "summary": "Add your brand logo, colors, and custom design.",
+    "image": "/images/products/custom-logo-cover/01-main.webp",
+    "imageAlt": "Branded cover on a portable wheeled evaporative air cooler",
+    "categorySlugs": [
+      "custom-evaporative-cooler-covers",
+      "commercial-cooler-covers",
+      "bulk-order-cooler-covers",
+      "small-batch-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "Any (Your Choice)"
+      },
+      {
+        "label": "Printing",
+        "value": "Screen / Heat Transfer / Embroidery"
+      },
+      {
+        "label": "Logo Area",
+        "value": "Up to Full Cover"
+      },
+      {
+        "label": "Min. Order",
+        "value": "1 Unit"
+      },
+      {
+        "label": "Lead Time",
+        "value": "7–14 Days"
+      }
+    ],
+    "features": [
+      "Full-color logo printing",
+      "Custom color matching",
+      "Multiple print methods",
+      "Available on all cover types",
+      "Design assistance included"
+    ],
+    "slug": "custom-logo-cover",
+    "description": "Fully branded cooler covers with your company logo, custom colors, and design elements. Perfect for HVAC contractors, property managers, and businesses wanting professional branded equipment protection. Available on any cover type."
+  },
+  {
+    "name": "Heavy-Duty Industrial Cover",
+    "summary": "Maximum durability for large wheeled commercial air coolers.",
+    "image": "/images/products/heavy-duty-industrial-cover/01-main.webp",
+    "imageAlt": "Heavy-duty cover on a large portable wheeled industrial air cooler",
+    "categorySlugs": [
+      "commercial-cooler-covers",
+      "industrial-cooler-covers",
+      "oversized-cooler-covers",
+      "extreme-weather-cooler-covers",
+      "bulk-order-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "900D Industrial Canvas"
+      },
+      {
+        "label": "Coating",
+        "value": "TPU Laminated"
+      },
+      {
+        "label": "Sizes",
+        "value": "L / XL / XXL / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Black, Gray"
+      },
+      {
+        "label": "Weight",
+        "value": "1.5–3.0 kg"
+      }
+    ],
+    "features": [
+      "Double-stitched seams",
+      "Heavy-duty buckle straps",
+      "UV-resistant coating",
+      "Custom cutouts for piping",
+      "Bulk pricing available"
+    ],
+    "popular": true,
+    "slug": "heavy-duty-industrial-cover",
+    "description": "Engineered with 900D industrial canvas and TPU lamination for oversized portable evaporative air coolers on heavy casters — the mobile units used in factories, logistics yards, and industrial sites. Double-stitched seams and heavy-duty buckle straps stand up to frequent moves and harsh environments."
+  },
+  {
+    "name": "Mesh Breathable Cover",
+    "summary": "Breathable mesh for debris & pest protection with airflow.",
+    "image": "/images/products/mesh-breathable-cover/01-main.webp",
+    "imageAlt": "Mesh cover on a portable wheeled evaporative air cooler",
+    "categorySlugs": [
+      "mesh-cooler-covers",
+      "evaporative-cooler-covers",
+      "air-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "High-Density Polyester Mesh"
+      },
+      {
+        "label": "Mesh Aperture",
+        "value": "1mm"
+      },
+      {
+        "label": "Sizes",
+        "value": "S / M / L / XL / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Black, Gray"
+      },
+      {
+        "label": "Weight",
+        "value": "0.3–0.6 kg"
+      }
+    ],
+    "features": [
+      "Breathable mesh fabric",
+      "Pest prevention",
+      "Debris filtration",
+      "Ultra-lightweight",
+      "Easy install/remove"
+    ],
+    "slug": "mesh-breathable-cover",
+    "description": "Lightweight mesh cover that filters out debris, leaves, and pests while maintaining full airflow. Perfect for in-season use in mild climates, or as a secondary protective layer during operational periods."
+  },
+  {
+    "name": "Round Cylinder Cover",
+    "summary": "Precision-cut for round portable & cylindrical air coolers.",
+    "image": "/images/products/round-cylinder-cover/01-main.webp",
+    "imageAlt": "Round cover on a cylindrical portable wheeled evaporative air cooler",
+    "categorySlugs": [
+      "round-cooler-covers",
+      "square-rectangular-cooler-covers",
+      "evaporative-cooler-covers",
+      "custom-evaporative-cooler-covers",
+      "custom-size-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "600D Oxford Polyester"
+      },
+      {
+        "label": "Shape",
+        "value": "Circular / Cylindrical"
+      },
+      {
+        "label": "Diameters",
+        "value": "60 / 80 / 100cm / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Gray, Beige, Custom"
+      },
+      {
+        "label": "Weight",
+        "value": "0.6–1.0 kg"
+      }
+    ],
+    "features": [
+      "Circular pattern cutting",
+      "Elastic hem for snug fit",
+      "Multiple diameter options",
+      "Custom sizing",
+      "Top drainage design"
+    ],
+    "slug": "round-cylinder-cover",
+    "description": "Custom-shaped cover for round and cylindrical portable evaporative coolers — including wheeled drum-style mobile units. Precision-cut circular pattern with elastic hem ensures a snug fit. Available in multiple standard diameters or fully custom dimensions."
+  },
+  {
+    "name": "Small Batch & Prototype Cover",
+    "summary": "Low MOQ orders and prototyping for unique requirements.",
+    "image": "/images/products/small-batch-prototype-cover/01-main.webp",
+    "imageAlt": "Prototype cover being fitted on a portable wheeled air cooler",
+    "categorySlugs": [
+      "small-batch-cooler-covers",
+      "custom-evaporative-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "Any (Your Choice)"
+      },
+      {
+        "label": "MOQ",
+        "value": "1 Unit"
+      },
+      {
+        "label": "Prototype",
+        "value": "Available"
+      },
+      {
+        "label": "Lead Time",
+        "value": "5–10 Days"
+      },
+      {
+        "label": "Customization",
+        "value": "Full"
+      }
+    ],
+    "features": [
+      "No minimum order",
+      "Full customization",
+      "Quick turnaround",
+      "Prototype samples",
+      "Design consultation"
+    ],
+    "slug": "small-batch-prototype-cover",
+    "description": "Flexible small-batch production with no minimum order requirements. Get prototypes before committing to large orders. Ideal for testing new designs, one-off custom projects, or specialty applications."
+  },
+  {
+    "name": "Standard Down Draft Cover",
+    "summary": "Cover for large portable top-discharge air coolers on wheels.",
+    "image": "/images/products/standard-down-draft-cover/01-main.webp",
+    "imageAlt": "Down-draft cover on a large portable wheeled evaporative air cooler — top discharge",
+    "categorySlugs": [
+      "evaporative-cooler-covers",
+      "down-draft-cooler-covers",
+      "rooftop-cooler-covers",
+      "swamp-cooler-covers",
+      "outdoor-cooler-covers",
+      "windproof-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "600D Oxford Polyester"
+      },
+      {
+        "label": "Coating",
+        "value": "PU + UV Stabilizer"
+      },
+      {
+        "label": "Sizes",
+        "value": "M / L / XL / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Gray, Charcoal"
+      },
+      {
+        "label": "Weight",
+        "value": "1.0–1.5 kg"
+      }
+    ],
+    "features": [
+      "Drainage channels",
+      "UV-resistant top panel",
+      "Wind-secure straps",
+      "Top-discharge portable fit",
+      "Custom cutouts available"
+    ],
+    "popular": true,
+    "slug": "standard-down-draft-cover",
+    "description": "Purpose-built for mid-to-large portable evaporative coolers with top-down (down-draft) airflow — wheeled floor-standing units used in warehouses, events, and commercial yards. Reinforced top panels, drainage channels, and UV-resistant coating handle outdoor storage and transport."
+  },
+  {
+    "name": "Standard Side Draft Cover",
+    "summary": "Reliable protection for portable side-discharge air coolers on wheels.",
+    "image": "/images/products/standard-side-draft-cover/01-main.webp",
+    "imageAlt": "Side-draft cover on a portable wheeled evaporative air cooler — front view",
+    "categorySlugs": [
+      "evaporative-cooler-covers",
+      "side-draft-cooler-covers",
+      "swamp-cooler-covers",
+      "residential-cooler-covers",
+      "dust-protection-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "600D Oxford Polyester"
+      },
+      {
+        "label": "Coating",
+        "value": "PU Water-Resistant"
+      },
+      {
+        "label": "Sizes",
+        "value": "S / M / L / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Gray, Beige, Navy"
+      },
+      {
+        "label": "Weight",
+        "value": "0.8–1.2 kg"
+      }
+    ],
+    "features": [
+      "Dustproof sealed seams",
+      "Caster-wheel clearance hem",
+      "Air vents",
+      "Fits portable box cabinets",
+      "Custom sizing available"
+    ],
+    "popular": true,
+    "slug": "standard-side-draft-cover",
+    "description": "Our standard side-draft cover is designed for mid-to-large portable evaporative air coolers — the wheeled, floor-standing cabinet style common in residential and light commercial use. Made from durable 600D polyester with PU coating, it provides year-round protection from dust, rain, and UV damage. Hem clearance fits caster wheels; ventilation openings prevent condensation."
+  },
+  {
+    "name": "UV Shield Cover",
+    "summary": "Advanced UV-blocking technology for sun-exposed coolers.",
+    "image": "/images/products/uv-shield-cover/01-main.webp",
+    "imageAlt": "UV shield cover on a portable wheeled air cooler in direct sunlight",
+    "categorySlugs": [
+      "uv-resistant-cooler-covers",
+      "evaporative-cooler-covers",
+      "rooftop-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "600D Polyester + UV Coating"
+      },
+      {
+        "label": "UV Protection",
+        "value": "UPF 50+"
+      },
+      {
+        "label": "Sizes",
+        "value": "S / M / L / XL / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Silver, White, Light Gray"
+      },
+      {
+        "label": "Weight",
+        "value": "0.9–1.4 kg"
+      }
+    ],
+    "features": [
+      "UPF 50+ UV blocking",
+      "Fade-resistant colors",
+      "Heat-reflective surface",
+      "Extended lifespan",
+      "All-season protection"
+    ],
+    "slug": "uv-shield-cover",
+    "description": "Featuring our proprietary UV-blocking coating, this cover prevents sun damage, color fading, and material degradation. Ideal for coolers exposed to direct sunlight year-round. Heat-reflective outer layer keeps your cooler significantly cooler."
+  },
+  {
+    "name": "Waterproof Premium Cover",
+    "summary": "100% waterproof with sealed seams for heavy rain regions.",
+    "image": "/images/products/waterproof-premium-cover/01-main.webp",
+    "imageAlt": "Waterproof cover on a portable wheeled evaporative air cooler outdoors",
+    "categorySlugs": [
+      "waterproof-cooler-covers",
+      "evaporative-cooler-covers",
+      "swamp-cooler-covers",
+      "side-draft-cooler-covers",
+      "down-draft-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "300D Polyester + PVC Backing"
+      },
+      {
+        "label": "Waterproof Rating",
+        "value": "5000mm H₂O"
+      },
+      {
+        "label": "Sizes",
+        "value": "S / M / L / XL / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Black, Dark Gray, Navy"
+      },
+      {
+        "label": "Weight",
+        "value": "1.0–1.8 kg"
+      }
+    ],
+    "features": [
+      "100% waterproof fabric",
+      "Sealed seam technology",
+      "Anti-mildew treatment",
+      "Drainage grommets",
+      "Elastic drawstring hem"
+    ],
+    "slug": "waterproof-premium-cover",
+    "description": "Our premium waterproof cover uses fully sealed seams and a multi-layer water-repellent coating to provide complete rain protection. Anti-mildew treatment and drainage grommets ensure your cooler stays dry and clean year-round."
+  },
+  {
+    "name": "Window Unit Cover",
+    "summary": "Custom-fit for window-mounted coolers without removal.",
+    "image": "/images/products/window-unit-cover/01-main.webp",
+    "imageAlt": "Window unit evaporative cooler cover fitted in residential window frame",
+    "categorySlugs": [
+      "window-cooler-covers",
+      "evaporative-cooler-covers",
+      "air-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "420D Polyester"
+      },
+      {
+        "label": "Coating",
+        "value": "PU Water-Resistant"
+      },
+      {
+        "label": "Sizes",
+        "value": "Standard Window / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Beige, Gray, White"
+      },
+      {
+        "label": "Weight",
+        "value": "0.4–0.7 kg"
+      }
+    ],
+    "features": [
+      "Window-frame compatible",
+      "Insulating properties",
+      "No-removal install",
+      "Compact storage",
+      "Adjustable straps"
+    ],
+    "slug": "window-unit-cover",
+    "description": "Designed specifically for window-mounted evaporative coolers. Install the cover without removing your unit. Insulating properties help reduce drafts during the off-season. Compact design folds for easy storage."
+  },
+  {
+    "name": "Winter Insulated Cover",
+    "summary": "Thermally insulated for freeze protection in cold climates.",
+    "image": "/images/products/winter-insulated-cover/01-main.webp",
+    "imageAlt": "Insulated cover on a portable wheeled evaporative air cooler in winter",
+    "categorySlugs": [
+      "winter-cooler-covers",
+      "insulated-cooler-covers",
+      "evaporative-cooler-covers",
+      "swamp-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "600D Polyester + Thermal Lining"
+      },
+      {
+        "label": "Insulation",
+        "value": "5mm Foam Core"
+      },
+      {
+        "label": "Sizes",
+        "value": "S / M / L / XL / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Gray, Black"
+      },
+      {
+        "label": "Weight",
+        "value": "1.2–2.0 kg"
+      }
+    ],
+    "features": [
+      "Thermal insulation layer",
+      "Freeze protection",
+      "Snow-shedding design",
+      "Tight-seal closures",
+      "Condensation prevention"
+    ],
+    "slug": "winter-insulated-cover",
+    "description": "Multi-layer insulated cover with thermal lining designed to protect evaporative coolers during harsh winters. Prevents freezing, ice damage, and debris accumulation. Snow-shedding exterior and tight-seal closures keep moisture out."
+  },
+  {
+    "name": "XL Commercial Cover",
+    "summary": "Oversized cover for extra-large wheeled commercial coolers.",
+    "image": "/images/products/xl-commercial-cover/01-main.webp",
+    "imageAlt": "XL cover on an oversized portable wheeled commercial air cooler",
+    "categorySlugs": [
+      "large-cooler-covers",
+      "extra-large-cooler-covers",
+      "commercial-cooler-covers",
+      "bulk-order-cooler-covers",
+      "oversized-cooler-covers"
+    ],
+    "specs": [
+      {
+        "label": "Material",
+        "value": "900D Polyester Canvas"
+      },
+      {
+        "label": "Coating",
+        "value": "PU + UV Stabilizer"
+      },
+      {
+        "label": "Sizes",
+        "value": "XL / XXL / XXXL / Custom"
+      },
+      {
+        "label": "Colors",
+        "value": "Gray, Black, Custom"
+      },
+      {
+        "label": "Weight",
+        "value": "2.0–4.0 kg"
+      }
+    ],
+    "features": [
+      "Reinforced stress points",
+      "Extra-wide coverage",
+      "Heavy-duty fasteners",
+      "Wind-resistant design",
+      "Custom branding options"
+    ],
+    "slug": "xl-commercial-cover",
+    "description": "Extra-large cover for the biggest portable evaporative air coolers on casters — mobile units used at hotels, restaurants, warehouses, and outdoor events. Reinforced stress points and heavy-duty fasteners handle wide cabinet spans and frequent repositioning."
+  }
+]

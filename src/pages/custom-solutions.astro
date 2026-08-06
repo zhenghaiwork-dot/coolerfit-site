@@ -1,0 +1,156 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import Icon from "@/components/Icon.astro";
+import QuoteLink from "@/components/QuoteLink.astro";
+
+const customOptions = [
+  {
+    title: "Custom Dimensions",
+    desc: "Any width, height, and depth — square, round, or irregular cabinets. Send a dimension table or photos of all four sides.",
+    image: "/images/custom/dimensions.webp",
+    imageAlt: "Measuring custom evaporative cooler cover dimensions on a unit",
+    path: "/custom/sizes",
+  },
+  {
+    title: "Custom Openings",
+    desc: "Cutouts for pipes, ducts, disconnect boxes, vents, and drainage. Side-draft and down-draft layouts supported.",
+    image: "/images/custom/openings.webp",
+    imageAlt: "Custom pipe and vent cutouts on a cooler cover pattern",
+    path: "/custom/opening-design",
+  },
+  {
+    title: "Material Selection",
+    desc: "Oxford, canvas, PVC-backed waterproof, mesh, or insulated composites — matched to your climate and exposure.",
+    image: "/images/custom/materials.webp",
+    imageAlt: "Fabric material swatches for custom cooler covers",
+    path: "/custom/materials",
+  },
+  {
+    title: "Color Matching",
+    desc: "Standard palette or Pantone / CMYK matching for fleet consistency and property branding.",
+    image: "/images/custom/colors.webp",
+    imageAlt: "Custom color options for cooler cover fabric",
+    path: "/contact",
+  },
+  {
+    title: "Logo & Branding",
+    desc: "Screen print, heat transfer, or embroidery. Upload artwork on the product page or quote form.",
+    image: "/images/custom/branding.webp",
+    imageAlt: "Custom logo printing on evaporative cooler cover",
+    path: "/custom/logo-printing",
+  },
+  {
+    title: "Special Features",
+    desc: "Zippers, Velcro, buckles, reinforced corners, wind straps — specify what your install needs.",
+    image: "/images/custom/features.webp",
+    imageAlt: "Heavy-duty straps and fasteners on custom cooler cover",
+    path: "/contact",
+  },
+];
+
+const processSteps = [
+  { step: "1", title: "Share Your Specs", desc: "Submit dimensions, photos, quantity, and any logo artwork via our quote form or product customizer." },
+  { step: "2", title: "Review & Confirm", desc: "We confirm measurements, material, and openings — prototype available for new designs." },
+  { step: "3", title: "Production & Delivery", desc: "Covers are cut and sewn to your approved spec, then shipped with tracking." },
+];
+---
+
+<BaseLayout
+  title="Custom Cooler Cover Solutions | CoolerFit"
+  description="Made-to-measure evaporative cooler covers: custom dimensions, materials, openings, colors, and logo printing. Send specs or photos — MOQ from 1 unit."
+  canonicalPath="/custom-solutions"
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-14">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">Custom Solutions</h1>
+          <p class="text-muted-foreground text-lg leading-relaxed mb-4">
+            We don't sell off-the-shelf SKUs — every cover is manufactured to your specifications. Share measurements, reference photos, or technical drawings, and we'll build to fit.
+          </p>
+          <p class="text-sm text-muted-foreground">
+            Prototype samples available · Small batch from 1 unit · Bulk &amp; fleet orders welcome
+          </p>
+        </div>
+        <div class="aspect-[16/10] overflow-hidden rounded-2xl bg-secondary shadow-lg ring-1 ring-border/40">
+          <img
+            src="/images/custom/hero.webp"
+            alt="Custom-made evaporative cooler covers in various sizes and configurations"
+            width={1200}
+            height={750}
+            loading="eager"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        {customOptions.map((opt) => (
+          <a href={opt.path} class="group block h-full">
+            <Card class="h-full border border-border/60 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+              <div class="aspect-[16/10] overflow-hidden bg-secondary">
+                <img
+                  src={opt.image}
+                  alt={opt.imageAlt}
+                  width={800}
+                  height={500}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+              </div>
+              <CardContent class="p-6">
+                <h3 class="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+                  {opt.title}
+                </h3>
+                <p class="text-sm text-muted-foreground leading-relaxed">{opt.desc}</p>
+                <span class="inline-flex items-center gap-1 mt-3 text-sm font-medium text-primary">
+                  Learn more <Icon name="ArrowRight" size={14} class="transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </CardContent>
+            </Card>
+          </a>
+        ))}
+      </div>
+
+      <div class="bg-secondary rounded-2xl p-10 md:p-16 mb-20">
+        <div class="section-hd !mb-12">
+          <span class="section-hd-label">Process</span>
+          <h2>Our Customization Process</h2>
+          <p>No standard size fits every unit. Tell us what you have — we'll confirm slack, openings, and material before production.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {processSteps.map((s) => (
+            <div class="text-center">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-foreground to-foreground/80 text-background font-display font-bold text-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+                {s.step}
+              </div>
+              <h3 class="font-display font-semibold text-foreground mb-2">{s.title}</h3>
+              <p class="text-sm text-muted-foreground">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="relative text-center py-12 section-edge">
+        <div class="section-hd !mb-8">
+          <h2>Have a Custom Project in Mind?</h2>
+          <p>Send us your requirements — even a rough photo and approximate size is enough to start a quote.</p>
+        </div>
+        <QuoteLink
+          quote={{
+            coverType: "Custom Cooler Cover Solutions",
+            ref: "/custom-solutions",
+          }}
+          class={buttonVariants({ size: "lg" })}
+        >
+          Start Your Custom Order <Icon name="ArrowRight" class="ml-2" size={18} />
+        </QuoteLink>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

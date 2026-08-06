@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "@/lib/utils";
+
+type Props = HTMLAttributes<"input">;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<input
+  class={cn(
+    "flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-base ring-offset-background transition-all duration-200 ease-out file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-hidden focus-visible:border-primary/40 focus-visible:ring-2 focus-visible:ring-primary/15 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm hover:border-primary/25",
+    className,
+  )}
+  {...rest}
+/>

@@ -1,0 +1,22 @@
+---
+/**
+ * `subtext` took a ReactNode in the original, which a few callers used to embed
+ * a link. Passing the string covers the common case; the `subtext` slot handles
+ * the rich variants.
+ */
+interface Props {
+  label?: string;
+  heading: string;
+  subtext?: string;
+  class?: string;
+}
+
+const { label, heading, subtext, class: className = "" } = Astro.props;
+const hasSubtextSlot = Astro.slots.has("subtext");
+---
+
+<div class={`section-hd ${className}`}>
+  {label ? <span class="section-hd-label">{label}</span> : null}
+  <h2>{heading}</h2>
+  {subtext || hasSubtextSlot ? <p>{subtext}<slot name="subtext" /></p> : null}
+</div>

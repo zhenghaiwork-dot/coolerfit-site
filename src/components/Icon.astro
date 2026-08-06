@@ -1,0 +1,54 @@
+---
+/**
+ * Inlines a Lucide glyph as SVG.
+ *
+ * Mirrors what `lucide-react` rendered: the stock 24x24 viewBox with
+ * `stroke="currentColor"` and a `lucide lucide-<name>` class. Sizing is done
+ * with utility classes (`w-4 h-4`) or the `size` prop, exactly as before. Any
+ * other props are forwarded onto the `<svg>` so scripts can target it.
+ */
+import { icons, type IconName } from "@/lib/icons";
+
+interface Props {
+  name: IconName;
+  class?: string;
+  /** Mirrors lucide-react's `size` prop: sets the width/height attributes. */
+  size?: number | string;
+  strokeWidth?: number | string;
+  /** Exposes the icon to assistive tech; otherwise it is marked decorative. */
+  label?: string;
+  [key: string]: unknown;
+}
+
+const { name, class: className, size, strokeWidth, label, ...rest } = Astro.props;
+
+const raw = icons[name];
+if (!raw) throw new Error(`Unknown icon: ${name}`);
+
+const escape = (v: string) => v.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
+let svg = raw;
+
+if (className) {
+  svg = svg.replace(/class="([^"]*)"/, (_m, existing) => `class="${existing} ${className}"`);
+}
+
+if (size !== undefined) {
+  svg = svg.replace(/width="[^"]*"/, `width="${size}"`).replace(/height="[^"]*"/, `height="${size}"`);
+}
+
+if (strokeWidth !== undefined) {
+  svg = svg.replace(/stroke-width="[^"]*"/, `stroke-width="${strokeWidth}"`);
+}
+
+const extra = Object.entries(rest)
+  .filter(([, v]) => v !== undefined && v !== false && v !== null)
+  .map(([k, v]) => (v === true ? k : `${k}="${escape(String(v))}"`))
+  .join(" ");
+
+const a11y = label ? `role="img" aria-label="${escape(label)}"` : 'aria-hidden="true"';
+
+svg = svg.replace(/^\s*<svg/, `<svg ${a11y}${extra ? ` ${extra}` : ""}`);
+---
+
+<Fragment set:html={svg} />

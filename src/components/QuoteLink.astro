@@ -1,0 +1,15 @@
+---
+/** Link to /contact carrying quote context as query params for form pre-fill. */
+import type { HTMLAttributes } from "astro/types";
+import { buildQuoteUrl, type QuoteLinkInput } from "@/lib/quote-link";
+
+type Props = HTMLAttributes<"a"> & {
+  quote: QuoteLinkInput;
+};
+
+const { quote, ...rest } = Astro.props;
+---
+
+<a href={buildQuoteUrl(quote)} {...rest}>
+  <slot />
+</a>

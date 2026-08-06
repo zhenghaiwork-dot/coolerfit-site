@@ -1,0 +1,81 @@
+/**
+ * Icon registry.
+ *
+ * The React build pulled components from `lucide-react`; here the same glyphs
+ * come from `lucide-static` as raw SVG strings so nothing ships to the browser.
+ * Names match the old `lucide-react` imports one-for-one, so markup translated
+ * from the React source can keep using the same identifiers.
+ */
+import {
+  ArrowLeft,
+  ArrowRight,
+  Award,
+  BookMarked,
+  BookOpen,
+  Check,
+  CheckCircle,
+  ChevronDown,
+  ChevronRight,
+  ChevronUp,
+  Factory,
+  Globe,
+  Image,
+  ImageOff,
+  Layers,
+  Mail,
+  MapPin,
+  Menu,
+  MoreHorizontal,
+  Palette,
+  Phone,
+  Ruler,
+  Scissors,
+  Send,
+  ShieldCheck,
+  ShoppingBag,
+  Stamp,
+  Sun,
+  Truck,
+  Upload,
+  Users,
+  Wind,
+  X,
+} from "lucide-static";
+
+export const icons = {
+  ArrowLeft,
+  ArrowRight,
+  Award,
+  BookMarked,
+  BookOpen,
+  Check,
+  CheckCircle,
+  ChevronDown,
+  ChevronRight,
+  ChevronUp,
+  Factory,
+  Globe,
+  Image,
+  ImageOff,
+  Layers,
+  Mail,
+  MapPin,
+  Menu,
+  MoreHorizontal,
+  Palette,
+  Phone,
+  Ruler,
+  Scissors,
+  Send,
+  ShieldCheck,
+  ShoppingBag,
+  Stamp,
+  Sun,
+  Truck,
+  Upload,
+  Users,
+  Wind,
+  X,
+} as const;
+
+export type IconName = keyof typeof icons;

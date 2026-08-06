@@ -1,0 +1,99 @@
+---
+/**
+ * Port of ProductImage. Whether a source is a real URL is now decided at build
+ * time; only the runtime "image 404s" path needs script, which swaps in the
+ * same fallback markup the React version rendered on `onError`.
+ */
+import Icon from "@/components/Icon.astro";
+import { cn } from "@/lib/utils";
+import { isProductImageUrl, PRODUCT_IMAGE_MAIN_PX } from "@/lib/product-images";
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  imgClass?: string;
+  width?: number;
+  height?: number;
+  /** Emoji or short fallback label when src is not a URL or the image fails. */
+  pendingLabel?: string;
+  loading?: "lazy" | "eager";
+}
+
+const {
+  src,
+  alt,
+  class: className,
+  imgClass,
+  width = PRODUCT_IMAGE_MAIN_PX,
+  height = PRODUCT_IMAGE_MAIN_PX,
+  pendingLabel = "Photo",
+  loading = "lazy",
+} = Astro.props;
+
+const isUrl = isProductImageUrl(src);
+const isEmoji = src.length <= 4 && !isUrl;
+
+const fallbackClass = cn(
+  "flex flex-col items-center justify-center gap-2 rounded-xl border border-border/40 bg-gradient-to-br from-secondary/80 to-secondary/40 text-muted-foreground",
+  className,
+);
+---
+
+{
+  !isUrl ? (
+    <div class={fallbackClass} role={isEmoji ? "img" : undefined} aria-label={isEmoji ? alt : undefined}>
+      {isEmoji ? (
+        <span class="text-[inherit] leading-none select-none" aria-hidden="true">
+          {src}
+        </span>
+      ) : (
+        <Fragment>
+          <span class="flex h-14 w-14 items-center justify-center rounded-full bg-background/80 shadow-xs">
+            <Icon name="ImageOff" class="h-6 w-6 text-muted-foreground/60" />
+          </span>
+          <span class="text-xs font-medium text-muted-foreground/80">{pendingLabel}</span>
+        </Fragment>
+      )}
+    </div>
+  ) : (
+    <Fragment>
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading={loading}
+        decoding="async"
+        data-product-image
+        class={cn("w-full h-full object-cover", imgClass)}
+      />
+      <template data-product-image-fallback>
+        <div class={fallbackClass}>
+          <span class="flex h-14 w-14 items-center justify-center rounded-full bg-background/80 shadow-xs">
+            <Icon name="ImageOff" class="h-6 w-6 text-muted-foreground/60" />
+          </span>
+          <span class="text-xs font-medium text-muted-foreground/80">{pendingLabel}</span>
+        </div>
+      </template>
+    </Fragment>
+  )
+}
+
+<script>
+  // `error` does not bubble, so listen in the capture phase from the document.
+  document.addEventListener(
+    "error",
+    (e) => {
+      const img = e.target as HTMLElement | null;
+      if (!(img instanceof HTMLImageElement) || !img.hasAttribute("data-product-image")) return;
+
+      const template = img.nextElementSibling;
+      if (!(template instanceof HTMLTemplateElement) || !template.hasAttribute("data-product-image-fallback")) return;
+
+      img.replaceWith(template.content.cloneNode(true));
+      template.remove();
+    },
+    true,
+  );
+</script>

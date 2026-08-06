@@ -1,0 +1,29 @@
+---
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import Icon from "@/components/Icon.astro";
+
+interface Props {
+  label: string;
+  path: string;
+  description?: string;
+}
+
+const { label, path, description } = Astro.props;
+---
+
+<a href={path} class="group block">
+  <Card
+    class="border border-border/60 shadow-xs hover:border-primary/25 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 group"
+  >
+    <CardContent class="p-4 flex items-center justify-between gap-3">
+      <div class="flex-1 min-w-0">
+        <p class="font-medium text-sm text-foreground group-hover:text-primary transition-colors truncate">
+          {label}
+        </p>
+        {description && <p class="text-xs text-muted-foreground mt-0.5 truncate">{description}</p>}
+      </div>
+      <Icon name="ChevronRight" size={16} class="text-muted-foreground group-hover:text-primary shrink-0 transition-colors" />
+    </CardContent>
+  </Card>
+</a>

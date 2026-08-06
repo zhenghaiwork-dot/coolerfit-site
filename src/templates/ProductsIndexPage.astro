@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import Icon from "@/components/Icon.astro";
+import ProductImageCard from "@/components/ProductImageCard.astro";
+import { getProductEntries, toProductItem } from "@/lib/content";
+import { localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = ui(locale);
+const lp = (p: string) => localizedPath(locale, p);
+const items = (await getProductEntries(locale)).map(toProductItem);
+---
+
+<BaseLayout
+  title={`${t.nav.products} | CoolerFit`}
+  description={t.home.heroBody}
+  canonicalPath={lp("/products")}
+  alternatePath="/products"
+  locale={locale}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <div class="text-center mb-12">
+        <span class="section-hd-label">{t.nav.products}</span>
+        <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">
+          {locale === "es" ? "Catálogo de productos" : locale === "ar" ? "كتالوج المنتجات" : "Product Catalog"}
+        </h1>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          items.map((p) => (
+            <a href={lp(`/product/${p.slug}`)} class="group block">
+              <Card class="h-full border border-border/60 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                <div class="aspect-[4/3] overflow-hidden bg-gradient-to-b from-secondary/50 to-secondary flex items-center justify-center p-4">
+                  <ProductImageCard src={p.image} alt={p.imageAlt ?? p.name} class="w-full h-full" />
+                </div>
+                <CardContent class="p-6">
+                  <h3 class="font-display font-semibold text-foreground mb-2">{p.name}</h3>
+                  <p class="text-sm text-muted-foreground mb-3 line-clamp-2">{p.summary}</p>
+                  <span class="inline-flex items-center text-sm font-medium text-primary">
+                    {t.common.viewDetails} <Icon name="ChevronRight" size={14} class="ms-1" />
+                  </span>
+                </CardContent>
+              </Card>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,12 @@
+---
+import ProductsCategoryPage from "@/templates/ProductsCategoryPage.astro";
+import { getCategoryEntries, categorySlug } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const entries = await getCategoryEntries("ar");
+  return entries.map((e) => ({ params: { id: categorySlug(e) }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+---
+<ProductsCategoryPage locale="ar" entry={entry} />

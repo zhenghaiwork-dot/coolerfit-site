@@ -1,0 +1,59 @@
+---
+/**
+ * Port of the shadcn Breadcrumb set. Every call site in the React app built the
+ * same shape — a trail of links ending in the current page — so the seven
+ * sub-components collapse into one data-driven component that emits identical
+ * markup.
+ */
+import Icon from "@/components/Icon.astro";
+import { cn } from "@/lib/utils";
+
+export type Crumb = {
+  label: string;
+  href?: string;
+};
+
+interface Props {
+  items: Crumb[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<nav aria-label="breadcrumb" class={className}>
+  <ol
+    class="flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5 rounded-lg bg-secondary/40 px-4 py-2.5 border border-border/30"
+  >
+    {
+      items.map((item, i) => (
+        <>
+          {i > 0 && (
+            <li role="presentation" aria-hidden="true" class="[&>svg]:size-3 [&>svg]:text-muted-foreground/50">
+              <Icon name="ChevronRight" />
+            </li>
+          )}
+          <li class="inline-flex items-center gap-1.5">
+            {item.href ? (
+              <a
+                href={item.href}
+                class={cn("transition-colors duration-200 hover:text-primary hover:underline underline-offset-4")}
+              >
+                {item.label}
+              </a>
+            ) : (
+              <span
+                role="link"
+                aria-disabled="true"
+                aria-current="page"
+                class="font-semibold text-foreground truncate max-w-[220px]"
+              >
+                {item.label}
+              </span>
+            )}
+          </li>
+        </>
+      ))
+    }
+  </ol>
+</nav>

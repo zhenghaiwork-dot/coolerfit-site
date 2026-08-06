@@ -1,0 +1,168 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/ui/Button.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import Badge from "@/components/ui/Badge.astro";
+import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import Icon from "@/components/Icon.astro";
+import ProductImageCard from "@/components/ProductImageCard.astro";
+import ProductGallery from "@/components/ProductGallery.astro";
+import ProductCustomizer from "@/components/ProductCustomizer.astro";
+import { getProductItemsByCategory, productItems } from "@/data/product-items";
+import type { ProductItem } from "@/data/product-items";
+import { getProductBySlug } from "@/data/products";
+import { getProductGallery } from "@/lib/product-images";
+import { productDetailMetaTitle, productDetailPageH1 } from "@/lib/category-seo";
+
+export function getStaticPaths() {
+  return productItems.map((p) => ({
+    params: { slug: p.slug },
+    props: { product: p },
+  }));
+}
+
+type Props = { product: ProductItem };
+const { product } = Astro.props as Props;
+
+const gallery = getProductGallery(product);
+const parentCategories = product.categorySlugs.map((s) => getProductBySlug(s)).filter(Boolean);
+const related =
+  product.categorySlugs.length > 0
+    ? getProductItemsByCategory(product.categorySlugs[0])
+        .filter((p) => p.slug !== product.slug)
+        .slice(0, 3)
+    : [];
+
+const pageH1 = productDetailPageH1(product.name);
+
+const crumbs = [
+  { label: "Home", href: "/" },
+  { label: "Products", href: "/products" },
+  ...(parentCategories[0]
+    ? [{ label: parentCategories[0].title, href: `/products/${parentCategories[0].slug}` }]
+    : []),
+  { label: product.name },
+];
+---
+
+<BaseLayout
+  title={productDetailMetaTitle(product.name)}
+  description={product.summary}
+  canonicalPath={`/product/${product.slug}`}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <Breadcrumb items={crumbs} class="mb-6" />
+
+      <a
+        href="/products"
+        class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8"
+      >
+        <Icon name="ArrowLeft" size={16} /> Back to Products
+      </a>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <ProductGallery gallery={gallery} />
+        </div>
+
+        <div>
+          <div class="flex flex-wrap gap-2 mb-3">
+            {
+              parentCategories.map(
+                (cat) =>
+                  cat && (
+                    <a href={`/products/${cat.slug}`}>
+                      <Badge
+                        variant="secondary"
+                        class="hover:bg-primary/10 transition-colors cursor-pointer text-xs"
+                      >
+                        {cat.title}
+                      </Badge>
+                    </a>
+                  ),
+              )
+            }
+          </div>
+
+          <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-2">{pageH1}</h1>
+          <p class="text-sm text-primary font-medium mb-4">
+            Made to your dimensions &amp; spec — customize material, color, openings, and logo below.
+          </p>
+          <p class="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
+
+          <Card class="border border-border/60 shadow-xs mb-8">
+            <CardContent class="p-6">
+              <h3 class="font-display font-semibold text-foreground mb-4">Specifications</h3>
+              <div class="space-y-3">
+                {
+                  product.specs.map((s) => (
+                    <div class="flex justify-between text-sm border-b border-border/40 pb-2 last:border-0 last:pb-0">
+                      <span class="text-muted-foreground">{s.label}</span>
+                      <span class="font-medium text-foreground">{s.value}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </CardContent>
+          </Card>
+
+          <div class="mb-8">
+            <h3 class="font-display font-semibold text-foreground mb-3">Features</h3>
+            <ul class="space-y-2">
+              {
+                product.features.map((f) => (
+                  <li class="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Icon name="Check" size={16} class="text-primary shrink-0" /> {f}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <Button size="lg" href="#inquiry" data-scroll-inquiry>
+            Customize &amp; Get Quote <Icon name="ChevronDown" class="ml-2" size={18} />
+          </Button>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <ProductCustomizer productName={product.name} productSlug={product.slug} />
+      </div>
+
+      {
+        related.length > 0 && (
+          <div class="mt-16">
+            <h2 class="text-2xl font-display font-semibold text-foreground mb-6">Related Products</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {related.map((item) => (
+                <Card class="group border border-border/60 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                  <CardContent class="p-0">
+                    <div class="aspect-[4/3] overflow-hidden bg-gradient-to-b from-secondary/50 to-secondary flex items-center justify-center p-4 md:p-5 rounded-t-xl">
+                      <ProductImageCard
+                        src={item.image}
+                        alt={item.imageAlt ?? item.name}
+                        class="w-full h-full transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <div class="p-5">
+                      <h3 class="font-display font-semibold text-foreground mb-1">{item.name}</h3>
+                      <p class="text-sm text-muted-foreground mb-3 line-clamp-2">{item.summary}</p>
+                      <a
+                        href={`/product/${item.slug}`}
+                        class="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                      >
+                        View Details <Icon name="ArrowRight" size={14} />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>

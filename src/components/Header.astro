@@ -1,0 +1,354 @@
+---
+/**
+ * Site header with mega dropdowns and a mobile drawer.
+ *
+ * The React version mounted dropdown markup only while open; here it is always
+ * in the DOM and toggled with `hidden`, which both keeps the static HTML
+ * complete and still replays the `animate-fade-in-up-sm` entrance, because a
+ * CSS animation restarts whenever an element leaves `display: none`.
+ */
+import Icon from "@/components/Icon.astro";
+import Button from "@/components/ui/Button.astro";
+import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
+import { cn } from "@/lib/utils";
+import { CUSTOM_PAGES } from "@/lib/custom-pages";
+import { navLinks, isNavActive } from "@/lib/nav";
+import { defaultLocale, localizedPath, stripLocalePrefix, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const t = ui(locale);
+const pathname = stripLocalePrefix(Astro.url.pathname);
+const lp = (path: string) => localizedPath(locale, path);
+
+const panelLinkClass =
+  "block text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-md px-2 py-1.5 -mx-2 transition-all duration-150";
+const groupHeadingClass = "text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mb-3";
+const mobileLinkClass =
+  "block px-4 py-2 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-md transition-all duration-150";
+const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mb-1 px-4";
+---
+
+<header
+  data-site-header
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-300 ease-out bg-card/80 backdrop-blur-sm border-b border-transparent"
+>
+  <div class="container flex items-center justify-between h-16 md:h-[72px]">
+    <a href={lp("/")} class="flex items-center group">
+      <img
+        src="/logo.svg"
+        alt="CoolerFit — Custom Evaporative Cooler Covers"
+        width="640"
+        height="128"
+        class="h-10 md:h-11 w-auto transition-opacity duration-200 group-hover:opacity-90"
+      />
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-0.5">
+      {
+        navLinks.map((link) => {
+          const active = isNavActive(link, pathname);
+          return (
+            <div class="relative" data-nav-item data-label={link.label}>
+              <a
+                href={lp(link.path)}
+                class={cn(
+                  "relative px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 inline-flex items-center gap-1",
+                  active ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-foreground hover:bg-foreground/5",
+                )}
+              >
+                {link.label}
+                {active && <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 rounded-full bg-primary" />}
+                {link.dropdown && (
+                  <Icon name="ChevronDown" size={14} class="transition-transform duration-200" data-nav-chevron />
+                )}
+              </a>
+
+              {link.dropdown && (
+                <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2" data-nav-panel hidden>
+                  <div class="animate-fade-in-up-sm">
+                    {link.label === "Custom" ? (
+                      <div class="bg-card border border-border/60 rounded-xl shadow-lg shadow-foreground/5 p-5 min-w-[640px] backdrop-blur-xl">
+                        <div class="grid grid-cols-2 gap-6">
+                          <div>
+                            <p class={groupHeadingClass}>Customization</p>
+                            <div class="grid gap-2">
+                              {CUSTOM_PAGES.map((page) => (
+                                <a
+                                  href={lp(`/${page.slug}`)}
+                                  class="group flex items-start gap-3 rounded-lg border border-transparent hover:border-primary/20 hover:bg-primary/[0.04] px-3 py-2.5 transition-all duration-150"
+                                >
+                                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                                    <Icon name={page.icon} size={16} />
+                                  </span>
+                                  <span class="min-w-0 flex-1">
+                                    <span class="flex items-center gap-1 text-sm font-medium text-foreground group-hover:text-primary">
+                                      {page.label}
+                                      <Icon
+                                        name="ArrowRight"
+                                        size={12}
+                                        class="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
+                                      />
+                                    </span>
+                                    <span class="block text-xs text-muted-foreground mt-0.5 leading-snug">
+                                      {page.description}
+                                    </span>
+                                  </span>
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                          <div>
+                            <p class={groupHeadingClass}>Order Options</p>
+                            <div class="space-y-0.5 mb-4">
+                              {link.dropdown[1]?.items.map((item) => (
+                                <a href={lp(item.path)} class={panelLinkClass}>
+                                  {item.label}
+                                </a>
+                              ))}
+                            </div>
+                            <a
+                              href={lp("/custom-solutions")}
+                              class="block rounded-xl bg-secondary border border-border/60 p-4 hover:border-primary/25 hover:shadow-xs transition-all group"
+                            >
+                              <p class="text-sm font-semibold text-foreground group-hover:text-primary">
+                                Custom Solutions Overview
+                              </p>
+                              <p class="text-xs text-muted-foreground mt-1 leading-relaxed">
+                                Dimensions, materials, openings, colors, and logo — all in one place.
+                              </p>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div class="bg-card border border-border/60 rounded-xl shadow-lg shadow-foreground/5 p-6 min-w-[720px] backdrop-blur-xl">
+                        <div class={cn("grid gap-6", link.dropdown.length <= 2 ? "grid-cols-2" : "grid-cols-4")}>
+                          {link.dropdown.map((group) => (
+                            <div>
+                              <p class={groupHeadingClass}>{group.heading}</p>
+                              <div class="space-y-0.5">
+                                {group.items.map((item) => (
+                                  <a href={lp(item.path)} class={panelLinkClass}>
+                                    {item.label}
+                                  </a>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })
+      }
+    </nav>
+
+    <div class="hidden lg:flex items-center gap-3">
+      <LanguageSwitcher locale={locale} />
+      <Button
+        href={lp("/contact")}
+        size="sm"
+        class="shadow-xs hover:shadow-md hover:-translate-y-px transition-all duration-200"
+      >
+        {t.nav.contact}
+      </Button>
+    </div>
+
+    <button class="lg:hidden p-2 text-foreground" aria-label="Toggle menu" aria-expanded="false" data-mobile-toggle>
+      <Icon name="Menu" size={24} data-icon-menu />
+      <Icon name="X" size={24} data-icon-close class="hidden" />
+    </button>
+  </div>
+
+  <div
+    class="lg:hidden bg-card/95 backdrop-blur-xl border-b border-border/40 max-h-[80vh] overflow-y-auto animate-fade-in-up-sm"
+    data-mobile-menu
+    hidden
+  >
+    <nav class="container flex flex-col gap-0.5 py-4">
+      {
+        navLinks.map((link) => {
+          const active = isNavActive(link, pathname);
+          return (
+            <div data-mobile-item data-label={link.label}>
+              <div class="flex items-center">
+                <a
+                  href={lp(link.path)}
+                  class={cn(
+                    "flex-1 px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-150",
+                    active ? "text-primary bg-primary/5" : "text-foreground/80 hover:text-foreground hover:bg-foreground/5",
+                  )}
+                >
+                  {link.label}
+                </a>
+                {link.dropdown && (
+                  <button
+                    class="p-3 text-muted-foreground hover:text-foreground transition-colors rounded-lg"
+                    aria-label={`Toggle ${link.label} submenu`}
+                    aria-expanded="false"
+                    data-mobile-expand
+                  >
+                    <Icon name="ChevronDown" size={16} class="transition-transform duration-200" data-mobile-chevron />
+                  </button>
+                )}
+              </div>
+              {link.dropdown && (
+                <div class="pl-4 pb-3 space-y-3 animate-fade-in-up-sm" data-mobile-panel hidden>
+                  {link.label === "Custom" ? (
+                    <Fragment>
+                      <p class="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mb-1 px-2">
+                        Customization
+                      </p>
+                      {CUSTOM_PAGES.map((page) => (
+                        <a
+                          href={`/${page.slug}`}
+                          class="flex items-center gap-3 mx-2 mb-1 rounded-lg border border-border/60 bg-secondary/40 px-3 py-2.5 hover:border-primary/30 hover:bg-primary/[0.04] transition-colors"
+                        >
+                          <span class="flex h-8 w-8 items-center justify-center rounded-md bg-card text-primary shrink-0">
+                            <Icon name={page.icon} size={15} />
+                          </span>
+                          <span>
+                            <span class="block text-sm font-medium text-foreground">{page.label}</span>
+                            <span class="block text-xs text-muted-foreground line-clamp-1">{page.description}</span>
+                          </span>
+                        </a>
+                      ))}
+                      <p class="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mb-1 px-2 pt-2">
+                        Order Options
+                      </p>
+                      {link.dropdown[1]?.items.map((item) => (
+                        <a href={lp(item.path)} class={mobileLinkClass}>
+                          {item.label}
+                        </a>
+                      ))}
+                    </Fragment>
+                  ) : (
+                    link.dropdown.map((group) => (
+                      <div>
+                        <p class={mobileHeadingClass}>{group.heading}</p>
+                        {group.items.map((item) => (
+                          <a href={lp(item.path)} class={mobileLinkClass}>
+                            {item.label}
+                          </a>
+                        ))}
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })
+      }
+      <div class="px-4 pt-2 lg:hidden">
+        <LanguageSwitcher locale={locale} />
+      </div>
+      <Button href={lp("/contact")} size="sm" class="mt-2 mx-4 shadow-xs">{t.nav.contact}</Button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-site-header]");
+  if (header) {
+    const SCROLLED = ["bg-card/90", "backdrop-blur-xl", "border-border/40", "shadow-xs"];
+    const TOP = ["bg-card/80", "backdrop-blur-sm", "border-transparent"];
+
+    const onScroll = () => {
+      const scrolled = window.scrollY > 20;
+      header.classList.toggle("border-b", true);
+      SCROLLED.forEach((c) => header.classList.toggle(c, scrolled));
+      TOP.forEach((c) => header.classList.toggle(c, !scrolled));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Desktop mega dropdowns — 150ms close delay matches the React version.
+    let closeTimer: ReturnType<typeof setTimeout> | undefined;
+
+    header.querySelectorAll<HTMLElement>("[data-nav-item]").forEach((item) => {
+      const panel = item.querySelector<HTMLElement>("[data-nav-panel]");
+      const chevron = item.querySelector<HTMLElement>("[data-nav-chevron]");
+      if (!panel) return;
+
+      const setOpen = (open: boolean) => {
+        panel.hidden = !open;
+        chevron?.classList.toggle("rotate-180", open);
+      };
+
+      item.addEventListener("mouseenter", () => {
+        clearTimeout(closeTimer);
+        header.querySelectorAll<HTMLElement>("[data-nav-panel]").forEach((p) => {
+          if (p !== panel) p.hidden = true;
+        });
+        header.querySelectorAll<HTMLElement>("[data-nav-chevron]").forEach((c) => {
+          if (c !== chevron) c.classList.remove("rotate-180");
+        });
+        setOpen(true);
+      });
+
+      item.addEventListener("mouseleave", () => {
+        closeTimer = setTimeout(() => setOpen(false), 150);
+      });
+
+      item.addEventListener("focusout", (e) => {
+        if (!item.contains(e.relatedTarget as Node)) setOpen(false);
+      });
+    });
+
+    header.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      header.querySelectorAll<HTMLElement>("[data-nav-panel]").forEach((p) => (p.hidden = true));
+      header.querySelectorAll<HTMLElement>("[data-nav-chevron]").forEach((c) => c.classList.remove("rotate-180"));
+    });
+
+    // Mobile drawer
+    const toggle = header.querySelector<HTMLButtonElement>("[data-mobile-toggle]");
+    const menu = header.querySelector<HTMLElement>("[data-mobile-menu]");
+    const iconMenu = header.querySelector<HTMLElement>("[data-icon-menu]");
+    const iconClose = header.querySelector<HTMLElement>("[data-icon-close]");
+
+    toggle?.addEventListener("click", () => {
+      if (!menu) return;
+      const open = Boolean(menu.hidden);
+      menu.hidden = !open;
+      toggle.setAttribute("aria-expanded", String(open));
+      iconMenu?.classList.toggle("hidden", open);
+      iconClose?.classList.toggle("hidden", !open);
+    });
+
+    header.querySelectorAll<HTMLElement>("[data-mobile-item]").forEach((item) => {
+      const button = item.querySelector<HTMLButtonElement>("[data-mobile-expand]");
+      const panel = item.querySelector<HTMLElement>("[data-mobile-panel]");
+      const chevron = item.querySelector<HTMLElement>("[data-mobile-chevron]");
+      if (!button || !panel) return;
+
+      button.addEventListener("click", () => {
+        const open = Boolean(panel.hidden);
+        // Only one mobile section stays expanded, as in the React version.
+        header.querySelectorAll<HTMLElement>("[data-mobile-panel]").forEach((p) => {
+          if (p !== panel) p.hidden = true;
+        });
+        header.querySelectorAll<HTMLElement>("[data-mobile-chevron]").forEach((c) => {
+          if (c !== chevron) c.classList.remove("rotate-180");
+        });
+        header.querySelectorAll<HTMLElement>("[data-mobile-expand]").forEach((b) => {
+          if (b !== button) b.setAttribute("aria-expanded", "false");
+        });
+
+        panel.hidden = !open;
+        button.setAttribute("aria-expanded", String(open));
+        chevron?.classList.toggle("rotate-180", open);
+      });
+    });
+  }
+</script>

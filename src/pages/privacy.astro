@@ -1,0 +1,68 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SITE_CONTACT, SITE_NAME, SITE_URL } from "@/lib/site";
+---
+
+<BaseLayout
+  title={`Privacy Policy | ${SITE_NAME}`}
+  description={`How ${SITE_NAME} collects, uses, and protects information submitted through our website inquiry forms.`}
+  canonicalPath="/privacy"
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container max-w-3xl">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">Privacy Policy</h1>
+      <p class="text-sm text-muted-foreground mb-10">Last updated: June 2026</p>
+
+      <div class="space-y-8 text-muted-foreground leading-relaxed">
+        <section>
+          <h2 class="text-xl font-display font-semibold text-foreground mb-3">Overview</h2>
+          <p>
+            {SITE_NAME} ({SITE_URL}) manufactures custom evaporative cooler covers. This policy explains what
+            information we collect when you use our website, how we use it, and the choices you have.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-display font-semibold text-foreground mb-3">Information We Collect</h2>
+          <p class="mb-3">When you submit a quote or contact form, we may collect:</p>
+          <ul class="list-disc pl-5 space-y-1 text-sm">
+            <li>Name, company, email address, and phone number</li>
+            <li>Product requirements, dimensions, quantities, and project notes you provide</li>
+            <li>Files you upload (for example, logo artwork for branded covers)</li>
+            <li>Basic technical data such as browser type and pages visited (standard server logs)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-display font-semibold text-foreground mb-3">How We Use Your Information</h2>
+          <ul class="list-disc pl-5 space-y-1 text-sm">
+            <li>Respond to inquiries and prepare quotes</li>
+            <li>Communicate about orders, samples, and production</li>
+            <li>Improve our website and customer service</li>
+            <li>Comply with legal obligations where applicable</li>
+          </ul>
+          <p class="mt-3">We do not sell your personal information to third parties.</p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-display font-semibold text-foreground mb-3">Data Retention</h2>
+          <p>
+            We retain inquiry records for as long as needed to fulfill your request, maintain business records,
+            and resolve disputes. You may ask us to delete non-essential contact data where local law allows.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-display font-semibold text-foreground mb-3">Contact</h2>
+          <p>
+            For privacy-related questions or requests, email <a href={`mailto:${SITE_CONTACT.email}`} class="text-primary hover:underline">{SITE_CONTACT.email}</a>.
+          </p>
+        </section>
+
+        <p class="text-sm">
+          <a href="/contact" class="text-primary hover:underline">Contact us</a> · <a href="/" class="text-primary hover:underline">Back to home</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

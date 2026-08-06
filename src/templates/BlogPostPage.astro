@@ -1,0 +1,22 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro";
+import type { BlogPost } from "@/data/blog";
+import { localizedPath, type Locale } from "@/i18n/locales";
+
+interface Props {
+  locale: Locale;
+  post: BlogPost;
+}
+
+const { locale, post } = Astro.props;
+const lp = (p: string) => localizedPath(locale, p);
+---
+
+<BlogLayout
+  post={post}
+  title={`${post.title} | CoolerFit`}
+  description={post.excerpt}
+  canonicalPath={lp(`/blog/${post.slug}`)}
+  noIndex={post.noIndex !== false}
+  locale={locale}
+/>

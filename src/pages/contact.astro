@@ -1,0 +1,296 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/ui/Button.astro";
+import Input from "@/components/ui/Input.astro";
+import Textarea from "@/components/ui/Textarea.astro";
+import Label from "@/components/ui/Label.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import Icon from "@/components/Icon.astro";
+import InquiryAntiSpamFields from "@/components/InquiryAntiSpamFields.astro";
+import { SITE_CONTACT } from "@/lib/site";
+import type { IconName } from "@/lib/icons";
+
+const contactCards: { icon: IconName; title: string; info: string; sub: string; href?: string }[] = [
+  {
+    icon: "Mail",
+    title: "Email Us",
+    info: SITE_CONTACT.email,
+    href: `mailto:${SITE_CONTACT.email}`,
+    sub: "We reply within 24 hours",
+  },
+  {
+    icon: "Phone",
+    title: "Mobile",
+    info: SITE_CONTACT.phone,
+    href: `tel:${SITE_CONTACT.phone.replace(/\s/g, "")}`,
+    sub: "Available for inquiries",
+  },
+  { icon: "MapPin", title: "Visit Us", info: SITE_CONTACT.address, sub: "Factory tours available" },
+];
+---
+
+<BaseLayout
+  title="Get a Quote | CoolerFit Custom Cooler Covers"
+  description="Request a custom evaporative cooler cover quote. Share dimensions, photos, material preferences, openings, logo artwork, and quantity — we respond within 24 hours."
+  canonicalPath="/contact"
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <div class="text-center mb-14">
+        <span class="section-hd-label">Get in Touch</span>
+        <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">Get a Quote</h1>
+        <p class="text-muted-foreground max-w-2xl mx-auto">
+          Every cover is custom-made to your measurements and requirements. Send dimensions, reference photos, or
+          drawings — we'll confirm specs and reply with a quote within 24 hours.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div class="lg:col-span-2">
+          <Card class="border border-border/60 shadow-md">
+            <CardContent class="p-8">
+              <div class="text-center py-16" role="status" aria-live="polite" data-contact-success hidden>
+                <Icon name="CheckCircle" class="text-primary mx-auto mb-4" size={48} />
+                <h3 class="font-display font-bold text-xl text-foreground mb-2">Request sent</h3>
+                <p class="text-muted-foreground max-w-md mx-auto">
+                  Your quote request was delivered to{" "}
+                  <a href={`mailto:${SITE_CONTACT.email}`} class="text-primary font-medium hover:underline">
+                    {SITE_CONTACT.email}
+                  </a>
+                  . We typically reply within 24 hours on business days.
+                </p>
+                <p class="text-xs text-muted-foreground mt-4">
+                  Check your inbox if you asked for a copy — we reply from this address.
+                </p>
+                <Button class="mt-6" data-contact-reset>Submit Another Request</Button>
+              </div>
+
+              <form class="relative space-y-6" data-contact-form>
+                <InquiryAntiSpamFields />
+
+                <div class="rounded-lg border border-primary/25 bg-primary/[0.04] px-4 py-3 text-sm" role="status" data-prefill-banner hidden>
+                  <p class="font-medium text-foreground">
+                    Quote request for: <span class="text-primary" data-prefill-summary></span>
+                  </p>
+                  <p class="text-muted-foreground mt-1 text-xs" data-prefill-ref hidden></p>
+                  <p class="text-muted-foreground mt-2 text-xs">
+                    Cover type is pre-filled. Add dimensions, quantity, and requirements below.
+                  </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <Label for="name">Full Name *</Label>
+                    <Input id="name" name="name" placeholder="John Smith" required maxlength={100} />
+                  </div>
+                  <div class="space-y-2">
+                    <Label for="email">Email *</Label>
+                    <Input id="email" name="email" type="email" placeholder="john@company.com" required maxlength={255} />
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <Label for="company">Company</Label>
+                    <Input id="company" name="company" placeholder="Company Name" maxlength={100} />
+                  </div>
+                  <div class="space-y-2">
+                    <Label for="phone">Phone</Label>
+                    <Input id="phone" name="phone" placeholder={SITE_CONTACT.phone} maxlength={20} />
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <Label for="product">Cover Type / Application</Label>
+                  <Input
+                    id="product"
+                    name="product"
+                    placeholder="e.g., Rooftop down-draft, branded fleet covers"
+                    maxlength={200}
+                  />
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <Label for="quantity">Estimated Quantity</Label>
+                    <Input id="quantity" name="quantity" placeholder="e.g., 100, 500, 1000+" maxlength={50} />
+                  </div>
+                  <div class="space-y-2">
+                    <Label for="size">Size / Dimensions</Label>
+                    <Input
+                      id="size"
+                      name="size"
+                      placeholder="W × H × D (in or cm) + unit model if known"
+                      maxlength={100}
+                    />
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <Label for="details">Custom Requirements</Label>
+                  <Textarea
+                    id="details"
+                    name="details"
+                    placeholder="Material, color, openings/cutouts, logo printing, photos or drawing links, deadline…"
+                    data-prefill-placeholder="e.g. W×D×H dimensions, material/color, openings, logo, quantity, deadline…"
+                    rows={5}
+                    maxlength={2000}
+                  />
+                </div>
+                <Button type="submit" size="lg" data-contact-submit>
+                  <Icon name="Send" class="mr-2" size={18} />
+                  <span data-submit-label>Send Request</span>
+                </Button>
+                <p class="text-xs text-muted-foreground">
+                  Submissions are emailed to {SITE_CONTACT.email}. On local preview, your email app may open with the
+                  details pre-filled.
+                </p>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div class="space-y-4">
+          {
+            contactCards.map((c) => (
+              <Card class="border border-border/60 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-0.5">
+                <CardContent class="p-5 flex gap-4">
+                  <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/8 to-primary-accent flex items-center justify-center shrink-0">
+                    <Icon name={c.icon} class="text-primary" size={20} />
+                  </div>
+                  <div>
+                    <h3 class="font-display font-semibold text-foreground text-sm">{c.title}</h3>
+                    {c.href ? (
+                      <a href={c.href} class="text-foreground text-sm font-medium hover:text-primary transition-colors">
+                        {c.info}
+                      </a>
+                    ) : (
+                      <p class="text-foreground text-sm font-medium">{c.info}</p>
+                    )}
+                    <p class="text-xs text-muted-foreground mt-1">{c.sub}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { submitInquiry, validateInquiryContact } from "@/lib/inquiry";
+  import { parseQuotePrefill, quotePrefillToForm } from "@/lib/quote-link";
+  import { SITE_CONTACT } from "@/lib/site";
+  import { toast } from "@/lib/toast";
+
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  const success = document.querySelector<HTMLElement>("[data-contact-success]");
+
+  if (form && success) {
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
+    const submitButton = form.querySelector<HTMLButtonElement>("[data-contact-submit]");
+    const submitLabel = form.querySelector<HTMLElement>("[data-submit-label]");
+
+    // The React page read these from the router; on a static page the query
+    // string is parsed on load instead.
+    let meta = { productSlug: "", productName: "", pageUrl: "" };
+
+    const prefill = parseQuotePrefill(new URLSearchParams(window.location.search));
+    if (prefill) {
+      const mapped = quotePrefillToForm(prefill);
+      meta = { productSlug: mapped.productSlug, productName: mapped.productName, pageUrl: mapped.pageUrl };
+
+      const product = field("product");
+      if (product) product.value = mapped.product;
+      const details = field("details");
+      if (details) {
+        details.value = mapped.details;
+        const alt = details.getAttribute("data-prefill-placeholder");
+        if (prefill.summary && alt) details.placeholder = alt;
+      }
+
+      if (prefill.summary) {
+        const banner = form.querySelector<HTMLElement>("[data-prefill-banner]");
+        const summary = form.querySelector<HTMLElement>("[data-prefill-summary]");
+        const ref = form.querySelector<HTMLElement>("[data-prefill-ref]");
+        if (banner) banner.hidden = false;
+        if (summary) summary.textContent = prefill.summary;
+        if (ref && prefill.ref) {
+          ref.hidden = false;
+          ref.textContent = `From page: ${prefill.ref}`;
+        }
+      }
+    }
+
+    const setSubmitting = (busy: boolean) => {
+      if (submitButton) submitButton.disabled = busy;
+      if (submitLabel) submitLabel.textContent = busy ? "Sending…" : "Send Request";
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const value = (name: string) => field(name)?.value.trim() ?? "";
+      const err = validateInquiryContact(value("name"), value("email"));
+      if (err) {
+        toast({ title: err, variant: "destructive" });
+        return;
+      }
+
+      setSubmitting(true);
+      try {
+        const result = await submitInquiry(
+          {
+            formType: "contact",
+            name: value("name"),
+            email: value("email"),
+            phone: value("phone") || undefined,
+            company: value("company") || undefined,
+            productName: meta.productName || value("product") || undefined,
+            productSlug: meta.productSlug || undefined,
+            coverType: value("product") || undefined,
+            quantity: value("quantity") || undefined,
+            dimensions: value("size") || undefined,
+            message: value("details") || undefined,
+            pageUrl: meta.pageUrl || window.location.href,
+          },
+          null,
+          {
+            formStartedAt: Number(field("formStartedAt")?.value ?? Date.now()),
+            honeypot: field("website")?.value ?? "",
+          },
+        );
+
+        if (result.ok && result.method === "api") {
+          meta = { productSlug: "", productName: "", pageUrl: "" };
+          form.reset();
+          form.hidden = true;
+          success.hidden = false;
+          toast({
+            title: "Quote request sent",
+            description: `Delivered to ${SITE_CONTACT.email}. We reply within 24 hours.`,
+          });
+        } else if (result.ok && result.method === "mailto") {
+          toast({
+            title: "Complete in your email app",
+            description: "Send the pre-filled message to finish your request.",
+          });
+        } else {
+          toast({
+            title: "Could not send request",
+            description: result.error ?? `Please email us at ${SITE_CONTACT.email}.`,
+            variant: "destructive",
+          });
+        }
+      } catch {
+        toast({ title: "Something went wrong", description: "Please email us directly.", variant: "destructive" });
+      } finally {
+        setSubmitting(false);
+      }
+    });
+
+    success.querySelector<HTMLButtonElement>("[data-contact-reset]")?.addEventListener("click", () => {
+      success.hidden = true;
+      form.hidden = false;
+    });
+  }
+</script>

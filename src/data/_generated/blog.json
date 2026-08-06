@@ -1,0 +1,1396 @@
+[
+  {
+    "title": "High-Wind and Rooftop Cover Installation",
+    "excerpt": "Cover on the ground after the first storm? Rooftops and open yards need tie-downs to curb anchors, a crowned top for drainage, and a post-storm re-tension check.",
+    "isPillar": false,
+    "pillarSlug": "cooler-cover-installation",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Standard installation steps",
+      "path": "/resources/installation"
+    },
+    "internalLinks": [
+      {
+        "label": "Windproof covers",
+        "path": "/products/windproof-cooler-covers"
+      },
+      {
+        "label": "Rooftop covers",
+        "path": "/products/rooftop-cooler-covers"
+      }
+    ],
+    "slug": "advanced-installation-high-wind-rooftop",
+    "content": [
+      {
+        "heading": "Problem: Drawcord Alone on a Rooftop",
+        "level": "h2",
+        "body": "Residential wall mounts often survive with a hem drawcord. Rooftops and open equipment yards see sustained 25+ mph gusts — wind gets under a loose hem and the cover becomes a sail. Bungee cords stretch and detach; the cover ends up on a lower roof or in the yard."
+      },
+      {
+        "heading": "Solution: Minimum Rooftop Install",
+        "level": "h2",
+        "body": "After standard drape and hem secure, add mechanical tie-downs.",
+        "bullets": [
+          "Ratchet straps or UV-rated cable ties to curb anchors or frame legs — not bungee alone",
+          "Reinforced top panel if rain or snow load is expected",
+          "Crown the top slightly with strap tension so water runs to edges, not into louvers",
+          "Route hem so runoff drains away from the cabinet opening, not into the pan area"
+        ]
+      },
+      {
+        "heading": "After the First Storm",
+        "level": "h2",
+        "body": "Walk the roof and re-tension every strap. Flutter at corners means the cover shifted — fix it before the next front, not after you find it on the ground.",
+        "sectionLinks": [
+          {
+            "label": "Full installation sequence",
+            "path": "/resources/installation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Top Benefits of Using a Cooler Cover",
+    "excerpt": "Fix winter drafts, skip spring rust cleanup, and avoid pad replacement — a cover pays for itself the first season you would have otherwise serviced the pan.",
+    "isPillar": false,
+    "pillarSlug": "evaporative-cooler-covers-guide",
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "What Is a Cover?",
+        "path": "/blog/what-is-evaporative-cooler-cover"
+      },
+      {
+        "label": "Winterizing",
+        "path": "/blog/winterizing-evaporative-cooler"
+      },
+      {
+        "label": "Shop Covers",
+        "path": "/products/evaporative-cooler-covers"
+      }
+    ],
+    "slug": "benefits-of-cooler-covers",
+    "content": [
+      {
+        "heading": "Problem: Cold Rooms After You Shut Down",
+        "level": "h2",
+        "body": "An uncovered cooler is an open duct to the outside. Cold air drafts through the intakes, through the cabinet, and into your house all winter. Sealing the intakes with a fitted cover stops that path — many homeowners notice warmer rooms within the first week."
+      },
+      {
+        "heading": "Problem: Expensive Spring Startup",
+        "level": "h2",
+        "body": "Rain, debris, and pests in an open cabinet drive most off-season repair bills.",
+        "bullets": [
+          "Rust in the water pan and hardware — often needs replacement, not just cleaning",
+          "Wasps and rodents nesting inside — removal before first run",
+          "UV-cracked louvers and dried-out pads — premature wear",
+          "Half a day of scrubbing before you can turn the unit on"
+        ]
+      },
+      {
+        "heading": "What Changes With a Cover",
+        "level": "h2",
+        "body": "",
+        "table": [
+          {
+            "label": "Winter drafts",
+            "without": "Open intakes all season",
+            "with": "Sealed panels"
+          },
+          {
+            "label": "Spring startup",
+            "without": "Clean-out + pan/pad work",
+            "with": "Inspect, fill, run"
+          },
+          {
+            "label": "Typical cost",
+            "without": "Pan rust, pad set, labor",
+            "with": "One cover, reused yearly"
+          }
+        ],
+        "sectionLinks": [
+          {
+            "label": "Shutdown checklist before covering",
+            "path": "/blog/winterizing-evaporative-cooler"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Bulk vs Small Batch Cooler Cover Orders",
+    "excerpt": "Need 5 units tomorrow but bulk pricing kicks in at 25? Prototype first, then bulk when the pattern is approved — we quote both tiers near the crossover.",
+    "isPillar": false,
+    "pillarSlug": "custom-cooler-covers",
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "Small batch products",
+        "path": "/products/small-batch-cooler-covers"
+      },
+      {
+        "label": "Get a quote",
+        "path": "/contact"
+      }
+    ],
+    "slug": "bulk-vs-small-batch-orders",
+    "content": [
+      {
+        "heading": "Problem: Wrong Order Tier Wastes Money or Time",
+        "level": "h2",
+        "body": "Bulk before prototype approval → remakes at scale. Small batch when you need 40 identical units → per-unit cost stays high. Match tier to pattern certainty and quantity."
+      },
+      {
+        "heading": "Choose Small Batch When",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "First time covering this cabinet model — pattern not yet approved",
+          "Quantity under ~25, or mixed sizes in low counts",
+          "Tight deadline on a handful of units before shutdown season"
+        ]
+      },
+      {
+        "heading": "Choose Bulk When",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Prototype fit and openings approved",
+          "25+ units, same material spec and pattern ID",
+          "Logo setup should amortize across the run"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Request both tier prices",
+            "path": "/contact"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Common Cooler Cover Sizing Mistakes",
+    "excerpt": "Hem binds on casters, corners gape, or you ordered pad width instead of cabinet size — five measurement errors that cause most returns.",
+    "isPillar": false,
+    "pillarSlug": "cooler-cover-installation",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Measuring tutorial",
+      "path": "/sizes/how-to-measure"
+    },
+    "internalLinks": [
+      {
+        "label": "Size chart",
+        "path": "/sizes"
+      }
+    ],
+    "slug": "common-cover-sizing-mistakes",
+    "content": [
+      {
+        "heading": "Problem: Cover Arrived \"Correct Size\" But Won't Fit",
+        "level": "h2",
+        "body": "Returns usually trace back to how the unit was measured — not the chart. Pad dimensions, inside cabinet depth, and catalog \"unit size\" labels are all smaller than the outside outline the cover must wrap."
+      },
+      {
+        "heading": "Five Mistakes → Fix",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Measured pad area, not outside cabinet → remeasure widest W×D×H",
+          "Forgot casters (add 3–6\") → include floor-to-highest-point height",
+          "Between chart rows and sized down → always size up; drawcord takes slack",
+          "Side-draft cover on down-draft unit (or reverse) → match profile to intake location",
+          "One size for three models → one row per model in your dimension table"
+        ],
+        "sectionLinks": [
+          {
+            "label": "How to measure",
+            "path": "/sizes/how-to-measure"
+          }
+        ]
+      },
+      {
+        "heading": "Quick Fit Check Before You Call It Done",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Hem sits below lowest louver — not above casters",
+          "No fabric stretched drum-tight over hose ports",
+          "All intake panels sealed with no visible gaps at corners",
+          "Drawcord or strap engaged under frame, not floating at mid-panel"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Advanced Installation & Care Topics",
+    "excerpt": "Cover blew off, water pooling on top, or hem won't fit? Standard install is in the resource guide — these articles fix wind, fit, and field failures.",
+    "isPillar": true,
+    "noIndex": false,
+    "clusterSlugs": [
+      "advanced-installation-high-wind-rooftop",
+      "troubleshooting-cooler-cover-issues",
+      "common-cover-sizing-mistakes"
+    ],
+    "internalLinks": [
+      {
+        "label": "Installation guide",
+        "path": "/resources/installation"
+      },
+      {
+        "label": "Maintenance guide",
+        "path": "/resources/maintenance"
+      },
+      {
+        "label": "High-wind tips",
+        "path": "/blog/advanced-installation-high-wind-rooftop"
+      },
+      {
+        "label": "Troubleshooting",
+        "path": "/blog/troubleshooting-cooler-cover-issues"
+      },
+      {
+        "label": "Sizing mistakes",
+        "path": "/blog/common-cover-sizing-mistakes"
+      }
+    ],
+    "slug": "cooler-cover-installation",
+    "content": [
+      {
+        "heading": "First Time? Start With the Resource Guide",
+        "level": "h2",
+        "body": "Drape cover, secure hem, add tie-downs if exposed — the step-by-step sequence is on our installation page. Come back here when something still fails after following those steps.",
+        "sectionLinks": [
+          {
+            "label": "Installation guide",
+            "path": "/resources/installation"
+          },
+          {
+            "label": "Maintenance guide",
+            "path": "/resources/maintenance"
+          }
+        ]
+      },
+      {
+        "heading": "Problem → Which Article",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Cover blew off rooftop or open yard → high-wind install",
+          "Water pools, mold smell, hem gaps → troubleshooting table",
+          "Cover too tight, corners open, wrong draft type → sizing mistakes"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Cooler Cover Materials & Performance Guide",
+    "excerpt": "Fabric faded in one season, water wicking through seams, or mesh used for winter? Pick material by how the unit fails in your storage conditions — not by lowest price.",
+    "isPillar": true,
+    "noIndex": false,
+    "clusterSlugs": [
+      "waterproof-vs-water-resistant",
+      "uv-protection-for-cooler-covers",
+      "vented-vs-closed-cover"
+    ],
+    "companionResource": {
+      "label": "Full materials comparison",
+      "path": "/materials"
+    },
+    "internalLinks": [
+      {
+        "label": "Waterproof vs resistant",
+        "path": "/blog/waterproof-vs-water-resistant"
+      },
+      {
+        "label": "UV protection",
+        "path": "/blog/uv-protection-for-cooler-covers"
+      },
+      {
+        "label": "Vented vs closed",
+        "path": "/blog/vented-vs-closed-cover"
+      },
+      {
+        "label": "Materials page",
+        "path": "/materials"
+      }
+    ],
+    "slug": "cooler-cover-materials-performance",
+    "content": [
+      {
+        "heading": "Problem: Cover Failed Early — Why?",
+        "level": "h2",
+        "body": "Match the failure mode to the fabric fix.",
+        "bullets": [
+          "Faded, brittle, torn at caster rub points → UV/denier issue (see UV article)",
+          "Water inside cabinet after rain → wrong waterproof rating (see waterproof article)",
+          "Cold drafts with cover on → mesh or vented used for winter (see vented vs closed)",
+          "Condensation in freezing yard after proper drain → consider insulated liner"
+        ]
+      },
+      {
+        "heading": "Default Picks by Condition",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Dry Southwest winter shutdown → 600D PU polyester",
+          "Standing water on top, coastal, or heavy snow → vinyl-coated polyester",
+          "Idle in summer dust, unit not winterized → mesh (in-season only)"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Full comparison table",
+            "path": "/materials"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Custom Cooler Covers: Complete Customization Guide",
+    "excerpt": "Stock cover rips on casters, gaps at hose ports, or a fleet with three different models? Custom patterns fix fit once — then reorder by pattern ID.",
+    "isPillar": true,
+    "noIndex": false,
+    "clusterSlugs": [
+      "custom-cover-materials",
+      "custom-cover-sizes",
+      "custom-opening-designs",
+      "logo-printing-on-cooler-covers",
+      "bulk-vs-small-batch-orders"
+    ],
+    "internalLinks": [
+      {
+        "label": "Materials",
+        "path": "/blog/custom-cover-materials"
+      },
+      {
+        "label": "Sizes",
+        "path": "/blog/custom-cover-sizes"
+      },
+      {
+        "label": "Openings",
+        "path": "/blog/custom-opening-designs"
+      },
+      {
+        "label": "Logo printing",
+        "path": "/blog/logo-printing-on-cooler-covers"
+      },
+      {
+        "label": "Bulk vs small batch",
+        "path": "/blog/bulk-vs-small-batch-orders"
+      },
+      {
+        "label": "Custom products",
+        "path": "/products/custom-evaporative-cooler-covers"
+      },
+      {
+        "label": "Get a quote",
+        "path": "/contact"
+      }
+    ],
+    "slug": "custom-cooler-covers",
+    "content": [
+      {
+        "heading": "When Stock Covers Fail",
+        "level": "h2",
+        "body": "If any of these sound familiar, custom is faster than fighting returns.",
+        "bullets": [
+          "Hem binds on casters or hose ports — fabric stretched, wind gets under the edge",
+          "Control panel or fill cap forces you to leave a corner open",
+          "Three cabinet models in one yard — one \"42-inch\" size fits none of them well",
+          "Procurement needs the same material code and color on every PO"
+        ]
+      },
+      {
+        "heading": "What to Send for an Accurate Quote",
+        "level": "h2",
+        "body": "Four inputs — missing any one slows approval or causes a remake.",
+        "bullets": [
+          "Outside W×D×H per model (include casters and protrusions)",
+          "Material + color for your climate (see materials article)",
+          "Opening locations — photos with a tape measure in frame",
+          "Quantity, timeline, and logo file if branding is required"
+        ],
+        "sectionLinks": [
+          {
+            "label": "How to measure",
+            "path": "/sizes/how-to-measure"
+          },
+          {
+            "label": "Request a quote",
+            "path": "/contact"
+          }
+        ]
+      },
+      {
+        "heading": "Typical Workflow",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "1. Submit dimensions + photos → quote with material options",
+          "2. Prototype one unit → field test fit and openings",
+          "3. Approve pattern → bulk or small-batch production",
+          "4. Reorders use stored pattern ID — no remeasure unless the cabinet changes"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Custom Cover Materials: What to Specify",
+    "excerpt": "Fabric failed in one season, or covers sit in a wet yard? Pick 600D PU, vinyl, mesh, or insulated based on how the unit is stored — not catalog default.",
+    "isPillar": false,
+    "pillarSlug": "custom-cooler-covers",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Custom materials specs",
+      "path": "/custom/materials"
+    },
+    "internalLinks": [
+      {
+        "label": "Materials comparison",
+        "path": "/materials"
+      },
+      {
+        "label": "Custom products",
+        "path": "/products/custom-evaporative-cooler-covers"
+      }
+    ],
+    "slug": "custom-cover-materials",
+    "content": [
+      {
+        "heading": "Problem: Wrong Fabric for Storage Conditions",
+        "level": "h2",
+        "body": "Cheap fabric fades and tears at caster contact points in one Southwest summer. Mesh used as a winter cover lets cold air straight through. Spec the fabric to your worst storage condition, not average weather."
+      },
+      {
+        "heading": "Solution: Pick by Condition",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Dry equipment yard, winter shutdown → 600D polyester + PU coating (default)",
+          "Rain/snow load on top, coastal or rooftop → vinyl-coated polyester",
+          "Idle in summer dust, unit still needs airflow → mesh (in-season only)",
+          "Freezing yard, months outdoors after full drain/dry → insulated liner option"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Full custom materials page",
+            "path": "/custom/materials"
+          }
+        ]
+      },
+      {
+        "heading": "Lock the Spec for Reorders",
+        "level": "h2",
+        "body": "Record material code and color on the PO template. Mixed specs across a fleet means some units fail early while others last — procurement cannot troubleshoot fabric in the field."
+      }
+    ]
+  },
+  {
+    "title": "Custom Cover Sizes: How to Submit Dimensions",
+    "excerpt": "Cover too tight at the hem or gaps at corners? You measured pad width or forgot casters. Submit outside cabinet dimensions — one row per model.",
+    "isPillar": false,
+    "pillarSlug": "custom-cooler-covers",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Custom sizes submission guide",
+      "path": "/custom/sizes"
+    },
+    "internalLinks": [
+      {
+        "label": "Size chart",
+        "path": "/sizes"
+      },
+      {
+        "label": "Measuring tutorial",
+        "path": "/sizes/how-to-measure"
+      }
+    ],
+    "slug": "custom-cover-sizes",
+    "content": [
+      {
+        "heading": "Problem: Returns From Bad Measurements",
+        "level": "h2",
+        "body": "Pad width is smaller than the cabinet. Casters add 3–6 inches stock charts ignore. Averaging three models into one size fits none of them. Custom only works if dimensions reflect the real outside outline."
+      },
+      {
+        "heading": "Solution: Measure Outside at Widest Points",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Width — widest face, including side handles or panel bumps",
+          "Depth — include hose ports or panels that stick out past the frame",
+          "Height — floor to highest point, casters included",
+          "One spreadsheet row per model number — never one \"average\" row for a mixed fleet"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Submission format",
+            "path": "/custom/sizes"
+          }
+        ]
+      },
+      {
+        "heading": "Between Chart Sizes?",
+        "level": "h2",
+        "body": "If you land between stock chart rows, size up — a slightly loose hem with a drawcord fits; a tight cover tears at corners and rides up in wind.",
+        "sectionLinks": [
+          {
+            "label": "Common sizing mistakes",
+            "path": "/blog/common-cover-sizing-mistakes"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Custom Opening Designs for Cooler Covers",
+    "excerpt": "Stretched fabric over a hose port, or a flap that won't stay closed in wind? Openings must align with real hardware — send photos and dimensions.",
+    "isPillar": false,
+    "pillarSlug": "custom-cooler-covers",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Opening design options",
+      "path": "/custom/opening-design"
+    },
+    "internalLinks": [
+      {
+        "label": "Get a quote",
+        "path": "/contact"
+      }
+    ],
+    "slug": "custom-opening-designs",
+    "content": [
+      {
+        "heading": "Problem: Cover Fights the Hardware",
+        "level": "h2",
+        "body": "Without cutouts, crews stretch fabric over hose fittings or leave the hem open to reach the panel. Both fail — stretched fabric tears; open hems let wind under the cover."
+      },
+      {
+        "heading": "Solution: Match Opening to Use Case",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Hose connection — reinforced grommet or zip panel at port height",
+          "Control panel — Velcro flap for occasional winter access without removing the cover",
+          "Fill cap — small zip or snap closure; mark left/right in photos",
+          "Include tape measure in photos — we place openings from your dimensions, not guesses"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Opening design reference",
+            "path": "/custom/opening-design"
+          }
+        ]
+      },
+      {
+        "heading": "Prototype First",
+        "level": "h2",
+        "body": "First order for a new model: approve one unit before fleet qty. Field-test zippers and flap placement — moving an opening after 40 covers are cut is expensive."
+      }
+    ]
+  },
+  {
+    "title": "The Complete Guide to Evaporative Cooler Covers",
+    "excerpt": "Cold rooms after shutdown, rust in spring, or a cover that won't stay on — start with cooler type, outside size, and fabric for your climate.",
+    "isPillar": true,
+    "noIndex": false,
+    "clusterSlugs": [
+      "what-is-evaporative-cooler-cover",
+      "benefits-of-cooler-covers",
+      "winterizing-evaporative-cooler"
+    ],
+    "internalLinks": [
+      {
+        "label": "What Is a Cooler Cover?",
+        "path": "/blog/what-is-evaporative-cooler-cover"
+      },
+      {
+        "label": "Benefits",
+        "path": "/blog/benefits-of-cooler-covers"
+      },
+      {
+        "label": "Winterizing",
+        "path": "/blog/winterizing-evaporative-cooler"
+      },
+      {
+        "label": "How to Measure",
+        "path": "/sizes/how-to-measure"
+      },
+      {
+        "label": "Materials",
+        "path": "/materials"
+      },
+      {
+        "label": "Shop Covers",
+        "path": "/products/evaporative-cooler-covers"
+      }
+    ],
+    "slug": "evaporative-cooler-covers-guide",
+    "content": [
+      {
+        "heading": "Which Problem Are You Fixing?",
+        "level": "h2",
+        "body": "Most cover orders start with one of these — match your situation to the right next step.",
+        "bullets": [
+          "Rooms feel colder after shutdown → you need a cover that seals intake panels (see benefits + winterizing)",
+          "Rust, mold, or wasps every spring → drain/dry first, then cover (winterizing checklist)",
+          "Cover won't fit or blows off → wrong type or size; remeasure outside W×D×H",
+          "Not sure what a cover even does → start with what-is article below"
+        ]
+      },
+      {
+        "heading": "Three Decisions Before You Order",
+        "level": "h2",
+        "body": "Get these right and most returns disappear.",
+        "bullets": [
+          "Cooler type — side draft, down draft, rooftop, or window (profile must match intakes)",
+          "Outside size — widest W×D×H including casters; between chart rows, size up",
+          "Fabric — 600D PU for dry winters; vinyl if rain pools on the unit; mesh never for winter"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Measuring tutorial",
+            "path": "/sizes/how-to-measure"
+          },
+          {
+            "label": "Materials comparison",
+            "path": "/materials"
+          }
+        ]
+      },
+      {
+        "heading": "Articles in This Guide",
+        "level": "h2",
+        "body": "Each article solves one decision. Full install and maintenance steps live on our resource pages.",
+        "bullets": [
+          "What is a cooler cover? — do you actually need one?",
+          "Top benefits — draft blocking and spring startup",
+          "Winterizing — shutdown order before the cover goes on"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Installation guide",
+            "path": "/resources/installation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Insulated Swamp Cooler Covers",
+    "excerpt": "Condensation inside a covered unit in a freezing yard? Insulation helps only after full drain/dry — it does not fix a wet pan or skipped shutdown.",
+    "isPillar": false,
+    "pillarSlug": "swamp-cooler-covers-guide",
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "Insulated products",
+        "path": "/products/insulated-cooler-covers"
+      },
+      {
+        "label": "Winterizing",
+        "path": "/blog/winterizing-evaporative-cooler"
+      }
+    ],
+    "slug": "insulated-swamp-cooler-covers",
+    "content": [
+      {
+        "heading": "Problem: Condensation in Cold Storage",
+        "level": "h2",
+        "body": "Units sit in freezing equipment yards for months. Temperature swings inside a sealed cover can produce condensation on metal surfaces — even when the unit was shut down correctly."
+      },
+      {
+        "heading": "Solution: Insulated Liner After Proper Shutdown",
+        "level": "h2",
+        "body": "Insulation reduces temperature swing inside a dry, covered cabinet. Prerequisites still apply.",
+        "bullets": [
+          "Pan drained and dry — insulation does not stop mold from a wet shutdown",
+          "Pads replaced or fully dried before cover goes on",
+          "Use only after complete winterizing — see checklist"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Winterizing checklist",
+            "path": "/blog/winterizing-evaporative-cooler"
+          }
+        ]
+      },
+      {
+        "heading": "When Insulation Will Not Help",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Cover put on while pan still had water → mold regardless of liner",
+          "Unit run with cover installed → overheating risk",
+          "Substitute for drain/dry steps → always fails by spring"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Logo Printing on Cooler Covers",
+    "excerpt": "Fleet units look identical in the yard? Screen print for volume; heat transfer for mixed sizes. One setup fee — art file stored for reorders.",
+    "isPillar": false,
+    "pillarSlug": "custom-cooler-covers",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Logo printing service",
+      "path": "/custom/logo-printing"
+    },
+    "internalLinks": [
+      {
+        "label": "Bulk orders",
+        "path": "/blog/bulk-vs-small-batch-orders"
+      }
+    ],
+    "slug": "logo-printing-on-cooler-covers",
+    "content": [
+      {
+        "heading": "Problem: Unmarked Fleet Covers",
+        "level": "h2",
+        "body": "Rental and event yards lose track of which covers belong to which client. Logo on the side panel at eye height solves identification and doubles as brand visibility on site."
+      },
+      {
+        "heading": "Solution: Method by Quantity",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "25+ identical covers, 1–2 colors → screen print (lowest per-unit cost at volume)",
+          "Mixed sizes or full-color logo → heat transfer",
+          "Submit vector art (AI/EPS/SVG); high-res PNG works if lines are clean",
+          "Setup fee applies once — stored screens/files used on reorders"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Logo specs",
+            "path": "/custom/logo-printing"
+          }
+        ]
+      },
+      {
+        "heading": "Before Production Runs",
+        "level": "h2",
+        "body": "We confirm placement on the prototype cover. Side panel placement avoids hem and opening conflict — moving logo after bulk cut is not practical."
+      }
+    ]
+  },
+  {
+    "title": "Mesh Swamp Cooler Covers",
+    "excerpt": "Pads clogging with yard dust on idle summer units? Mesh keeps debris off while air flows. It will not stop winter drafts, rain, or pests — use solid fabric for shutdown.",
+    "isPillar": false,
+    "pillarSlug": "swamp-cooler-covers-guide",
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "Mesh products",
+        "path": "/products/mesh-cooler-covers"
+      },
+      {
+        "label": "Winter covers",
+        "path": "/products/winter-cooler-covers"
+      }
+    ],
+    "slug": "mesh-swamp-cooler-covers",
+    "content": [
+      {
+        "heading": "Problem: Dust on Idle Units During Cooling Season",
+        "level": "h2",
+        "body": "Portable units sit in gravel yards between jobs. Wind-blown dust loads pads on idle coolers — startup airflow drops and pads need early replacement. Mesh blocks debris while allowing air through."
+      },
+      {
+        "heading": "Solution: Mesh for In-Season Idle Only",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Use when the unit is off but not winterized — still needs airflow",
+          "Keeps leaves and dust off pads without trapping heat like solid fabric",
+          "Swap to solid winter cover at shutdown — mesh is not a winter product"
+        ]
+      },
+      {
+        "heading": "Do Not Use Mesh When",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Winter shutdown — cold air passes straight through mesh",
+          "Rain protection needed — water penetrates openly",
+          "Pest blocking — mesh openings are too large for wasps and rodents"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Winterizing before solid cover",
+            "path": "/blog/winterizing-evaporative-cooler"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Down Draft Swamp Cooler Covers",
+    "excerpt": "Rain sitting on top of the unit, or top intake still open? Down-draft cabinets need a wide, low cover with a reinforced top — sides alone are not enough.",
+    "isPillar": false,
+    "pillarSlug": "swamp-cooler-covers-guide",
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "Down draft products",
+        "path": "/products/down-draft-cooler-covers"
+      }
+    ],
+    "slug": "swamp-cooler-cover-down-draft",
+    "content": [
+      {
+        "heading": "Problem: Water Pools or Top Intake Exposed",
+        "level": "h2",
+        "body": "Down-draft units pull air through the top deck. Sides are mostly solid. A side-draft cover leaves the primary intake open and may sag in the middle — rainwater pools instead of running off."
+      },
+      {
+        "heading": "Solution: Down-Draft Profile + Drainage",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Wide, low cover shape — top panel is the critical seal",
+          "Reinforced top for rain and snow load in open yards",
+          "Tighten straps so the top crowns slightly — water runs to edges, not into louvers",
+          "Confirm outlet duct clearance before ordering — depth must clear roof connections"
+        ]
+      },
+      {
+        "heading": "Open Yard Storage",
+        "level": "h2",
+        "body": "Add tie-downs on exposed sites. Re-tension after the first storm — a sagging top is the main cause of pooled water and interior rust.",
+        "sectionLinks": [
+          {
+            "label": "High-wind install tips",
+            "path": "/blog/advanced-installation-high-wind-rooftop"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Side Draft Swamp Cooler Covers",
+    "excerpt": "Cold air still coming in after covering? Side louvers are probably open — you need a tall cover that wraps the intake panels, not a down-draft top-only profile.",
+    "isPillar": false,
+    "pillarSlug": "swamp-cooler-covers-guide",
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "Side draft products",
+        "path": "/products/side-draft-cooler-covers"
+      },
+      {
+        "label": "Down draft covers",
+        "path": "/blog/swamp-cooler-cover-down-draft"
+      }
+    ],
+    "slug": "swamp-cooler-cover-side-draft",
+    "content": [
+      {
+        "heading": "Problem: Side Intakes Still Open",
+        "level": "h2",
+        "body": "Side-draft portables pull air through large louvers on the left and right faces. A cover that only seals the top leaves both intakes exposed — drafts and debris get in exactly where you thought you were protected."
+      },
+      {
+        "heading": "Solution: Identify and Wrap Side Draft",
+        "level": "h2",
+        "body": "Large intake louvers on left/right; outlet on top or front.",
+        "bullets": [
+          "Use a side-draft profile — tall enough to wrap both intake faces",
+          "Hem below the lowest louver edge, not mid-panel",
+          "Route drawcord or strap under the caster frame so wind cannot lift the hem",
+          "Do not substitute a down-draft cover — top seal alone fails on side intakes"
+        ]
+      },
+      {
+        "heading": "Still Gaps at Corners?",
+        "level": "h2",
+        "body": "Remeasure outside width and depth — pad dimensions are smaller than the cabinet. Wrong draft type with correct size still leaks.",
+        "sectionLinks": [
+          {
+            "label": "How to measure",
+            "path": "/sizes/how-to-measure"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Swamp Cooler Cover Sizes",
+    "excerpt": "Hem won't drop over casters, or fabric straining at corners? Measure outside W×D×H — between chart rows, size up. Go custom when ports break the rectangle.",
+    "isPillar": false,
+    "pillarSlug": "swamp-cooler-covers-guide",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Full size chart",
+      "path": "/sizes"
+    },
+    "internalLinks": [
+      {
+        "label": "Measuring tutorial",
+        "path": "/sizes/how-to-measure"
+      },
+      {
+        "label": "Sizing mistakes",
+        "path": "/blog/common-cover-sizing-mistakes"
+      }
+    ],
+    "slug": "swamp-cooler-cover-sizes",
+    "content": [
+      {
+        "heading": "Problem: Chart Size Almost Fits",
+        "level": "h2",
+        "body": "Stock charts list outside dimension ranges. Landing between two rows is common — especially when casters add height the chart does not show. Ordering down saves money once; reordering after a failed fit costs a season."
+      },
+      {
+        "heading": "Solution: Size Up, Then Adjust Hem",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Measure outside W×D×H at widest points — casters included",
+          "Between rows → pick the next size up; drawcord or strap takes up slack",
+          "Hem should sit below the lowest louver, not above casters",
+          "Still tight at hose ports → custom pattern, not the next stock size"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Size chart",
+            "path": "/sizes"
+          }
+        ]
+      },
+      {
+        "heading": "When Stock Will Not Work",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Rear hose panel sticks out past cabinet depth",
+          "Three models in one yard — no single chart row fits all",
+          "Control panel on the face breaks a flat rectangle"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Custom sizes guide",
+            "path": "/custom/sizes"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Swamp Cooler Covers: The Ultimate Guide",
+    "excerpt": "Swamp cooler = evaporative cooler. Wrong size in the yard, side gaps with a down-draft cover, or mesh used for winter — pick the article that matches your problem.",
+    "isPillar": true,
+    "noIndex": false,
+    "clusterSlugs": [
+      "swamp-cooler-cover-sizes",
+      "swamp-cooler-cover-side-draft",
+      "swamp-cooler-cover-down-draft",
+      "insulated-swamp-cooler-covers",
+      "mesh-swamp-cooler-covers"
+    ],
+    "internalLinks": [
+      {
+        "label": "Sizes",
+        "path": "/blog/swamp-cooler-cover-sizes"
+      },
+      {
+        "label": "Side draft",
+        "path": "/blog/swamp-cooler-cover-side-draft"
+      },
+      {
+        "label": "Down draft",
+        "path": "/blog/swamp-cooler-cover-down-draft"
+      },
+      {
+        "label": "Insulated",
+        "path": "/blog/insulated-swamp-cooler-covers"
+      },
+      {
+        "label": "Mesh",
+        "path": "/blog/mesh-swamp-cooler-covers"
+      },
+      {
+        "label": "Evaporative guide",
+        "path": "/blog/evaporative-cooler-covers-guide"
+      },
+      {
+        "label": "Shop swamp covers",
+        "path": "/products/swamp-cooler-covers"
+      }
+    ],
+    "canonicalNote": "Regional search term for evaporative cooler — same product category as /blog/evaporative-cooler-covers-guide.",
+    "slug": "swamp-cooler-covers-guide",
+    "content": [
+      {
+        "heading": "Same Machine — Regional Name",
+        "level": "h2",
+        "body": "\"Swamp cooler\" is Southwest slang for evaporative cooler. Same protection rules apply. Articles here focus on portable wheeled units in equipment yards — casters, mixed fleets, and open storage."
+      },
+      {
+        "heading": "Match Your Problem to an Article",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Between size chart rows or casters don't fit → swamp cooler cover sizes",
+          "Side louvers still exposed after covering → side draft covers",
+          "Rain pools on top, top intake not sealed → down draft covers",
+          "Condensation in a freezing yard after proper drain/dry → insulated options",
+          "Dust on idle summer units, not winter shutdown → mesh only"
+        ],
+        "sectionLinks": [
+          {
+            "label": "How to measure",
+            "path": "/sizes/how-to-measure"
+          },
+          {
+            "label": "Installation",
+            "path": "/resources/installation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Troubleshooting Cooler Cover Issues",
+    "excerpt": "Cover blew off, holds water, smells like mold, or gaps at corners — match the symptom to a fix before you reorder the wrong size or type.",
+    "isPillar": false,
+    "pillarSlug": "cooler-cover-installation",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Cleaning & storage how-to",
+      "path": "/resources/maintenance"
+    },
+    "internalLinks": [
+      {
+        "label": "Sizing mistakes",
+        "path": "/blog/common-cover-sizing-mistakes"
+      }
+    ],
+    "slug": "troubleshooting-cooler-cover-issues",
+    "content": [
+      {
+        "heading": "Symptom → Cause → Fix",
+        "level": "h2",
+        "body": "Work top to bottom. If the fix does not match, remeasure before reordering.",
+        "dataTable": {
+          "headers": [
+            "Symptom",
+            "Likely cause",
+            "Fix"
+          ],
+          "rows": [
+            [
+              "Cover blew off",
+              "Hem riding up over casters; no tie-downs",
+              "Route hem below casters; add ratchet straps to anchors"
+            ],
+            [
+              "Water pools on top",
+              "Sagging top; wrong draft profile",
+              "Re-tension straps to crown top; confirm down-draft cover on top-intake unit"
+            ],
+            [
+              "Mold smell in spring",
+              "Unit covered while wet",
+              "Drain/dry fully next season before cover; clean pan now"
+            ],
+            [
+              "Gaps at corners",
+              "Cover too small or wrong draft type",
+              "Remeasure outside W×D×H; match side vs down draft"
+            ],
+            [
+              "Fabric tearing at hem",
+              "Cover too small — stretched over hardware",
+              "Size up or go custom for port protrusions"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Still Stuck?",
+        "level": "h2",
+        "body": "Send photos of the installed cover — hem position, tie-downs, and any gaps — with outside dimensions. Most reorder issues are sizing or draft type, not fabric quality.",
+        "sectionLinks": [
+          {
+            "label": "Measuring tutorial",
+            "path": "/sizes/how-to-measure"
+          },
+          {
+            "label": "Request a quote",
+            "path": "/contact"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "UV Protection for Cooler Covers",
+    "excerpt": "Cover faded and tore at the hem in one season? Southwest sun destroys low-denier fabric — specify 600D+ with UV-stabilized coating and expect shorter life on exposed rooftops.",
+    "isPillar": false,
+    "pillarSlug": "cooler-cover-materials-performance",
+    "noIndex": false,
+    "companionResource": {
+      "label": "UV-rated fabrics",
+      "path": "/materials"
+    },
+    "internalLinks": [
+      {
+        "label": "UV-resistant products",
+        "path": "/products/uv-resistant-cooler-covers"
+      }
+    ],
+    "slug": "uv-protection-for-cooler-covers",
+    "content": [
+      {
+        "heading": "Problem: One-Season Fabric Failure",
+        "level": "h2",
+        "body": "High-desert UV breaks down cheap polyester fast — especially at hem contact points and anywhere the fabric rubs on casters or roof curbs. Fading is the visible sign; brittleness and tearing at stress points follow in the same season."
+      },
+      {
+        "heading": "Solution: Spec for UV Exposure",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "600D or higher polyester with UV-stabilized PU or vinyl coating",
+          "Darker colors fade slower than light colors on exposed sites",
+          "Rooftop and open yard storage → shortest lifespan; inspect hems yearly",
+          "Store folded in shade between seasons when possible"
+        ]
+      },
+      {
+        "heading": "When to Replace vs Repair",
+        "level": "h2",
+        "body": "Small hem fraying on an otherwise sound cover → repair tape or patch. Widespread brittleness or coating breakdown → replace — UV damage is through the fabric, not just the surface."
+      }
+    ]
+  },
+  {
+    "title": "Vented vs Closed Cooler Covers",
+    "excerpt": "Still cold indoors with a cover on, or pads got wet under a \"breathable\" cover in winter? Mesh and vented fabrics are for in-season idle only — winter needs solid closure.",
+    "isPillar": false,
+    "pillarSlug": "cooler-cover-materials-performance",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Mesh vs solid fabrics",
+      "path": "/materials"
+    },
+    "internalLinks": [
+      {
+        "label": "Mesh covers",
+        "path": "/products/mesh-cooler-covers"
+      },
+      {
+        "label": "Winter covers",
+        "path": "/products/winter-cooler-covers"
+      }
+    ],
+    "slug": "vented-vs-closed-cover",
+    "content": [
+      {
+        "heading": "Problem: Wrong Closure for the Season",
+        "level": "h2",
+        "body": "Mesh keeps dust off idle summer units while air flows. Used at winter shutdown, cold outdoor air passes straight through — drafts continue and rain soaks pads. Teams sometimes pick mesh because it is lighter and cheaper; the failure shows up as cold rooms and wet pads in spring."
+      },
+      {
+        "heading": "Solution: Closed for Shutdown, Vented for Idle",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Closed solid fabric — after full drain/dry shutdown; blocks drafts, rain, and pests",
+          "Mesh / vented — idle unit during cooling season in dusty yards; not winter",
+          "At shutdown: swap mesh for solid cover — do not leave mesh on through winter"
+        ]
+      },
+      {
+        "heading": "Interior Duct Still Drafting?",
+        "level": "h2",
+        "body": "A solid cover seals outdoor intakes only. If rooms stay cold, check the interior duct damper or panel inside the house — cover fabric cannot fix an open duct path.",
+        "sectionLinks": [
+          {
+            "label": "Winterizing checklist",
+            "path": "/blog/winterizing-evaporative-cooler"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Waterproof vs Water-Resistant Cooler Covers",
+    "excerpt": "Water inside the cabinet after a storm? PU-coated polyester sheds rain but stitched seams wick under standing water — vinyl is required when puddles form on top.",
+    "isPillar": false,
+    "pillarSlug": "cooler-cover-materials-performance",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Materials comparison",
+      "path": "/materials"
+    },
+    "internalLinks": [
+      {
+        "label": "Waterproof products",
+        "path": "/products/waterproof-cooler-covers"
+      }
+    ],
+    "slug": "waterproof-vs-water-resistant",
+    "content": [
+      {
+        "heading": "Problem: Dry Climate Fabric, Wet Climate Install",
+        "level": "h2",
+        "body": "600D PU polyester is the right default for dry Southwest winters — light rain beads off. On a rooftop where water pools after storms, or in coastal exposure, prolonged standing water wicks through stitched seams. Interior rust follows even when the cover \"looks fine\" from the ground."
+      },
+      {
+        "heading": "Solution: Match to Worst Case, Not Average",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Water-resistant (600D PU) — dry climates, wall mounts, light rain only",
+          "Waterproof (vinyl-coated) — rooftop ponding, heavy snow load, coastal rain",
+          "If you see puddles on top after storms → upgrade to vinyl regardless of climate zone"
+        ]
+      },
+      {
+        "heading": "Also Fix Drainage",
+        "level": "h2",
+        "body": "Wrong fabric is not the only cause of interior wet — a sagging top pools water even on vinyl. Crown the top with strap tension so runoff reaches edges.",
+        "sectionLinks": [
+          {
+            "label": "High-wind install tips",
+            "path": "/blog/advanced-installation-high-wind-rooftop"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "What Is an Evaporative Cooler Cover?",
+    "excerpt": "Open intakes let cold air, rain, and pests in all winter. A cover seals the cabinet from the outside — but only after you drain and dry the unit.",
+    "isPillar": false,
+    "pillarSlug": "evaporative-cooler-covers-guide",
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "Benefits",
+        "path": "/blog/benefits-of-cooler-covers"
+      },
+      {
+        "label": "How to Measure",
+        "path": "/sizes/how-to-measure"
+      },
+      {
+        "label": "Shop Covers",
+        "path": "/products/evaporative-cooler-covers"
+      }
+    ],
+    "slug": "what-is-evaporative-cooler-cover",
+    "content": [
+      {
+        "heading": "Problem: Open Intakes All Winter",
+        "level": "h2",
+        "body": "Evaporative coolers need large intake panels to pull air through wet pads in summer. When the unit is off, those same openings become a straight path for cold outdoor air, rain, dust, and nesting pests. A tarp thrown over the top usually leaves side gaps — a fitted cover wraps the outside cabinet and closes every intake path."
+      },
+      {
+        "heading": "Solution: Match Cover Profile to Your Unit",
+        "level": "h2",
+        "body": "Wrong type = gaps even when the size looks close. Identify your cooler first.",
+        "bullets": [
+          "Side draft — tall cover; side louvers must be fully wrapped",
+          "Down draft — wide, low profile; top deck is the intake to seal",
+          "Rooftop — reinforced top + tie-downs; water must drain off, not into the curb",
+          "Window — frame-width fit; blocks the window opening from drafting"
+        ]
+      },
+      {
+        "heading": "Common Mistakes",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Running the cooler with the cover on → overheating and motor damage",
+          "Covering a unit that still has water in the pan → rust and mold under the fabric",
+          "Using a down-draft cover on a side-draft unit → side intakes stay open"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Winterizing before you cover",
+            "path": "/blog/winterizing-evaporative-cooler"
+          },
+          {
+            "label": "How to measure for the right size",
+            "path": "/sizes/how-to-measure"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Winterizing Your Evaporative Cooler",
+    "excerpt": "Mold smell in spring or a cracked water line? You skipped shutdown steps. Drain, dry, seal the interior duct — then install the cover last.",
+    "isPillar": false,
+    "pillarSlug": "evaporative-cooler-covers-guide",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Full maintenance & storage guide",
+      "path": "/resources/maintenance"
+    },
+    "internalLinks": [
+      {
+        "label": "Installation guide",
+        "path": "/resources/installation"
+      },
+      {
+        "label": "Benefits of covers",
+        "path": "/blog/benefits-of-cooler-covers"
+      },
+      {
+        "label": "Shop winter covers",
+        "path": "/products/winter-cooler-covers"
+      }
+    ],
+    "slug": "winterizing-evaporative-cooler",
+    "content": [
+      {
+        "heading": "Problem: Covering Too Early or While Wet",
+        "level": "h2",
+        "body": "A cover on a wet unit traps moisture → rust, mold, and pad rot by spring. Shut down when nights stay below ~50°F and you will not need cooling again until spring. The cover is the last step, not a substitute for draining."
+      },
+      {
+        "heading": "Solution: Shutdown Checklist",
+        "level": "h2",
+        "body": "Do these in order. Cleaning detail and storage tips are in the maintenance guide.",
+        "bullets": [
+          "Power off at the disconnect — not just the wall switch",
+          "Close the water valve; disconnect and blow out the feed line",
+          "Drain the pan completely; leave the drain plug open",
+          "Scrub the pan; inspect pads — replace damaged ones or dry fully before covering",
+          "Seal the interior duct opening inside the house (damper or insulated panel)",
+          "Install cover — correct draft type, hem below lowest louver, tie-downs if exposed"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Step-by-step maintenance guide",
+            "path": "/resources/maintenance"
+          }
+        ]
+      },
+      {
+        "heading": "If You Already Have These Symptoms",
+        "level": "h2",
+        "body": "",
+        "bullets": [
+          "Mold smell when you remove the cover → unit was wet; drain and dry fully next season",
+          "Cracked feed line in spring → line was still full of water when it froze",
+          "Still cold indoors → interior duct not sealed — cover alone does not fix in-house draft",
+          "Cover on the ground after a storm → add tie-downs; see installation guide"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Cover installation",
+            "path": "/resources/installation"
+          }
+        ]
+      }
+    ]
+  }
+]

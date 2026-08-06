@@ -1,0 +1,127 @@
+---
+/**
+ * Port of ResourcePageRoute. The React app matched `/materials/*`, `/sizes/*`,
+ * `/custom/*` and `/resources/*` with four catch-all routes that all resolved
+ * through `getResourceBySlug`; one rest route with `getStaticPaths` emits the
+ * same URL set, and `/custom/*` still branches to `CustomResourcePage`.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import CustomResourcePage from "@/components/CustomResourcePage.astro";
+import Icon from "@/components/Icon.astro";
+import InternalLinkCard from "@/components/InternalLinkCard.astro";
+import QuoteLink from "@/components/QuoteLink.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import { resourcePages, type ResourcePage } from "@/data/resources";
+
+export function getStaticPaths() {
+  return resourcePages.map((resource) => ({
+    params: { slug: resource.slug },
+    props: { resource },
+  }));
+}
+
+type Props = { resource: ResourcePage };
+
+const { resource } = Astro.props;
+
+const slug = resource.slug;
+const isCustom = slug.startsWith("custom/");
+const parts = slug.split("/");
+
+const crumbs: { label: string; href?: string }[] = [{ label: "Home", href: "/" }];
+if (parts.length > 1) {
+  const section = parts[0];
+  // `/resources/*` has no index page — point the middle crumb at the blog hub instead.
+  const sectionHref = section === "resources" ? "/blog" : `/${section}`;
+  crumbs.push({
+    label: section.charAt(0).toUpperCase() + section.slice(1),
+    href: sectionHref,
+  });
+}
+crumbs.push({ label: resource.title });
+---
+
+<BaseLayout
+  title={`${resource.title} | CoolerFit`}
+  description={resource.description}
+  canonicalPath={`/${resource.slug}`}
+>
+  {
+    isCustom ? (
+      <CustomResourcePage resource={resource} slug={slug} />
+    ) : (
+      <div class="pt-24 md:pt-32 pb-20">
+        <div class="container max-w-4xl">
+          <Breadcrumb class="mb-6" items={crumbs} />
+
+          <header class="mb-10 border-b border-border pb-8">
+            <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">{resource.title}</h1>
+            <p class="text-lg text-muted-foreground">{resource.description}</p>
+            {resource.intro ? <p class="mt-4 text-muted-foreground leading-relaxed">{resource.intro}</p> : null}
+          </header>
+
+          <div class="space-y-10">
+            {resource.sections.map((section) => (
+              <section>
+                <h2 class="text-2xl font-display font-semibold text-foreground mb-3">{section.heading}</h2>
+                <p class="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
+                {section.bullets && section.bullets.length > 0 ? (
+                  <ul class="space-y-2">
+                    {section.bullets.map((item) => (
+                      <li class="flex items-start gap-2 text-sm text-foreground">
+                        <Icon name="CheckCircle" size={16} class="text-primary shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </section>
+            ))}
+          </div>
+
+          {resource.deepDiveLinks && resource.deepDiveLinks.length > 0 && (
+            <div class="mt-14 pt-10 border-t border-border">
+              <h2 class="text-2xl font-display font-semibold text-foreground mb-2">Go Deeper</h2>
+              <p class="text-sm text-muted-foreground mb-4">
+                These articles add background and advanced tips — the step-by-step guides above stay on this page.
+              </p>
+              <div class="grid gap-3 sm:grid-cols-2">
+                {resource.deepDiveLinks.map((link) => (
+                  <InternalLinkCard label={link.label} path={link.path} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {resource.relatedLinks.length > 0 && (
+            <div class="mt-14 pt-10 border-t border-border">
+              <h2 class="text-2xl font-display font-semibold text-foreground mb-4">Related Resources</h2>
+              <div class="grid gap-3 sm:grid-cols-2">
+                {resource.relatedLinks.map((link) => (
+                  <InternalLinkCard label={link.label} path={link.path} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div class="mt-12 p-8 bg-secondary rounded-xl text-center">
+            <h3 class="font-display font-semibold text-foreground mb-2">Need a Custom Quote?</h3>
+            <p class="text-sm text-muted-foreground mb-4">
+              Send your dimensions and material preferences — we respond within 24 hours.
+            </p>
+            <QuoteLink
+              quote={{
+                coverType: resource.title,
+                ref: `/${resource.slug}`,
+              }}
+              class={buttonVariants()}
+            >
+              Request a Quote
+            </QuoteLink>
+          </div>
+        </div>
+      </div>
+    )
+  }
+</BaseLayout>

@@ -1,0 +1,78 @@
+---
+import { locales, localizedPath, stripLocalePrefix, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = ui(locale);
+const path = stripLocalePrefix(Astro.url.pathname);
+
+const labels: Record<Locale, string> = {
+  en: "English",
+  es: "Español",
+  ar: "العربية",
+};
+---
+
+<div class="relative" data-lang-switcher>
+  <button
+    type="button"
+    class="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+    data-lang-trigger
+  >
+    <span class="sr-only">{t.common.language}:</span>
+    <span>{labels[locale]}</span>
+    <span aria-hidden="true" class="text-xs opacity-60">▾</span>
+  </button>
+  <ul
+    role="listbox"
+    hidden
+    data-lang-menu
+    class="absolute end-0 top-full z-50 mt-2 min-w-[9rem] rounded-lg border border-border/60 bg-popover py-1 shadow-md"
+  >
+    {
+      locales.map((code) => (
+        <li role="option" aria-selected={code === locale}>
+          <a
+            href={localizedPath(code, path)}
+            class:list={[
+              "block px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground",
+              code === locale && "font-semibold text-primary",
+            ]}
+            hreflang={code}
+            lang={code}
+          >
+            {labels[code]}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-lang-switcher]").forEach((root) => {
+    const trigger = root.querySelector<HTMLButtonElement>("[data-lang-trigger]");
+    const menu = root.querySelector<HTMLElement>("[data-lang-menu]");
+    if (!trigger || !menu) return;
+
+    const close = () => {
+      menu.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+    };
+    const open = () => {
+      menu.hidden = false;
+      trigger.setAttribute("aria-expanded", "true");
+    };
+
+    trigger.addEventListener("click", () => (menu.hidden ? open() : close()));
+    document.addEventListener("pointerdown", (e) => {
+      if (!root.contains(e.target as Node)) close();
+    });
+  });
+</script>

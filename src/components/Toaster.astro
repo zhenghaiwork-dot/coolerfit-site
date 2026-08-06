@@ -1,0 +1,13 @@
+---
+/**
+ * Renders the toast viewport up front so toasts land in a stable place in the
+ * DOM. `toast()` falls back to creating one if this is ever absent.
+ */
+---
+
+<ol
+  data-toast-viewport
+  tabindex="-1"
+  class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]"
+>
+</ol>

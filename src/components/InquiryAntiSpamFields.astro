@@ -1,0 +1,19 @@
+---
+/**
+ * Hidden honeypot field — bots fill this, humans never see it. The companion
+ * `formStartedAt` timestamp is stamped by script on load so the PHP guard can
+ * reject submissions that arrive suspiciously fast.
+ */
+---
+
+<div aria-hidden="true" class="absolute -left-[9999px] top-auto h-0 w-0 overflow-hidden opacity-0 pointer-events-none">
+  <label for="inquiry-website">Website</label>
+  <input id="inquiry-website" name="website" type="text" tabindex="-1" autocomplete="off" value="" />
+  <input type="hidden" name="formStartedAt" data-form-started-at value="0" />
+</div>
+
+<script>
+  document.querySelectorAll<HTMLInputElement>("[data-form-started-at]").forEach((el) => {
+    el.value = String(Date.now());
+  });
+</script>
