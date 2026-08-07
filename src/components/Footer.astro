@@ -67,9 +67,24 @@ const year = new Date().getFullYear();
   <div class="container relative py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
       <div class="lg:col-span-1">
-        <div class="flex items-center gap-2 mb-4">
-          <img src="/logo-on-dark.svg" alt="CoolerFit" width="160" height="32" class="h-8 w-auto" />
-        </div>
+        <a href={lp("/")} class="inline-flex items-center gap-2.5 mb-4 group" aria-label="CoolerFit">
+          <svg viewBox="0 0 124 124" width="36" height="36" class="shrink-0" aria-hidden="true">
+            <defs>
+              <linearGradient id="footer-logo-g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1B8CE3"></stop>
+                <stop offset="100%" stop-color="#2EB89E"></stop>
+              </linearGradient>
+            </defs>
+            <rect x="12" y="12" width="100" height="100" rx="21" fill="url(#footer-logo-g)"></rect>
+            <rect x="33" y="39" width="10" height="45" rx="5" fill="#FFFFFF"></rect>
+            <path d="M 40 50 Q 62 41 87 50" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill="none"></path>
+            <path d="M 40 62 Q 59 58 79 62" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill="none"></path>
+            <path d="M 40 74 Q 62 71 87 74" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill="none"></path>
+          </svg>
+          <span class="font-display font-extrabold text-xl tracking-tight text-background group-hover:opacity-90 transition-opacity">
+            CoolerFit
+          </span>
+        </a>
         <p class="text-sm opacity-80 leading-relaxed mb-4">
           {t.chrome.tagline}
         </p>

@@ -6,10 +6,9 @@
   RewriteEngine On
   RewriteBase /
 
-  # Force HTTPS — uncomment ONLY after SSL is active on the live domain.
-  # Leaving this on without a certificate can break the site (redirect loops / HTTPS errors).
-  # RewriteCond %{HTTPS} off
-  # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # Force HTTPS (SSL active on Hostinger)
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # Retired blog URLs → canonical resource guides
   RewriteRule ^blog/how-to-measure-cooler-cover/?$ /sizes/how-to-measure [R=301,L]
