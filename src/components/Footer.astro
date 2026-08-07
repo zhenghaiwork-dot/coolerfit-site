@@ -48,9 +48,9 @@ const resourceLinks = [
 ];
 
 const linkClass =
-  "text-sm opacity-55 hover:opacity-100 hover:translate-x-0.5 rtl:hover:-translate-x-0.5 transition-all duration-200 inline-block";
-const headingClass = "font-display font-semibold text-xs uppercase tracking-widest mb-4 opacity-50";
-const contactItemClass = "flex items-start gap-3 text-sm opacity-55 hover:opacity-80 transition-opacity duration-200";
+  "text-sm opacity-80 hover:opacity-100 hover:translate-x-0.5 rtl:hover:-translate-x-0.5 transition-all duration-200 inline-block";
+const headingClass = "font-display font-semibold text-xs uppercase tracking-widest mb-4 opacity-70";
+const contactItemClass = "flex items-start gap-3 text-sm opacity-80 hover:opacity-100 transition-opacity duration-200";
 
 const year = new Date().getFullYear();
 ---
@@ -68,9 +68,9 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
       <div class="lg:col-span-1">
         <div class="flex items-center gap-2 mb-4">
-          <img src="/logo.svg" alt="CoolerFit" width="160" height="32" class="h-8 w-auto" />
+          <img src="/logo-on-dark.svg" alt="CoolerFit" width="160" height="32" class="h-8 w-auto" />
         </div>
-        <p class="text-sm opacity-55 leading-relaxed mb-4">
+        <p class="text-sm opacity-80 leading-relaxed mb-4">
           {t.chrome.tagline}
         </p>
         <LanguageSwitcher locale={locale} />
@@ -126,11 +126,11 @@ const year = new Date().getFullYear();
         <ul class="space-y-3">
           <li class={contactItemClass}>
             <Icon name="Mail" size={16} class="mt-0.5 shrink-0 opacity-50" />
-            <span>{SITE_CONTACT.email}</span>
+            <a href={`mailto:${SITE_CONTACT.email}`} class="hover:underline">{SITE_CONTACT.email}</a>
           </li>
           <li class={contactItemClass}>
             <Icon name="Phone" size={16} class="mt-0.5 shrink-0 opacity-50" />
-            <span>{SITE_CONTACT.phone}</span>
+            <a href={`tel:${SITE_CONTACT.phone.replace(/[^\d+]/g, "")}`} class="hover:underline">{SITE_CONTACT.phone}</a>
           </li>
           <li class={contactItemClass}>
             <Icon name="MapPin" size={16} class="mt-0.5 shrink-0 opacity-50" />
@@ -141,7 +141,7 @@ const year = new Date().getFullYear();
     </div>
 
     <div
-      class="border-t border-background/8 mt-14 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm opacity-35"
+      class="border-t border-background/8 mt-14 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm opacity-70"
     >
       <span>© {year} CoolerFit. {t.common.allRights}</span>
       <a href={lp("/privacy")} class="hover:opacity-70 transition-opacity duration-200">{t.common.privacy}</a>

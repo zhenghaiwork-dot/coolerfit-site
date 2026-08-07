@@ -1,0 +1,18 @@
+<svg viewBox="0 0 640 128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B8CE3"/>
+      <stop offset="100%" stop-color="#2EB89E"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon mark  same as logo.svg -->
+  <rect x="12" y="14" width="100" height="100" rx="21" fill="url(#g)"/>
+  <rect x="33" y="41" width="10" height="45" rx="5" fill="#FFFFFF"/>
+  <path d="M 40 52 Q 62 43 87 52" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M 40 64 Q 59 60 79 64" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M 40 76 Q 62 73 87 76" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <!-- Brand name  light for dark footer -->
+  <text x="134" y="78" font-family="'Plus Jakarta Sans', 'Segoe UI', sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">CoolerFit</text>
+  <!-- Tagline -->
+  <text x="135" y="104" font-family="'Inter', 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#7EC8F5" letter-spacing="4.5">CUSTOM COOLER COVERS</text>
+</svg>

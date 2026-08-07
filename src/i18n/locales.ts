@@ -49,12 +49,32 @@ export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
 
-/** Prefix a site path for a locale. English stays unprefixed. */
+/** Ensure directory URLs end with `/` (matches Astro `trailingSlash: 'always'`). */
+export function withTrailingSlash(path: string): string {
+  if (!path || path === "/") return "/";
+  const hashIdx = path.indexOf("#");
+  const queryIdx = path.indexOf("?");
+  let cut = path.length;
+  if (hashIdx !== -1) cut = Math.min(cut, hashIdx);
+  if (queryIdx !== -1) cut = Math.min(cut, queryIdx);
+  const base = path.slice(0, cut);
+  const suffix = path.slice(cut);
+  if (base === "/" || base.endsWith("/")) return path;
+  return `${base}/${suffix}`;
+}
+
+/** Prefix a site path for a locale. English stays unprefixed. Always trailing-slash. */
 export function localizedPath(locale: Locale, path: string): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
-  if (locale === defaultLocale) return normalized === "" ? "/" : normalized;
-  if (normalized === "/") return `/${locale}/`;
-  return `/${locale}${normalized}`;
+  let out: string;
+  if (locale === defaultLocale) {
+    out = normalized === "" ? "/" : normalized;
+  } else if (normalized === "/") {
+    out = `/${locale}/`;
+  } else {
+    out = `/${locale}${normalized}`;
+  }
+  return withTrailingSlash(out);
 }
 
 /** Detect locale from a URL pathname. */

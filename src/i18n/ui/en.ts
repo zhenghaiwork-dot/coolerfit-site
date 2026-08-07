@@ -152,6 +152,47 @@ export const en = {
   toast: {
     inquirySent: "Inquiry submitted",
     quoteSent: "Quote request sent",
+    fileTooLarge: "File too large",
+    fileTooLargeDesc: "Logo must be under 5MB.",
+    fillCustomization: "Please fill in at least one customization option",
+    customSent: "Customization request sent",
+    customSentDesc: "We'll prepare a quote based on your specifications within 24 hours.",
+    completeMailto: "Complete in your email app",
+    completeMailtoDesc: "Attach your logo file manually if needed, then send the message.",
+    couldNotSend: "Could not send request",
+    couldNotSendDesc: "Please use the contact form or email us directly.",
+    somethingWrong: "Something went wrong",
+    emailDirectly: "Please email us directly.",
+  },
+  resource: {
+    customManufacturing: "Custom Manufacturing",
+    customizeYourCover: "Customize Your Cover",
+    pickSpecArea: "Pick a specification area",
+    currentPage: "Current page",
+    explore: "Explore →",
+    materialCompare: "Quick material comparison",
+    materialCompareSub: "At-a-glance specs for common custom fabric codes.",
+    fabric: "Fabric",
+    bestFor: "Best for",
+    rating: "Rating",
+    onThisPage: "On this page",
+    needHelpSpec: "Need help specifying?",
+    needHelpSpecBody:
+      "Send dimensions, photos, or artwork — we confirm specs and reply within 24 hours. MOQ from 1 unit.",
+    deepDive: "Deep dive",
+    readFullGuide: "Read the full blog guide →",
+    relatedResources: "Related Resources",
+    readyToSpecify: "Ready to Specify Your Cover?",
+    readyToSpecifyBody:
+      "Send dimensions, material choice, opening layout, or logo artwork — we confirm specs and reply with a quote within 24 hours.",
+  },
+  contactPrefill: {
+    quotingFor: "Quoting for",
+    contextHint: "We’ll include this context with your request.",
+  },
+  categoryEmpty: {
+    heading: "No sample SKUs listed here yet",
+    body: "Every cover is still made to measure — send dimensions or photos for a quote.",
   },
 } as const;
 

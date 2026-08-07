@@ -59,7 +59,7 @@ export function toast({ title, description, variant = "default" }: ToastOptions)
   item.setAttribute("data-toast", "");
   item.dataset.state = "open";
   item.setAttribute("role", "status");
-  item.setAttribute("aria-live", "off");
+  item.setAttribute("aria-live", variant === "destructive" ? "assertive" : "polite");
   item.setAttribute("aria-atomic", "true");
   item.tabIndex = 0;
   item.className = `${BASE_CLASS} ${VARIANT_CLASS[variant]}`;

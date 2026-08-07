@@ -14,3 +14,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://aircoolercover.com/sitemap.xml
+# Astro also emits sitemap-index.xml; /sitemap.xml is the public entry (copied at build).

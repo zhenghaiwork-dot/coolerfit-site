@@ -6,7 +6,8 @@
   RewriteEngine On
   RewriteBase /
 
-  # Force HTTPS (uncomment after SSL is active)
+  # Force HTTPS — uncomment ONLY after SSL is active on the live domain.
+  # Leaving this on without a certificate can break the site (redirect loops / HTTPS errors).
   # RewriteCond %{HTTPS} off
   # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
@@ -16,6 +17,10 @@
   RewriteRule ^blog/how-to-install-cooler-cover/?$ /resources/installation [R=301,L]
   RewriteRule ^blog/how-to-clean-cooler-covers/?$ /resources/maintenance [R=301,L]
   RewriteRule ^blog/how-to-store-cooler-cover/?$ /resources/maintenance [R=301,L]
+
+  # Conventional /sitemap.xml (Astro also writes sitemap-index.xml; build copies to sitemap.xml)
+  # Fallback rewrite if only the index file is present on the host
+  RewriteRule ^sitemap\.xml$ /sitemap-index.xml [L]
 
   # Directory URLs without trailing slash → with slash (matches Astro directory output)
   RewriteCond %{REQUEST_FILENAME} !-f

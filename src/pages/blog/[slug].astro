@@ -1,21 +1,15 @@
 ---
-import BlogLayout from "@/layouts/BlogLayout.astro";
-import { blogPosts } from "@/data/blog";
+import BlogPostPage from "@/templates/BlogPostPage.astro";
+import { getBlogEntries, blogSlug, toBlogPost } from "@/lib/content";
 
-export function getStaticPaths() {
-  return blogPosts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
+export async function getStaticPaths() {
+  const entries = await getBlogEntries("en");
+  return entries.map((e) => ({
+    params: { slug: blogSlug(e) },
+    props: { post: toBlogPost(e) },
   }));
 }
 
 const { post } = Astro.props;
 ---
-
-<BlogLayout
-  post={post}
-  title={`${post.title} | CoolerFit Blog`}
-  description={post.excerpt}
-  canonicalPath={`/blog/${post.slug}`}
-  noIndex={post.noIndex !== false}
-/>
+<BlogPostPage locale="en" post={post} />

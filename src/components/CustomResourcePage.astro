@@ -29,12 +29,27 @@ const CUSTOM_PAGES = getCustomPages(t);
 const badgeIcon = pageMeta?.icon;
 const highlights = resource.sections[0]?.bullets?.slice(0, 3) ?? [];
 
-const materialRows: [string, string, string][] = [
-  ["600D Oxford + PU", "General outdoor, Southwest winter", "Water-resistant"],
-  ["900D + TPU", "Industrial / XL cabinets", "Heavy-duty WR"],
-  ["PVC-backed vinyl", "Coastal rain, flat rooftops", "Waterproof"],
-  ["Insulated laminate", "Cold-climate shutdown", "Thermal + WR"],
-];
+const materialRows: [string, string, string][] =
+  locale === "es"
+    ? [
+        ["600D Oxford + PU", "Exterior general, invierno suroeste", "Resistente al agua"],
+        ["900D + TPU", "Gabinetes industriales / XL", "WR reforzado"],
+        ["Vinilo con respaldo PVC", "Lluvia costera, azoteas planas", "Impermeable"],
+        ["Laminado aislante", "Apagado en clima frío", "Térmico + WR"],
+      ]
+    : locale === "ar"
+      ? [
+          ["600D Oxford + PU", "استخدام خارجي عام، شتاء جاف", "مقاوم للماء"],
+          ["900D + TPU", "خزائن صناعية / كبيرة جدًا", "مقاومة معزّزة"],
+          ["فينيل بظهر PVC", "أمطار ساحلية وأسقف مستوية", "مانع لتسرّب الماء"],
+          ["رقائق عازلة", "إيقاف التشغيل في المناخ البارد", "حراري + مقاوم للماء"],
+        ]
+      : [
+          ["600D Oxford + PU", "General outdoor, Southwest winter", "Water-resistant"],
+          ["900D + TPU", "Industrial / XL cabinets", "Heavy-duty WR"],
+          ["PVC-backed vinyl", "Coastal rain, flat rooftops", "Waterproof"],
+          ["Insulated laminate", "Cold-climate shutdown", "Thermal + WR"],
+        ];
 
 const deepDiveSlug =
   slug === "custom/materials"
@@ -74,7 +89,7 @@ const deepDiveSlug =
             badgeIcon ? (
               <div class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-card/80 backdrop-blur-sm px-3 py-1.5 text-xs font-semibold text-primary uppercase tracking-wider mb-4 shadow-xs">
                 <Icon name={badgeIcon} size={14} />
-                Custom Manufacturing
+                {t.resource.customManufacturing}
               </div>
             ) : null
           }
@@ -89,9 +104,11 @@ const deepDiveSlug =
           }
           <div class="mt-8 flex flex-wrap gap-3">
             <QuoteLink
+              locale={locale}
               quote={{
                 coverType: resource.title,
-                ref: lp(`/${resource.slug}`),
+                ref: `/${resource.slug}`,
+                locale,
               }}
               class={cn(buttonVariants({ size: "lg" }), "shadow-md")}
             >
@@ -131,8 +148,8 @@ const deepDiveSlug =
   <section class="container py-8 md:py-10">
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
       <div>
-        <p class="section-hd-label">Customize Your Cover</p>
-        <h2 class="text-xl font-display font-semibold text-foreground">Pick a specification area</h2>
+        <p class="section-hd-label">{t.resource.customizeYourCover}</p>
+        <h2 class="text-xl font-display font-semibold text-foreground">{t.resource.pickSpecArea}</h2>
       </div>
       <a href={lp("/custom-solutions")} class="text-sm font-medium text-primary hover:underline inline-flex items-center gap-1">
         {t.chrome.customOverview} <Icon name="ChevronRight" size={14} />
@@ -165,10 +182,10 @@ const deepDiveSlug =
               </p>
               <p class="mt-1 text-xs text-muted-foreground leading-relaxed line-clamp-2">{page.description}</p>
               {active ? (
-                <span class="mt-3 text-[10px] font-semibold uppercase tracking-wider text-primary">Current page</span>
+                <span class="mt-3 text-[10px] font-semibold uppercase tracking-wider text-primary">{t.resource.currentPage}</span>
               ) : (
                 <span class="mt-3 text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                  Explore →
+                  {t.resource.explore}
                 </span>
               )}
             </a>
@@ -232,21 +249,21 @@ const deepDiveSlug =
           slug === "custom/materials" ? (
             <div class="rounded-2xl border border-border/70 bg-card shadow-xs overflow-hidden">
               <div class="border-b border-border/60 px-6 py-4 md:px-8">
-                <h2 class="text-lg font-display font-semibold text-foreground">Quick material comparison</h2>
-                <p class="text-sm text-muted-foreground mt-1">At-a-glance specs for common custom fabric codes.</p>
+                <h2 class="text-lg font-display font-semibold text-foreground">{t.resource.materialCompare}</h2>
+                <p class="text-sm text-muted-foreground mt-1">{t.resource.materialCompareSub}</p>
               </div>
               <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                   <thead>
                     <tr class="border-b border-border bg-secondary/50">
-                      <th class="px-4 py-3 text-left font-semibold text-foreground" scope="col">
-                        Fabric
+                      <th class="px-4 py-3 text-start font-semibold text-foreground" scope="col">
+                        {t.resource.fabric}
                       </th>
-                      <th class="px-4 py-3 text-left font-semibold text-foreground" scope="col">
-                        Best for
+                      <th class="px-4 py-3 text-start font-semibold text-foreground" scope="col">
+                        {t.resource.bestFor}
                       </th>
-                      <th class="px-4 py-3 text-left font-semibold text-foreground" scope="col">
-                        Rating
+                      <th class="px-4 py-3 text-start font-semibold text-foreground" scope="col">
+                        {t.resource.rating}
                       </th>
                     </tr>
                   </thead>
@@ -254,7 +271,7 @@ const deepDiveSlug =
                     {materialRows.map(([fabric, use, rating]) => (
                       <tr class="border-b border-border last:border-0">
                         <th
-                          class="px-4 py-3 text-left font-medium text-foreground align-top whitespace-nowrap"
+                          class="px-4 py-3 text-start font-medium text-foreground align-top whitespace-nowrap"
                           scope="row"
                         >
                           {fabric}
@@ -274,8 +291,8 @@ const deepDiveSlug =
       <aside class="space-y-5 lg:sticky lg:top-28 lg:self-start">
         <Card class="border border-border/70 shadow-xs">
           <CardContent class="p-4">
-            <p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">On this page</p>
-            <nav class="space-y-1" aria-label="Page sections">
+            <p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">{t.resource.onThisPage}</p>
+            <nav class="space-y-1" aria-label={t.resource.onThisPage}>
               {
                 resource.sections.map((section, i) => (
                   <a
@@ -292,24 +309,25 @@ const deepDiveSlug =
 
         <Card class="border border-primary/20 bg-primary/[0.04] shadow-xs">
           <CardContent class="p-5">
-            <p class="font-display font-semibold text-foreground text-sm mb-2">Need help specifying?</p>
+            <p class="font-display font-semibold text-foreground text-sm mb-2">{t.resource.needHelpSpec}</p>
             <p class="text-xs text-muted-foreground leading-relaxed mb-4">
-              Send dimensions, photos, or artwork — we confirm specs and reply within 24 hours. MOQ from 1 unit.
+              {t.resource.needHelpSpecBody}
             </p>
             <QuoteLink
-              quote={{ coverType: resource.title, ref: `/${resource.slug}` }}
+              locale={locale}
+              quote={{ coverType: resource.title, ref: `/${resource.slug}`, locale }}
               class={cn(buttonVariants({ size: "sm" }), "w-full")}
             >
-              Request a Quote
+              {t.chrome.requestQuote}
             </QuoteLink>
           </CardContent>
         </Card>
 
         <Card class="border border-border/70 shadow-xs">
           <CardContent class="p-4">
-            <p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Deep dive</p>
+            <p class="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{t.resource.deepDive}</p>
             <a href={lp(`/blog/${deepDiveSlug}`)} class="text-sm font-medium text-primary hover:underline">
-              Read the full blog guide →
+              {t.resource.readFullGuide}
             </a>
           </CardContent>
         </Card>
@@ -320,7 +338,7 @@ const deepDiveSlug =
   {
     resource.relatedLinks.length > 0 ? (
       <div class="container mt-14 md:mt-16">
-        <h2 class="text-2xl font-display font-semibold text-foreground mb-5">Related Resources</h2>
+        <h2 class="text-2xl font-display font-semibold text-foreground mb-5">{t.resource.relatedResources}</h2>
         <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {resource.relatedLinks.map((link) => (
             <InternalLinkCard label={link.label} path={lp(link.path)} />
@@ -336,14 +354,14 @@ const deepDiveSlug =
         class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/10 pointer-events-none"
         aria-hidden="true"></div>
       <div class="relative">
-        <h2 class="text-2xl md:text-3xl font-display font-bold mb-3">Ready to Specify Your Cover?</h2>
+        <h2 class="text-2xl md:text-3xl font-display font-bold mb-3">{t.resource.readyToSpecify}</h2>
         <p class="text-background/75 max-w-xl mx-auto mb-8 text-sm md:text-base leading-relaxed">
-          Send dimensions, material choice, opening layout, or logo artwork — we confirm specs and reply with a quote
-          within 24 hours.
+          {t.resource.readyToSpecifyBody}
         </p>
         <div class="flex flex-wrap justify-center gap-3">
           <QuoteLink
-            quote={{ coverType: resource.title, ref: lp(`/${resource.slug}`) }}
+            locale={locale}
+            quote={{ coverType: resource.title, ref: `/${resource.slug}`, locale }}
             class={buttonVariants({ size: "lg", variant: "secondary" })}
           >
             {t.chrome.requestQuote}

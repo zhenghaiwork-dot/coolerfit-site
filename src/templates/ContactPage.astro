@@ -9,6 +9,7 @@ import CardContent from "@/components/ui/CardContent.astro";
 import Icon from "@/components/Icon.astro";
 import InquiryAntiSpamFields from "@/components/InquiryAntiSpamFields.astro";
 import { SITE_CONTACT } from "@/lib/site";
+import { parseQuotePrefill } from "@/lib/quote-link";
 import { localizedPath, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
 
@@ -19,6 +20,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = ui(locale);
 const lp = (p: string) => localizedPath(locale, p);
+const prefill = parseQuotePrefill(Astro.url.searchParams);
 ---
 
 <BaseLayout
@@ -36,10 +38,42 @@ const lp = (p: string) => localizedPath(locale, p);
         <p class="text-muted-foreground max-w-2xl mx-auto">{t.contact.subtext}</p>
       </div>
 
+      {
+        prefill && (
+          <div
+            class="mb-6 rounded-xl border border-primary/25 bg-primary/[0.06] px-5 py-4 text-start"
+            data-quote-banner
+          >
+            <p class="text-sm font-semibold text-foreground">
+              {t.contactPrefill.quotingFor}:{" "}
+              <span class="text-primary">{prefill.summary || prefill.productName || prefill.categoryName}</span>
+            </p>
+            <p class="text-xs text-muted-foreground mt-1">{t.contactPrefill.contextHint}</p>
+          </div>
+        )
+      }
+
       <Card class="border border-border/60 shadow-md">
         <CardContent class="p-8">
-          <form class="relative space-y-6" data-contact-form data-locale={locale}>
+          <form
+            class="relative space-y-6"
+            data-contact-form
+            data-locale={locale}
+            data-sending={t.contact.sending}
+            data-success={t.toast.quoteSent}
+          >
             <InquiryAntiSpamFields />
+            {
+              prefill && (
+                <>
+                  <input type="hidden" name="productSlug" value={prefill.productSlug} />
+                  <input type="hidden" name="productName" value={prefill.productName || prefill.summary} />
+                  <input type="hidden" name="coverType" value={prefill.coverType || prefill.categoryName} />
+                  <input type="hidden" name="categorySlug" value={prefill.categorySlug} />
+                  <input type="hidden" name="refPath" value={prefill.ref} />
+                </>
+              )
+            }
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="space-y-2">
                 <Label for="name">{t.form.name}</Label>
@@ -60,9 +94,22 @@ const lp = (p: string) => localizedPath(locale, p);
                 <Input id="phone" name="phone" placeholder={SITE_CONTACT.phone} maxlength={20} />
               </div>
             </div>
+            {
+              (prefill?.coverType || prefill?.categoryName || prefill?.productName) && (
+                <div class="space-y-2">
+                  <Label for="coverTypeDisplay">{t.form.coverType}</Label>
+                  <Input
+                    id="coverTypeDisplay"
+                    name="coverTypeDisplay"
+                    value={prefill.coverType || prefill.categoryName || prefill.productName}
+                    readonly
+                  />
+                </div>
+              )
+            }
             <div class="space-y-2">
               <Label for="details">{t.form.details}</Label>
-              <Textarea id="details" name="details" rows={5} maxlength={2000} />
+              <Textarea id="details" name="details" rows={5} maxlength={2000} value={prefill?.details ?? ""} />
             </div>
             <Button type="submit" size="lg" data-contact-submit>
               <Icon name="Send" class="me-2" size={18} />
@@ -87,6 +134,8 @@ const lp = (p: string) => localizedPath(locale, p);
     const submitLabel = form.querySelector<HTMLElement>("[data-submit-label]");
     const idle = submitLabel?.textContent ?? "Send";
     const locale = form.dataset.locale ?? "en";
+    const sending = form.dataset.sending ?? "Sending…";
+    const success = form.dataset.success ?? "Quote request sent";
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -101,7 +150,8 @@ const lp = (p: string) => localizedPath(locale, p);
         return;
       }
       if (submitButton) submitButton.disabled = true;
-      if (submitLabel) submitLabel.textContent = locale === "es" ? "Enviando…" : locale === "ar" ? "جارٍ الإرسال…" : "Sending…";
+      if (submitLabel) submitLabel.textContent = sending;
+      const refPath = value("refPath");
       try {
         const result = await submitInquiry(
           {
@@ -111,7 +161,10 @@ const lp = (p: string) => localizedPath(locale, p);
             phone: value("phone") || undefined,
             company: value("company") || undefined,
             message: value("details") || undefined,
-            pageUrl: window.location.href,
+            productSlug: value("productSlug") || undefined,
+            productName: value("productName") || undefined,
+            coverType: value("coverType") || value("coverTypeDisplay") || undefined,
+            pageUrl: refPath ? `${window.location.origin}${refPath}` : window.location.href,
           },
           null,
           {
@@ -121,10 +174,11 @@ const lp = (p: string) => localizedPath(locale, p);
         );
         if (result.ok) {
           toast({
-            title: locale === "es" ? "Solicitud enviada" : locale === "ar" ? "تم إرسال الطلب" : "Quote request sent",
+            title: success,
             description: `→ ${SITE_CONTACT.email}`,
           });
           form.reset();
+          document.querySelector("[data-quote-banner]")?.remove();
         } else {
           toast({ title: result.error ?? "Error", variant: "destructive" });
         }

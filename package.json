@@ -8,7 +8,7 @@
   "scripts": {
     "sync:content": "tsx scripts/sync-data-from-mdx.ts",
     "dev": "npm run sync:content && astro dev",
-    "build": "npm run sync:content && astro build",
+    "build": "npm run sync:content && astro build && node scripts/alias-sitemap.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

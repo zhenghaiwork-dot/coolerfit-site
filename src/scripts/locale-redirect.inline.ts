@@ -4,9 +4,11 @@
  *
  * Rules:
  * - Skip bots / prerender hints
+ * - Skip when html has data-skip-lang-redirect (404 error pages)
  * - Honor explicit cookie preference (set by language switcher or first detect)
  * - On first visit only: map navigator.languages → en | es | ar and redirect once
  * - Preserve path across locales (en unprefixed, es/ar prefixed)
+ * - Target URLs always use trailing slash (matches Astro trailingSlash: always)
  */
 export const localeRedirectInlineScript = `(function(){
   try {
@@ -17,6 +19,8 @@ export const localeRedirectInlineScript = `(function(){
     if ((location.search || "").indexOf("nolang=1") !== -1) return;
 
     var html = document.documentElement;
+    if (html.getAttribute("data-skip-lang-redirect") === "1") return;
+
     var current = html.getAttribute("data-locale") || "en";
     var path = location.pathname || "/";
 
@@ -34,11 +38,26 @@ export const localeRedirectInlineScript = `(function(){
       return pathname.replace(new RegExp("^/" + loc), "") || "/";
     }
 
+    function withSlash(p){
+      if (!p || p === "/") return "/";
+      var q = p.indexOf("?");
+      var h = p.indexOf("#");
+      var cut = p.length;
+      if (q !== -1) cut = Math.min(cut, q);
+      if (h !== -1) cut = Math.min(cut, h);
+      var base = p.slice(0, cut);
+      var suf = p.slice(cut);
+      if (base === "/" || /\\/$/.test(base)) return p;
+      return base + "/" + suf;
+    }
+
     function withLocale(locale, bare){
       var n = bare.charAt(0) === "/" ? bare : "/" + bare;
-      if (locale === "en") return n === "" ? "/" : n;
-      if (n === "/") return "/" + locale + "/";
-      return "/" + locale + n;
+      var out;
+      if (locale === "en") out = n === "" ? "/" : n;
+      else if (n === "/") out = "/" + locale + "/";
+      else out = "/" + locale + n;
+      return withSlash(out);
     }
 
     function detect(){
@@ -85,10 +104,8 @@ export const localeRedirectInlineScript = `(function(){
 
     if (pref === current) return;
 
-    // Only auto-jump on first visit (browser detect). Later visits follow cookie
-    // only when arriving on a mismatched URL (e.g. shared EN link after choosing ES).
     var target = withLocale(pref, strip(path));
-    if (target === path) return;
+    if (target === path || withSlash(path) === target) return;
     var q = location.search || "";
     var h = location.hash || "";
     location.replace(target + q + h);

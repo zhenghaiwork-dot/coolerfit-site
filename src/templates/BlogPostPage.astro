@@ -17,6 +17,6 @@ const lp = (p: string) => localizedPath(locale, p);
   title={`${post.title} | CoolerFit`}
   description={post.excerpt}
   canonicalPath={lp(`/blog/${post.slug}`)}
-  noIndex={post.noIndex !== false}
+  noIndex={Boolean(post.noIndex)}
   locale={locale}
 />

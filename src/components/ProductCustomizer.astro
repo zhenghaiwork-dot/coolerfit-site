@@ -88,6 +88,18 @@ const openingOptions = [
   data-customizer
   data-product-name={productName}
   data-product-slug={productSlug}
+  data-msg-file-large={t.toast.fileTooLarge}
+  data-msg-file-large-desc={t.toast.fileTooLargeDesc}
+  data-msg-fill={t.toast.fillCustomization}
+  data-msg-sending={t.contact.sending}
+  data-msg-sent={t.toast.customSent}
+  data-msg-sent-desc={t.toast.customSentDesc}
+  data-msg-mailto={t.toast.completeMailto}
+  data-msg-mailto-desc={t.toast.completeMailtoDesc}
+  data-msg-fail={t.toast.couldNotSend}
+  data-msg-fail-desc={t.toast.couldNotSendDesc}
+  data-msg-error={t.toast.somethingWrong}
+  data-msg-error-desc={t.toast.emailDirectly}
 >
   <CardContent class="p-6 md:p-8">
     <div class="mb-6">
@@ -281,6 +293,20 @@ const openingOptions = [
 
   const productName = root.dataset.productName ?? "";
   const productSlug = root.dataset.productSlug ?? "";
+  const msg = {
+    fileLarge: root.dataset.msgFileLarge ?? "File too large",
+    fileLargeDesc: root.dataset.msgFileLargeDesc ?? "Logo must be under 5MB.",
+    fill: root.dataset.msgFill ?? "Please fill in at least one customization option",
+    sending: root.dataset.msgSending ?? "Sending…",
+    sent: root.dataset.msgSent ?? "Customization request sent",
+    sentDesc: root.dataset.msgSentDesc ?? "",
+    mailto: root.dataset.msgMailto ?? "Complete in your email app",
+    mailtoDesc: root.dataset.msgMailtoDesc ?? "",
+    fail: root.dataset.msgFail ?? "Could not send request",
+    failDesc: root.dataset.msgFailDesc ?? "",
+    error: root.dataset.msgError ?? "Something went wrong",
+    errorDesc: root.dataset.msgErrorDesc ?? "",
+  };
 
   const colorInput = form.querySelector<HTMLInputElement>("[data-color-input]")!;
   const colorLabel = form.querySelector<HTMLElement>("[data-color-label]")!;
@@ -346,7 +372,7 @@ const openingOptions = [
     const file = logoInput.files?.[0];
     if (!file) return;
     if (file.size > 5 * 1024 * 1024) {
-      toast({ title: "File too large", description: "Logo must be under 5MB.", variant: "destructive" });
+      toast({ title: msg.fileLarge, description: msg.fileLargeDesc, variant: "destructive" });
       logoInput.value = "";
       return;
     }
@@ -409,12 +435,12 @@ const openingOptions = [
       !value("notes") &&
       !value("openingDesign")
     ) {
-      toast({ title: "Please fill in at least one customization option", variant: "destructive" });
+      toast({ title: msg.fill, variant: "destructive" });
       return;
     }
 
     submitButton.disabled = true;
-    submitLabel.textContent = "Sending…";
+    submitLabel.textContent = msg.sending;
 
     try {
       const result = await submitInquiry(
@@ -445,25 +471,25 @@ const openingOptions = [
 
       if (result.ok && result.method === "api") {
         toast({
-          title: "Customization request sent",
-          description: "We'll prepare a quote based on your specifications within 24 hours.",
+          title: msg.sent,
+          description: msg.sentDesc,
         });
         const notes = field("notes");
         if (notes) notes.value = "";
       } else if (result.ok && result.method === "mailto") {
         toast({
-          title: "Complete in your email app",
-          description: "Attach your logo file manually if needed, then send the message.",
+          title: msg.mailto,
+          description: msg.mailtoDesc,
         });
       } else {
         toast({
-          title: "Could not send request",
-          description: result.error ?? "Please use the contact form or email us directly.",
+          title: msg.fail,
+          description: result.error ?? msg.failDesc,
           variant: "destructive",
         });
       }
     } catch {
-      toast({ title: "Something went wrong", description: "Please email us directly.", variant: "destructive" });
+      toast({ title: msg.error, description: msg.errorDesc, variant: "destructive" });
     } finally {
       submitButton.disabled = false;
       submitLabel.textContent = idleLabel;

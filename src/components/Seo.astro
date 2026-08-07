@@ -5,7 +5,14 @@
  */
 import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/site";
 import { toAbsoluteUrl, truncateMetaDescription, type JsonLd } from "@/lib/seo";
-import { defaultLocale, localeMarkets, locales, localizedPath, type Locale } from "@/i18n/locales";
+import {
+  defaultLocale,
+  localeMarkets,
+  locales,
+  localizedPath,
+  stripLocalePrefix,
+  type Locale,
+} from "@/i18n/locales";
 
 interface Props {
   title: string;
@@ -30,7 +37,8 @@ const {
   alternatePath,
 } = Astro.props;
 
-const pathForAlternates = alternatePath ?? canonicalPath ?? "/";
+const rawAlternate = alternatePath ?? canonicalPath ?? "/";
+const pathForAlternates = stripLocalePrefix(rawAlternate) || "/";
 const canonical = canonicalPath ? toAbsoluteUrl(canonicalPath) : undefined;
 const ogImage = toAbsoluteUrl(imageUrl || DEFAULT_OG_IMAGE);
 const metaDescription = description ? truncateMetaDescription(description) : undefined;
@@ -53,6 +61,11 @@ const metaDescription = description ? truncateMetaDescription(description) : und
 
 <meta property="og:site_name" content={SITE_NAME} />
 <meta property="og:locale" content={localeMarkets[locale].ogLocale} />
+{
+  locales
+    .filter((code) => code !== locale)
+    .map((code) => <meta property="og:locale:alternate" content={localeMarkets[code].ogLocale} />)
+}
 <meta property="og:title" content={title} />
 {metaDescription && <meta property="og:description" content={metaDescription} />}
 {canonical && <meta property="og:url" content={canonical} />}

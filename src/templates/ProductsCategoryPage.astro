@@ -81,7 +81,7 @@ const relatedPosts = (
       </div>
 
       {
-        categoryProducts.length > 0 && (
+        categoryProducts.length > 0 ? (
           <div class="mb-12">
             <h2 class="text-2xl font-display font-semibold text-foreground mb-6">{t.chrome.productsInCategory}</h2>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -109,6 +109,11 @@ const relatedPosts = (
                 </Card>
               ))}
             </div>
+          </div>
+        ) : (
+          <div class="mb-12 rounded-2xl border border-border/60 bg-secondary/40 px-6 py-10 text-center">
+            <h2 class="text-xl font-display font-semibold text-foreground mb-2">{t.categoryEmpty.heading}</h2>
+            <p class="text-sm text-muted-foreground max-w-md mx-auto">{t.categoryEmpty.body}</p>
           </div>
         )
       }
