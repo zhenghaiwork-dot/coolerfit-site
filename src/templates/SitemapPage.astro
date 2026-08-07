@@ -1,0 +1,125 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import {
+  blogSlug,
+  categorySlug,
+  featureSlug,
+  getBlogEntries,
+  getCategoryEntries,
+  getFeatureEntries,
+  getProductEntries,
+  getResourceEntries,
+  productSlug,
+  resourceSlug,
+} from "@/lib/content";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const t = ui(locale);
+const lp = (path: string) => localizedPath(locale, path);
+
+type SitemapLink = { label: string; path: string };
+
+const [categories, products, posts, features, resources] = await Promise.all([
+  getCategoryEntries(locale),
+  getProductEntries(locale),
+  getBlogEntries(locale),
+  getFeatureEntries(locale),
+  getResourceEntries(locale),
+]);
+
+const mainPages: SitemapLink[] = [
+  { label: t.common.home, path: lp("/") },
+  { label: t.nav.products, path: lp("/products") },
+  { label: t.nav.customSolutions, path: lp("/custom-solutions") },
+  { label: t.nav.about, path: lp("/about") },
+  { label: t.nav.contact, path: lp("/contact") },
+  { label: t.common.privacy, path: lp("/privacy") },
+  { label: t.nav.blog, path: lp("/blog") },
+];
+
+const sections: { title: string; links: SitemapLink[] }[] = [
+  { title: t.chrome.mainPages, links: mainPages },
+  {
+    title: t.chrome.productCategories,
+    links: categories.map((c) => ({
+      label: c.data.title,
+      path: lp(`/products/${categorySlug(c)}`),
+    })),
+  },
+  {
+    title: t.nav.products,
+    links: products.map((p) => ({
+      label: p.data.name,
+      path: lp(`/product/${productSlug(p)}`),
+    })),
+  },
+  {
+    title: t.chrome.featuresGroup,
+    links: features.map((f) => ({
+      label: f.data.title,
+      path: lp(`/features/${featureSlug(f)}`),
+    })),
+  },
+  {
+    title: t.nav.resources,
+    links: resources.map((r) => ({
+      label: r.data.title,
+      path: lp(`/${resourceSlug(r)}`),
+    })),
+  },
+  {
+    title: t.nav.blog,
+    links: posts.map((p) => ({
+      label: p.data.title,
+      path: lp(`/blog/${blogSlug(p)}`),
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={`${t.common.siteMap} | CoolerFit`}
+  description={t.chrome.sitemapIntro}
+  canonicalPath={lp("/sitemap")}
+  alternatePath="/sitemap"
+  locale={locale}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container max-w-5xl">
+      <Breadcrumb class="mb-6" items={[{ label: t.common.home, href: lp("/") }, { label: t.common.siteMap }]} />
+
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">{t.common.siteMap}</h1>
+      <p class="text-muted-foreground mb-10 max-w-2xl">
+        {t.chrome.sitemapIntro}
+        {" "}
+        <a href="/sitemap.xml" class="text-primary hover:underline">{t.chrome.xmlSitemap}</a>.
+      </p>
+
+      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          sections.map((section) => (
+            <section>
+              <h2 class="text-lg font-display font-semibold text-foreground mb-3">{section.title}</h2>
+              <ul class="space-y-1.5">
+                {section.links.map((link) => (
+                  <li>
+                    <a href={link.path} class="text-sm text-muted-foreground hover:text-primary transition-colors">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</BaseLayout>

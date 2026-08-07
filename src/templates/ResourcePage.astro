@@ -1,0 +1,124 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import CustomResourcePage from "@/components/CustomResourcePage.astro";
+import Icon from "@/components/Icon.astro";
+import InternalLinkCard from "@/components/InternalLinkCard.astro";
+import QuoteLink from "@/components/QuoteLink.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import type { ResourcePage as ResourceData } from "@/data/resources";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale?: Locale;
+  resource: ResourceData;
+}
+
+const { locale = defaultLocale, resource } = Astro.props;
+const t = ui(locale);
+const lp = (path: string) => localizedPath(locale, path);
+
+const slug = resource.slug;
+const isCustom = slug.startsWith("custom/");
+const parts = slug.split("/");
+
+const crumbs: { label: string; href?: string }[] = [{ label: t.common.home, href: lp("/") }];
+if (parts.length > 1) {
+  const section = parts[0];
+  const sectionHref = section === "resources" ? lp("/blog") : lp(`/${section}`);
+  const sectionLabel =
+    section === "custom"
+      ? t.nav.custom
+      : section === "resources"
+        ? t.nav.resources
+        : section === "materials"
+          ? t.chrome.materialsGuide
+          : section === "sizes"
+            ? t.chrome.sizeGuide
+            : section.charAt(0).toUpperCase() + section.slice(1);
+  crumbs.push({ label: sectionLabel, href: sectionHref });
+}
+crumbs.push({ label: resource.title });
+---
+
+<BaseLayout
+  title={`${resource.title} | CoolerFit`}
+  description={resource.description}
+  canonicalPath={lp(`/${resource.slug}`)}
+  alternatePath={`/${resource.slug}`}
+  locale={locale}
+>
+  {
+    isCustom ? (
+      <CustomResourcePage resource={resource} slug={slug} locale={locale} />
+    ) : (
+      <div class="pt-24 md:pt-32 pb-20">
+        <div class="container max-w-4xl">
+          <Breadcrumb class="mb-6" items={crumbs} />
+
+          <header class="mb-10 border-b border-border pb-8">
+            <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">{resource.title}</h1>
+            <p class="text-lg text-muted-foreground">{resource.description}</p>
+            {resource.intro ? <p class="mt-4 text-muted-foreground leading-relaxed">{resource.intro}</p> : null}
+          </header>
+
+          <div class="space-y-10">
+            {resource.sections.map((section) => (
+              <section>
+                <h2 class="text-2xl font-display font-semibold text-foreground mb-3">{section.heading}</h2>
+                <p class="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
+                {section.bullets && section.bullets.length > 0 ? (
+                  <ul class="space-y-2">
+                    {section.bullets.map((item) => (
+                      <li class="flex items-start gap-2 text-sm text-foreground">
+                        <Icon name="CheckCircle" size={16} class="text-primary shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </section>
+            ))}
+          </div>
+
+          {resource.deepDiveLinks && resource.deepDiveLinks.length > 0 && (
+            <div class="mt-14 pt-10 border-t border-border">
+              <h2 class="text-2xl font-display font-semibold text-foreground mb-2">{t.chrome.goDeeper}</h2>
+              <div class="grid gap-3 sm:grid-cols-2">
+                {resource.deepDiveLinks.map((link) => (
+                  <InternalLinkCard label={link.label} path={lp(link.path)} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {resource.relatedLinks.length > 0 && (
+            <div class="mt-14 pt-10 border-t border-border">
+              <h2 class="text-2xl font-display font-semibold text-foreground mb-4">{t.chrome.relatedResources}</h2>
+              <div class="grid gap-3 sm:grid-cols-2">
+                {resource.relatedLinks.map((link) => (
+                  <InternalLinkCard label={link.label} path={lp(link.path)} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div class="mt-12 p-8 bg-secondary rounded-xl text-center">
+            <h3 class="font-display font-semibold text-foreground mb-2">{t.chrome.needQuote}</h3>
+            <p class="text-sm text-muted-foreground mb-4">{t.chrome.needQuoteBody}</p>
+            <QuoteLink
+              quote={{
+                coverType: resource.title,
+                ref: lp(`/${resource.slug}`),
+              }}
+              class={buttonVariants()}
+            >
+              {t.chrome.requestQuote}
+            </QuoteLink>
+          </div>
+        </div>
+      </div>
+    )
+  }
+</BaseLayout>

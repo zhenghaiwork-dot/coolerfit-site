@@ -12,12 +12,15 @@ export type CategoryEntry = CollectionEntry<"categories">;
 export type PageEntry = CollectionEntry<"pages">;
 
 function localeOf(id: string): string {
-  return id.split("/")[0] ?? "en";
+  const normalized = id.replace(/\\/g, "/");
+  return normalized.split("/")[0] ?? "en";
 }
 
 function slugOf(id: string): string {
-  const parts = id.split("/");
-  return parts.slice(1).join("/");
+  const normalized = id.replace(/\\/g, "/").replace(/\.mdx$/i, "");
+  const parts = normalized.split("/");
+  // Prefer locale/slug…; if id has no locale prefix, use whole id as slug.
+  return parts.length > 1 ? parts.slice(1).join("/") : parts[0] ?? "";
 }
 
 function inLocale<T extends { id: string }>(entries: T[], locale: Locale) {
@@ -93,6 +96,19 @@ export function resourceSlug(entry: ResourceEntry) {
   return slugOf(entry.id);
 }
 
+/** Shape expected by resource page templates / CustomResourcePage. */
+export function toResourcePage(entry: ResourceEntry) {
+  return {
+    slug: resourceSlug(entry),
+    title: entry.data.title,
+    description: entry.data.description,
+    intro: undefined as string | undefined,
+    sections: entry.data.sections,
+    relatedLinks: entry.data.relatedLinks,
+    deepDiveLinks: entry.data.deepDiveLinks,
+  };
+}
+
 export async function getFeatureEntries(locale: Locale = "en") {
   return inLocale(await getCollection("features"), locale);
 }
@@ -103,6 +119,21 @@ export async function getFeatureBySlug(slug: string, locale: Locale = "en") {
 
 export function featureSlug(entry: FeatureEntry) {
   return slugOf(entry.id);
+}
+
+/** Shape expected by feature page templates. */
+export function toFeaturePage(entry: FeatureEntry) {
+  return {
+    slug: featureSlug(entry),
+    title: entry.data.title,
+    description: entry.data.description,
+    intro: undefined as string | undefined,
+    benefits: entry.data.benefits,
+    sections: entry.data.sections,
+    faqs: entry.data.faqs,
+    relatedProducts: entry.data.relatedProducts,
+    relatedBlogSlugs: entry.data.relatedBlogSlugs,
+  };
 }
 
 export async function getProductEntries(locale: Locale = "en") {

@@ -20,11 +20,11 @@ const { locale, product } = Astro.props;
 const t = ui(locale);
 const lp = (p: string) => localizedPath(locale, p);
 const gallery = getProductGallery(product);
-const pageH1 = productDetailPageH1(product.name);
+const pageH1 = productDetailPageH1(product.name, locale);
 ---
 
 <BaseLayout
-  title={productDetailMetaTitle(product.name)}
+  title={productDetailMetaTitle(product.name, locale)}
   description={product.summary}
   canonicalPath={lp(`/product/${product.slug}`)}
   alternatePath={`/product/${product.slug}`}
@@ -64,7 +64,7 @@ const pageH1 = productDetailPageH1(product.name);
         </div>
       </div>
       <div class="mt-12">
-        <ProductCustomizer productName={product.name} productSlug={product.slug} />
+        <ProductCustomizer locale={locale} productName={product.name} productSlug={product.slug} />
       </div>
     </div>
   </div>

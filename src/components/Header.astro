@@ -11,8 +11,9 @@ import Icon from "@/components/Icon.astro";
 import Button from "@/components/ui/Button.astro";
 import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
 import { cn } from "@/lib/utils";
-import { CUSTOM_PAGES } from "@/lib/custom-pages";
-import { navLinks, isNavActive } from "@/lib/nav";
+import { getCustomPages } from "@/lib/custom-pages";
+import { localizeNavLinks, isNavActive } from "@/lib/nav";
+import { categorySlug, getBlogEntries, getCategoryEntries, blogSlug } from "@/lib/content";
 import { defaultLocale, localizedPath, stripLocalePrefix, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
 
@@ -24,6 +25,21 @@ const { locale = defaultLocale } = Astro.props;
 const t = ui(locale);
 const pathname = stripLocalePrefix(Astro.url.pathname);
 const lp = (path: string) => localizedPath(locale, path);
+
+const [categories, posts] = await Promise.all([getCategoryEntries(locale), getBlogEntries(locale)]);
+const titles: Record<string, string> = {};
+for (const c of categories) {
+  const slug = categorySlug(c);
+  titles[`cat:${slug}`] = c.data.title;
+  titles[`/products/${slug}`] = c.data.title;
+}
+for (const p of posts) {
+  const slug = blogSlug(p);
+  titles[`blog:${slug}`] = p.data.title;
+  titles[`/blog/${slug}`] = p.data.title;
+}
+const links = localizeNavLinks(t, titles);
+const customPages = getCustomPages(t);
 
 const panelLinkClass =
   "block text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-md px-2 py-1.5 -mx-2 transition-all duration-150";
@@ -50,8 +66,9 @@ const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppe
 
     <nav class="hidden lg:flex items-center gap-0.5">
       {
-        navLinks.map((link) => {
+        links.map((link) => {
           const active = isNavActive(link, pathname);
+          const isCustom = link.path === "/custom-solutions";
           return (
             <div class="relative" data-nav-item data-label={link.label}>
               <a
@@ -71,13 +88,13 @@ const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppe
               {link.dropdown && (
                 <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2" data-nav-panel hidden>
                   <div class="animate-fade-in-up-sm">
-                    {link.label === "Custom" ? (
+                    {isCustom ? (
                       <div class="bg-card border border-border/60 rounded-xl shadow-lg shadow-foreground/5 p-5 min-w-[640px] backdrop-blur-xl">
                         <div class="grid grid-cols-2 gap-6">
                           <div>
-                            <p class={groupHeadingClass}>Customization</p>
+                            <p class={groupHeadingClass}>{t.chrome.customization}</p>
                             <div class="grid gap-2">
-                              {CUSTOM_PAGES.map((page) => (
+                              {customPages.map((page) => (
                                 <a
                                   href={lp(`/${page.slug}`)}
                                   class="group flex items-start gap-3 rounded-lg border border-transparent hover:border-primary/20 hover:bg-primary/[0.04] px-3 py-2.5 transition-all duration-150"
@@ -103,7 +120,7 @@ const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppe
                             </div>
                           </div>
                           <div>
-                            <p class={groupHeadingClass}>Order Options</p>
+                            <p class={groupHeadingClass}>{t.chrome.orderOptions}</p>
                             <div class="space-y-0.5 mb-4">
                               {link.dropdown[1]?.items.map((item) => (
                                 <a href={lp(item.path)} class={panelLinkClass}>
@@ -116,10 +133,10 @@ const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppe
                               class="block rounded-xl bg-secondary border border-border/60 p-4 hover:border-primary/25 hover:shadow-xs transition-all group"
                             >
                               <p class="text-sm font-semibold text-foreground group-hover:text-primary">
-                                Custom Solutions Overview
+                                {t.chrome.customOverview}
                               </p>
                               <p class="text-xs text-muted-foreground mt-1 leading-relaxed">
-                                Dimensions, materials, openings, colors, and logo — all in one place.
+                                {t.chrome.customOverviewDesc}
                               </p>
                             </a>
                           </div>
@@ -176,8 +193,9 @@ const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppe
   >
     <nav class="container flex flex-col gap-0.5 py-4">
       {
-        navLinks.map((link) => {
+        links.map((link) => {
           const active = isNavActive(link, pathname);
+          const isCustom = link.path === "/custom-solutions";
           return (
             <div data-mobile-item data-label={link.label}>
               <div class="flex items-center">
@@ -203,14 +221,14 @@ const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppe
               </div>
               {link.dropdown && (
                 <div class="pl-4 pb-3 space-y-3 animate-fade-in-up-sm" data-mobile-panel hidden>
-                  {link.label === "Custom" ? (
+                  {isCustom ? (
                     <Fragment>
                       <p class="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mb-1 px-2">
-                        Customization
+                        {t.chrome.customization}
                       </p>
-                      {CUSTOM_PAGES.map((page) => (
+                      {customPages.map((page) => (
                         <a
-                          href={`/${page.slug}`}
+                          href={lp(`/${page.slug}`)}
                           class="flex items-center gap-3 mx-2 mb-1 rounded-lg border border-border/60 bg-secondary/40 px-3 py-2.5 hover:border-primary/30 hover:bg-primary/[0.04] transition-colors"
                         >
                           <span class="flex h-8 w-8 items-center justify-center rounded-md bg-card text-primary shrink-0">
@@ -223,7 +241,7 @@ const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppe
                         </a>
                       ))}
                       <p class="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest mb-1 px-2 pt-2">
-                        Order Options
+                        {t.chrome.orderOptions}
                       </p>
                       {link.dropdown[1]?.items.map((item) => (
                         <a href={lp(item.path)} class={mobileLinkClass}>

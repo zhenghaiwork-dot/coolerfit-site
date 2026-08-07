@@ -1,5 +1,6 @@
 import { getProductItemBySlug } from "@/data/product-items";
 import { getProductBySlug } from "@/data/products";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
 
 export type QuoteLinkInput = {
   /** Product SKU slug */
@@ -13,8 +14,10 @@ export type QuoteLinkInput = {
   coverType?: string;
   /** Pre-fill custom requirements */
   details?: string;
-  /** Source page path, e.g. /product/foo */
+  /** Source page path, e.g. /product/foo (unprefixed; will be localized) */
   ref?: string;
+  /** Target contact locale */
+  locale?: Locale;
 };
 
 export type QuotePrefill = {
@@ -40,6 +43,7 @@ const emptyPrefill = (): Omit<QuotePrefill, "summary"> => ({
 });
 
 export function buildQuoteUrl(input: QuoteLinkInput = {}): string {
+  const locale = input.locale ?? defaultLocale;
   const params = new URLSearchParams();
   if (input.productSlug) params.set("product", input.productSlug);
   if (input.productName) params.set("productName", input.productName);
@@ -47,9 +51,13 @@ export function buildQuoteUrl(input: QuoteLinkInput = {}): string {
   if (input.categoryName) params.set("categoryName", input.categoryName);
   if (input.coverType) params.set("coverType", input.coverType);
   if (input.details) params.set("details", input.details);
-  if (input.ref) params.set("ref", input.ref);
+  if (input.ref) {
+    // Prefer unprefixed refs; if already localized, store as-is.
+    params.set("ref", input.ref);
+  }
   const q = params.toString();
-  return q ? `/contact?${q}` : "/contact";
+  const contact = localizedPath(locale, "/contact");
+  return q ? `${contact}?${q}` : contact;
 }
 
 function buildSummary(fields: Omit<QuotePrefill, "summary">): string {

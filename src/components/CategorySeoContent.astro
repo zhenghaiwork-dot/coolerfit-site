@@ -6,13 +6,16 @@
 import Icon from "@/components/Icon.astro";
 import FaqAccordion from "@/components/ui/FaqAccordion.astro";
 import type { ProductCategory } from "@/data/products";
+import { defaultLocale, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
 
 interface Props {
   product: ProductCategory;
+  locale?: Locale;
 }
 
-const { product } = Astro.props;
-
+const { product, locale = defaultLocale } = Astro.props;
+const t = ui(locale);
 const seo = product.seoContent;
 
 const faqJsonLd =
@@ -37,7 +40,9 @@ const faqJsonLd =
       class="mb-12 border-t border-border pt-12"
     >
       <article class="max-w-3xl mx-auto">
-        <h2 class="text-2xl font-display font-semibold text-foreground mb-4">About {product.title}</h2>
+        <h2 class="text-2xl font-display font-semibold text-foreground mb-4">
+          {t.chrome.aboutPrefix} {product.title}
+        </h2>
         <p class="text-muted-foreground mb-8 leading-relaxed">{seo.intro}</p>
 
         {seo.highlights.length > 0 && (
@@ -53,7 +58,7 @@ const faqJsonLd =
 
         {seo.faqs.length > 0 && (
           <Fragment>
-            <h3 class="text-xl font-display font-semibold text-foreground mb-4">Frequently Asked Questions</h3>
+            <h3 class="text-xl font-display font-semibold text-foreground mb-4">{t.chrome.faqs}</h3>
             <FaqAccordion faqs={seo.faqs} />
           </Fragment>
         )}

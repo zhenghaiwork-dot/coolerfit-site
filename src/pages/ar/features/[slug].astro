@@ -1,0 +1,15 @@
+---
+import FeatureDetailPage from "@/templates/FeatureDetailPage.astro";
+import { getFeatureEntries, featureSlug, toFeaturePage } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const entries = await getFeatureEntries("ar");
+  return entries.map((e) => ({
+    params: { slug: featureSlug(e) },
+    props: { feature: toFeaturePage(e) },
+  }));
+}
+
+const { feature } = Astro.props;
+---
+<FeatureDetailPage locale="ar" feature={feature} />

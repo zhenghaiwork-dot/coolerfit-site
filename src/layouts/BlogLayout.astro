@@ -1,10 +1,6 @@
 ---
 /**
  * Article chrome for /blog/:slug — breadcrumb, article column and sidebar.
- *
- * The React version was a plain component rendered underneath `<Seo>`; here it
- * owns the page shell instead, so the SEO values still come from the page and
- * are forwarded straight to `BaseLayout`.
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Card from "@/components/ui/Card.astro";
@@ -16,9 +12,16 @@ import QuoteLink from "@/components/QuoteLink.astro";
 import { buttonVariants } from "@/components/ui/button-variants";
 import { cn } from "@/lib/utils";
 import type { BlogPost } from "@/data/blog";
-import { getClusterPosts, getBlogBySlug, getBlogReadingMinutes } from "@/data/blog";
+import {
+  blogSlug,
+  getBlogBySlug,
+  getBlogReadingMinutes,
+  getClusterPosts,
+  toBlogPost,
+} from "@/lib/content";
 import type { JsonLd } from "@/lib/seo";
-import { defaultLocale, type Locale } from "@/i18n/locales";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
 
 interface Props {
   post: BlogPost;
@@ -31,17 +34,27 @@ interface Props {
 }
 
 const { post, title, description, canonicalPath, jsonLd, noIndex, locale = defaultLocale } = Astro.props;
+const t = ui(locale);
+const lp = (path: string) => localizedPath(locale, path);
 
-const pillar = post.pillarSlug ? getBlogBySlug(post.pillarSlug) : null;
-const siblings = post.pillarSlug ? getClusterPosts(post.pillarSlug).filter((p) => p.slug !== post.slug) : [];
-const clusters = post.isPillar && post.clusterSlugs ? getClusterPosts(post.slug) : [];
-const readingMinutes = getBlogReadingMinutes(post);
+const pillarEntry = post.pillarSlug ? await getBlogBySlug(post.pillarSlug, locale) : null;
+const pillar = pillarEntry ? toBlogPost(pillarEntry) : null;
+const siblingEntries = post.pillarSlug
+  ? (await getClusterPosts(post.pillarSlug, locale)).filter((p) => blogSlug(p) !== post.slug)
+  : [];
+const siblings = siblingEntries.map(toBlogPost);
+const clusterEntries =
+  post.isPillar && post.clusterSlugs ? await getClusterPosts(post.slug, locale) : [];
+const clusters = clusterEntries.map(toBlogPost);
+
+const readingEntry = await getBlogBySlug(post.slug, locale);
+const readingMinutes = readingEntry ? getBlogReadingMinutes(readingEntry) : 1;
 const showIntro = Boolean(post.intro?.trim()) && post.intro!.trim() !== post.excerpt.trim();
 
 const crumbs: { label: string; href?: string }[] = [
-  { label: "Home", href: "/" },
-  { label: "Blog", href: "/blog" },
-  ...(pillar ? [{ label: pillar.title, href: `/blog/${pillar.slug}` }] : []),
+  { label: t.common.home, href: lp("/") },
+  { label: t.nav.blog, href: lp("/blog") },
+  ...(pillar ? [{ label: pillar.title, href: lp(`/blog/${pillar.slug}`) }] : []),
   { label: post.title },
 ];
 ---
@@ -64,12 +77,14 @@ const crumbs: { label: string; href?: string }[] = [
           {
             post.isPillar && (
               <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
-                Pillar Page
+                {t.chrome.pillarPage}
               </span>
             )
           }
           <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-3">{post.title}</h1>
-          <p class="text-xs text-muted-foreground mb-3">{readingMinutes} min read</p>
+          <p class="text-xs text-muted-foreground mb-3">
+            {readingMinutes} {t.common.readingMin}
+          </p>
           <p class="text-lg text-muted-foreground mb-6 leading-snug">{post.excerpt}</p>
           {
             showIntro ? (
@@ -85,9 +100,9 @@ const crumbs: { label: string; href?: string }[] = [
             post.companionResource ? (
               <div class="mb-8 rounded-lg border border-primary/25 bg-primary/[0.04] px-4 py-3 text-sm">
                 <p class="text-muted-foreground">
-                  <Icon name="BookMarked" class="inline mr-1.5 text-primary" size={16} />
-                  Need the quick reference first?{" "}
-                  <a href={post.companionResource.path} class="font-medium text-primary hover:underline">
+                  <Icon name="BookMarked" class="inline me-1.5 text-primary" size={16} />
+                  {t.chrome.companionHint}{" "}
+                  <a href={lp(post.companionResource.path)} class="font-medium text-primary hover:underline">
                     {post.companionResource.label}
                   </a>
                 </p>
@@ -98,11 +113,11 @@ const crumbs: { label: string; href?: string }[] = [
           {
             post.isPillar && clusters.length > 0 && (
               <div class="mb-10">
-                <h2 class="text-xl font-display font-semibold text-foreground mb-4">In This Guide</h2>
+                <h2 class="text-xl font-display font-semibold text-foreground mb-4">{t.chrome.inThisGuide}</h2>
                 <div class="grid gap-2">
                   {clusters.map((c) => (
                     <a
-                      href={`/blog/${c.slug}`}
+                      href={lp(`/blog/${c.slug}`)}
                       class="group flex items-center gap-3 p-3 rounded-lg border border-border/60 hover:border-primary/25 hover:shadow-xs transition-all duration-200"
                     >
                       <Icon name="BookOpen" size={16} class="text-primary shrink-0" />
@@ -137,7 +152,7 @@ const crumbs: { label: string; href?: string }[] = [
                       ))
                   : null}
                 {section.bullets && section.bullets.length > 0 ? (
-                  <ul class="mt-3 space-y-2 list-disc pl-5">
+                  <ul class="mt-3 space-y-2 list-disc ps-5">
                     {section.bullets.map((item) => (
                       <li class="text-muted-foreground leading-relaxed text-sm">{item}</li>
                     ))}
@@ -146,7 +161,7 @@ const crumbs: { label: string; href?: string }[] = [
                 {section.sectionLinks && section.sectionLinks.length > 0 ? (
                   <div class="mt-4 flex flex-col gap-2">
                     {section.sectionLinks.map((link) => (
-                      <a href={link.path} class="text-sm font-medium text-primary hover:underline">
+                      <a href={lp(link.path)} class="text-sm font-medium text-primary hover:underline">
                         {link.label} →
                       </a>
                     ))}
@@ -157,19 +172,19 @@ const crumbs: { label: string; href?: string }[] = [
                     <table class="w-full text-sm">
                       <thead>
                         <tr class="border-b border-border bg-secondary/50">
-                          <th class="px-4 py-3 text-left font-semibold text-foreground" scope="col"></th>
-                          <th class="px-4 py-3 text-left font-semibold text-foreground" scope="col">
-                            Without a Cover
+                          <th class="px-4 py-3 text-start font-semibold text-foreground" scope="col"></th>
+                          <th class="px-4 py-3 text-start font-semibold text-foreground" scope="col">
+                            {t.chrome.withoutCover}
                           </th>
-                          <th class="px-4 py-3 text-left font-semibold text-foreground" scope="col">
-                            With a Cover
+                          <th class="px-4 py-3 text-start font-semibold text-foreground" scope="col">
+                            {t.chrome.withCover}
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         {section.table.map((row) => (
                           <tr class="border-b border-border last:border-0">
-                            <th class="px-4 py-3 text-left font-medium text-foreground align-top" scope="row">
+                            <th class="px-4 py-3 text-start font-medium text-foreground align-top" scope="row">
                               {row.label}
                             </th>
                             <td class="px-4 py-3 text-muted-foreground align-top">{row.without}</td>
@@ -187,7 +202,7 @@ const crumbs: { label: string; href?: string }[] = [
                         <tr class="border-b border-border bg-secondary/50">
                           {section.dataTable.headers.map((header) => (
                             <th
-                              class="px-4 py-3 text-left font-semibold text-foreground whitespace-nowrap"
+                              class="px-4 py-3 text-start font-semibold text-foreground whitespace-nowrap"
                               scope="col"
                             >
                               {header}
@@ -201,7 +216,7 @@ const crumbs: { label: string; href?: string }[] = [
                             {row.map((cell, ci) =>
                               ci === 0 ? (
                                 <th
-                                  class="px-4 py-3 text-left font-medium text-foreground align-top whitespace-nowrap"
+                                  class="px-4 py-3 text-start font-medium text-foreground align-top whitespace-nowrap"
                                   scope="row"
                                 >
                                   {cell}
@@ -223,10 +238,10 @@ const crumbs: { label: string; href?: string }[] = [
           {
             post.internalLinks.length > 0 && (
               <div class="mt-12">
-                <h2 class="text-xl font-display font-semibold text-foreground mb-4">Related Resources</h2>
+                <h2 class="text-xl font-display font-semibold text-foreground mb-4">{t.chrome.relatedResources}</h2>
                 <div class="grid gap-3 sm:grid-cols-2">
                   {post.internalLinks.map((link) => (
-                    <InternalLinkCard label={link.label} path={link.path} />
+                    <InternalLinkCard label={link.label} path={lp(link.path)} />
                   ))}
                 </div>
               </div>
@@ -234,16 +249,18 @@ const crumbs: { label: string; href?: string }[] = [
           }
 
           <div class="mt-12 p-8 bg-secondary rounded-2xl text-center border border-border/20">
-            <h3 class="font-display font-semibold text-foreground mb-2">Need a Custom Cover?</h3>
-            <p class="text-sm text-muted-foreground mb-4">Get a free quote for your exact specifications.</p>
+            <h3 class="font-display font-semibold text-foreground mb-2">{t.chrome.needCustomCover}</h3>
+            <p class="text-sm text-muted-foreground mb-4">{t.chrome.needCustomCoverBody}</p>
             <QuoteLink
+              locale={locale}
               quote={{
                 coverType: post.title,
-                ref: `/blog/${post.slug}`,
+                ref: lp(`/blog/${post.slug}`),
+                locale,
               }}
               class={cn(buttonVariants(), "shadow-md")}
             >
-              Request a Quote
+              {t.chrome.requestQuote}
             </QuoteLink>
           </div>
         </article>
@@ -254,10 +271,10 @@ const crumbs: { label: string; href?: string }[] = [
               <Card class="border border-border/60 shadow-xs">
                 <CardContent class="p-4">
                   <a
-                    href={`/blog/${pillar.slug}`}
+                    href={lp(`/blog/${pillar.slug}`)}
                     class="flex items-center gap-2 text-sm text-primary hover:underline"
                   >
-                    <Icon name="ArrowLeft" size={14} /> Back to: {pillar.title}
+                    <Icon name="ArrowLeft" size={14} class="rtl:rotate-180" /> {t.chrome.backTo} {pillar.title}
                   </a>
                 </CardContent>
               </Card>
@@ -270,12 +287,12 @@ const crumbs: { label: string; href?: string }[] = [
                 <CardContent class="p-4">
                   <h4 class="font-display font-semibold text-sm text-foreground mb-3 flex items-center gap-2">
                     <Icon name="BookMarked" size={14} class="text-primary shrink-0" />
-                    More in This Series
+                    {t.chrome.moreInSeries}
                   </h4>
                   <div class="space-y-1.5">
                     {siblings.map((s) => (
                       <a
-                        href={`/blog/${s.slug}`}
+                        href={lp(`/blog/${s.slug}`)}
                         class="block text-sm text-muted-foreground hover:text-primary transition-colors py-1 px-2 -mx-2 rounded hover:bg-secondary/50"
                       >
                         {s.title}
@@ -291,22 +308,28 @@ const crumbs: { label: string; href?: string }[] = [
             <CardContent class="p-4">
               <h4 class="font-display font-semibold text-sm text-foreground mb-3 flex items-center gap-2">
                 <Icon name="ShoppingBag" size={14} class="text-primary shrink-0" />
-                Shop Covers
+                {t.chrome.shopCovers}
               </h4>
               <div class="space-y-1">
                 <a
-                  href="/products/evaporative-cooler-covers"
+                  href={lp("/products/evaporative-cooler-covers")}
                   class="block text-sm text-muted-foreground hover:text-primary transition-colors py-1 px-2 -mx-2 rounded hover:bg-secondary/50"
-                  >Evaporative Cooler Covers</a
                 >
+                  {locale === "es"
+                    ? "Fundas para enfriadores evaporativos"
+                    : locale === "ar"
+                      ? "كفرات مكيّفات صحراوية"
+                      : "Evaporative Cooler Covers"}
+                </a>
                 <a
-                  href="/products/custom-evaporative-cooler-covers"
+                  href={lp("/products/custom-evaporative-cooler-covers")}
                   class="block text-sm text-muted-foreground hover:text-primary transition-colors py-1 px-2 -mx-2 rounded hover:bg-secondary/50"
-                  >Custom Covers</a
                 >
-                <a href="/products" class="block text-sm text-primary font-medium hover:underline mt-2"
-                  >View All Products →</a
-                >
+                  {t.nav.customSolutions}
+                </a>
+                <a href={lp("/products")} class="block text-sm text-primary font-medium hover:underline mt-2">
+                  {t.chrome.viewAllProducts} →
+                </a>
               </div>
             </CardContent>
           </Card>

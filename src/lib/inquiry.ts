@@ -146,9 +146,32 @@ export async function submitInquiry(
   };
 }
 
-export function validateInquiryContact(name: string, email: string): string | null {
-  if (!name.trim()) return "Please enter your name.";
-  if (!email.trim()) return "Please enter your email.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Please enter a valid email.";
+export function validateInquiryContact(
+  name: string,
+  email: string,
+  locale: string = "en",
+): string | null {
+  const messages = {
+    en: {
+      name: "Please enter your name.",
+      email: "Please enter your email.",
+      invalid: "Please enter a valid email.",
+    },
+    es: {
+      name: "Ingresa tu nombre.",
+      email: "Ingresa tu correo.",
+      invalid: "Ingresa un correo válido.",
+    },
+    ar: {
+      name: "يرجى إدخال اسمك.",
+      email: "يرجى إدخال بريدك الإلكتروني.",
+      invalid: "يرجى إدخال بريد إلكتروني صالح.",
+    },
+  } as const;
+  const key = locale.startsWith("es") ? "es" : locale.startsWith("ar") ? "ar" : "en";
+  const m = messages[key];
+  if (!name.trim()) return m.name;
+  if (!email.trim()) return m.email;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return m.invalid;
   return null;
 }

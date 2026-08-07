@@ -10,13 +10,18 @@ import Icon from "@/components/Icon.astro";
 import InquiryAntiSpamFields from "@/components/InquiryAntiSpamFields.astro";
 import QuoteLink from "@/components/QuoteLink.astro";
 import { cn } from "@/lib/utils";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
 
 interface Props {
   productName: string;
   productSlug: string;
+  locale?: Locale;
 }
 
-const { productName, productSlug } = Astro.props;
+const { productName, productSlug, locale = defaultLocale } = Astro.props;
+const t = ui(locale);
+const lp = (path: string) => localizedPath(locale, path);
 
 const PRESET_COLORS = [
   { name: "Charcoal", value: "#374151" },
@@ -45,20 +50,35 @@ const unitOptions = [
 ];
 
 const logoPositionOptions = [
-  { value: "center", label: "Center" },
-  { value: "top-left", label: "Top Left" },
-  { value: "top-right", label: "Top Right" },
-  { value: "bottom-center", label: "Bottom Center" },
-  { value: "full", label: "Full Cover" },
+  { value: "center", label: locale === "es" ? "Centro" : locale === "ar" ? "وسط" : "Center" },
+  { value: "top-left", label: locale === "es" ? "Arriba izquierda" : locale === "ar" ? "أعلى اليسار" : "Top Left" },
+  { value: "top-right", label: locale === "es" ? "Arriba derecha" : locale === "ar" ? "أعلى اليمين" : "Top Right" },
+  {
+    value: "bottom-center",
+    label: locale === "es" ? "Abajo al centro" : locale === "ar" ? "أسفل الوسط" : "Bottom Center",
+  },
+  { value: "full", label: locale === "es" ? "Cubierta completa" : locale === "ar" ? "كامل الغطاء" : "Full Cover" },
 ];
 
 const openingOptions = [
-  { value: "none", label: "No Openings" },
-  { value: "vent-top", label: "Top Ventilation" },
-  { value: "vent-side", label: "Side Ventilation" },
-  { value: "pipe-cutout", label: "Pipe Cutout" },
-  { value: "drain-hole", label: "Drainage Hole" },
-  { value: "full-custom", label: "Custom (Describe Below)" },
+  { value: "none", label: locale === "es" ? "Sin aberturas" : locale === "ar" ? "بدون فتحات" : "No Openings" },
+  {
+    value: "vent-top",
+    label: locale === "es" ? "Ventilación superior" : locale === "ar" ? "تهوية علوية" : "Top Ventilation",
+  },
+  {
+    value: "vent-side",
+    label: locale === "es" ? "Ventilación lateral" : locale === "ar" ? "تهوية جانبية" : "Side Ventilation",
+  },
+  { value: "pipe-cutout", label: locale === "es" ? "Corte para tubo" : locale === "ar" ? "فتحة أنبوب" : "Pipe Cutout" },
+  {
+    value: "drain-hole",
+    label: locale === "es" ? "Orificio de drenaje" : locale === "ar" ? "فتحة تصريف" : "Drainage Hole",
+  },
+  {
+    value: "full-custom",
+    label: locale === "es" ? "Personalizado (describir abajo)" : locale === "ar" ? "مخصّص (صف أدناه)" : "Custom (Describe Below)",
+  },
 ];
 ---
 
@@ -73,10 +93,10 @@ const openingOptions = [
     <div class="mb-6">
       <div class="flex items-center gap-2 mb-2">
         <Icon name="Palette" size={20} class="text-primary" />
-        <h3 class="text-xl font-display font-semibold text-foreground">Customize This Cover</h3>
+        <h3 class="text-xl font-display font-semibold text-foreground">{t.chrome.customizeThisCover}</h3>
       </div>
       <p class="text-sm text-muted-foreground">
-        Send us your drawings, photos, or dimension list — we manufacture to your exact spec.
+        {t.chrome.customizeIntro}
       </p>
     </div>
 
@@ -84,22 +104,22 @@ const openingOptions = [
       <InquiryAntiSpamFields />
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-lg bg-secondary/60 border border-border">
         <div class="space-y-2 sm:col-span-1">
-          <Label for="custom-name">Your Name *</Label>
+          <Label for="custom-name">{t.form.name}</Label>
           <Input id="custom-name" name="name" maxlength={100} required />
         </div>
         <div class="space-y-2 sm:col-span-1">
-          <Label for="custom-email">Email *</Label>
+          <Label for="custom-email">{t.form.email}</Label>
           <Input id="custom-email" name="email" type="email" maxlength={255} required />
         </div>
         <div class="space-y-2 sm:col-span-1">
-          <Label for="custom-phone">Phone (optional)</Label>
+          <Label for="custom-phone">{t.form.phone}</Label>
           <Input id="custom-phone" name="phone" maxlength={20} />
         </div>
       </div>
 
       <div>
         <Label class="text-sm font-medium text-foreground mb-3 flex items-center gap-1.5">
-          <Icon name="Palette" size={14} class="text-primary" /> Color
+          <Icon name="Palette" size={14} class="text-primary" /> {t.chrome.color}
         </Label>
         <div class="flex flex-wrap gap-2 mt-2">
           {
@@ -139,26 +159,26 @@ const openingOptions = [
 
       <div>
         <Label class="text-sm font-medium text-foreground flex items-center gap-1.5">
-          <Icon name="Layers" size={14} class="text-primary" /> Material
+          <Icon name="Layers" size={14} class="text-primary" /> {t.chrome.materialLabel}
         </Label>
-        <Select name="material" class="mt-2" placeholder="Select material..." options={materialOptions} />
+        <Select name="material" class="mt-2" placeholder={t.chrome.materialLabel} options={materialOptions} />
       </div>
 
       <div>
         <Label class="text-sm font-medium text-foreground flex items-center gap-1.5">
-          <Icon name="Ruler" size={14} class="text-primary" /> Custom Dimensions
+          <Icon name="Ruler" size={14} class="text-primary" /> {t.chrome.dimensionsLabel}
         </Label>
         <div class="grid grid-cols-4 gap-2 mt-2">
-          <Input name="width" placeholder="Width" type="number" min="0" aria-label="Width" />
-          <Input name="height" placeholder="Height" type="number" min="0" aria-label="Height" />
-          <Input name="depth" placeholder="Depth" type="number" min="0" aria-label="Depth" />
+          <Input name="width" placeholder={t.chrome.width} type="number" min="0" aria-label={t.chrome.width} />
+          <Input name="height" placeholder={t.chrome.height} type="number" min="0" aria-label={t.chrome.height} />
+          <Input name="depth" placeholder={t.chrome.depth} type="number" min="0" aria-label={t.chrome.depth} />
           <Select name="sizeUnit" options={unitOptions} value="cm" />
         </div>
       </div>
 
       <div>
         <Label class="text-sm font-medium text-foreground flex items-center gap-1.5">
-          <Icon name="Image" size={14} class="text-primary" /> Logo / Branding
+          <Icon name="Image" size={14} class="text-primary" /> {t.chrome.logoPrinting}
         </Label>
         <div class="mt-2">
           <div class="flex items-start gap-4" data-logo-preview-wrap hidden>
@@ -180,7 +200,7 @@ const openingOptions = [
                 name="logoPosition"
                 class="mt-2"
                 triggerClass="h-8 text-xs"
-                placeholder="Logo position..."
+                placeholder={t.chrome.logoPosition}
                 options={logoPositionOptions}
               />
             </div>
@@ -191,9 +211,15 @@ const openingOptions = [
             class="w-full border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/40 hover:bg-primary/[0.02] transition-colors"
           >
             <Icon name="Upload" size={24} class="mx-auto mb-2 text-muted-foreground" />
-            <p class="text-sm text-muted-foreground">Click to upload logo artwork</p>
+            <p class="text-sm text-muted-foreground">
+              {locale === "es"
+                ? "Haz clic para subir el arte del logo"
+                : locale === "ar"
+                  ? "انقر لرفع تصميم الشعار"
+                  : "Click to upload logo artwork"}
+            </p>
             <p class="text-xs text-muted-foreground/60 mt-1">
-              PNG, JPG, SVG — Max 5MB · Sent with your quote request
+              PNG, JPG, SVG — Max 5MB
             </p>
           </button>
           <input type="file" accept="image/*,.svg" class="hidden" data-logo-input />
@@ -201,41 +227,42 @@ const openingOptions = [
       </div>
 
       <div>
-        <Label class="text-sm font-medium text-foreground">Opening / Cutout Design</Label>
+        <Label class="text-sm font-medium text-foreground">{t.chrome.openingDesign}</Label>
         <Select
           name="openingDesign"
           class="mt-2"
-          placeholder="Select opening style..."
+          placeholder={t.chrome.selectOpening}
           options={openingOptions}
         />
       </div>
 
       <div>
-        <Label class="text-sm font-medium text-foreground">Additional Notes</Label>
+        <Label class="text-sm font-medium text-foreground">{t.chrome.additionalNotes}</Label>
         <Textarea
           name="notes"
-          placeholder="Quantity, reference photos, pipe locations, Pantone color, special fasteners…"
+          placeholder={t.chrome.notesPlaceholder}
           class="mt-2 min-h-[80px]"
           maxlength={1000}
         />
       </div>
 
       <Button type="submit" size="lg" class="w-full" data-customizer-submit>
-        <Icon name="Send" size={16} class="mr-2" />
-        <span data-customizer-label>Request Custom Quote for {productName}</span>
+        <Icon name="Send" size={16} class="me-2" />
+        <span data-customizer-label>{t.chrome.requestCustomQuoteFor} {productName}</span>
       </Button>
       <p class="text-xs text-muted-foreground text-center">
-        All selections above are included in your inquiry email to our team. We respond within 24 hours.
-        Prefer a simpler form?{" "}
+        {t.chrome.customizerFooter}{" "}
         <QuoteLink
+          locale={locale}
           quote={{
             productSlug,
             productName,
-            ref: `/product/${productSlug}`,
+            ref: lp(`/product/${productSlug}`),
+            locale,
           }}
           class="text-primary hover:underline font-medium"
         >
-          Use our contact form
+          {t.chrome.orSkipToQuote}
         </QuoteLink>
         .
       </p>
@@ -369,7 +396,7 @@ const openingOptions = [
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const err = validateInquiryContact(value("name"), value("email"));
+    const err = validateInquiryContact(value("name"), value("email"), document.documentElement.getAttribute("data-locale") ?? "en");
     if (err) {
       toast({ title: err, variant: "destructive" });
       return;

@@ -5,7 +5,7 @@
  */
 import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/site";
 import { toAbsoluteUrl, truncateMetaDescription, type JsonLd } from "@/lib/seo";
-import { defaultLocale, locales, localizedPath, type Locale } from "@/i18n/locales";
+import { defaultLocale, localeMarkets, locales, localizedPath, type Locale } from "@/i18n/locales";
 
 interface Props {
   title: string;
@@ -44,7 +44,7 @@ const metaDescription = description ? truncateMetaDescription(description) : und
   locales.map((code) => (
     <link
       rel="alternate"
-      hreflang={code === "en" ? "en-US" : code}
+      hreflang={localeMarkets[code].hreflang}
       href={toAbsoluteUrl(localizedPath(code, pathForAlternates))}
     />
   ))
@@ -52,7 +52,7 @@ const metaDescription = description ? truncateMetaDescription(description) : und
 <link rel="alternate" hreflang="x-default" href={toAbsoluteUrl(localizedPath(defaultLocale, pathForAlternates))} />
 
 <meta property="og:site_name" content={SITE_NAME} />
-<meta property="og:locale" content={locale === "en" ? "en_US" : locale === "es" ? "es_MX" : "ar"} />
+<meta property="og:locale" content={localeMarkets[locale].ogLocale} />
 <meta property="og:title" content={title} />
 {metaDescription && <meta property="og:description" content={metaDescription} />}
 {canonical && <meta property="og:url" content={canonical} />}

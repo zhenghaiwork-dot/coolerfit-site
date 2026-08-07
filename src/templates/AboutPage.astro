@@ -1,0 +1,227 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import Icon from "@/components/Icon.astro";
+import type { IconName } from "@/lib/icons";
+import { getPageEntry } from "@/lib/content";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const t = ui(locale);
+const lp = (path: string) => localizedPath(locale, path);
+const page = await getPageEntry("about", locale);
+
+const h1 =
+  page?.data.title.split("|")[0]?.trim() ??
+  (locale === "es" ? "Acerca de CoolerFit" : locale === "ar" ? "عن CoolerFit" : "About CoolerFit");
+const intro =
+  page?.body?.trim() ??
+  (locale === "es"
+    ? "Somos un fabricante especializado de fundas personalizadas para enfriadores evaporativos, atendiendo negocios en todo el mundo con soluciones de protección premium desde 2009."
+    : locale === "ar"
+      ? "نحن مصنع متخصص في أغطية مكيف صحراوي مخصّصة، نخدم الشركات حول العالم بحلول حماية premium منذ 2009."
+      : "We are a specialized manufacturer of custom evaporative cooler covers, serving businesses worldwide with premium protective solutions since 2009.");
+
+const stats: { icon: IconName; value: string; label: string }[] =
+  locale === "es"
+    ? [
+        { icon: "Factory", value: "10,000+", label: "m² de fábrica" },
+        { icon: "Users", value: "200+", label: "Trabajadores calificados" },
+        { icon: "Award", value: "15+", label: "Años de experiencia" },
+        { icon: "Globe", value: "50+", label: "Países atendidos" },
+      ]
+    : locale === "ar"
+      ? [
+          { icon: "Factory", value: "10,000+", label: "م² مصنع" },
+          { icon: "Users", value: "200+", label: "عمال مهرة" },
+          { icon: "Award", value: "15+", label: "سنوات خبرة" },
+          { icon: "Globe", value: "50+", label: "دولة نخدمها" },
+        ]
+      : [
+          { icon: "Factory", value: "10,000+", label: "Sq. Meters Factory" },
+          { icon: "Users", value: "200+", label: "Skilled Workers" },
+          { icon: "Award", value: "15+", label: "Years Experience" },
+          { icon: "Globe", value: "50+", label: "Countries Served" },
+        ];
+
+const advantages: { icon: IconName; title: string; desc: string }[] =
+  locale === "es"
+    ? [
+        { icon: "ShieldCheck", title: "Garantía de calidad", desc: "Fabricación certificada ISO 9001 con control de calidad riguroso en cada etapa." },
+        { icon: "Factory", title: "Equipo avanzado", desc: "Maquinaria de corte, costura e impresión de última generación para fabricación de precisión." },
+        { icon: "Truck", title: "Entrega rápida", desc: "Líneas de producción eficientes permiten entrega rápida sin comprometer la calidad." },
+        { icon: "Globe", title: "Envío global", desc: "Socios logísticos confiables para entrega mundial con seguimiento completo." },
+      ]
+    : locale === "ar"
+      ? [
+          { icon: "ShieldCheck", title: "ضمان الجودة", desc: "تصنيع معتمد ISO 9001 مع رقابة جودة صارمة في كل مرحلة." },
+          { icon: "Factory", title: "معدات متقدمة", desc: "آلات قص وخياطة وطباعة حديثة للتصنيع الدقيق." },
+          { icon: "Truck", title: "تسليم سريع", desc: "خطوط إنتاج فعّالة تتيح تسليماً سريعاً دون المساس بالجودة." },
+          { icon: "Globe", title: "شحن عالمي", desc: "شركاء لوجistics موثوقون للتوصيل العالمي مع تتبع كامل." },
+        ]
+      : [
+          { icon: "ShieldCheck", title: "Quality Assurance", desc: "ISO 9001 certified manufacturing with rigorous quality control at every stage." },
+          { icon: "Factory", title: "Advanced Equipment", desc: "State-of-the-art cutting, sewing, and printing machinery for precision manufacturing." },
+          { icon: "Truck", title: "Fast Turnaround", desc: "Efficient production lines enable quick delivery without compromising quality." },
+          { icon: "Globe", title: "Global Shipping", desc: "Reliable logistics partners for worldwide delivery with full tracking." },
+        ];
+
+const facilityPhotos =
+  locale === "es"
+    ? [
+        {
+          src: "/images/about/production-line.webp",
+          alt: "Línea de producción CoolerFit cosiendo fundas personalizadas para enfriador evaporativo",
+          label: "Línea de producción",
+        },
+        {
+          src: "/images/about/quality-control.webp",
+          alt: "Inspección de control de calidad de costura y dimensiones de funda para enfriador",
+          label: "Control de calidad",
+        },
+        {
+          src: "/images/about/warehouse.webp",
+          alt: "Almacén CoolerFit con fundas para enfriador empaquetadas listas para envío",
+          label: "Almacén",
+        },
+      ]
+    : locale === "ar"
+      ? [
+          {
+            src: "/images/about/production-line.webp",
+            alt: "خط إنتاج CoolerFit لخياطة أغطية مكيف صحراوي مخصّصة",
+            label: "خط الإنتاج",
+          },
+          {
+            src: "/images/about/quality-control.webp",
+            alt: "فحص جودة درزات وأبعاد غطاء المكيف الصحراوي",
+            label: "مراقبة الجودة",
+          },
+          {
+            src: "/images/about/warehouse.webp",
+            alt: "مستودع CoolerFit مع أغطية مكيف صحراوي معبّأة جاهزة للشحن",
+            label: "المستودع",
+          },
+        ]
+      : ([
+          {
+            src: "/images/about/production-line.webp",
+            alt: "CoolerFit production line sewing custom evaporative cooler covers",
+            label: "Production Line",
+          },
+          {
+            src: "/images/about/quality-control.webp",
+            alt: "Quality control inspection of cooler cover stitching and dimensions",
+            label: "Quality Control",
+          },
+          {
+            src: "/images/about/warehouse.webp",
+            alt: "CoolerFit warehouse with packaged cooler covers ready for shipping",
+            label: "Warehouse",
+          },
+        ] as const);
+
+const facilityHeading =
+  locale === "es" ? "Nuestra planta de fabricación" : locale === "ar" ? "منشأة التصنيع لدينا" : "Our Manufacturing Facility";
+const facilitySub =
+  locale === "es"
+    ? "Líneas de producción de última generación con estándares de calidad rigurosos."
+    : locale === "ar"
+      ? "خطوط إنتاج حديثة بمعايير جودة صارمة."
+      : "State-of-the-art production lines with rigorous quality standards.";
+const partnerHeading =
+  locale === "es" ? "Por qué asociarse con nosotros" : locale === "ar" ? "لماذا تتعاون معنا" : "Why Partner With Us";
+const partnerSub =
+  locale === "es"
+    ? "Socio de fabricación dedicado para sus necesidades de fundas para enfriador."
+    : locale === "ar"
+      ? "شريك تصنيع مخصّص لاحتياجات أغطية المكيف الصحراوي."
+      : "Dedicated manufacturing partner for your cooler cover needs.";
+---
+
+<BaseLayout
+  title={page?.data.title ?? "About CoolerFit | Custom Evaporative Cooler Cover Manufacturer"}
+  description={page?.data.description ?? "CoolerFit manufactures custom evaporative cooler covers for HVAC contractors, property managers, and distributors worldwide since 2009."}
+  canonicalPath={lp("/about")}
+  alternatePath="/about"
+  locale={locale}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <div class="text-center mb-14">
+        <span class="section-hd-label">{t.nav.about}</span>
+        <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">{h1}</h1>
+        <p class="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">{intro}</p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        {stats.map((s) => (
+          <Card class="border border-border/60 shadow-xs text-center hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+            <CardContent class="p-8">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/8 to-primary-accent flex items-center justify-center mx-auto mb-3">
+                <Icon name={s.icon} class="text-primary" size={24} />
+              </div>
+              <div class="text-3xl font-display font-bold text-foreground mb-1">{s.value}</div>
+              <p class="text-sm text-muted-foreground">{s.label}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div class="mb-20">
+        <div class="relative py-12 mb-8 section-edge">
+          <div class="section-hd">
+            <h2>{facilityHeading}</h2>
+            <p>{facilitySub}</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {facilityPhotos.map((photo) => (
+            <figure class="relative aspect-video overflow-hidden rounded-xl bg-secondary group">
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                width={1200}
+                height={675}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+              />
+              <figcaption class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-foreground/70 to-transparent">
+                <span class="text-background text-xs font-medium">{photo.label}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      <div class="relative py-12 section-edge">
+        <div class="section-hd">
+          <h2>{partnerHeading}</h2>
+          <p>{partnerSub}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {advantages.map((a) => (
+            <Card class="border border-border/60 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+              <CardContent class="p-8 flex gap-5">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/8 to-primary-accent flex items-center justify-center shrink-0">
+                  <Icon name={a.icon} class="text-primary" size={24} />
+                </div>
+                <div>
+                  <h3 class="font-display font-semibold text-foreground mb-1.5">{a.title}</h3>
+                  <p class="text-sm text-muted-foreground leading-relaxed">{a.desc}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

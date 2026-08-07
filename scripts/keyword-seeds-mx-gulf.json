@@ -1,0 +1,34 @@
+{
+  "markets": {
+    "es": { "location_name": "Mexico", "language_code": "es" },
+    "ar_uae": { "location_name": "United Arab Emirates", "language_code": "ar" },
+    "ar_sa": { "location_name": "Saudi Arabia", "language_code": "ar" }
+  },
+  "seeds": {
+    "es_mx": [
+      "funda para enfriador evaporativo",
+      "funda enfriador evaporativo",
+      "funda para cooler",
+      "funda cooler",
+      "cubre enfriador",
+      "protector enfriador",
+      "funda swamp cooler",
+      "funda enfriador de aire",
+      "funda personalizada enfriador",
+      "como medir enfriador evaporativo",
+      "enfriador evaporativo",
+      "cotizar funda enfriador"
+    ],
+    "ar_gulf": [
+      "كفر مكيف صحراوي",
+      "غطاء مكيف صحراوي",
+      "غطاء مبرد صحراوي",
+      "كفر مكيف صحراوي شتوي",
+      "غطاء مبرد تبخيري",
+      "واقي مكيف صحراوي",
+      "غطاء مخصص للمكيف الصحراوي",
+      "مكيف صحراوي",
+      "مبرد تبخيري"
+    ]
+  }
+}

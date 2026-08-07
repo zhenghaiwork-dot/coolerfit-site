@@ -1,0 +1,290 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import Icon from "@/components/Icon.astro";
+import QuoteLink from "@/components/QuoteLink.astro";
+import { getPageEntry } from "@/lib/content";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const t = ui(locale);
+const lp = (path: string) => localizedPath(locale, path);
+const page = await getPageEntry("custom-solutions", locale);
+
+const copy =
+  locale === "es"
+    ? {
+        metaDesc:
+          "Fundas a medida para enfriadores evaporativos: dimensiones, materiales, aberturas, colores e impresión de logo. Envía medidas o fotos — desde 1 pieza.",
+        hero:
+          "No vendemos tallas genéricas: cada funda se fabrica según tus especificaciones. Comparte medidas, fotos o planos y la hacemos a la medida.",
+        heroMeta: "Prototipos disponibles · Pedido desde 1 pieza · Mayoreo y flotas bienvenidos",
+        processLabel: "Proceso",
+        processTitle: "Cómo funciona la personalización",
+        processLead:
+          "Ninguna medida estándar sirve para todos. Cuéntanos qué tienes — confirmamos holgura, aberturas y material antes de producir.",
+        steps: [
+          {
+            step: "1",
+            title: "Envía tus datos",
+            desc: "Comparte medidas, fotos, cantidad y arte del logo en el formulario de cotización o en el personalizador del producto.",
+          },
+          {
+            step: "2",
+            title: "Revisión y confirmación",
+            desc: "Confirmamos medidas, material y aberturas — hay prototipo disponible para diseños nuevos.",
+          },
+          {
+            step: "3",
+            title: "Producción y envío",
+            desc: "Cortamos y cosemos según la especificación aprobada y enviamos con seguimiento.",
+          },
+        ],
+        ctaTitle: "¿Tienes un proyecto a medida?",
+        ctaBody: "Envíanos tus requisitos — incluso una foto aproximada y el tamaño bastan para iniciar la cotización.",
+        colorTitle: "Igualación de color",
+        colorDesc: "Paleta estándar o Pantone / CMYK para flotas y branding de propiedad.",
+        featuresDesc: "Cierres, Velcro, hebillas, esquinas reforzadas, correas — indica lo que necesita tu instalación.",
+        sizesDesc: "Cualquier ancho, alto y fondo — gabinetes cuadrados, redondos o irregulares. Envía tabla de medidas o fotos de los cuatro lados.",
+        openingsDesc: "Cortes para tubos, ductos, cajas de desconexión, rejillas y drenaje. Diseños de tiro lateral e inferior.",
+        materialsDesc: "Oxford, lona, vinil impermeable, malla o compuestos aislados — según clima y exposición.",
+        logoDesc: "Serigrafía, transfer o bordado. Sube el arte en la página del producto o en el formulario.",
+      }
+    : locale === "ar"
+      ? {
+          metaDesc:
+            "كفرات مكيّف صحراوي حسب القياس: أبعاد ومواد وفتحات وألوان وطباعة شعار. أرسل المقاسات أو الصور — من قطعة واحدة.",
+          hero:
+            "لا نبيع مقاسات جاهزة — كل كفر يُصنع حسب مواصفاتك. أرسل القياسات أو الصور أو المخططات ونبني ليلائمك.",
+          heroMeta: "عيّنات نموذجية متاحة · طلب من قطعة واحدة · طلبات الجملة والأسطول مرحّب بها",
+          processLabel: "العملية",
+          processTitle: "كيف يعمل التخصيص",
+          processLead:
+            "لا يوجد مقاس قياسي يناسب كل وحدة. أخبرنا بما لديك — نؤكّد الفراغ والفتحات والمادة قبل الإنتاج.",
+          steps: [
+            {
+              step: "1",
+              title: "أرسل المواصفات",
+              desc: "شاركنا الأبعاد والصور والكمية وفن الشعار عبر نموذج عرض السعر أو أداة التخصيص.",
+            },
+            {
+              step: "2",
+              title: "مراجعة وتأكيد",
+              desc: "نؤكّد القياسات والمادة والفتحات — ويتوفر نموذج أولي للتصاميم الجديدة.",
+            },
+            {
+              step: "3",
+              title: "الإنتاج والتسليم",
+              desc: "يُقصّ ويُخاط حسب المواصفة المعتمدة ثم يُشحن مع رقم تتبع.",
+            },
+          ],
+          ctaTitle: "هل لديك مشروع مخصّص؟",
+          ctaBody: "أرسل متطلباتك — حتى صورة تقريبية ومقاس تقريبي يكفيان لبدء عرض السعر.",
+          colorTitle: "مطابقة الألوان",
+          colorDesc: "لوحة قياسية أو Pantone / CMYK لاتساق الأسطول وهوية العقار.",
+          featuresDesc: "سحّابات وفيلكرو وأبازيم وزوايا معزّزة وأحزمة رياح — حدد ما يحتاجه التركيب.",
+          sizesDesc: "أي عرض وارتفاع وعمق — خزائن مربعة أو مستديرة أو غير منتظمة. أرسل جدول أبعاد أو صورًا من الجهات الأربع.",
+          openingsDesc: "قصّات للأنابيب والمجاري وصناديق الفصل والفتحات والتصريف. تخطيطات سحب جانبي وسفلي.",
+          materialsDesc: "أكسفورد أو كانفاس أو فينيل مقاوم للماء أو شبكة أو مركّبات عازلة — حسب المناخ والتعرض.",
+          logoDesc: "طباعة شاشة أو حرارية أو تطريز. ارفع العمل الفني من صفحة المنتج أو نموذج العرض.",
+        }
+      : {
+          metaDesc:
+            "Made-to-measure evaporative cooler covers: custom dimensions, materials, openings, colors, and logo printing. Send specs or photos — MOQ from 1 unit.",
+          hero:
+            "We don't sell off-the-shelf SKUs — every cover is manufactured to your specifications. Share measurements, reference photos, or technical drawings, and we'll build to fit.",
+          heroMeta: "Prototype samples available · Small batch from 1 unit · Bulk & fleet orders welcome",
+          processLabel: "Process",
+          processTitle: "Our Customization Process",
+          processLead:
+            "No standard size fits every unit. Tell us what you have — we'll confirm slack, openings, and material before production.",
+          steps: [
+            {
+              step: "1",
+              title: "Share Your Specs",
+              desc: "Submit dimensions, photos, quantity, and any logo artwork via our quote form or product customizer.",
+            },
+            {
+              step: "2",
+              title: "Review & Confirm",
+              desc: "We confirm measurements, material, and openings — prototype available for new designs.",
+            },
+            {
+              step: "3",
+              title: "Production & Delivery",
+              desc: "Covers are cut and sewn to your approved spec, then shipped with tracking.",
+            },
+          ],
+          ctaTitle: "Have a Custom Project in Mind?",
+          ctaBody: "Send us your requirements — even a rough photo and approximate size is enough to start a quote.",
+          colorTitle: "Color Matching",
+          colorDesc: "Standard palette or Pantone / CMYK matching for fleet consistency and property branding.",
+          featuresDesc: "Zippers, Velcro, buckles, reinforced corners, wind straps — specify what your install needs.",
+          sizesDesc:
+            "Any width, height, and depth — square, round, or irregular cabinets. Send a dimension table or photos of all four sides.",
+          openingsDesc:
+            "Cutouts for pipes, ducts, disconnect boxes, vents, and drainage. Side-draft and down-draft layouts supported.",
+          materialsDesc:
+            "Oxford, canvas, PVC-backed waterproof, mesh, or insulated composites — matched to your climate and exposure.",
+          logoDesc: "Screen print, heat transfer, or embroidery. Upload artwork on the product page or quote form.",
+        };
+
+const customOptions = [
+  {
+    title: t.chrome.customSizes,
+    desc: copy.sizesDesc,
+    image: "/images/custom/dimensions.webp",
+    imageAlt: copy.sizesDesc,
+    path: "/custom/sizes",
+  },
+  {
+    title: t.chrome.openingDesign,
+    desc: copy.openingsDesc,
+    image: "/images/custom/openings.webp",
+    imageAlt: copy.openingsDesc,
+    path: "/custom/opening-design",
+  },
+  {
+    title: t.chrome.customMaterials,
+    desc: copy.materialsDesc,
+    image: "/images/custom/materials.webp",
+    imageAlt: copy.materialsDesc,
+    path: "/custom/materials",
+  },
+  {
+    title: copy.colorTitle,
+    desc: copy.colorDesc,
+    image: "/images/custom/colors.webp",
+    imageAlt: copy.colorDesc,
+    path: "/contact",
+  },
+  {
+    title: t.chrome.logoPrinting,
+    desc: copy.logoDesc,
+    image: "/images/custom/branding.webp",
+    imageAlt: copy.logoDesc,
+    path: "/custom/logo-printing",
+  },
+  {
+    title: t.common.features,
+    desc: copy.featuresDesc,
+    image: "/images/custom/features.webp",
+    imageAlt: copy.featuresDesc,
+    path: "/contact",
+  },
+];
+
+const processSteps = copy.steps;
+const pageTitle = page?.data.title ?? `${t.nav.customSolutions} | CoolerFit`;
+const pageDesc = page?.data.description ?? copy.metaDesc;
+const heroBody = page?.body?.trim() || copy.hero;
+---
+
+<BaseLayout
+  title={pageTitle.includes("|") ? pageTitle : `${pageTitle} | CoolerFit`}
+  description={pageDesc}
+  canonicalPath={lp("/custom-solutions")}
+  alternatePath="/custom-solutions"
+  locale={locale}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-14">
+        <div>
+          <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">{t.nav.customSolutions}</h1>
+          <p class="text-muted-foreground text-lg leading-relaxed mb-4">{heroBody}</p>
+          <p class="text-sm text-muted-foreground" set:html={copy.heroMeta} />
+        </div>
+        <div class="aspect-[16/10] overflow-hidden rounded-2xl bg-secondary shadow-lg ring-1 ring-border/40">
+          <img
+            src="/images/custom/hero.webp"
+            alt={t.nav.customSolutions}
+            width={1200}
+            height={750}
+            loading="eager"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        {
+          customOptions.map((opt) => (
+            <a href={lp(opt.path)} class="group block h-full">
+              <Card class="h-full border border-border/60 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                <div class="aspect-[16/10] overflow-hidden bg-secondary">
+                  <img
+                    src={opt.image}
+                    alt={opt.imageAlt}
+                    width={800}
+                    height={500}
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                  />
+                </div>
+                <CardContent class="p-6">
+                  <h3 class="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {opt.title}
+                  </h3>
+                  <p class="text-sm text-muted-foreground leading-relaxed">{opt.desc}</p>
+                  <span class="inline-flex items-center gap-1 mt-3 text-sm font-medium text-primary">
+                    {t.common.learnMore}{" "}
+                    <Icon name="ArrowRight" size={14} class="transition-transform group-hover:translate-x-0.5 rtl:rotate-180" />
+                  </span>
+                </CardContent>
+              </Card>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="bg-secondary rounded-2xl p-10 md:p-16 mb-20">
+        <div class="section-hd !mb-12">
+          <span class="section-hd-label">{copy.processLabel}</span>
+          <h2>{copy.processTitle}</h2>
+          <p>{copy.processLead}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {
+            processSteps.map((s) => (
+              <div class="text-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-foreground to-foreground/80 text-background font-display font-bold text-lg flex items-center justify-center mx-auto mb-4 shadow-md">
+                  {s.step}
+                </div>
+                <h3 class="font-display font-semibold text-foreground mb-2">{s.title}</h3>
+                <p class="text-sm text-muted-foreground">{s.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="relative text-center py-12 section-edge">
+        <div class="section-hd !mb-8">
+          <h2>{copy.ctaTitle}</h2>
+          <p>{copy.ctaBody}</p>
+        </div>
+        <QuoteLink
+          locale={locale}
+          quote={{
+            coverType: t.nav.customSolutions,
+            ref: lp("/custom-solutions"),
+            locale,
+          }}
+          class={buttonVariants({ size: "lg" })}
+        >
+          {t.nav.requestQuote} <Icon name="ArrowRight" class="ms-2" size={18} />
+        </QuoteLink>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

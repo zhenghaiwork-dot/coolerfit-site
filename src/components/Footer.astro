@@ -2,6 +2,7 @@
 import Icon from "@/components/Icon.astro";
 import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
 import { SITE_CONTACT } from "@/lib/site";
+import { categorySlug, getCategoryEntries } from "@/lib/content";
 import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
 
@@ -13,6 +14,9 @@ const { locale = defaultLocale } = Astro.props;
 const t = ui(locale);
 const lp = (path: string) => localizedPath(locale, path);
 
+const categories = await getCategoryEntries(locale);
+const titleBySlug = Object.fromEntries(categories.map((c) => [categorySlug(c), c.data.title]));
+
 const quickLinks = [
   { label: t.nav.products, path: "/products" },
   { label: t.nav.customSolutions, path: "/custom-solutions" },
@@ -20,22 +24,27 @@ const quickLinks = [
   { label: t.nav.contact, path: "/contact" },
 ];
 
-const productLinks = [
-  { label: "Evaporative Cooler Covers", path: "/products/evaporative-cooler-covers" },
-  { label: "UV-Resistant Covers", path: "/products/uv-resistant-cooler-covers" },
-  { label: "Waterproof Covers", path: "/products/waterproof-cooler-covers" },
-  { label: "Winter Covers", path: "/products/winter-cooler-covers" },
-  { label: "Custom Size Covers", path: "/products/custom-size-cooler-covers" },
-  { label: "Oversized Covers", path: "/products/oversized-cooler-covers" },
-];
+const productSlugs = [
+  "evaporative-cooler-covers",
+  "uv-resistant-cooler-covers",
+  "waterproof-cooler-covers",
+  "winter-cooler-covers",
+  "custom-size-cooler-covers",
+  "oversized-cooler-covers",
+] as const;
+
+const productLinks = productSlugs.map((slug) => ({
+  label: titleBySlug[slug] ?? slug,
+  path: `/products/${slug}`,
+}));
 
 const resourceLinks = [
   { label: t.nav.blog, path: "/blog" },
-  { label: "Materials Guide", path: "/materials" },
-  { label: "Installation Guide", path: "/resources/installation" },
-  { label: "Maintenance Guide", path: "/resources/maintenance" },
-  { label: "How to Measure", path: "/sizes/how-to-measure" },
-  { label: "Site Map", path: "/sitemap" },
+  { label: t.chrome.materialsGuide, path: "/materials" },
+  { label: t.chrome.installationGuide, path: "/resources/installation" },
+  { label: t.chrome.maintenanceGuide, path: "/resources/maintenance" },
+  { label: t.chrome.howToMeasure, path: "/sizes/how-to-measure" },
+  { label: t.common.siteMap, path: "/sitemap" },
 ];
 
 const linkClass =
@@ -59,16 +68,16 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
       <div class="lg:col-span-1">
         <div class="flex items-center gap-2 mb-4">
-          <img src="/logo.svg" alt="CoolerFit" width="160" height="32" class="h-8 w-auto brightness-0 invert" />
+          <img src="/logo.svg" alt="CoolerFit" width="160" height="32" class="h-8 w-auto" />
         </div>
         <p class="text-sm opacity-55 leading-relaxed mb-4">
-          Custom evaporative cooler covers manufactured to your specs.
+          {t.chrome.tagline}
         </p>
         <LanguageSwitcher locale={locale} />
       </div>
 
       <div>
-        <h3 class={headingClass}>Quick Links</h3>
+        <h3 class={headingClass}>{t.chrome.quickLinks}</h3>
         <ul class="space-y-2.5">
           {
             quickLinks.map((l) => (
@@ -113,7 +122,7 @@ const year = new Date().getFullYear();
       </div>
 
       <div>
-        <h3 class={headingClass}>Contact</h3>
+        <h3 class={headingClass}>{t.chrome.contactHeading}</h3>
         <ul class="space-y-3">
           <li class={contactItemClass}>
             <Icon name="Mail" size={16} class="mt-0.5 shrink-0 opacity-50" />

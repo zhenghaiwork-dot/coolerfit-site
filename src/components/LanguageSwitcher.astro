@@ -56,6 +56,21 @@ const labels: Record<Locale, string> = {
 </div>
 
 <script>
+  const KEY = "coolerfit_lang";
+
+  function rememberLocale(locale: string) {
+    try {
+      localStorage.setItem(KEY, locale);
+    } catch {
+      /* ignore */
+    }
+    try {
+      document.cookie = `${KEY}=${encodeURIComponent(locale)};path=/;max-age=${60 * 60 * 24 * 365};samesite=lax`;
+    } catch {
+      /* ignore */
+    }
+  }
+
   document.querySelectorAll<HTMLElement>("[data-lang-switcher]").forEach((root) => {
     const trigger = root.querySelector<HTMLButtonElement>("[data-lang-trigger]");
     const menu = root.querySelector<HTMLElement>("[data-lang-menu]");
@@ -73,6 +88,13 @@ const labels: Record<Locale, string> = {
     trigger.addEventListener("click", () => (menu.hidden ? open() : close()));
     document.addEventListener("pointerdown", (e) => {
       if (!root.contains(e.target as Node)) close();
+    });
+
+    menu.querySelectorAll("a[hreflang]").forEach((link) => {
+      link.addEventListener("click", () => {
+        const code = link.getAttribute("hreflang");
+        if (code) rememberLocale(code);
+      });
     });
   });
 </script>

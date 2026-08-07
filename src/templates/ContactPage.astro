@@ -91,7 +91,11 @@ const lp = (p: string) => localizedPath(locale, p);
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const value = (name: string) => field(name)?.value.trim() ?? "";
-      const err = validateInquiryContact(value("name"), value("email"));
+      const err = validateInquiryContact(
+        value("name"),
+        value("email"),
+        document.documentElement.getAttribute("data-locale") ?? "en",
+      );
       if (err) {
         toast({ title: err, variant: "destructive" });
         return;

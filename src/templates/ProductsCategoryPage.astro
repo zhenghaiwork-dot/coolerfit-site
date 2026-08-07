@@ -1,9 +1,24 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
 import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import Icon from "@/components/Icon.astro";
+import InternalLinkCard from "@/components/InternalLinkCard.astro";
 import CategorySeoContent from "@/components/CategorySeoContent.astro";
-import { toProductCategory, type CategoryEntry } from "@/lib/content";
+import ProductImageCard from "@/components/ProductImageCard.astro";
+import QuoteLink from "@/components/QuoteLink.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import {
+  blogSlug,
+  getBlogBySlug,
+  getProductItemsByCategory,
+  toProductCategory,
+  toProductItem,
+  type CategoryEntry,
+} from "@/lib/content";
 import { categoryPageH1 } from "@/lib/category-seo";
+import { cn } from "@/lib/utils";
 import { localizedPath, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
 
@@ -16,10 +31,15 @@ const { locale, entry } = Astro.props;
 const t = ui(locale);
 const product = toProductCategory(entry);
 const lp = (p: string) => localizedPath(locale, p);
-const pageH1 = categoryPageH1(product.title);
+const pageH1 = categoryPageH1(product.title, locale);
 const canonicalPath = product.canonicalSlug
   ? lp(`/products/${product.canonicalSlug}`)
   : lp(`/products/${product.slug}`);
+
+const categoryProducts = (await getProductItemsByCategory(product.slug, locale)).map(toProductItem);
+const relatedPosts = (
+  await Promise.all(product.relatedBlogSlugs.map((slug) => getBlogBySlug(slug, locale)))
+).filter(Boolean);
 ---
 
 <BaseLayout
@@ -39,9 +59,120 @@ const canonicalPath = product.canonicalSlug
           { label: product.title },
         ]}
       />
-      <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">{pageH1}</h1>
-      <p class="text-muted-foreground max-w-3xl mb-10">{product.description}</p>
-      <CategorySeoContent product={product} />
+
+      <div class="mb-10">
+        <span class="section-hd-label">{t.chrome.productCategory}</span>
+        <h1 class="text-3xl md:text-5xl font-display font-bold text-foreground mb-4">{pageH1}</h1>
+        <p class="text-lg text-muted-foreground max-w-3xl">{product.description}</p>
+      </div>
+
+      <div class="mb-12">
+        <h2 class="text-2xl font-display font-semibold text-foreground mb-6">{t.chrome.keyFeatures}</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {
+            product.features.map((feature) => (
+              <div class="flex items-start gap-3 p-4 bg-secondary rounded-xl border border-border/20 hover:border-primary/15 transition-all duration-200">
+                <Icon name="CheckCircle" size={18} class="text-primary shrink-0 mt-0.5" />
+                <span class="text-sm text-foreground">{feature}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      {
+        categoryProducts.length > 0 && (
+          <div class="mb-12">
+            <h2 class="text-2xl font-display font-semibold text-foreground mb-6">{t.chrome.productsInCategory}</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {categoryProducts.map((item) => (
+                <Card class="group border border-border/60 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                  <CardContent class="p-0">
+                    <div class="aspect-[4/3] overflow-hidden bg-gradient-to-b from-secondary/50 to-secondary flex items-center justify-center p-4 md:p-5 rounded-t-xl">
+                      <ProductImageCard
+                        src={item.image}
+                        alt={item.imageAlt ?? item.name}
+                        class="w-full h-full transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <div class="p-5">
+                      <h3 class="font-display font-semibold text-foreground mb-1">{item.name}</h3>
+                      <p class="text-sm text-muted-foreground mb-3 line-clamp-2">{item.summary}</p>
+                      <a
+                        href={lp(`/product/${item.slug}`)}
+                        class="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                      >
+                        {t.common.viewDetails} <Icon name="ArrowRight" size={14} class="rtl:rotate-180" />
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      <div class="mb-12 p-8 md:p-10 bg-secondary rounded-2xl text-center border border-border/20">
+        <h2 class="text-2xl font-display font-semibold text-foreground mb-3">
+          {t.chrome.quoteForHeading} {product.title}
+        </h2>
+        <p class="text-muted-foreground mb-6 max-w-lg mx-auto">
+          {t.chrome.quoteForBodyBefore} {product.title} {t.chrome.quoteForBodyAfter}
+        </p>
+        <QuoteLink
+          locale={locale}
+          quote={{
+            categorySlug: product.slug,
+            categoryName: product.title,
+            ref: lp(`/products/${product.slug}`),
+            locale,
+          }}
+          class={cn(buttonVariants({ size: "lg" }), "shadow-md hover:shadow-lg")}
+        >
+          {t.chrome.requestQuote}
+        </QuoteLink>
+      </div>
+
+      <CategorySeoContent product={product} locale={locale} />
+
+      {
+        product.internalLinks.length > 0 && (
+          <div class="mb-12">
+            <h2 class="text-2xl font-display font-semibold text-foreground mb-4">{t.chrome.related}</h2>
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {product.internalLinks.map((link) => (
+                <InternalLinkCard label={link.label} path={lp(link.path)} />
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      {
+        relatedPosts.length > 0 && (
+          <div>
+            <h2 class="text-2xl font-display font-semibold text-foreground mb-4">{t.chrome.learnMore}</h2>
+            <div class="grid gap-4 sm:grid-cols-2">
+              {relatedPosts.map(
+                (post) =>
+                  post && (
+                    <Card class="border border-border/60 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                      <CardContent class="p-5">
+                        <a href={lp(`/blog/${blogSlug(post)}`)} class="group">
+                          <h3 class="font-display font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                            {post.data.title}
+                          </h3>
+                          <p class="text-sm text-muted-foreground">{post.data.excerpt}</p>
+                        </a>
+                      </CardContent>
+                    </Card>
+                  ),
+              )}
+            </div>
+          </div>
+        )
+      }
     </div>
   </div>
 </BaseLayout>

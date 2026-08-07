@@ -1,0 +1,167 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Breadcrumb from "@/components/ui/Breadcrumb.astro";
+import Card from "@/components/ui/Card.astro";
+import CardContent from "@/components/ui/CardContent.astro";
+import FaqAccordion from "@/components/ui/FaqAccordion.astro";
+import Icon from "@/components/Icon.astro";
+import InternalLinkCard from "@/components/InternalLinkCard.astro";
+import QuoteLink from "@/components/QuoteLink.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import type { FeaturePage } from "@/data/features";
+import { blogSlug, getBlogBySlug } from "@/lib/content";
+import { featurePageH1 } from "@/lib/category-seo";
+import type { JsonLd } from "@/lib/seo";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+
+interface Props {
+  locale?: Locale;
+  feature: FeaturePage;
+}
+
+const { locale = defaultLocale, feature } = Astro.props;
+const t = ui(locale);
+const lp = (path: string) => localizedPath(locale, path);
+
+const relatedPosts = (
+  await Promise.all(feature.relatedBlogSlugs.map((s) => getBlogBySlug(s, locale)))
+).filter(Boolean);
+
+const faqJsonLd: JsonLd | undefined = feature.faqs?.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: feature.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    }
+  : undefined;
+
+const pageH1 = featurePageH1(feature.title, locale);
+---
+
+<BaseLayout
+  title={`${pageH1} | CoolerFit`}
+  description={feature.description}
+  canonicalPath={lp(`/features/${feature.slug}`)}
+  alternatePath={`/features/${feature.slug}`}
+  locale={locale}
+  jsonLd={faqJsonLd}
+>
+  <div class="pt-24 md:pt-32 pb-20">
+    <div class="container max-w-4xl">
+      <Breadcrumb
+        class="mb-6"
+        items={[
+          { label: t.common.home, href: lp("/") },
+          { label: t.nav.products, href: lp("/products") },
+          { label: feature.title },
+        ]}
+      />
+
+      <header class="mb-10 border-b border-border pb-8">
+        <span class="section-hd-label">{t.chrome.featureDetail}</span>
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">{pageH1}</h1>
+        <p class="text-lg text-muted-foreground">{feature.description}</p>
+        {feature.intro ? <p class="mt-4 text-muted-foreground leading-relaxed">{feature.intro}</p> : null}
+      </header>
+
+      <div class="mb-10">
+        <h2 class="text-2xl font-display font-semibold text-foreground mb-4">{t.chrome.keyBenefits}</h2>
+        <div class="space-y-3">
+          {
+            feature.benefits.map((b) => (
+              <div class="flex items-start gap-3 p-3 bg-secondary rounded-lg">
+                <Icon name="CheckCircle" size={18} class="text-primary shrink-0 mt-0.5" />
+                <span class="text-sm text-foreground">{b}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      {
+        feature.sections && feature.sections.length > 0 ? (
+          <div class="space-y-10 mb-10">
+            {feature.sections.map((section) => (
+              <section>
+                <h2 class="text-2xl font-display font-semibold text-foreground mb-3">{section.heading}</h2>
+                <p class="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
+                {section.bullets && section.bullets.length > 0 ? (
+                  <ul class="space-y-2">
+                    {section.bullets.map((item) => (
+                      <li class="flex items-start gap-2 text-sm text-foreground">
+                        <Icon name="CheckCircle" size={16} class="text-primary shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </section>
+            ))}
+          </div>
+        ) : null
+      }
+
+      {
+        feature.faqs && feature.faqs.length > 0 ? (
+          <div class="mb-10">
+            <h2 class="text-2xl font-display font-semibold text-foreground mb-4">{t.chrome.faqs}</h2>
+            <FaqAccordion faqs={feature.faqs} />
+          </div>
+        ) : null
+      }
+
+      <div class="mb-10 pt-6 border-t border-border">
+        <h2 class="text-2xl font-display font-semibold text-foreground mb-4">{t.common.relatedProducts}</h2>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {feature.relatedProducts.map((p) => <InternalLinkCard label={p.label} path={lp(p.path)} />)}
+        </div>
+      </div>
+
+      {
+        relatedPosts.length > 0 && (
+          <div class="mb-10">
+            <h2 class="text-2xl font-display font-semibold text-foreground mb-4">{t.chrome.learnMore}</h2>
+            <div class="grid gap-3 sm:grid-cols-2">
+              {relatedPosts.map(
+                (post) =>
+                  post && (
+                    <Card class="border border-border/60 shadow-xs hover:shadow-md transition-all duration-300">
+                      <CardContent class="p-4">
+                        <a href={lp(`/blog/${blogSlug(post)}`)} class="group">
+                          <h3 class="font-medium text-sm text-foreground group-hover:text-primary transition-colors">
+                            {post.data.title}
+                          </h3>
+                          <p class="text-xs text-muted-foreground mt-1">{post.data.excerpt}</p>
+                        </a>
+                      </CardContent>
+                    </Card>
+                  ),
+              )}
+            </div>
+          </div>
+        )
+      }
+
+      <div class="p-8 bg-secondary rounded-xl text-center">
+        <h3 class="font-display font-semibold text-foreground mb-2">{t.chrome.interestedFeature}</h3>
+        <p class="text-sm text-muted-foreground mb-4">{t.chrome.interestedFeatureBody}</p>
+        <QuoteLink
+          locale={locale}
+          quote={{
+            coverType: pageH1,
+            ref: lp(`/features/${feature.slug}`),
+            locale,
+          }}
+          class={buttonVariants()}
+        >
+          {t.nav.contact}
+        </QuoteLink>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

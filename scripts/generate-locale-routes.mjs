@@ -35,6 +35,42 @@ import ContactPage from "@/templates/ContactPage.astro";
   );
 
   write(
+    `${locale}/about.astro`,
+    `---
+import AboutPage from "@/templates/AboutPage.astro";
+---
+<AboutPage locale="${locale}" />
+`,
+  );
+
+  write(
+    `${locale}/privacy.astro`,
+    `---
+import PrivacyPage from "@/templates/PrivacyPage.astro";
+---
+<PrivacyPage locale="${locale}" />
+`,
+  );
+
+  write(
+    `${locale}/custom-solutions.astro`,
+    `---
+import CustomSolutionsPage from "@/templates/CustomSolutionsPage.astro";
+---
+<CustomSolutionsPage locale="${locale}" />
+`,
+  );
+
+  write(
+    `${locale}/sitemap.astro`,
+    `---
+import SitemapPage from "@/templates/SitemapPage.astro";
+---
+<SitemapPage locale="${locale}" />
+`,
+  );
+
+  write(
     `${locale}/products/index.astro`,
     `---
 import ProductsIndexPage from "@/templates/ProductsIndexPage.astro";
@@ -106,6 +142,46 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 ---
 <BlogPostPage locale="${locale}" post={post} />
+`,
+  );
+
+  write(
+    `${locale}/features/[slug].astro`,
+    `---
+import FeatureDetailPage from "@/templates/FeatureDetailPage.astro";
+import { getFeatureEntries, featureSlug, toFeaturePage } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const entries = await getFeatureEntries("${locale}");
+  return entries.map((e) => ({
+    params: { slug: featureSlug(e) },
+    props: { feature: toFeaturePage(e) },
+  }));
+}
+
+const { feature } = Astro.props;
+---
+<FeatureDetailPage locale="${locale}" feature={feature} />
+`,
+  );
+
+  write(
+    `${locale}/[...slug].astro`,
+    `---
+import ResourcePage from "@/templates/ResourcePage.astro";
+import { getResourceEntries, resourceSlug, toResourcePage } from "@/lib/content";
+
+export async function getStaticPaths() {
+  const entries = await getResourceEntries("${locale}");
+  return entries.map((e) => ({
+    params: { slug: resourceSlug(e) },
+    props: { resource: toResourcePage(e) },
+  }));
+}
+
+const { resource } = Astro.props;
+---
+<ResourcePage locale="${locale}" resource={resource} />
 `,
   );
 }

@@ -22,7 +22,7 @@ export default defineConfig({
         defaultLocale: 'en',
         locales: {
           en: 'en-US',
-          es: 'es',
+          es: 'es-MX',
           ar: 'ar',
         },
       },

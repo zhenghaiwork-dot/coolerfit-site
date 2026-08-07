@@ -32,7 +32,15 @@ const featuredSlugs = [
 ] as const;
 
 const products = (await getProductEntries(locale)).map(toProductItem);
-const featured = featuredSlugs.map((slug) => products.find((p) => p.slug === slug)).filter(Boolean);
+const bySlug = new Map(products.map((p) => [p.slug, p]));
+const featuredFromList = featuredSlugs.map((slug) => bySlug.get(slug)).filter((p): p is NonNullable<typeof p> => Boolean(p));
+// Never leave the homepage product strip empty if collections load but slugs drift.
+const featured =
+  featuredFromList.length > 0
+    ? featuredFromList
+    : products.filter((p) => p.popular).slice(0, 6).length > 0
+      ? products.filter((p) => p.popular).slice(0, 6)
+      : products.slice(0, 6);
 
 const sellingPoints: { icon: IconName; title: string; desc: string }[] =
   locale === "es"
@@ -124,31 +132,45 @@ const sellingPoints: { icon: IconName; title: string; desc: string }[] =
   <section class="relative py-16 md:py-24 bg-secondary section-edge">
     <div class="container">
       <SectionHeader label={t.nav.products} heading={locale === "es" ? "Nuestra gama" : locale === "ar" ? "مجموعة منتجاتنا" : "Our Product Range"} />
+      {
+        featured.length === 0 ? (
+          <p class="text-center text-muted-foreground mb-8">
+            {locale === "es"
+              ? "Pronto añadiremos productos aquí. Mientras tanto, explora el catálogo completo."
+              : locale === "ar"
+                ? "سنضيف المنتجات هنا قريبًا. يمكنك تصفّح الكتالوج الكامل الآن."
+                : "Products will appear here shortly. Browse the full catalog in the meantime."}
+          </p>
+        ) : null
+      }
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {
-          featured.map(
-            (p) =>
-              p && (
-                <a href={lp(`/product/${p.slug}`)} class="group block">
-                  <Card class="h-full border border-border/60 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1 overflow-hidden">
-                    <div class="aspect-[4/3] overflow-hidden bg-gradient-to-b from-secondary/50 to-secondary flex items-center justify-center p-4 md:p-5">
-                      <ProductImageCard
-                        src={p.image}
-                        alt={p.imageAlt ?? p.name}
-                        class="w-full h-full transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                      />
-                    </div>
-                    <CardContent class="p-6">
-                      <h3 class="font-display font-semibold text-foreground mt-1 mb-2">{p.name}</h3>
-                      <span class="inline-flex items-center text-sm font-medium text-primary">
-                        {t.common.learnMore} <Icon name="ChevronRight" size={14} class="ms-1" />
-                      </span>
-                    </CardContent>
-                  </Card>
-                </a>
-              ),
-          )
+          featured.map((p) => (
+            <a href={lp(`/product/${p.slug}`)} class="group block">
+              <Card class="h-full border border-border/60 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1 overflow-hidden">
+                <div class="aspect-[4/3] overflow-hidden bg-gradient-to-b from-secondary/50 to-secondary flex items-center justify-center p-4 md:p-5">
+                  <ProductImageCard
+                    src={p.image}
+                    alt={p.imageAlt ?? p.name}
+                    class="w-full h-full transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+                <CardContent class="p-6">
+                  <h3 class="font-display font-semibold text-foreground mt-1 mb-2">{p.name}</h3>
+                  <span class="inline-flex items-center text-sm font-medium text-primary">
+                    {t.common.learnMore} <Icon name="ChevronRight" size={14} class="ms-1 rtl:rotate-180" />
+                  </span>
+                </CardContent>
+              </Card>
+            </a>
+          ))
         }
+      </div>
+      <div class="text-center mt-10">
+        <Button href={lp("/products")} variant="outline">
+          {locale === "es" ? "Ver todos los productos" : locale === "ar" ? "عرض كل المنتجات" : "View all products"}
+          <Icon name="ArrowRight" class="ms-2" size={16} />
+        </Button>
       </div>
     </div>
   </section>
