@@ -5,12 +5,24 @@
  */
 header('Content-Type: application/json; charset=utf-8');
 
-$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
-header("Access-Control-Allow-Origin: $origin");
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+$allowedOrigins = [
+    'https://aircoolercover.com',
+    'https://www.aircoolercover.com',
+];
+if ($origin !== '' && in_array($origin, $allowedOrigins, true)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header('Vary: Origin');
+}
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
-if ($_SERVER['HTTP_ORIGIN'] ?? false) {
-    header('Vary: Origin');
+header('Cache-Control: no-store');
+header('X-Content-Type-Options: nosniff');
+
+if ($origin !== '' && !in_array($origin, $allowedOrigins, true)) {
+    http_response_code(403);
+    echo json_encode(['ok' => false, 'error' => 'Origin not allowed']);
+    exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -123,11 +135,32 @@ $logoTmp = $_FILES['logo']['tmp_name'] ?? '';
 $logoName = $_FILES['logo']['name'] ?? '';
 $logoError = $_FILES['logo']['error'] ?? UPLOAD_ERR_NO_FILE;
 if ($logoError === UPLOAD_ERR_OK && is_uploaded_file($logoTmp)) {
+    $maxLogoBytes = 5 * 1024 * 1024;
+    $logoSize = (int)($_FILES['logo']['size'] ?? 0);
+    if ($logoSize <= 0 || $logoSize > $maxLogoBytes) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'error' => 'Logo must be 5 MB or smaller']);
+        exit;
+    }
+
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mime = finfo_file($finfo, $logoTmp) ?: 'application/octet-stream';
     finfo_close($finfo);
+    $allowedLogoTypes = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp',
+        'application/pdf' => 'pdf',
+    ];
+    if (!isset($allowedLogoTypes[$mime])) {
+        http_response_code(400);
+        echo json_encode(['ok' => false, 'error' => 'Logo must be JPG, PNG, WebP, or PDF']);
+        exit;
+    }
+    $safeBaseName = preg_replace('/[^A-Za-z0-9._-]/', '-', pathinfo($logoName, PATHINFO_FILENAME)) ?: 'logo';
+    $safeLogoName = substr($safeBaseName, 0, 80) . '.' . $allowedLogoTypes[$mime];
     $attachment = [
-        'name' => $logoName,
+        'name' => $safeLogoName,
         'mime' => $mime,
         'data' => file_get_contents($logoTmp),
     ];

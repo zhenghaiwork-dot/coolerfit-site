@@ -9,7 +9,6 @@ import Select from "@/components/ui/Select.astro";
 import Icon from "@/components/Icon.astro";
 import InquiryAntiSpamFields from "@/components/InquiryAntiSpamFields.astro";
 import QuoteLink from "@/components/QuoteLink.astro";
-import { cn } from "@/lib/utils";
 import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
 
@@ -153,7 +152,7 @@ const openingOptions = [
               value="#888888"
               data-custom-hex
               class="absolute inset-0 w-11 h-11 opacity-0 cursor-pointer"
-              aria-label="Custom color"
+              aria-label={t.common.customColor}
             />
             <div
               data-custom-hex-preview
@@ -200,7 +199,7 @@ const openingOptions = [
                 type="button"
                 data-logo-remove
                 class="absolute -top-1.5 -right-1.5 w-7 h-7 bg-destructive text-destructive-foreground rounded-full flex items-center justify-center hover:bg-destructive/90 transition-colors"
-                aria-label="Remove logo"
+                aria-label={t.common.removeLogo}
               >
                 <Icon name="X" size={14} />
               </button>
@@ -234,12 +233,12 @@ const openingOptions = [
               PNG, JPG, SVG — Max 5MB
             </p>
           </button>
-          <input type="file" accept="image/*,.svg" class="hidden" data-logo-input />
+          <input type="file" accept="image/jpeg,image/png,image/webp,application/pdf" class="hidden" data-logo-input />
         </div>
       </div>
 
       <div>
-        <Label class="text-sm font-medium text-foreground">{t.chrome.openingDesign}</Label>
+        <Label class="text-sm font-medium text-foreground">{t.chrome.openingDesignLabel}</Label>
         <Select
           name="openingDesign"
           class="mt-2"

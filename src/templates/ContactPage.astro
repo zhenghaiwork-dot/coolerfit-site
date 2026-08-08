@@ -8,7 +8,7 @@ import Card from "@/components/ui/Card.astro";
 import CardContent from "@/components/ui/CardContent.astro";
 import Icon from "@/components/Icon.astro";
 import InquiryAntiSpamFields from "@/components/InquiryAntiSpamFields.astro";
-import { SITE_CONTACT } from "@/lib/site";
+import { organizationJsonLd, SITE_CONTACT, SITE_NAME, SITE_URL } from "@/lib/site";
 import { parseQuotePrefill } from "@/lib/quote-link";
 import { localizedPath, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
@@ -21,6 +21,24 @@ const { locale } = Astro.props;
 const t = ui(locale);
 const lp = (p: string) => localizedPath(locale, p);
 const prefill = parseQuotePrefill(Astro.url.searchParams);
+const contactJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: t.contact.heading,
+  url: `${SITE_URL}${lp("/contact")}`,
+  mainEntity: {
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: SITE_CONTACT.email,
+      telephone: SITE_CONTACT.phone,
+      contactType: "sales",
+      availableLanguage: ["English", "Spanish", "Arabic"],
+    },
+  },
+};
 ---
 
 <BaseLayout
@@ -29,6 +47,7 @@ const prefill = parseQuotePrefill(Astro.url.searchParams);
   canonicalPath={lp("/contact")}
   alternatePath="/contact"
   locale={locale}
+  jsonLd={[organizationJsonLd(), contactJsonLd]}
 >
   <div class="pt-24 md:pt-32 pb-20">
     <div class="container max-w-3xl">
@@ -133,7 +152,6 @@ const prefill = parseQuotePrefill(Astro.url.searchParams);
     const submitButton = form.querySelector<HTMLButtonElement>("[data-contact-submit]");
     const submitLabel = form.querySelector<HTMLElement>("[data-submit-label]");
     const idle = submitLabel?.textContent ?? "Send";
-    const locale = form.dataset.locale ?? "en";
     const sending = form.dataset.sending ?? "Sending…";
     const success = form.dataset.success ?? "Quote request sent";
 
@@ -177,13 +195,14 @@ const prefill = parseQuotePrefill(Astro.url.searchParams);
             title: success,
             description: `→ ${SITE_CONTACT.email}`,
           });
-          form.reset();
-          document.querySelector("[data-quote-banner]")?.remove();
+          form.dataset.submitted = "true";
+          if (submitButton) submitButton.disabled = true;
+          if (submitLabel) submitLabel.textContent = success;
         } else {
           toast({ title: result.error ?? "Error", variant: "destructive" });
         }
       } finally {
-        if (submitButton) submitButton.disabled = false;
+        if (submitButton && form.dataset.submitted !== "true") submitButton.disabled = false;
         if (submitLabel) submitLabel.textContent = idle;
       }
     });

@@ -10,6 +10,7 @@ import { getProductGallery } from "@/lib/product-images";
 import { productDetailMetaTitle, productDetailPageH1 } from "@/lib/category-seo";
 import { localizedPath, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
+import { breadcrumbJsonLd, SITE_NAME, SITE_URL } from "@/lib/site";
 
 interface Props {
   locale: Locale;
@@ -21,14 +22,33 @@ const t = ui(locale);
 const lp = (p: string) => localizedPath(locale, p);
 const gallery = getProductGallery(product);
 const pageH1 = productDetailPageH1(product.name, locale);
+const productPath = lp(`/product/${product.slug}`);
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: product.name,
+  description: product.summary,
+  image: gallery.map((item) => `${SITE_URL}${item.src}`),
+  sku: product.slug,
+  brand: { "@type": "Brand", name: SITE_NAME },
+  url: `${SITE_URL}${productPath}`,
+};
+const productBreadcrumbs = breadcrumbJsonLd([
+  { name: t.common.home, path: lp("/") },
+  { name: t.nav.products, path: lp("/products") },
+  { name: product.name, path: productPath },
+]);
 ---
 
 <BaseLayout
   title={productDetailMetaTitle(product.name, locale)}
   description={product.summary}
-  canonicalPath={lp(`/product/${product.slug}`)}
+  canonicalPath={productPath}
   alternatePath={`/product/${product.slug}`}
   locale={locale}
+  ogType="product"
+  imageUrl={gallery[0]?.src}
+  jsonLd={[productJsonLd, productBreadcrumbs]}
 >
   <div class="pt-24 md:pt-32 pb-20">
     <div class="container">
@@ -44,7 +64,7 @@ const pageH1 = productDetailPageH1(product.name, locale);
         <Icon name="ArrowLeft" size={16} /> {t.common.backToProducts}
       </a>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <ProductGallery gallery={gallery} />
+        <ProductGallery gallery={gallery} locale={locale} />
         <div>
           <h1 class="text-3xl md:text-4xl font-display font-bold text-foreground mb-2">{pageH1}</h1>
           <p class="text-muted-foreground leading-relaxed mb-8">{product.description}</p>

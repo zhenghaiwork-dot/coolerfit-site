@@ -6,7 +6,7 @@ import CardContent from "@/components/ui/CardContent.astro";
 import Icon from "@/components/Icon.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
 import ProductImageCard from "@/components/ProductImageCard.astro";
-import { organizationJsonLd } from "@/lib/site";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/site";
 import { getProductEntries, toProductItem } from "@/lib/content";
 import { getPageEntry } from "@/lib/content";
 import { localizedPath, type Locale } from "@/i18n/locales";
@@ -71,7 +71,7 @@ const sellingPoints: { icon: IconName; title: string; desc: string }[] =
   canonicalPath={lp("/")}
   alternatePath="/"
   locale={locale}
-  jsonLd={organizationJsonLd()}
+  jsonLd={[organizationJsonLd(), websiteJsonLd()]}
 >
   <section class="relative pt-32 pb-16 md:pt-44 md:pb-28 bg-secondary overflow-hidden">
     <div class="absolute inset-0 pointer-events-none" aria-hidden="true">

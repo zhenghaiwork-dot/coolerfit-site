@@ -25,6 +25,14 @@ export const en = {
     language: "Language",
     siteMap: "Site Map",
     pageNotFound: "Page Not Found",
+    toggleMenu: "Toggle menu",
+    toggleSubmenu: "Toggle submenu",
+    customColor: "Custom color",
+    removeLogo: "Remove logo",
+    showImage: "Show image",
+    previousSlide: "Previous slide",
+    nextSlide: "Next slide",
+    close: "Close",
   },
   chrome: {
     quickLinks: "Quick Links",
@@ -113,7 +121,7 @@ export const en = {
     orSkipToQuote: "Or skip to a quick quote",
     materialLabel: "Material",
     dimensionsLabel: "Dimensions",
-    openingDesign: "Opening / Cutout Design",
+    openingDesignLabel: "Opening / Cutout Design",
     selectOpening: "Select opening style...",
     additionalNotes: "Additional Notes",
     notesPlaceholder: "Quantity, reference photos, pipe locations, Pantone color, special fasteners…",
@@ -196,4 +204,8 @@ export const en = {
   },
 } as const;
 
-export type UiDict = typeof en;
+type StringShape<T> = {
+  [K in keyof T]: T[K] extends string ? string : StringShape<T[K]>;
+};
+
+export type UiDict = StringShape<typeof en>;

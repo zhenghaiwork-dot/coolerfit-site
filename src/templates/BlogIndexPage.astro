@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Card from "@/components/ui/Card.astro";
 import Breadcrumb from "@/components/ui/Breadcrumb.astro";
 import Icon from "@/components/Icon.astro";
-import { getPillarPosts, getClusterPosts, blogSlug, toBlogPost } from "@/lib/content";
+import { getPillarPosts, getClusterPosts, toBlogPost } from "@/lib/content";
 import { localizedPath, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
 
@@ -15,10 +15,15 @@ const { locale } = Astro.props;
 const t = ui(locale);
 const lp = (p: string) => localizedPath(locale, p);
 const pillars = (await getPillarPosts(locale)).map(toBlogPost);
+const blogMetaTitle = locale === "es"
+  ? "Guías de fundas para enfriadores | CoolerFit"
+  : locale === "ar"
+    ? "دليل كفرات المكيّف الصحراوي | CoolerFit"
+    : "Cooler Cover Knowledge Base | CoolerFit";
 ---
 
 <BaseLayout
-  title={`${t.nav.blog} | CoolerFit`}
+  title={blogMetaTitle}
   description={t.home.heroBody}
   canonicalPath={lp("/blog")}
   alternatePath="/blog"

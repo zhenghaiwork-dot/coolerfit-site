@@ -44,7 +44,7 @@ const pageH1 = featurePageH1(feature.title, locale);
 ---
 
 <BaseLayout
-  title={`${pageH1} | CoolerFit`}
+  title={`${pageH1} — ${locale === "es" ? "característica" : locale === "ar" ? "ميزة" : "feature"} | CoolerFit`}
   description={feature.description}
   canonicalPath={lp(`/features/${feature.slug}`)}
   alternatePath={`/features/${feature.slug}`}

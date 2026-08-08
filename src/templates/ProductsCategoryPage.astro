@@ -21,6 +21,7 @@ import { categoryPageH1 } from "@/lib/category-seo";
 import { cn } from "@/lib/utils";
 import { localizedPath, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
+import { breadcrumbJsonLd, SITE_URL } from "@/lib/site";
 
 interface Props {
   locale: Locale;
@@ -35,19 +36,45 @@ const pageH1 = categoryPageH1(product.title, locale);
 const canonicalPath = product.canonicalSlug
   ? lp(`/products/${product.canonicalSlug}`)
   : lp(`/products/${product.slug}`);
+const categoryMetaTitle = product.canonicalSlug
+  ? `${product.title} — ${locale === "es" ? "término alternativo" : locale === "ar" ? "مصطلح بديل" : "alternate term"} | CoolerFit`
+  : `${product.title} | CoolerFit`;
 
 const categoryProducts = (await getProductItemsByCategory(product.slug, locale)).map(toProductItem);
 const relatedPosts = (
   await Promise.all(product.relatedBlogSlugs.map((slug) => getBlogBySlug(slug, locale)))
 ).filter(Boolean);
+const categoryJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: pageH1,
+  description: product.description,
+  url: `${SITE_URL}${canonicalPath}`,
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: categoryProducts.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: `${SITE_URL}${lp(`/product/${item.slug}`)}`,
+    })),
+  },
+};
+const categoryBreadcrumbs = breadcrumbJsonLd([
+  { name: t.common.home, path: lp("/") },
+  { name: t.nav.products, path: lp("/products") },
+  { name: product.title, path: canonicalPath },
+]);
 ---
 
 <BaseLayout
-  title={`${pageH1} | CoolerFit`}
+  title={categoryMetaTitle}
   description={product.description}
   canonicalPath={canonicalPath}
   alternatePath={`/products/${product.canonicalSlug ?? product.slug}`}
   locale={locale}
+  jsonLd={[categoryJsonLd, categoryBreadcrumbs]}
+  noIndex={Boolean(product.canonicalSlug)}
 >
   <div class="pt-24 md:pt-32 pb-20">
     <div class="container">

@@ -2,6 +2,8 @@
 import BlogLayout from "@/layouts/BlogLayout.astro";
 import type { BlogPost } from "@/data/blog";
 import { localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+import { breadcrumbJsonLd, SITE_NAME, SITE_URL } from "@/lib/site";
 
 interface Props {
   locale: Locale;
@@ -10,13 +12,31 @@ interface Props {
 
 const { locale, post } = Astro.props;
 const lp = (p: string) => localizedPath(locale, p);
+const t = ui(locale);
+const articlePath = lp(`/blog/${post.slug}`);
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.title,
+  description: post.excerpt,
+  inLanguage: locale === "es" ? "es-MX" : locale === "ar" ? "ar" : "en-US",
+  mainEntityOfPage: `${SITE_URL}${articlePath}`,
+  author: { "@type": "Organization", name: SITE_NAME },
+  publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+};
+const articleBreadcrumbs = breadcrumbJsonLd([
+  { name: t.common.home, path: lp("/") },
+  { name: t.nav.blog, path: lp("/blog") },
+  { name: post.title, path: articlePath },
+]);
 ---
 
 <BlogLayout
   post={post}
   title={`${post.title} | CoolerFit`}
   description={post.excerpt}
-  canonicalPath={lp(`/blog/${post.slug}`)}
+  canonicalPath={articlePath}
   noIndex={Boolean(post.noIndex)}
   locale={locale}
+  jsonLd={[articleJsonLd, articleBreadcrumbs]}
 />

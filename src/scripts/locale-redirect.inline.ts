@@ -5,9 +5,8 @@
  * Rules:
  * - Skip bots / prerender hints
  * - Skip when html has data-skip-lang-redirect (404 error pages)
- * - Honor explicit cookie preference (set by language switcher or first detect)
- * - On first visit only: map navigator.languages → en | es | ar and redirect once
- * - Preserve path across locales (en unprefixed, es/ar prefixed)
+ * - Only the homepage may auto-route, avoiding deep-link surprises
+ * - Only on first visit: map navigator.languages → en | es | ar and redirect once
  * - Target URLs always use trailing slash (matches Astro trailingSlash: always)
  */
 export const localeRedirectInlineScript = `(function(){
@@ -23,6 +22,7 @@ export const localeRedirectInlineScript = `(function(){
 
     var current = html.getAttribute("data-locale") || "en";
     var path = location.pathname || "/";
+    if (path !== "/") return;
 
     function isLocale(v){ return locales.indexOf(v) !== -1; }
 
@@ -96,12 +96,9 @@ export const localeRedirectInlineScript = `(function(){
     }
 
     var pref = readPref();
-    var firstVisit = !pref;
-    if (firstVisit) {
-      pref = detect();
-      writePref(pref);
-    }
-
+    if (pref) return;
+    pref = detect();
+    writePref(pref);
     if (pref === current) return;
 
     var target = withLocale(pref, strip(path));

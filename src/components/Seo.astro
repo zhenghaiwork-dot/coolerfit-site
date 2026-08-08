@@ -4,7 +4,7 @@
  * component produced, but at build time so crawlers see them in the raw HTML.
  */
 import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/site";
-import { toAbsoluteUrl, truncateMetaDescription, type JsonLd } from "@/lib/seo";
+import { toAbsoluteUrl, truncateMetaDescription, truncateMetaTitle, type JsonLd } from "@/lib/seo";
 import {
   defaultLocale,
   localeMarkets,
@@ -24,6 +24,7 @@ interface Props {
   locale?: Locale;
   /** Path without locale prefix, used for hreflang alternates. */
   alternatePath?: string;
+  ogType?: "website" | "article" | "product";
 }
 
 const {
@@ -35,6 +36,7 @@ const {
   noIndex,
   locale = defaultLocale,
   alternatePath,
+  ogType = "website",
 } = Astro.props;
 
 const rawAlternate = alternatePath ?? canonicalPath ?? "/";
@@ -42,9 +44,10 @@ const pathForAlternates = stripLocalePrefix(rawAlternate) || "/";
 const canonical = canonicalPath ? toAbsoluteUrl(canonicalPath) : undefined;
 const ogImage = toAbsoluteUrl(imageUrl || DEFAULT_OG_IMAGE);
 const metaDescription = description ? truncateMetaDescription(description) : undefined;
+const metaTitle = truncateMetaTitle(title);
 ---
 
-<title>{title}</title>
+<title>{metaTitle}</title>
 {metaDescription && <meta name="description" content={metaDescription} />}
 {canonical && <link rel="canonical" href={canonical} />}
 
@@ -66,14 +69,14 @@ const metaDescription = description ? truncateMetaDescription(description) : und
     .filter((code) => code !== locale)
     .map((code) => <meta property="og:locale:alternate" content={localeMarkets[code].ogLocale} />)
 }
-<meta property="og:title" content={title} />
+<meta property="og:title" content={metaTitle} />
 {metaDescription && <meta property="og:description" content={metaDescription} />}
 {canonical && <meta property="og:url" content={canonical} />}
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:image" content={ogImage} />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={title} />
+<meta name="twitter:title" content={metaTitle} />
 {metaDescription && <meta name="twitter:description" content={metaDescription} />}
 <meta name="twitter:image" content={ogImage} />
 

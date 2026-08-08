@@ -180,7 +180,7 @@ const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppe
       </Button>
     </div>
 
-    <button class="lg:hidden p-2 text-foreground" aria-label="Toggle menu" aria-expanded="false" data-mobile-toggle>
+    <button class="lg:hidden p-2 text-foreground" aria-label={t.common.toggleMenu} aria-expanded="false" data-mobile-toggle>
       <Icon name="Menu" size={24} data-icon-menu />
       <Icon name="X" size={24} data-icon-close class="hidden" />
     </button>
@@ -211,7 +211,7 @@ const mobileHeadingClass = "text-[11px] font-semibold text-muted-foreground uppe
                 {link.dropdown && (
                   <button
                     class="p-3 text-muted-foreground hover:text-foreground transition-colors rounded-lg"
-                    aria-label={`Toggle ${link.label} submenu`}
+                    aria-label={`${t.common.toggleSubmenu}: ${link.label}`}
                     aria-expanded="false"
                     data-mobile-expand
                   >

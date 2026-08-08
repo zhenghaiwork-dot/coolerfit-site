@@ -7,7 +7,12 @@ import mdx from '@astrojs/mdx';
 import { blogRedirects } from './src/lib/blog-redirects.ts';
 
 const redirects = Object.fromEntries(
-  Object.entries(blogRedirects).map(([slug, to]) => [`/blog/${slug}`, to]),
+  ['en', 'es', 'ar'].flatMap((locale) =>
+    Object.entries(blogRedirects).map(([slug, to]) => {
+      const prefix = locale === 'en' ? '' : `/${locale}`;
+      return [`${prefix}/blog/${slug}`, `${prefix}${to}`];
+    }),
+  ),
 );
 
 // https://astro.build/config
@@ -18,6 +23,9 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
+      serialize(item) {
+        return { ...item, lastmod: new Date().toISOString() };
+      },
       i18n: {
         defaultLocale: 'en',
         locales: {

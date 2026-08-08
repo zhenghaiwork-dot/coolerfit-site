@@ -84,7 +84,8 @@ export function toast({ title, description, variant = "default" }: ToastOptions)
   const close = document.createElement("button");
   close.type = "button";
   close.setAttribute("toast-close", "");
-  close.setAttribute("aria-label", "Close");
+  const locale = document.documentElement.getAttribute("data-locale") ?? "en";
+  close.setAttribute("aria-label", locale === "es" ? "Cerrar" : locale === "ar" ? "إغلاق" : "Close");
   close.className = CLOSE_CLASS;
   close.innerHTML = CLOSE_ICON;
   close.addEventListener("click", () => dismiss(item));

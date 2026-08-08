@@ -13,12 +13,16 @@ import ProductImage from "@/components/ProductImage.astro";
 import { buttonVariants } from "@/components/ui/button-variants";
 import { cn } from "@/lib/utils";
 import type { ProductGalleryItem } from "@/lib/product-images";
+import { ui } from "@/i18n/ui";
+import type { Locale } from "@/i18n/locales";
 
 interface Props {
   gallery: ProductGalleryItem[];
+  locale: Locale;
 }
 
-const { gallery } = Astro.props;
+const { gallery, locale } = Astro.props;
+const t = ui(locale);
 
 const navClass = cn(buttonVariants({ variant: "outline", size: "icon" }), "absolute h-10 w-10 rounded-full");
 ---
@@ -40,11 +44,11 @@ const navClass = cn(buttonVariants({ variant: "outline", size: "icon" }), "absol
         </div>
         <button type="button" data-gallery-prev class={cn(navClass, "left-3 top-1/2 -translate-y-1/2")} disabled>
           <Icon name="ArrowLeft" class="h-4 w-4" />
-          <span class="sr-only">Previous slide</span>
+          <span class="sr-only">{t.common.previousSlide}</span>
         </button>
         <button type="button" data-gallery-next class={cn(navClass, "right-3 top-1/2 -translate-y-1/2")}>
           <Icon name="ArrowRight" class="h-4 w-4" />
-          <span class="sr-only">Next slide</span>
+          <span class="sr-only">{t.common.nextSlide}</span>
         </button>
       </div>
       <div class="mt-4 grid grid-cols-5 gap-2">
@@ -53,7 +57,7 @@ const navClass = cn(buttonVariants({ variant: "outline", size: "icon" }), "absol
             type="button"
             data-gallery-thumb
             data-index={i}
-            aria-label={`Show image ${i + 1}: ${item.alt}`}
+            aria-label={`${t.common.showImage} ${i + 1}: ${item.alt}`}
             class={cn(
               "aspect-square rounded-md overflow-hidden bg-secondary border-2 transition-colors",
               i === 0 ? "border-primary" : "border-transparent hover:border-border",

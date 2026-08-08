@@ -23,6 +23,7 @@ interface Props {
   alternatePath?: string;
   /** Disable browser-language redirect (use on 404 / error pages). */
   skipLocaleRedirect?: boolean;
+  ogType?: "website" | "article" | "product";
 }
 
 const {
@@ -35,6 +36,7 @@ const {
   locale = (Astro.currentLocale as Locale | undefined) ?? defaultLocale,
   alternatePath,
   skipLocaleRedirect = false,
+  ogType = "website",
 } = Astro.props;
 
 const dir = localeDirs[locale];
@@ -80,6 +82,7 @@ const lang = localeHtmlLang[locale];
       noIndex={noIndex}
       locale={locale}
       alternatePath={alternatePath ?? canonicalPath}
+      ogType={ogType}
     />
   </head>
 
