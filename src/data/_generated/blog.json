@@ -592,8 +592,8 @@
     ]
   },
   {
-    "title": "The Complete Guide to Evaporative Cooler Covers",
-    "excerpt": "Cold rooms after shutdown, rust in spring, or a cover that won't stay on — start with cooler type, outside size, and fabric for your climate.",
+    "title": "Evaporative Cooler Covers: Types, Fit & Buying Guide",
+    "excerpt": "Compare side-draft, down-draft, portable, and custom evaporative cooler covers by size, fabric, tie-down, and off-season use.",
     "isPillar": true,
     "noIndex": false,
     "clusterSlugs": [
@@ -629,6 +629,27 @@
     ],
     "slug": "evaporative-cooler-covers-guide",
     "content": [
+      {
+        "heading": "Quick Buying Guide",
+        "level": "h2",
+        "body": "Start with the cooler profile, then match the outside dimensions and exposure. Retail covers commonly run from about $14 for small portable units to $72+ for large rooftop or heavy-duty models; custom pricing depends on size, fabric, openings, quantity, and logo requirements.",
+        "bullets": [
+          "Side-draft unit → tall cover that wraps every side intake",
+          "Down-draft rooftop unit → wide, lower profile with reinforced top and tie-downs",
+          "Portable cooler → model-specific lightweight cover with a drawcord",
+          "Pipes, disconnect boxes, or unusual proportions → made-to-measure pattern"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Compare cover sizes",
+            "path": "/sizes"
+          },
+          {
+            "label": "Request a custom quote",
+            "path": "/contact"
+          }
+        ]
+      },
       {
         "heading": "Which Problem Are You Fixing?",
         "level": "h2",
@@ -918,8 +939,8 @@
     ]
   },
   {
-    "title": "Swamp Cooler Cover Sizes",
-    "excerpt": "Hem won't drop over casters, or fabric straining at corners? Measure outside W×D×H — between chart rows, size up. Go custom when ports break the rectangle.",
+    "title": "Swamp Cooler Cover Size Chart & Measuring Guide",
+    "excerpt": "Find the right swamp cooler cover size: measure outside width × depth × height, check common 34-inch and 40-inch fits, and size up between rows.",
     "isPillar": false,
     "pillarSlug": "swamp-cooler-covers-guide",
     "noIndex": false,
@@ -939,6 +960,40 @@
     ],
     "slug": "swamp-cooler-cover-sizes",
     "content": [
+      {
+        "heading": "Common Swamp Cooler Cover Sizes",
+        "level": "h2",
+        "body": "These are shopping references, not a substitute for measuring your unit. Manufacturers list dimensions in different orders, so confirm the label is width × depth × height before ordering.",
+        "dataTable": {
+          "headers": [
+            "Typical outside size",
+            "Common application",
+            "Fit check"
+          ],
+          "rows": [
+            [
+              "28 × 28 × 34 in",
+              "Compact down-draft unit",
+              "Verify duct curb and top hardware"
+            ],
+            [
+              "34 × 34 × 36 in",
+              "Common rooftop or side-draft unit",
+              "Include louver and corner clearance"
+            ],
+            [
+              "38 × 38 × 40 in",
+              "Mid-size side-draft unit",
+              "Measure any rear connection box"
+            ],
+            [
+              "40 × 40 × 46 in",
+              "Large side-draft unit",
+              "Confirm straps reach below the cabinet"
+            ]
+          ]
+        }
+      },
       {
         "heading": "Problem: Chart Size Almost Fits",
         "level": "h2",
@@ -980,8 +1035,8 @@
     ]
   },
   {
-    "title": "Swamp Cooler Covers: The Ultimate Guide",
-    "excerpt": "Swamp cooler = evaporative cooler. Wrong size in the yard, side gaps with a down-draft cover, or mesh used for winter — pick the article that matches your problem.",
+    "title": "Swamp Cooler Covers: Sizes, Types & Winter Fit",
+    "excerpt": "Choose the right swamp cooler cover by unit type, outside dimensions, winter exposure, material, and tie-down style—without leaving intake gaps.",
     "isPillar": true,
     "noIndex": false,
     "clusterSlugs": [
@@ -1024,6 +1079,26 @@
     "canonicalNote": "Regional search term for evaporative cooler — same product category as /blog/evaporative-cooler-covers-guide.",
     "slug": "swamp-cooler-covers-guide",
     "content": [
+      {
+        "heading": "Choose a Swamp Cooler Cover in 3 Steps",
+        "level": "h2",
+        "body": "Measure the cabinet first, identify the airflow layout, then choose fabric for the storage season. A correct cover closes the intakes without trapping water inside the cooler.",
+        "bullets": [
+          "Measure maximum width × depth × height, including casters and protrusions",
+          "Match side-draft, down-draft, rooftop, window, or portable profile",
+          "Use solid water-resistant fabric for winter; use mesh only for dry-season dust control"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Swamp cooler cover size chart",
+            "path": "/sizes"
+          },
+          {
+            "label": "Shop cover options",
+            "path": "/products/swamp-cooler-covers"
+          }
+        ]
+      },
       {
         "heading": "Same Machine — Regional Name",
         "level": "h2",
