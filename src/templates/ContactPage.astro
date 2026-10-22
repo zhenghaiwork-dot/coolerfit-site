@@ -143,6 +143,7 @@ const contactJsonLd = {
 
 <script>
   import { submitInquiry, validateInquiryContact } from "@/lib/inquiry";
+  import { clearInquirySource, getInquirySource } from "@/lib/inquiry-source";
   import { SITE_CONTACT } from "@/lib/site";
   import { toast } from "@/lib/toast";
 
@@ -170,6 +171,7 @@ const contactJsonLd = {
       if (submitButton) submitButton.disabled = true;
       if (submitLabel) submitLabel.textContent = sending;
       const refPath = value("refPath");
+      const inquirySource = getInquirySource();
       try {
         const result = await submitInquiry(
           {
@@ -182,7 +184,9 @@ const contactJsonLd = {
             productSlug: value("productSlug") || undefined,
             productName: value("productName") || undefined,
             coverType: value("coverType") || value("coverTypeDisplay") || undefined,
-            pageUrl: refPath ? `${window.location.origin}${refPath}` : window.location.href,
+            pageUrl: refPath || window.location.pathname,
+            sourcePage: inquirySource?.page,
+            sourcePosition: inquirySource?.position,
           },
           null,
           {
@@ -191,9 +195,12 @@ const contactJsonLd = {
           },
         );
         if (result.ok) {
+          clearInquirySource();
           toast({
             title: success,
-            description: `→ ${SITE_CONTACT.email}`,
+            description: result.method === "api" && result.inquiryId
+              ? `Reference: ${result.inquiryId} · ${SITE_CONTACT.email}`
+              : `→ ${SITE_CONTACT.email}`,
           });
           form.dataset.submitted = "true";
           if (submitButton) submitButton.disabled = true;

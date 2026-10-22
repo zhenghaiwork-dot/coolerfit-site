@@ -110,6 +110,6 @@ export function quotePrefillToForm(prefill: QuotePrefill) {
     details: "",
     productSlug: prefill.productSlug,
     productName: prefill.productName || prefill.categoryName || prefill.coverType,
-    pageUrl: prefill.ref ? `${window.location.origin}${prefill.ref}` : window.location.href,
+    pageUrl: prefill.ref || window.location.pathname,
   };
 }

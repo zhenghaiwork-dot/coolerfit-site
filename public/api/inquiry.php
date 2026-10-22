@@ -43,6 +43,26 @@ function field(string $key): string {
     return trim((string)($_POST[$key] ?? ''));
 }
 
+function inquiry_reference(): string {
+    $alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    $suffix = '';
+    for ($i = 0; $i < 4; $i++) {
+        $suffix .= $alphabet[random_int(0, strlen($alphabet) - 1)];
+    }
+    return 'CF-' . gmdate('ymd') . '-' . $suffix;
+}
+
+function safe_source_path(string $value): string {
+    if ($value === '') return '';
+    $path = parse_url($value, PHP_URL_PATH);
+    if (!is_string($path) || $path === '' || $path[0] !== '/') return '';
+    return substr($path, 0, 240);
+}
+
+function safe_source_position(string $value): string {
+    return preg_match('/^[a-z0-9_-]{1,48}$/', $value) ? $value : '';
+}
+
 if (inquiry_rate_limit_exceeded()) {
     http_response_code(429);
     echo json_encode(['ok' => false, 'error' => 'Too many requests. Please wait a while and try again.']);
@@ -86,11 +106,11 @@ if (inquiry_has_excessive_links($combinedText)) {
 }
 
 $formType = field('formType') ?: 'simple';
-$productName = field('productName');
-$subjectProduct = $productName !== '' ? " — $productName" : '';
-$subject = "CoolerFit Quote Request ($formType)$subjectProduct";
+$inquiryId = inquiry_reference();
+$subject = "[$inquiryId] Custom Cooler Cover Inquiry";
 
 $lines = [
+    "Inquiry ID: $inquiryId",
     "Form: $formType",
     "Name: $name",
     "Email: $email",
@@ -110,7 +130,6 @@ $optional = [
     'logoPosition' => 'Logo position',
     'message' => 'Message',
     'notes' => 'Notes',
-    'pageUrl' => 'Submitted from',
 ];
 
 foreach ($optional as $key => $label) {
@@ -118,6 +137,20 @@ foreach ($optional as $key => $label) {
     if ($val !== '') {
         $lines[] = "$label: $val";
     }
+}
+
+$submittedFrom = safe_source_path(field('pageUrl'));
+if ($submittedFrom !== '') {
+    $lines[] = "Submitted from: $submittedFrom";
+}
+
+$sourcePage = safe_source_path(field('sourcePage'));
+$sourcePosition = safe_source_position(field('sourcePosition'));
+if ($sourcePage !== '') {
+    $lines[] = "Lead source page: $sourcePage";
+}
+if ($sourcePosition !== '') {
+    $lines[] = "CTA position: $sourcePosition";
 }
 
 $width = field('width');
@@ -174,4 +207,4 @@ if (!$sent) {
     exit;
 }
 
-echo json_encode(['ok' => true]);
+echo json_encode(['ok' => true, 'inquiryId' => $inquiryId]);

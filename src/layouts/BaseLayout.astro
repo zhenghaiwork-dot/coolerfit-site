@@ -95,6 +95,10 @@ const lang = localeHtmlLang[locale];
       <Footer locale={locale} />
     </div>
     <Toaster />
+    <script>
+      import { initInquirySourceTracking } from "@/lib/inquiry-source";
+      initInquirySourceTracking();
+    </script>
   </body>
 </html>
 

@@ -24,6 +24,8 @@ export type InquiryPayload = {
   openingDesign?: string;
   notes?: string;
   pageUrl?: string;
+  sourcePage?: string;
+  sourcePosition?: string;
 };
 
 // Astro exposes client-visible env vars under the PUBLIC_ prefix, so the
@@ -80,6 +82,8 @@ export function formatInquiryBody(payload: InquiryPayload, logoFileName?: string
   if (payload.message) lines.push(`Message:\n${payload.message}`);
   if (payload.notes) lines.push(`Notes:\n${payload.notes}`);
   if (payload.pageUrl) lines.push(`Submitted from: ${payload.pageUrl}`);
+  if (payload.sourcePage) lines.push(`Lead source page: ${payload.sourcePage}`);
+  if (payload.sourcePosition) lines.push(`CTA position: ${payload.sourcePosition}`);
 
   return lines.join("\n");
 }
@@ -92,7 +96,7 @@ export function buildMailtoUrl(payload: InquiryPayload, logoFileName?: string): 
 }
 
 export type SubmitInquiryResult =
-  | { ok: true; method: "api" }
+  | { ok: true; method: "api"; inquiryId?: string }
   | { ok: true; method: "mailto" }
   | { ok: false; method: "failed"; error?: string };
 
@@ -118,8 +122,8 @@ export async function submitInquiry(
 
   try {
     const res = await fetch(ENDPOINT, { method: "POST", body: formData });
-    const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
-    if (res.ok && data?.ok) return { ok: true, method: "api" };
+    const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string; inquiryId?: string } | null;
+    if (res.ok && data?.ok) return { ok: true, method: "api", inquiryId: data.inquiryId };
     if (!res.ok && data?.error) {
       // Server rejected — try mailto only in local/dev without PHP
       const isLocal =

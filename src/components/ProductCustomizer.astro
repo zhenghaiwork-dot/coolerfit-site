@@ -283,6 +283,7 @@ const openingOptions = [
 
 <script>
   import { submitInquiry, validateInquiryContact } from "@/lib/inquiry";
+  import { clearInquirySource, getInquirySource } from "@/lib/inquiry-source";
   import { toast } from "@/lib/toast";
   import { cn } from "@/lib/utils";
 
@@ -440,6 +441,7 @@ const openingOptions = [
 
     submitButton.disabled = true;
     submitLabel.textContent = msg.sending;
+    const inquirySource = getInquirySource();
 
     try {
       const result = await submitInquiry(
@@ -459,7 +461,9 @@ const openingOptions = [
           logoPosition: value("logoPosition") || undefined,
           openingDesign: value("openingDesign") || undefined,
           notes: value("notes") || undefined,
-          pageUrl: window.location.href,
+          pageUrl: window.location.pathname,
+          sourcePage: inquirySource?.page,
+          sourcePosition: inquirySource?.position ?? "product-customizer-form",
         },
         logoFile,
         {
@@ -469,9 +473,10 @@ const openingOptions = [
       );
 
       if (result.ok && result.method === "api") {
+        clearInquirySource();
         toast({
           title: msg.sent,
-          description: msg.sentDesc,
+          description: result.inquiryId ? `Reference: ${result.inquiryId}` : msg.sentDesc,
         });
         const notes = field("notes");
         if (notes) notes.value = "";

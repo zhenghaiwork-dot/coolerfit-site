@@ -6,14 +6,15 @@
 function inquiry_load_config(): array
 {
     $defaults = [
+        'resend_api_key' => getenv('RESEND_API_KEY') ?: '',
         'smtp_host' => 'smtp.hostinger.com',
         'smtp_port' => 465,
         'smtp_secure' => 'ssl',
         'smtp_user' => 'custom@aircoolercover.com',
         'smtp_pass' => '',
-        'from_email' => 'custom@aircoolercover.com',
+        'from_email' => getenv('INQUIRY_FROM') ?: 'custom@aircoolercover.com',
         'from_name' => 'CoolerFit Website',
-        'to_email' => 'custom@aircoolercover.com',
+        'to_email' => getenv('INQUIRY_TO') ?: 'custom@aircoolercover.com',
     ];
 
     $local = __DIR__ . '/inquiry-config.local.php';
@@ -27,8 +28,66 @@ function inquiry_load_config(): array
     return $defaults;
 }
 
+function inquiry_resend_send(
+    array $config,
+    string $subject,
+    string $bodyText,
+    string $replyToName,
+    string $replyToEmail,
+    ?array $attachment = null,
+): bool {
+    $apiKey = trim((string)($config['resend_api_key'] ?? ''));
+    if ($apiKey === '' || !function_exists('curl_init')) {
+        return false;
+    }
+
+    $fromEmail = (string)$config['from_email'];
+    $fromName = (string)$config['from_name'];
+    $toEmail = (string)$config['to_email'];
+    $payload = [
+        'from' => "$fromName <$fromEmail>",
+        'to' => [$toEmail],
+        'subject' => $subject,
+        'text' => $bodyText,
+        'reply_to' => "$replyToName <$replyToEmail>",
+    ];
+
+    if ($attachment) {
+        $payload['attachments'] = [[
+            'filename' => $attachment['name'],
+            'content' => base64_encode($attachment['data']),
+            'content_type' => $attachment['mime'],
+        ]];
+    }
+
+    $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    if ($json === false) {
+        return false;
+    }
+
+    $curl = curl_init('https://api.resend.com/emails');
+    curl_setopt_array($curl, [
+        CURLOPT_POST => true,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CONNECTTIMEOUT => 10,
+        CURLOPT_TIMEOUT => 25,
+        CURLOPT_HTTPHEADER => [
+            'Authorization: Bearer ' . $apiKey,
+            'Content-Type: application/json',
+            'User-Agent: CoolerFit-Inquiry/1.0',
+        ],
+        CURLOPT_POSTFIELDS => $json,
+    ]);
+    $response = curl_exec($curl);
+    $status = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
+
+    return $response !== false && $status >= 200 && $status < 300;
+}
+
 function inquiry_encode_header(string $value): string
 {
+    $value = trim((string)preg_replace('/[\r\n]+/', ' ', $value));
     return preg_match('/[^\x20-\x7E]/', $value)
         ? '=?' . 'UTF-8' . '?B?' . base64_encode($value) . '?='
         : $value;
@@ -52,6 +111,7 @@ function inquiry_build_message(
     $encodedSubject = inquiry_encode_header($subject);
 
     $headers = [
+        'Date: ' . date(DATE_RFC2822),
         "Subject: {$encodedSubject}",
         "From: {$fromHeader}",
         "To: {$toEmail}",
@@ -116,10 +176,10 @@ function inquiry_smtp_send(array $config, string $rawMessage, string $toEmail, s
         return $data;
     };
 
-    $cmd = function (string $command) use ($socket, $read): bool {
+    $cmd = function (string $command, array $acceptedClasses = ['2']) use ($socket, $read): bool {
         fwrite($socket, $command . "\r\n");
         $resp = $read();
-        return isset($resp[0]) && $resp[0] === '2';
+        return isset($resp[0]) && in_array($resp[0], $acceptedClasses, true);
     };
 
     $read(); // banner
@@ -163,12 +223,15 @@ function inquiry_smtp_send(array $config, string $rawMessage, string $toEmail, s
         fclose($socket);
         return false;
     }
-    if (!$cmd('DATA')) {
+    // DATA is accepted with SMTP 354 (a 3xx intermediate response), not 2xx.
+    if (!$cmd('DATA', ['3'])) {
         fclose($socket);
         return false;
     }
 
-    fwrite($socket, $rawMessage . "\r\n.\r\n");
+    // SMTP dot-stuffing prevents a body line beginning with a dot from ending DATA early.
+    $smtpPayload = preg_replace('/(?m)^\./', '..', $rawMessage) ?? $rawMessage;
+    fwrite($socket, $smtpPayload . "\r\n.\r\n");
     $dataResp = $read();
     $cmd('QUIT');
     fclose($socket);
@@ -188,6 +251,19 @@ function inquiry_send_mail(
     $fromName = $config['from_name'];
     $toEmail = $config['to_email'];
 
+    // When Resend is configured it is the authoritative transport. Do not
+    // silently fall back to PHP mail(), which obscures delivery failures.
+    if (!empty($config['resend_api_key'])) {
+        return inquiry_resend_send(
+            $config,
+            $subject,
+            $bodyText,
+            $replyToName,
+            $replyToEmail,
+            $attachment,
+        );
+    }
+
     $raw = inquiry_build_message(
         $bodyText,
         $fromEmail,
@@ -206,8 +282,12 @@ function inquiry_send_mail(
     }
 
     $parts = explode("\r\n\r\n", $raw, 2);
-    $headerBlock = $parts[0];
+    $headerLines = explode("\r\n", $parts[0]);
+    $headerLines = array_values(array_filter($headerLines, static function (string $line): bool {
+        return stripos($line, 'Subject:') !== 0 && stripos($line, 'To:') !== 0;
+    }));
+    $headerBlock = implode("\r\n", $headerLines);
     $body = $parts[1] ?? $bodyText;
 
-    return mail($toEmail, '', $body, $headerBlock);
+    return mail($toEmail, inquiry_encode_header($subject), $body, $headerBlock);
 }
