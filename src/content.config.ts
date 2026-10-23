@@ -16,6 +16,13 @@ const blogSection = z.object({
   dataTable: z
     .object({ headers: z.array(z.string()), rows: z.array(z.array(z.string())) })
     .optional(),
+  image: z
+    .object({
+      src: z.string(),
+      alt: z.string(),
+      caption: z.string().optional(),
+    })
+    .optional(),
 });
 
 const blog = defineCollection({

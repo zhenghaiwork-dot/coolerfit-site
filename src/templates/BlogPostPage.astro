@@ -14,6 +14,7 @@ const { locale, post } = Astro.props;
 const lp = (p: string) => localizedPath(locale, p);
 const t = ui(locale);
 const articlePath = lp(`/blog/${post.slug}`);
+const articleImage = post.content.find((section) => section.image)?.image;
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -23,6 +24,7 @@ const articleJsonLd = {
   mainEntityOfPage: `${SITE_URL}${articlePath}`,
   author: { "@type": "Organization", name: SITE_NAME },
   publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+  ...(articleImage ? { image: [`${SITE_URL}${articleImage.src}`] } : {}),
 };
 const articleBreadcrumbs = breadcrumbJsonLd([
   { name: t.common.home, path: lp("/") },

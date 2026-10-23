@@ -599,7 +599,8 @@
     "clusterSlugs": [
       "what-is-evaporative-cooler-cover",
       "benefits-of-cooler-covers",
-      "winterizing-evaporative-cooler"
+      "winterizing-evaporative-cooler",
+      "how-to-cover-a-swamp-cooler-for-winter"
     ],
     "internalLinks": [
       {
@@ -696,6 +697,133 @@
             "path": "/resources/installation"
           }
         ]
+      }
+    ]
+  },
+  {
+    "title": "How to Cover a Swamp Cooler for Winter",
+    "excerpt": "Drain, clean, dry, seal the indoor duct, then fit the cover last. Follow the right winter steps for portable, rooftop, wall, and window swamp coolers.",
+    "isPillar": false,
+    "pillarSlug": "evaporative-cooler-covers-guide",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Quick winterizing checklist and troubleshooting",
+      "path": "/blog/winterizing-evaporative-cooler"
+    },
+    "internalLinks": [
+      {
+        "label": "Quick winterizing checklist",
+        "path": "/blog/winterizing-evaporative-cooler"
+      },
+      {
+        "label": "Side-draft vs down-draft sizes",
+        "path": "/blog/side-draft-vs-down-draft-air-cooler-sizes"
+      },
+      {
+        "label": "How to measure a cooler",
+        "path": "/sizes/how-to-measure"
+      },
+      {
+        "label": "Shop winter cooler covers",
+        "path": "/products/winter-cooler-covers"
+      }
+    ],
+    "slug": "how-to-cover-a-swamp-cooler-for-winter",
+    "intro": "This detailed procedure complements our short winterizing checklist: use this page while doing the work, and use the checklist to diagnose missed shutdown steps or spring problems.",
+    "content": [
+      {
+        "heading": "Covering Is the Last Winterizing Step",
+        "level": "h2",
+        "body": "A cover blocks wind, dust, precipitation, and pests, but it cannot prevent water left in the cooler from freezing. Shut off power and water, drain and clean the unit, let every wet surface dry, seal the indoor duct where applicable, and install the cover only after those jobs are complete.",
+        "bullets": [
+          "Follow the cooler manufacturer's shutdown instructions before removing panels or pads",
+          "Never service the cooler while it is energized",
+          "Do not cover wet pads, a wet sump, or water-filled distribution lines",
+          "Use a cover profile that matches the unit instead of forcing a generic tarp around ducts and brackets"
+        ]
+      },
+      {
+        "heading": "Tools and Information to Prepare",
+        "level": "h2",
+        "body": "Gather an adjustable wrench, screwdriver, bucket, soft brush, dry towels, pipe insulation, and the cleaning product approved by the cooler manufacturer. Before ordering a cover, record the model, maximum outside width × depth × height, mounting type, and every pipe, electrical box, bracket, or duct that changes the cabinet outline.",
+        "sectionLinks": [
+          {
+            "label": "Measurement tutorial",
+            "path": "/sizes/how-to-measure"
+          }
+        ]
+      },
+      {
+        "heading": "Core Shutdown Steps for Every Cooler",
+        "level": "h2",
+        "body": "Complete the work in this order so moisture is not trapped behind a freshly installed cover.",
+        "bullets": [
+          "Disconnect power at the plug or service disconnect and verify the unit cannot start",
+          "Close the water supply, disconnect the feed where required, and drain the tank or sump completely",
+          "Remove debris and mineral buildup with methods approved for the pad and cabinet material",
+          "Drain pumps and small distribution tubes; use low-pressure air only when the manufacturer permits it",
+          "Air-dry the open unit fully, then reinstall dry components or store removable pads indoors",
+          "Insulate exposed pipes and seal the interior duct opening with a damper or insulated panel"
+        ]
+      },
+      {
+        "heading": "Instructions by Cooler Type",
+        "level": "h2",
+        "body": "The preparation sequence is shared, but storage, openings, and tie-down locations change with the installation.",
+        "dataTable": {
+          "headers": [
+            "Cooler type",
+            "Winter action",
+            "Cover detail"
+          ],
+          "rows": [
+            [
+              "Portable",
+              "Drain the removable tank and pump; store indoors when possible",
+              "Use a breathable dust cover indoors or a fitted weather cover outdoors"
+            ],
+            [
+              "Rooftop or fixed",
+              "Drain the sump and water line; seal the indoor duct",
+              "Reinforced top and secure tie-downs with clearance for pipes and motor housing"
+            ],
+            [
+              "Wall-mounted",
+              "Inspect brackets and protect exposed lines",
+              "Close fit around wall brackets with multiple wind straps"
+            ],
+            [
+              "Window-mounted",
+              "Remove and store indoors when practical; otherwise seal frame gaps",
+              "Fitted outer cover plus an insulated interior panel"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Fit and Secure the Winter Cover",
+        "level": "h2",
+        "body": "Slide the dry cover over the cabinet without dragging it across sharp corners. Align custom openings with pipes, ducts, and brackets, pull the hem below the lowest intake louver, and tighten the drawcord or straps evenly. The cover should be secure without crushing panels or becoming airtight; designed vents or controlled drainage help condensation escape.",
+        "sectionLinks": [
+          {
+            "label": "Compare side-draft and down-draft cover shapes",
+            "path": "/blog/side-draft-vs-down-draft-air-cooler-sizes"
+          },
+          {
+            "label": "High-wind installation tips",
+            "path": "/blog/advanced-installation-high-wind-rooftop"
+          }
+        ]
+      },
+      {
+        "heading": "Winter Checks and Spring Start-Up",
+        "level": "h2",
+        "body": "After storms, remove heavy snow and check that straps remain tensioned and water is not pooling on top. In spring, remove and dry the cover before storage, inspect pipes and the basin for freeze damage, reinstall serviceable pads, reconnect water, check for leaks, and restore power only after the cooler is ready to run."
+      },
+      {
+        "heading": "Quick Questions",
+        "level": "h2",
+        "body": "A plastic tarp can provide temporary protection, but loose folds catch wind and can trap condensation. Draining remains necessary even under a fitted cover. The cover should be weather-resistant and secure, not hermetically sealed. If the unit has unusual ducts, brackets, or control boxes, send measurements and photos for a made-to-measure pattern."
       }
     ]
   },
@@ -849,12 +977,166 @@
     ]
   },
   {
-    "title": "Down Draft Swamp Cooler Covers",
-    "excerpt": "Rain sitting on top of the unit, or top intake still open? Down-draft cabinets need a wide, low cover with a reinforced top — sides alone are not enough.",
+    "title": "Side-Draft vs Down-Draft Cooler Sizes",
+    "excerpt": "Compare airflow, cabinet shape, cover openings, and measurement points for side-draft and down-draft evaporative coolers in inches or centimetres.",
+    "isPillar": false,
+    "pillarSlug": "swamp-cooler-covers-guide",
+    "noIndex": false,
+    "companionResource": {
+      "label": "Full swamp cooler cover size chart",
+      "path": "/blog/swamp-cooler-cover-sizes"
+    },
+    "internalLinks": [
+      {
+        "label": "Swamp cooler cover size chart",
+        "path": "/blog/swamp-cooler-cover-sizes"
+      },
+      {
+        "label": "Side-draft cover guide",
+        "path": "/blog/swamp-cooler-cover-side-draft"
+      },
+      {
+        "label": "Down-draft cover guide",
+        "path": "/blog/swamp-cooler-cover-down-draft"
+      },
+      {
+        "label": "How to cover a swamp cooler for winter",
+        "path": "/blog/how-to-cover-a-swamp-cooler-for-winter"
+      },
+      {
+        "label": "Request a custom-size cover",
+        "path": "/products/custom-size-cooler-covers"
+      }
+    ],
+    "slug": "side-draft-vs-down-draft-air-cooler-sizes",
+    "intro": "This comparison page explains which measurements and openings change with draft type. Use the dedicated size chart for common dimensions, and the individual side-draft or down-draft guides when diagnosing exposed intakes or water pooling.",
+    "content": [
+      {
+        "heading": "Side-Draft vs Down-Draft at a Glance",
+        "level": "h2",
+        "body": "Draft type describes where conditioned air leaves the cabinet, not where every intake louver sits. Identify the outlet and duct connection before choosing a cover; two cabinets with similar dimensions may need different openings, hems, and tie-down positions.",
+        "image": {
+          "src": "/images/blog/side-draft-vs-down-draft-air-cooler.webp",
+          "alt": "Side-draft wall-mounted evaporative coolers beside a cube-shaped down-draft evaporative cooler",
+          "caption": "Side-draft installations usually connect through one side; down-draft units discharge through the base into a roof duct."
+        },
+        "dataTable": {
+          "headers": [
+            "Feature",
+            "Side-draft",
+            "Down-draft"
+          ],
+          "rows": [
+            [
+              "Air outlet",
+              "One side of the cabinet",
+              "Bottom of the cabinet"
+            ],
+            [
+              "Typical installation",
+              "Ground stand; wall bracket; rooftop beside a duct",
+              "Rooftop over a vertical duct"
+            ],
+            [
+              "Cover pattern",
+              "Side outlet or duct clearance; hem shaped around supports",
+              "Base or curb clearance; reinforced top and roof tie-downs"
+            ],
+            [
+              "Common markets",
+              "US Southwest plus industrial sites in Europe and the Gulf",
+              "Primarily North American rooftop systems"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "There Is No Universal Cover Size",
+        "level": "h2",
+        "body": "Common US dimensions such as 28 × 28 × 34 in and 34 × 34 × 36 in are useful shopping references, not an official standard. Brand, model year, pad frame, motor housing, duct, and installation hardware can change the finished outside dimensions. Portable and industrial coolers sold in Europe and the Gulf also use many metric cabinet sizes, so measure the actual installed unit.",
+        "sectionLinks": [
+          {
+            "label": "Common size chart and fit checks",
+            "path": "/blog/swamp-cooler-cover-sizes"
+          }
+        ]
+      },
+      {
+        "heading": "How to Measure in Inches or Centimetres",
+        "level": "h2",
+        "body": "Use one unit system throughout the quote. Measure the cabinet—not the cooling pad—and do not add your own fit allowance; the cover pattern should add controlled ease during production.",
+        "bullets": [
+          "Width — maximum outside measurement across the front face",
+          "Depth — maximum outside measurement from front to back",
+          "Height — cabinet base to the highest fixed point, excluding a separate stand unless the cover must enclose it",
+          "Protrusions — size and location of motor housings, disconnect boxes, water inlets, valves, and control panels",
+          "Outlet and duct — dimensions, position, and the side on which each connection sits",
+          "Mounting — ground, roof curb, wall bracket, or window frame; include clear photos from the front and side"
+        ]
+      },
+      {
+        "heading": "US, UK, Europe, and Gulf Installations",
+        "level": "h2",
+        "body": "In the US Southwest, both side-draft and rooftop down-draft cabinets are common. UK and European buyers more often need covers for portable or wall- and roof-mounted industrial evaporative coolers, while Gulf projects frequently involve large wall-mounted or rooftop units exposed to dust and intense UV. The measurement method stays the same, but the fabric, openings, and fastening plan should match the installed climate and structure."
+      },
+      {
+        "heading": "Fit and Climate Change the Cover Build",
+        "level": "h2",
+        "body": "A tight cover stresses seams and corners; a loose cover catches wind and abrades the cabinet. Dry high-UV sites benefit from UV-resistant coated fabric, snowy sites need a reinforced top and secure tie-downs, and wet windy climates need sealed seams plus designed ventilation or drainage rather than an airtight plastic sheet.",
+        "dataTable": {
+          "headers": [
+            "Exposure",
+            "Useful cover features",
+            "Main fit risk"
+          ],
+          "rows": [
+            [
+              "Dry and sunny",
+              "UV-resistant coated fabric and stable tie-downs",
+              "Brittle fabric and wind lift"
+            ],
+            [
+              "Cold and snowy",
+              "Reinforced top seams and load-shedding shape",
+              "Pooled water or snow on a sagging top"
+            ],
+            [
+              "Wet and windy",
+              "Weather-resistant fabric; sealed seams; vents or drainage",
+              "Condensation and cover abrasion"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Prepare the Unit Before Measuring the Final Fit",
+        "level": "h2",
+        "body": "A cover does not replace winterizing. Disconnect power, shut off and drain the water system, clean and dry the cooler, protect exposed lines, and seal the indoor duct before installing the cover. Use the detailed winter guide for the correct sequence by installation type.",
+        "sectionLinks": [
+          {
+            "label": "Complete winter covering procedure",
+            "path": "/blog/how-to-cover-a-swamp-cooler-for-winter"
+          }
+        ]
+      },
+      {
+        "heading": "Ordering Checklist",
+        "level": "h2",
+        "body": "Send maximum width × depth × height, the draft type, measurement unit, installation method, climate, required fabric, and photos that show every connection. For fleets, list each model and quantity separately; similar-looking cabinets should not be assumed to share one cover pattern."
+      }
+    ]
+  },
+  {
+    "title": "Down-Draft Swamp Cooler Covers",
+    "excerpt": "A down-draft cooler discharges through its base into a roof duct. Measure the cabinet and curb, then use a reinforced cover that sheds water and stays tied down.",
     "isPillar": false,
     "pillarSlug": "swamp-cooler-covers-guide",
     "noIndex": false,
     "internalLinks": [
+      {
+        "label": "Compare side-draft and down-draft sizes",
+        "path": "/blog/side-draft-vs-down-draft-air-cooler-sizes"
+      },
       {
         "label": "Down draft products",
         "path": "/products/down-draft-cooler-covers"
@@ -863,19 +1145,19 @@
     "slug": "swamp-cooler-cover-down-draft",
     "content": [
       {
-        "heading": "Problem: Water Pools or Top Intake Exposed",
+        "heading": "Problem: The Cover Does Not Clear the Roof Curb",
         "level": "h2",
-        "body": "Down-draft units pull air through the top deck. Sides are mostly solid. A side-draft cover leaves the primary intake open and may sag in the middle — rainwater pools instead of running off."
+        "body": "Down-draft describes conditioned air leaving through the cabinet base into a vertical duct. Intake louvers are commonly on the cabinet sides. A cover sized only to the visible box can bind at the curb, leave the lower cabinet exposed, or sag and hold water on an open roof."
       },
       {
-        "heading": "Solution: Down-Draft Profile + Drainage",
+        "heading": "Solution: Measure the Cabinet, Base, and Exposure",
         "level": "h2",
         "body": "",
         "bullets": [
-          "Wide, low cover shape — top panel is the critical seal",
-          "Reinforced top for rain and snow load in open yards",
-          "Tighten straps so the top crowns slightly — water runs to edges, not into louvers",
-          "Confirm outlet duct clearance before ordering — depth must clear roof connections"
+          "Measure maximum cabinet width, depth, and height above the roof curb",
+          "Record curb, flashing, service disconnect, water line, and any projecting motor housing",
+          "Use a reinforced top and a shape that encourages rain and snowmelt to run off",
+          "Anchor tie-downs to approved points without crushing panels or damaging the roof membrane"
         ]
       },
       {
@@ -892,12 +1174,16 @@
     ]
   },
   {
-    "title": "Side Draft Swamp Cooler Covers",
-    "excerpt": "Cold air still coming in after covering? Side louvers are probably open — you need a tall cover that wraps the intake panels, not a down-draft top-only profile.",
+    "title": "Side-Draft Swamp Cooler Covers",
+    "excerpt": "A side-draft cooler discharges through one side. Measure the outlet, duct, brackets, and full cabinet so the cover closes securely without rubbing or leaving gaps.",
     "isPillar": false,
     "pillarSlug": "swamp-cooler-covers-guide",
     "noIndex": false,
     "internalLinks": [
+      {
+        "label": "Compare side-draft and down-draft sizes",
+        "path": "/blog/side-draft-vs-down-draft-air-cooler-sizes"
+      },
       {
         "label": "Side draft products",
         "path": "/products/side-draft-cooler-covers"
@@ -910,25 +1196,25 @@
     "slug": "swamp-cooler-cover-side-draft",
     "content": [
       {
-        "heading": "Problem: Side Intakes Still Open",
+        "heading": "Problem: The Cover Catches on the Side Outlet",
         "level": "h2",
-        "body": "Side-draft portables pull air through large louvers on the left and right faces. A cover that only seals the top leaves both intakes exposed — drafts and debris get in exactly where you thought you were protected."
+        "body": "Side-draft describes the direction of conditioned-air discharge. The outlet or connected duct is on one side of the cabinet, while intake louvers may occupy several other panels. A generic rectangular cover can snag on the outlet, ride above the lower louvers, or rub against a wall bracket."
       },
       {
-        "heading": "Solution: Identify and Wrap Side Draft",
+        "heading": "Solution: Measure the Outlet and Cabinet Separately",
         "level": "h2",
-        "body": "Large intake louvers on left/right; outlet on top or front.",
+        "body": "Identify the discharge side first, then record the maximum cabinet dimensions and every connection that changes the outline.",
         "bullets": [
-          "Use a side-draft profile — tall enough to wrap both intake faces",
-          "Hem below the lowest louver edge, not mid-panel",
-          "Route drawcord or strap under the caster frame so wind cannot lift the hem",
-          "Do not substitute a down-draft cover — top seal alone fails on side intakes"
+          "Measure the side outlet or duct width, height, projection, and position",
+          "Include motor housings, disconnect boxes, wall brackets, and pipework",
+          "Place the hem below the lowest intake opening without blocking a fixed duct connection",
+          "Use split seams, closures, or custom cut-outs where the cover must pass around supports"
         ]
       },
       {
         "heading": "Still Gaps at Corners?",
         "level": "h2",
-        "body": "Remeasure outside width and depth — pad dimensions are smaller than the cabinet. Wrong draft type with correct size still leaks.",
+        "body": "Remeasure maximum outside width, depth, and height—pad dimensions are smaller than the cabinet. Confirm that the quoted pattern includes the outlet side and mounting method, not only the three cabinet measurements.",
         "sectionLinks": [
           {
             "label": "How to measure",
@@ -949,6 +1235,10 @@
       "path": "/sizes"
     },
     "internalLinks": [
+      {
+        "label": "Side-draft vs down-draft comparison",
+        "path": "/blog/side-draft-vs-down-draft-air-cooler-sizes"
+      },
       {
         "label": "Measuring tutorial",
         "path": "/sizes/how-to-measure"
@@ -1044,7 +1334,8 @@
       "swamp-cooler-cover-side-draft",
       "swamp-cooler-cover-down-draft",
       "insulated-swamp-cooler-covers",
-      "mesh-swamp-cooler-covers"
+      "mesh-swamp-cooler-covers",
+      "side-draft-vs-down-draft-air-cooler-sizes"
     ],
     "internalLinks": [
       {
@@ -1410,6 +1701,10 @@
       "path": "/resources/maintenance"
     },
     "internalLinks": [
+      {
+        "label": "Detailed winter covering steps by cooler type",
+        "path": "/blog/how-to-cover-a-swamp-cooler-for-winter"
+      },
       {
         "label": "Installation guide",
         "path": "/resources/installation"

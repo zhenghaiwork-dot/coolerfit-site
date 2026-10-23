@@ -27,6 +27,7 @@ export interface BlogSection {
   sectionLinks?: { label: string; path: string }[];
   table?: { label: string; without: string; with: string }[];
   dataTable?: { headers: string[]; rows: string[][] };
+  image?: { src: string; alt: string; caption?: string };
 }
 
 export const blogPosts = generated as BlogPost[];

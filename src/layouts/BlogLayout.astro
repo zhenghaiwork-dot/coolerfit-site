@@ -50,6 +50,7 @@ const clusters = clusterEntries.map(toBlogPost);
 const readingEntry = await getBlogBySlug(post.slug, locale);
 const readingMinutes = readingEntry ? getBlogReadingMinutes(readingEntry) : 1;
 const showIntro = Boolean(post.intro?.trim()) && post.intro!.trim() !== post.excerpt.trim();
+const articleImage = post.content.find((section) => section.image)?.image;
 
 const crumbs: { label: string; href?: string }[] = [
   { label: t.common.home, href: lp("/") },
@@ -68,6 +69,7 @@ const crumbs: { label: string; href?: string }[] = [
   jsonLd={jsonLd}
   noIndex={noIndex}
   ogType="article"
+  imageUrl={articleImage?.src}
 >
   <div class="pt-24 md:pt-32 pb-20">
     <div class="container">
@@ -152,6 +154,24 @@ const crumbs: { label: string; href?: string }[] = [
                         <p class="text-muted-foreground leading-relaxed mb-3 last:mb-0 text-sm">{para}</p>
                       ))
                   : null}
+                {section.image ? (
+                  <figure class="my-5 overflow-hidden rounded-xl border border-border/60 bg-secondary/20">
+                    <img
+                      src={section.image.src}
+                      alt={section.image.alt}
+                      width="1641"
+                      height="688"
+                      loading="lazy"
+                      decoding="async"
+                      class="h-auto w-full object-cover"
+                    />
+                    {section.image.caption ? (
+                      <figcaption class="border-t border-border/50 px-4 py-2.5 text-xs leading-relaxed text-muted-foreground">
+                        {section.image.caption}
+                      </figcaption>
+                    ) : null}
+                  </figure>
+                ) : null}
                 {section.bullets && section.bullets.length > 0 ? (
                   <ul class="mt-3 space-y-2 list-disc ps-5">
                     {section.bullets.map((item) => (
