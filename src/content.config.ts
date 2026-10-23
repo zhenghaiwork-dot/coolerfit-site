@@ -46,16 +46,23 @@ const resources = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/resources" }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().optional(),
     description: z.string(),
     sections: z.array(
       z.object({
         heading: z.string(),
+        level: z.enum(["h2", "h3"]).optional(),
         body: z.string(),
         bullets: z.array(z.string()).optional(),
+        sectionLinks: z.array(link).optional(),
+        dataTable: z
+          .object({ headers: z.array(z.string()), rows: z.array(z.array(z.string())) })
+          .optional(),
       }),
     ),
     relatedLinks: z.array(link),
     deepDiveLinks: z.array(link).optional(),
+    faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
   }),
 });
 

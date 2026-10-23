@@ -170,6 +170,146 @@
     ]
   },
   {
+    "title": "Canvas vs Polyester Swamp Cooler Covers",
+    "seoTitle": "Canvas vs Polyester Swamp Cooler Covers",
+    "excerpt": "Compare breathability, rain resistance, UV stability, shrinkage, and care before specifying canvas or coated polyester for an evaporative cooler cover.",
+    "pillarSlug": "cooler-cover-materials-performance",
+    "isPillar": false,
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "Full cover materials comparison",
+        "path": "/materials"
+      },
+      {
+        "label": "Custom material options",
+        "path": "/custom/materials"
+      },
+      {
+        "label": "Inside vs outside covers",
+        "path": "/blog/inside-vs-outside-swamp-cooler-covers"
+      },
+      {
+        "label": "Brand and model size chart",
+        "path": "/swamp-cooler-cover-by-brand-and-model"
+      },
+      {
+        "label": "Request a material recommendation",
+        "path": "/contact"
+      }
+    ],
+    "slug": "canvas-vs-polyester-swamp-cooler-covers",
+    "intro": "Canvas is the more breathable choice; coated polyester is usually the more practical choice for rain, UV exposure, and low-maintenance outdoor storage. The correct answer depends on whether the cooler is dry, where it sits while unused, and how the cover is ventilated and secured.",
+    "content": [
+      {
+        "heading": "Canvas and Coated Polyester at a Glance",
+        "level": "h2",
+        "body": "Fit and fabric work together. A breathable material used under a roof may fail in driving rain, while a heavily coated shell can hold condensation if a wet cooler is sealed without ventilation. Choose for the worst storage condition, not the average day.",
+        "dataTable": {
+          "headers": [
+            "Factor",
+            "Canvas",
+            "Coated polyester or Oxford"
+          ],
+          "rows": [
+            [
+              "Construction",
+              "Cotton or cotton-blend weave with optional water-repellent treatment",
+              "Synthetic weave with PU or PVC backing"
+            ],
+            [
+              "Strongest point",
+              "Breathability and natural appearance",
+              "Rain resistance and lower maintenance"
+            ],
+            [
+              "Main limitation",
+              "Can absorb water and needs reproofing; prolonged UV weakens fibers",
+              "Heavy coatings breathe less and may need designed vents"
+            ],
+            [
+              "Shape stability",
+              "May shrink after repeated wet and dry cycles",
+              "Holds dimensions well through wet and dry cycles"
+            ],
+            [
+              "Care",
+              "Dry fully and renew water-repellent treatment when needed",
+              "Wipe or rinse; dry fully before storage"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Breathability",
+        "level": "h2",
+        "body": "Canvas allows more water vapor through its weave, even when treated. That can help on a dry unit stored under a roof. Coated polyester breathes less as coating weight increases; PVC allows very little vapor movement. Vents or screened mesh panels can be added where condensation risk requires airflow, but no fabric replaces draining and drying the cooler before it is covered."
+      },
+      {
+        "heading": "Rain Resistance and Seams",
+        "level": "h2",
+        "body": "Freshly treated canvas sheds light rain, but exposure gradually wears down the finish. Coated polyester gives more consistent rain protection and normally needs less retreatment. Stitching holes, zipper openings, and pooled water remain weak points on either material; specify sealed or taped seams and a top that sheds water when the site sees sustained rain.",
+        "sectionLinks": [
+          {
+            "label": "Waterproof vs water-resistant covers",
+            "path": "/blog/waterproof-vs-water-resistant"
+          }
+        ]
+      },
+      {
+        "heading": "UV, Heat, and Dimensional Stability",
+        "level": "h2",
+        "body": "Natural canvas fibers fade and weaken under prolonged intense sun. UV-stabilized polyester usually performs better in exposed desert or rooftop sites, especially in a lighter color. Canvas can also shrink after repeated wetting and drying, while polyester is more dimensionally stable. Pattern allowance must match the selected fabric before cutting.",
+        "sectionLinks": [
+          {
+            "label": "UV protection guide",
+            "path": "/blog/uv-protection-for-cooler-covers"
+          }
+        ]
+      },
+      {
+        "heading": "Material Guidance by Climate",
+        "level": "h2",
+        "body": "Site exposure matters more than the region name, but these starting points help narrow the specification.",
+        "bullets": [
+          "Wet or frosty European winters → vented coated polyester; canvas works better under a covered terrace or indoors",
+          "Gulf heat, sun, and sand → light-colored UV-stabilized polyester with a tight hem; shaded inland storage may suit canvas",
+          "North African coast → coated polyester for rain and salt exposure; dry interior sites can use either material based on shade and dust sealing",
+          "Humid Central and South American rainy seasons → coated polyester with designed ventilation; never cover wet pads",
+          "North American snow or rain → coated polyester; dry shaded storage can use canvas",
+          "Indoor restaurants, cafés, shops, and workshops → canvas or lightly coated breathable polyester where dust and grease matter more than rain"
+        ]
+      },
+      {
+        "heading": "Quick Material Decision",
+        "level": "h2",
+        "body": "Start with the most severe condition the idle cooler will face.",
+        "bullets": [
+          "Repeated rain, snow, or humidity → coated polyester with drainage and ventilation appropriate to the site",
+          "Dry climate under a roof or in shade → canvas is a breathable option",
+          "Strong daily UV → UV-stabilized polyester in a lighter color",
+          "Dust and sand → either fabric with a close-fitting hem and suitable tie-downs",
+          "Indoor storage → breathable dust cover that is easy to remove and clean"
+        ]
+      },
+      {
+        "heading": "Specify the Whole Cover, Not Only the Fabric",
+        "level": "h2",
+        "body": "A useful quote also defines dimensions, ventilation, seam treatment, fastening, openings, color, quantity, and destination. Canvas, PU-coated polyester, PVC-coated polyester, or a hybrid construction can be paired with vents, mesh panels, straps, buckles, zippers, and access openings. Typical production takes 10–14 business days after specifications and artwork are approved; transit time is separate.",
+        "sectionLinks": [
+          {
+            "label": "Compare indoor and outdoor storage",
+            "path": "/blog/inside-vs-outside-swamp-cooler-covers"
+          },
+          {
+            "label": "Send your climate and unit details",
+            "path": "/contact"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "Common Cooler Cover Sizing Mistakes",
     "excerpt": "Hem binds on casters, corners gape, or you ordered pad width instead of cabinet size — five measurement errors that cause most returns.",
     "isPillar": false,
@@ -292,7 +432,8 @@
     "clusterSlugs": [
       "waterproof-vs-water-resistant",
       "uv-protection-for-cooler-covers",
-      "vented-vs-closed-cover"
+      "vented-vs-closed-cover",
+      "canvas-vs-polyester-swamp-cooler-covers"
     ],
     "companionResource": {
       "label": "Full materials comparison",
@@ -310,6 +451,10 @@
       {
         "label": "Vented vs closed",
         "path": "/blog/vented-vs-closed-cover"
+      },
+      {
+        "label": "Canvas vs polyester",
+        "path": "/blog/canvas-vs-polyester-swamp-cooler-covers"
       },
       {
         "label": "Materials page",
@@ -991,6 +1136,159 @@
     ]
   },
   {
+    "title": "Inside vs Outside Swamp Cooler Covers",
+    "seoTitle": "Inside vs Outside Swamp Cooler Covers",
+    "excerpt": "Choose an indoor dust cover or an outdoor weather-resistant cover for portable evaporative coolers in restaurants, cafés, warehouses, patios, and job sites.",
+    "pillarSlug": "swamp-cooler-covers-guide",
+    "isPillar": false,
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "Canvas vs polyester covers",
+        "path": "/blog/canvas-vs-polyester-swamp-cooler-covers"
+      },
+      {
+        "label": "Outdoor cooler covers",
+        "path": "/products/outdoor-cooler-covers"
+      },
+      {
+        "label": "Brand and model size chart",
+        "path": "/swamp-cooler-cover-by-brand-and-model"
+      },
+      {
+        "label": "How to measure",
+        "path": "/sizes/how-to-measure"
+      },
+      {
+        "label": "Request a custom quote",
+        "path": "/contact"
+      }
+    ],
+    "slug": "inside-vs-outside-swamp-cooler-covers",
+    "intro": "Choose an inside cover for dry indoor storage and an outside cover for weather exposure. The correct fabric, ventilation, and tie-downs depend on the cooler being fully drained and on where it spends its unused time.",
+    "content": [
+      {
+        "heading": "What “Inside” Means in This Guide",
+        "level": "h2",
+        "body": "Here, inside and outside describe where a portable evaporative cooler is used or stored. This is not a guide to ceiling-register or interior duct covers used with some rooftop residential systems. CoolerFit covers the cooler cabinet itself."
+      },
+      {
+        "heading": "The Short Answer",
+        "level": "h2",
+        "body": "A cooler stored in a restaurant, shop, storeroom, or warehouse usually needs a breathable fitted dust cover. A cooler left on a patio, terrace, rooftop, farm, or job site needs a weather-resistant, UV-stable cover with stronger fastening. In both cases, drain and dry the unit first.",
+        "dataTable": {
+          "headers": [
+            "Decision",
+            "Inside cover",
+            "Outside cover"
+          ],
+          "rows": [
+            [
+              "Typical location",
+              "Restaurants; cafés; shops; gyms; halls; warehouses",
+              "Patios; terraces; courtyards; rooftops; job sites; farms"
+            ],
+            [
+              "Main threats",
+              "Dust; kitchen grease; insects; knocks",
+              "Rain; snow; frost; UV; wind; sand"
+            ],
+            [
+              "Typical fabric",
+              "Lighter breathable canvas or polyester",
+              "Heavier coated polyester or vinyl with ventilation where needed"
+            ],
+            [
+              "Fastening",
+              "Elastic or drawstring hem",
+              "Drawstring plus straps or buckles"
+            ],
+            [
+              "Best use",
+              "Indoor off-season or between-use storage",
+              "Outdoor off-season and between-use protection"
+            ]
+          ]
+        }
+      },
+      {
+        "heading": "Inside Covers for Restaurants and Indoor Spaces",
+        "level": "h2",
+        "body": "Portable coolers used in restaurants, cafés, shisha lounges, shops, gyms, event halls, and workshops collect fine dust, grease, and insects while idle. A fitted cover also looks cleaner than a sheet in a customer-facing area and avoids fabric dragging around chairs or caster wheels.",
+        "bullets": [
+          "Choose breathable fabric, but still empty and dry the sump and pads before covering",
+          "Use a fitted cut with an elastic or drawstring hem for frequent access",
+          "Select a washable surface where kitchen grease or workshop dust is expected",
+          "Match color or add a logo when the covered unit remains visible to customers"
+        ]
+      },
+      {
+        "heading": "Outside Covers for Patios and Job Sites",
+        "level": "h2",
+        "body": "Outdoor portable coolers face rain, freezing water, UV, wind, sand, and dust. Specify the cover as a system: coated fabric, drainage, ventilation where needed, reinforced corners, and fastening that cannot lift off the hem. A loose tarp leaves intake gaps and wears through at cabinet edges.",
+        "bullets": [
+          "Use UV-stabilized weather-resistant fabric for prolonged exposure",
+          "Add screened vents when the site needs condensation control",
+          "Use a drawstring plus straps or buckles in wind",
+          "Confirm whether casters and handles remain accessible while covered"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Compare outdoor cover options",
+            "path": "/products/outdoor-cooler-covers"
+          }
+        ]
+      },
+      {
+        "heading": "Choose for the Climate and Storage Condition",
+        "level": "h2",
+        "body": "Southwest US sites usually prioritize UV, dust, and wind; wet European winters prioritize rain, damp, and frost; Gulf and Middle East sites add extreme sun and sand; North African coastal sites combine UV with seasonal rain. The same region can contain very different sites, so send the exact location, whether the unit is sheltered, and how long it remains unused.",
+        "sectionLinks": [
+          {
+            "label": "Compare canvas and coated polyester",
+            "path": "/blog/canvas-vs-polyester-swamp-cooler-covers"
+          }
+        ]
+      },
+      {
+        "heading": "If the Cooler Moves In and Out",
+        "level": "h2",
+        "body": "Choose for where the cooler spends most of its unused time. If it remains outside overnight, specify an outside cover. If it is stored indoors for the whole off-season, a lighter inside cover is usually enough. For long periods in both places, use an outside-grade cover with appropriate ventilation so it can protect outdoors without trapping residual moisture indoors."
+      },
+      {
+        "heading": "Measure the Portable Cooler",
+        "level": "h2",
+        "body": "Portable coolers do not follow one universal cabinet size. Measure maximum outside width, depth, and height; include casters only if the cover should extend toward the floor; and record handles, control panels, water inlets, louvers, and hose connections. Send the model and photos as supporting information, but the actual measured cabinet controls the pattern.",
+        "sectionLinks": [
+          {
+            "label": "Open the brand and model size chart",
+            "path": "/swamp-cooler-cover-by-brand-and-model"
+          },
+          {
+            "label": "Follow the measurement guide",
+            "path": "/sizes/how-to-measure"
+          }
+        ]
+      },
+      {
+        "heading": "Prepare the Cooler Before Covering",
+        "level": "h2",
+        "body": "Disconnect power, drain the tank and sump, clean pads and internal surfaces, and let the unit dry completely. A cover protects a prepared cooler; it does not correct water left inside. Install the fitted cover last and secure every closure.",
+        "sectionLinks": [
+          {
+            "label": "Winter shutdown checklist",
+            "path": "/blog/how-to-cover-a-swamp-cooler-for-winter"
+          }
+        ]
+      },
+      {
+        "heading": "Common Questions",
+        "level": "h2",
+        "body": "An outside cover can be used indoors when it has suitable ventilation, although it is heavier than necessary. An inside dust cover should not be used outdoors because it is not designed for rain, strong UV, or wind. We make unit covers for restaurant and café coolers, but not interior ceiling registers. A close-fitting outside cover reduces sand entry; it cannot create a sealed enclosure around an operating cooler."
+      }
+    ]
+  },
+  {
     "title": "Insulated Swamp Cooler Covers",
     "excerpt": "Condensation inside a covered unit in a freezing yard? Insulation helps only after full drain/dry — it does not fix a wet pan or skipped shutdown.",
     "isPillar": false,
@@ -1498,7 +1796,8 @@
       "swamp-cooler-cover-down-draft",
       "insulated-swamp-cooler-covers",
       "mesh-swamp-cooler-covers",
-      "side-draft-vs-down-draft-air-cooler-sizes"
+      "side-draft-vs-down-draft-air-cooler-sizes",
+      "inside-vs-outside-swamp-cooler-covers"
     ],
     "internalLinks": [
       {
@@ -1524,6 +1823,14 @@
       {
         "label": "Evaporative guide",
         "path": "/blog/evaporative-cooler-covers-guide"
+      },
+      {
+        "label": "Inside vs outside use",
+        "path": "/blog/inside-vs-outside-swamp-cooler-covers"
+      },
+      {
+        "label": "Brand and model size chart",
+        "path": "/swamp-cooler-cover-by-brand-and-model"
       },
       {
         "label": "Shop swamp covers",

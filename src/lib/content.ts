@@ -102,11 +102,13 @@ export function toResourcePage(entry: ResourceEntry) {
   return {
     slug: resourceSlug(entry),
     title: entry.data.title,
+    seoTitle: entry.data.seoTitle,
     description: entry.data.description,
     intro: undefined as string | undefined,
     sections: entry.data.sections,
     relatedLinks: entry.data.relatedLinks,
     deepDiveLinks: entry.data.deepDiveLinks,
+    faqs: entry.data.faqs,
   };
 }
 

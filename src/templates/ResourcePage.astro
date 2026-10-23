@@ -9,6 +9,7 @@ import { buttonVariants } from "@/components/ui/button-variants";
 import type { ResourcePage as ResourceData } from "@/data/resources";
 import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
+import { breadcrumbJsonLd, SITE_URL } from "@/lib/site";
 
 interface Props {
   locale?: Locale;
@@ -40,14 +41,38 @@ if (parts.length > 1) {
   crumbs.push({ label: sectionLabel, href: sectionHref });
 }
 crumbs.push({ label: resource.title });
+const canonicalPath = lp(`/${resource.slug}`);
+const pageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: resource.title,
+  description: resource.description,
+  url: `${SITE_URL}${canonicalPath}`,
+  inLanguage: locale === "es" ? "es-MX" : locale === "ar" ? "ar" : "en-US",
+};
+const breadcrumbData = breadcrumbJsonLd(
+  crumbs.map((crumb) => ({ name: crumb.label, path: crumb.href ?? canonicalPath })),
+);
+const faqJsonLd = resource.faqs?.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: resource.faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.q,
+        acceptedAnswer: { "@type": "Answer", text: faq.a },
+      })),
+    }
+  : null;
 ---
 
 <BaseLayout
-  title={`${resource.title} | CoolerFit`}
+  title={`${resource.seoTitle ?? resource.title} | CoolerFit`}
   description={resource.description}
-  canonicalPath={lp(`/${resource.slug}`)}
+  canonicalPath={canonicalPath}
   alternatePath={`/${resource.slug}`}
   locale={locale}
+  jsonLd={[pageJsonLd, breadcrumbData, ...(faqJsonLd ? [faqJsonLd] : [])]}
 >
   {
     isCustom ? (
@@ -66,7 +91,11 @@ crumbs.push({ label: resource.title });
           <div class="space-y-10">
             {resource.sections.map((section) => (
               <section>
-                <h2 class="text-2xl font-display font-semibold text-foreground mb-3">{section.heading}</h2>
+                {section.level === "h3" ? (
+                  <h3 class="text-xl font-display font-semibold text-foreground mb-3">{section.heading}</h3>
+                ) : (
+                  <h2 class="text-2xl font-display font-semibold text-foreground mb-3">{section.heading}</h2>
+                )}
                 <p class="text-muted-foreground leading-relaxed mb-4">{section.body}</p>
                 {section.bullets && section.bullets.length > 0 ? (
                   <ul class="space-y-2">
@@ -78,9 +107,62 @@ crumbs.push({ label: resource.title });
                     ))}
                   </ul>
                 ) : null}
+                {section.dataTable && section.dataTable.rows.length > 0 ? (
+                  <div class="mt-4 overflow-x-auto rounded-lg border border-border">
+                    <table class="w-full text-sm">
+                      <thead>
+                        <tr class="border-b border-border bg-secondary/50">
+                          {section.dataTable.headers.map((header) => (
+                            <th class="px-4 py-3 text-start font-semibold text-foreground whitespace-nowrap" scope="col">
+                              {header}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {section.dataTable.rows.map((row) => (
+                          <tr class="border-b border-border last:border-0">
+                            {row.map((cell, index) =>
+                              index === 0 ? (
+                                <th class="px-4 py-3 text-start font-medium text-foreground align-top whitespace-nowrap" scope="row">
+                                  {cell}
+                                </th>
+                              ) : (
+                                <td class="px-4 py-3 text-muted-foreground align-top whitespace-nowrap">{cell}</td>
+                              ),
+                            )}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : null}
+                {section.sectionLinks && section.sectionLinks.length > 0 ? (
+                  <div class="mt-4 flex flex-col gap-2">
+                    {section.sectionLinks.map((link) => (
+                      <a href={lp(link.path)} class="text-sm font-medium text-primary hover:underline">
+                        {link.label} →
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
               </section>
             ))}
           </div>
+
+          {resource.faqs && resource.faqs.length > 0 && (
+            <section class="mt-14 pt-10 border-t border-border">
+              <h2 class="text-2xl font-display font-semibold text-foreground mb-5">FAQ</h2>
+              <div class="space-y-5">
+                {resource.faqs.map((faq) => (
+                  <div>
+                    <h3 class="font-display font-semibold text-foreground mb-1">{faq.q}</h3>
+                    <p class="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {resource.deepDiveLinks && resource.deepDiveLinks.length > 0 && (
             <div class="mt-14 pt-10 border-t border-border">
