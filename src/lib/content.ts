@@ -51,6 +51,7 @@ export function toBlogPost(entry: BlogEntry) {
   return {
     slug: blogSlug(entry),
     title: entry.data.title,
+    seoTitle: entry.data.seoTitle,
     excerpt: entry.data.excerpt,
     pillarSlug: entry.data.pillarSlug,
     isPillar: entry.data.isPillar,
@@ -195,6 +196,7 @@ export function toProductCategory(entry: CategoryEntry) {
   return {
     slug: categorySlug(entry),
     title: entry.data.title,
+    seoTitle: entry.data.seoTitle,
     description: entry.data.description,
     features: entry.data.features,
     internalLinks: entry.data.internalLinks,

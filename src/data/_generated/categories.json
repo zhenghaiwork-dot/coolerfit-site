@@ -68,10 +68,15 @@
       {
         "label": "Bulk vs Small Batch Guide",
         "path": "/blog/bulk-vs-small-batch-orders"
+      },
+      {
+        "label": "Contractor & Facility Buying Guide",
+        "path": "/blog/custom-swamp-cooler-covers-contractors-facilities"
       }
     ],
     "relatedBlogSlugs": [
-      "bulk-vs-small-batch-orders"
+      "bulk-vs-small-batch-orders",
+      "custom-swamp-cooler-covers-contractors-facilities"
     ],
     "description": "Volume pricing for large orders of evaporative cooler covers. Ideal for property management companies, HVAC contractors, and distributors. Significant discounts on orders of 50+ units.",
     "slug": "bulk-order-cooler-covers",
@@ -123,10 +128,15 @@
       {
         "label": "Bulk vs Small Batch",
         "path": "/blog/bulk-vs-small-batch-orders"
+      },
+      {
+        "label": "Contractor & Facility Buying Guide",
+        "path": "/blog/custom-swamp-cooler-covers-contractors-facilities"
       }
     ],
     "relatedBlogSlugs": [
-      "bulk-vs-small-batch-orders"
+      "bulk-vs-small-batch-orders",
+      "custom-swamp-cooler-covers-contractors-facilities"
     ],
     "description": "Professional-grade covers designed for commercial evaporative cooling systems. Suitable for hotels, restaurants, warehouses, and office buildings.",
     "slug": "commercial-cooler-covers",
@@ -141,7 +151,7 @@
       "faqs": [
         {
           "q": "What is the minimum order for commercial covers?",
-          "a": "There is no strict minimum, but volume pricing begins at 25 units. Below that the per-unit cost is the same as our standard custom line."
+          "a": "We use a flexible low MOQ confirmed from dimensions, material, printing, total quantity, packing, destination, and shipping method. Volume pricing begins at 25 units."
         },
         {
           "q": "Can you match covers across many different unit sizes?",
@@ -153,21 +163,26 @@
         },
         {
           "q": "What is the lead time for a commercial order?",
-          "a": "Standard orders ship in 10 to 14 business days. Larger orders above 200 units typically require 3 to 4 weeks depending on fabric availability."
+          "a": "Typical production takes 10–14 business days after specifications and artwork are approved. Shipping time is separate, and orders above 200 units may require 3–4 weeks depending on complexity and fabric availability."
         }
       ]
     }
   },
   {
-    "title": "Custom Evaporative Cooler Covers",
+    "title": "Custom Evaporative & Swamp Cooler Covers",
+    "seoTitle": "Custom Swamp Cooler Covers | Low MOQ & Logo",
     "features": [
       "Made-to-measure sizing",
-      "Choice of 10+ materials",
-      "Custom opening designs",
-      "Logo printing available",
-      "Bulk order discounts"
+      "Flexible low MOQ",
+      "10–14 business day production lead time",
+      "Logo and private-label options",
+      "Mixed-size batches on one purchase order"
     ],
     "internalLinks": [
+      {
+        "label": "Contractor & Facility Buying Guide",
+        "path": "/blog/custom-swamp-cooler-covers-contractors-facilities"
+      },
       {
         "label": "Custom Materials Guide",
         "path": "/blog/custom-cover-materials"
@@ -182,28 +197,30 @@
       }
     ],
     "relatedBlogSlugs": [
+      "custom-swamp-cooler-covers-contractors-facilities",
       "custom-cooler-covers",
       "custom-cover-materials",
       "custom-cover-sizes"
     ],
-    "description": "Fully customized evaporative cooler covers built to your exact specifications. Choose your material, size, opening configuration, color, and add your brand logo. Perfect for non-standard cooler dimensions or specific functional requirements.",
+    "description": "Custom swamp and evaporative cooler covers with low MOQ, made-to-measure fit, logo options, mixed-size batches, and a clear RFQ process.",
     "slug": "custom-evaporative-cooler-covers",
     "seoContent": {
-      "intro": "Custom evaporative cooler covers are cut to your exact cabinet dimensions, material spec, and opening layout — not adjusted from a generic template. Contractors and facility teams use custom covers when standard retail sizes gap on duct clearance, branding, or fabric rating for the install environment.",
+      "intro": "Custom evaporative and swamp cooler covers are cut to your cabinet dimensions, material specification, and opening layout—not adjusted from a generic retail size. They are best suited to small-batch and multi-unit projects where fit, shared fabric, branding, or repeat ordering offsets international freight and setup cost. For a one-off replacement, local retail is often more economical.",
       "highlights": [
-        "Any width, depth, and height with controlled 1–2 in. fit slack",
+        "Flexible low MOQ confirmed from size, material, printing, quantity, and destination",
         "10+ fabric options from 300D polyester to insulated laminate",
         "Custom vents, zippers, and split corners for electrical boxes",
-        "Logo printing and mixed-size bulk batches on one purchase order"
+        "Logo or private-label printing and mixed-size batches on one purchase order",
+        "Typical production in 10–14 business days after specs and artwork approval; transit time is separate"
       ],
       "faqs": [
         {
           "q": "What is the minimum order for a custom cover?",
-          "a": "Our small-batch line accepts orders from a single unit. Volume pricing tiers apply at 25+ units."
+          "a": "We offer a flexible low MOQ rather than promising single-piece production. The practical minimum is confirmed from cover dimensions, material, printing, quantity, and shipping method. Volume pricing tiers begin at 25 units."
         },
         {
           "q": "How long does a custom cover take to produce?",
-          "a": "Most custom orders ship in 10–14 business days after dimensions and material are confirmed. Prototype samples are available on request."
+          "a": "Typical production takes 10–14 business days after dimensions, material, quantity, artwork, and order details are approved. Shipping time is quoted separately, and large or complex programs may require more time."
         },
         {
           "q": "What information do you need for a quote?",
@@ -212,6 +229,10 @@
         {
           "q": "Can I mix sizes in one custom order?",
           "a": "Yes. Send a spreadsheet of unit models and dimensions; we hold the same fabric and color across every size in the batch."
+        },
+        {
+          "q": "How does the quote process work?",
+          "a": "Send your quantity, outside dimensions, cooler type, photos, material or climate requirements, logo file if needed, destination, and required date. We review fit and shipping economics, confirm MOQ and production lead time, then issue the quote for approval."
         }
       ]
     }
@@ -220,7 +241,7 @@
     "title": "Custom Size Cooler Covers",
     "features": [
       "No reliance on generic size charts",
-      "Single unit to bulk mixed-size orders",
+      "Low-MOQ to bulk mixed-size orders",
       "Opening and hardware accommodations",
       "Prototype before fleet rollout"
     ],
@@ -248,7 +269,7 @@
     "seoContent": {
       "intro": "Custom size cooler covers are our core product: every cover cut to submitted outside dimensions, with controlled slack, hem style, and tie-down placement — not adjusted from a nearest retail size.",
       "highlights": [
-        "Single-unit to mixed fleet spreadsheets",
+        "Low-MOQ to mixed fleet spreadsheets",
         "Openings for pipes, panels, and branding",
         "Material chosen for your climate class",
         "Prototype and swatch before bulk commit"
@@ -260,11 +281,11 @@
         },
         {
           "q": "Is there a minimum order?",
-          "a": "No. Small-batch line accepts one cover; volume tiers start at 25+ units."
+          "a": "Yes. We confirm a flexible project MOQ from dimensions, material, printing, quantity, destination, and shipping method; volume pricing starts at 25+ units."
         },
         {
           "q": "How fast is custom sizing turnaround?",
-          "a": "Most orders ship in 10–14 business days after spec confirmation; simple one-offs can ship in 5–7 days."
+          "a": "Typical production takes 10–14 business days after specification approval. Shipping time is quoted separately, and complex programs may require more time."
         },
         {
           "q": "Can I mix many sizes in one order?",
@@ -412,13 +433,13 @@
     "description": "Custom evaporative cooler covers for side-draft, down-draft, rooftop, window, and portable units. Compare fit, fabric, MOQ, and lead time.",
     "slug": "evaporative-cooler-covers",
     "seoContent": {
-      "intro": "Order evaporative cooler covers by outside cabinet size, cooler profile, and exposure. Standard shapes suit side-draft, down-draft, rooftop, window, and portable units; made-to-measure patterns handle pipes, control boxes, mixed fleets, and branded bulk programs. One-piece custom orders are accepted, and most confirmed custom orders ship in 10–14 business days.",
+      "intro": "Order evaporative cooler covers by outside cabinet size, cooler profile, and exposure. Standard shapes suit side-draft, down-draft, rooftop, window, and portable units; made-to-measure patterns handle pipes, control boxes, mixed fleets, and branded bulk programs. Flexible low-MOQ custom production is best suited to small batches and multi-unit projects.",
       "highlights": [
         "Made-to-measure for down-draft, side-draft, and window units",
         "Heavier 600D fabric option for high-wind regions",
         "Drawstring or elastic hem to prevent wind lift",
         "Optional bottom drainage to avoid trapped moisture",
-        "Single-unit MOQ with volume pricing from 25+ covers"
+        "Flexible project MOQ with volume pricing from 25+ covers"
       ],
       "faqs": [
         {
@@ -443,7 +464,7 @@
         },
         {
           "q": "What is the minimum order and production time?",
-          "a": "Custom orders can start at one cover. Most confirmed orders ship in 10–14 business days, with volume pricing available from 25 units."
+          "a": "The practical MOQ is confirmed from dimensions, material, printing, quantity, destination, and shipping method. Typical production takes 10–14 business days after approval; shipping is separate, and volume pricing is available from 25 units."
         }
       ]
     }
@@ -885,7 +906,7 @@
       "Standard and custom residential sizing",
       "Lightweight 600D options",
       "Draft-sealing for winter shutdown",
-      "Affordable single-unit orders"
+      "Standard sizes for local replacement sourcing"
     ],
     "internalLinks": [
       {
@@ -926,7 +947,7 @@
         },
         {
           "q": "Can I buy just one cover?",
-          "a": "Yes. Small-batch custom sizing accepts single residential orders."
+          "a": "For one standard residential replacement, local retail is usually the most economical option. Our custom program is intended for low-MOQ small batches, non-standard cabinets, and mixed-size projects."
         },
         {
           "q": "How do I pick the right type?",
@@ -1151,10 +1172,10 @@
   {
     "title": "Small Batch Cooler Covers",
     "features": [
-      "No minimum order",
+      "Flexible low MOQ",
       "Full customization",
-      "Quick turnaround",
-      "Prototype available"
+      "Mixed-size short runs",
+      "Pre-production sample when qualified"
     ],
     "internalLinks": [
       {
@@ -1170,28 +1191,28 @@
       "bulk-vs-small-batch-orders",
       "custom-cooler-covers"
     ],
-    "description": "Flexible small-batch production for unique or specialty cooler cover orders. No minimum order requirements — get as few as one custom cover made to your specifications.",
+    "description": "Flexible low-MOQ production for short runs of custom cooler covers, with project minimums confirmed from specifications, quantity, and shipping economics.",
     "slug": "small-batch-cooler-covers",
     "seoContent": {
-      "intro": "Small-batch cooler covers let you order one unit or a short run without meeting bulk minimums. Ideal for prototypes, historic buildings with odd cabinets, or contractors testing a fabric before a fleet rollout.",
+      "intro": "Small-batch cooler covers support short production runs without requiring a full bulk tier. They suit mixed-size facilities, historic buildings with unusual cabinets, and contractors validating a pattern or fabric before a larger rollout. For one standard replacement in the United States or Europe, local retail is often more economical.",
       "highlights": [
-        "No minimum quantity on the small-batch line",
+        "Flexible low MOQ confirmed for each project",
         "Full custom dimensions and openings",
-        "Prototype cover before committing to bulk",
-        "Typical lead time 5–10 business days"
+        "Pre-production sample available for qualifying orders",
+        "Typical production in 10–14 business days after specification approval; transit is separate"
       ],
       "faqs": [
         {
-          "q": "Is there a price penalty for one cover?",
-          "a": "Single-unit pricing reflects setup and cutting time. Per-unit cost drops quickly as quantity increases."
+          "q": "What is the minimum for a small-batch order?",
+          "a": "The minimum is project based rather than a guaranteed single piece. We confirm it from dimensions, material, printing, quantity, packing, destination, and shipping method."
         },
         {
-          "q": "Can I order a sample before bulk?",
-          "a": "Yes. Order one cover in production fabric or request a material swatch with your quote."
+          "q": "Can I approve a sample before production?",
+          "a": "A material swatch or pre-production sample may be arranged for a qualifying order before the full run is released."
         },
         {
-          "q": "What is the fastest turnaround?",
-          "a": "Simple rectangular covers in stock fabric often ship within 5–7 business days after proof approval."
+          "q": "What is the usual turnaround?",
+          "a": "Typical production takes 10–14 business days after specifications and any artwork are approved. Shipping time is quoted separately."
         },
         {
           "q": "When should I switch to bulk ordering?",

@@ -137,7 +137,7 @@ export const es: UiDict = {
     h1Accent: "para enfriadores evaporativos",
     heroBody:
       "Fundas para enfriadores evaporativos (cooler) de piso con ruedas — uso residencial, comercial e industrial. Mándanos medidas, fotos o planos; fabricamos a la medida y te enviamos cotización.",
-    heroMeta: "Medidas estándar · Pedido desde 1 pieza · Logo y cortes especiales",
+    heroMeta: "MOQ bajo y flexible · Medidas mixtas · Logo y cortes especiales",
     ctaQuote: "Cotización gratis",
     ctaHow: "Cómo funciona lo personalizado",
   },
@@ -189,7 +189,7 @@ export const es: UiDict = {
     onThisPage: "En esta página",
     needHelpSpec: "¿Necesitas ayuda con las especificaciones?",
     needHelpSpecBody:
-      "Envía medidas, fotos o arte — confirmamos y respondemos en un máximo de 24 horas. Pedido desde 1 pieza.",
+      "Envía medidas, fotos, cantidad o arte — confirmamos especificaciones y el MOQ práctico del proyecto en un máximo de 24 horas.",
     deepDive: "Guía completa",
     readFullGuide: "Leer la guía del blog →",
     relatedResources: "Recursos relacionados",

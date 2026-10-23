@@ -29,6 +29,7 @@ const blog = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().optional(),
     excerpt: z.string(),
     pillarSlug: z.string().optional(),
     isPillar: z.boolean(),
@@ -99,6 +100,7 @@ const categories = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./src/content/categories" }),
   schema: z.object({
     title: z.string(),
+    seoTitle: z.string().optional(),
     description: z.string(),
     features: z.array(z.string()),
     internalLinks: z.array(link),

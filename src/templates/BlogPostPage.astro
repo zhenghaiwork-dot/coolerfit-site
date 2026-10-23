@@ -35,7 +35,7 @@ const articleBreadcrumbs = breadcrumbJsonLd([
 
 <BlogLayout
   post={post}
-  title={`${post.title} | CoolerFit`}
+  title={`${post.seoTitle ?? post.title} | CoolerFit`}
   description={post.excerpt}
   canonicalPath={articlePath}
   noIndex={Boolean(post.noIndex)}

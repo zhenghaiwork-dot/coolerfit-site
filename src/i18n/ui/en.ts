@@ -134,7 +134,7 @@ export const en = {
     h1Accent: "Evaporative Cooler Covers",
     heroBody:
       "Covers for portable evaporative air coolers — the wheeled, floor-standing units used across residential, commercial, and industrial sites. Send us your dimensions, photos, or drawings; we manufacture made-to-measure.",
-    heroMeta: "Standard sizes available · MOQ from 1 unit · Logo printing & custom cutouts supported",
+    heroMeta: "Flexible low MOQ · Mixed-size orders · Logo printing & custom cutouts supported",
     ctaQuote: "Get a Free Quote",
     ctaHow: "How Custom Works",
   },
@@ -186,7 +186,7 @@ export const en = {
     onThisPage: "On this page",
     needHelpSpec: "Need help specifying?",
     needHelpSpecBody:
-      "Send dimensions, photos, or artwork — we confirm specs and reply within 24 hours. MOQ from 1 unit.",
+      "Send dimensions, photos, quantity, or artwork — we confirm specifications and the practical project MOQ within 24 hours.",
     deepDive: "Deep dive",
     readFullGuide: "Read the full blog guide →",
     relatedResources: "Related Resources",

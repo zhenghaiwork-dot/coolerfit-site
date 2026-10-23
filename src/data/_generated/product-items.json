@@ -25,11 +25,11 @@
       },
       {
         "label": "Min. Order",
-        "value": "1 Unit"
+        "value": "Project-Based Low MOQ"
       },
       {
         "label": "Lead Time",
-        "value": "7–14 Days"
+        "value": "10–14 Production Days"
       }
     ],
     "features": [
@@ -40,7 +40,7 @@
       "Design assistance included"
     ],
     "slug": "custom-logo-cover",
-    "description": "Fully branded cooler covers with your company logo, custom colors, and design elements. Perfect for HVAC contractors, property managers, and businesses wanting professional branded equipment protection. Available on any cover type."
+    "description": "Fully branded cooler covers with your company logo, custom colors, and design elements. The practical MOQ depends on artwork, print method, material, cover sizes, quantity, and shipping plan. Typical production takes 10–14 business days after artwork and specifications are approved; transit time is separate."
   },
   {
     "name": "Heavy-Duty Industrial Cover",
@@ -189,7 +189,7 @@
       },
       {
         "label": "MOQ",
-        "value": "1 Unit"
+        "value": "Project-Based Low MOQ"
       },
       {
         "label": "Prototype",
@@ -197,7 +197,7 @@
       },
       {
         "label": "Lead Time",
-        "value": "5–10 Days"
+        "value": "10–14 Production Days"
       },
       {
         "label": "Customization",
@@ -205,14 +205,14 @@
       }
     ],
     "features": [
-      "No minimum order",
+      "Flexible low MOQ",
       "Full customization",
       "Quick turnaround",
       "Prototype samples",
       "Design consultation"
     ],
     "slug": "small-batch-prototype-cover",
-    "description": "Flexible small-batch production with no minimum order requirements. Get prototypes before committing to large orders. Ideal for testing new designs, one-off custom projects, or specialty applications."
+    "description": "Flexible low-MOQ production for short runs, mixed sizes, and specialty requirements. Material swatches or pre-production samples may be arranged for qualifying orders before a larger release. The confirmed MOQ depends on dimensions, material, quantity, printing, destination, and shipping method."
   },
   {
     "name": "Standard Down Draft Cover",

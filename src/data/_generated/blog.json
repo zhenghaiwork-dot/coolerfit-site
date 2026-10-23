@@ -357,7 +357,8 @@
       "custom-cover-sizes",
       "custom-opening-designs",
       "logo-printing-on-cooler-covers",
-      "bulk-vs-small-batch-orders"
+      "bulk-vs-small-batch-orders",
+      "custom-swamp-cooler-covers-contractors-facilities"
     ],
     "internalLinks": [
       {
@@ -383,6 +384,10 @@
       {
         "label": "Custom products",
         "path": "/products/custom-evaporative-cooler-covers"
+      },
+      {
+        "label": "Contractor and facility buying guide",
+        "path": "/blog/custom-swamp-cooler-covers-contractors-facilities"
       },
       {
         "label": "Get a quote",
@@ -429,8 +434,8 @@
         "body": "",
         "bullets": [
           "1. Submit dimensions + photos → quote with material options",
-          "2. Prototype one unit → field test fit and openings",
-          "3. Approve pattern → bulk or small-batch production",
+          "2. For a qualifying production order, approve the pattern or pre-production sample → field-test fit and openings",
+          "3. Approve the result → bulk or small-batch production",
           "4. Reorders use stored pattern ID — no remeasure unless the cabinet changes"
         ]
       }
@@ -587,7 +592,165 @@
       {
         "heading": "Prototype First",
         "level": "h2",
-        "body": "First order for a new model: approve one unit before fleet qty. Field-test zippers and flap placement — moving an opening after 40 covers are cut is expensive."
+        "body": "For a qualifying first production order on a new model, approve a pre-production sample or pattern before releasing the fleet quantity. Field-test zippers and flap placement — moving an opening after 40 covers are cut is expensive."
+      }
+    ]
+  },
+  {
+    "title": "Custom Swamp Cooler Covers for Contractors & Facilities",
+    "seoTitle": "Commercial Swamp Cooler Covers for Contractors",
+    "excerpt": "Plan a mixed-size cover program for rooftop and side-draft units—low MOQ, site measurements, logo options, one RFQ, and a repeatable reorder record.",
+    "pillarSlug": "custom-cooler-covers",
+    "isPillar": false,
+    "noIndex": false,
+    "internalLinks": [
+      {
+        "label": "Custom evaporative cooler covers",
+        "path": "/products/custom-evaporative-cooler-covers"
+      },
+      {
+        "label": "Commercial cooler covers",
+        "path": "/products/commercial-cooler-covers"
+      },
+      {
+        "label": "Bulk order cooler covers",
+        "path": "/products/bulk-order-cooler-covers"
+      },
+      {
+        "label": "How to measure a cooler",
+        "path": "/sizes/how-to-measure"
+      },
+      {
+        "label": "Logo printing guide",
+        "path": "/blog/logo-printing-on-cooler-covers"
+      },
+      {
+        "label": "Request a project quote",
+        "path": "/contact"
+      }
+    ],
+    "slug": "custom-swamp-cooler-covers-contractors-facilities",
+    "intro": "For multi-unit sites, a good cover program begins with an accurate asset schedule and one commercial specification—not a promise that one generic size will fit every cabinet. Use this guide to prepare a quote package, then send the project details for a confirmed low MOQ and production plan.",
+    "content": [
+      {
+        "heading": "Who This Procurement Guide Is For",
+        "level": "h2",
+        "body": "Commercial swamp cooler covers are usually purchased as a project, not as an isolated retail accessory. This guide is for HVAC contractors, facility teams, property managers, and distributors covering several rooftop, side-draft, down-draft, window, or portable units. The goal is to place different cabinet sizes under one controlled specification while keeping each cover identifiable at installation and reorder time.",
+        "bullets": [
+          "Multi-building facilities with several cooler models or installation types",
+          "Contractors preparing seasonal shutdown or replacement programs",
+          "Property portfolios that need consistent fabric, color, tie-downs, and branding",
+          "Distributors sourcing custom equipment covers specifically for evaporative cooling units"
+        ]
+      },
+      {
+        "heading": "Low MOQ Works Better Than a One-Piece Promise",
+        "level": "h2",
+        "body": "For a single standard replacement in the United States or Europe, local retail is often more economical once international freight and production setup are included. CoolerFit instead offers a flexible low MOQ for small commercial runs and mixed-size projects. The practical minimum is confirmed from finished dimensions, material, printing, total quantity, packing, destination, and shipping method; volume pricing tiers begin at 25 units.",
+        "sectionLinks": [
+          {
+            "label": "Compare low-volume and bulk ordering",
+            "path": "/blog/bulk-vs-small-batch-orders"
+          },
+          {
+            "label": "Review custom product options",
+            "path": "/products/custom-evaporative-cooler-covers"
+          }
+        ]
+      },
+      {
+        "heading": "Build an Asset Schedule Before Requesting a Quote",
+        "level": "h2",
+        "body": "Give every cooler a site or asset ID and measure the outside cabinet rather than the pad or catalog nominal size. Record protrusions, disconnect boxes, pipes, ducts, caster assemblies, control panels, and the side that must remain accessible. Photos of all four sides with a tape measure visible reduce clarification and prevent unlike cabinets from being grouped under one pattern.",
+        "dataTable": {
+          "headers": [
+            "Field",
+            "What to record",
+            "Why it matters"
+          ],
+          "rows": [
+            [
+              "Asset ID",
+              "Building, roof zone, or unit tag",
+              "Matches the finished cover to the installation point"
+            ],
+            [
+              "Outside size",
+              "Maximum width × depth × height, with one unit system",
+              "Defines the base pattern and controlled fit allowance"
+            ],
+            [
+              "Cooler configuration",
+              "Side draft, down draft, window, rooftop, or portable",
+              "Changes the opening and fastening layout"
+            ],
+            [
+              "Obstructions",
+              "Photos and measured locations of pipes, boxes, ducts, and wheels",
+              "Prevents a custom cover from binding or leaving a side exposed"
+            ],
+            [
+              "Quantity",
+              "Units required for each size or pattern",
+              "Determines MOQ, packing, and the correct price tier"
+            ]
+          ]
+        },
+        "sectionLinks": [
+          {
+            "label": "Follow the measurement checklist",
+            "path": "/sizes/how-to-measure"
+          }
+        ]
+      },
+      {
+        "heading": "Combine Mixed Sizes on One Purchase Order",
+        "level": "h2",
+        "body": "A commercial program does not need every cooler to share one size. Send one schedule with a separate row and quantity for each cabinet pattern. We can review the batch around a shared fabric, color, seam construction, tie-down method, and labeling convention while preserving the individual measurements and openings. This makes approval and future replacement clearer than averaging unlike units into a universal size.",
+        "bullets": [
+          "Group identical cabinets under one pattern ID and quantity",
+          "Keep materially different cabinets on separate rows even when nominal model names match",
+          "Use one approved fabric and color where site conditions allow",
+          "Put the asset or pattern ID on packing and reorder records"
+        ]
+      },
+      {
+        "heading": "Specify Fabric, Fastening, and Logo Requirements",
+        "level": "h2",
+        "body": "Climate and installation conditions should drive the construction. Tell us whether the covers face desert UV, rooftop wind, rain, salt air, freezing weather, dust, or indoor storage. Then note the required hem, drawstring, straps, zipper access, split corners, vents, or equipment openings. Logo or private-label printing can also be included; print method and practical MOQ depend on artwork, color count, cover material, and quantity.",
+        "sectionLinks": [
+          {
+            "label": "Compare cover materials",
+            "path": "/blog/custom-cover-materials"
+          },
+          {
+            "label": "Plan logo printing",
+            "path": "/blog/logo-printing-on-cooler-covers"
+          }
+        ]
+      },
+      {
+        "heading": "RFQ and Production Workflow",
+        "level": "h2",
+        "body": "A complete RFQ lets the factory confirm fit, production economics, and freight before an order is approved. Typical production is 10–14 business days after dimensions, materials, quantities, artwork, and pattern details are approved. Transit time is quoted separately, and large or complex programs may require additional production time.",
+        "bullets": [
+          "1. Send the asset schedule, quantities, unit type, photos, destination, and required date",
+          "2. Receive a technical review with material options, confirmed MOQ, lead time, and quote",
+          "3. Approve dimensions, opening layout, artwork, and any qualifying pre-production sample",
+          "4. Production begins after order and specification approval",
+          "5. Retain the approved pattern IDs for simpler repeat orders when the equipment has not changed"
+        ],
+        "sectionLinks": [
+          {
+            "label": "Start a commercial cover RFQ",
+            "path": "/contact"
+          }
+        ]
+      },
+      {
+        "heading": "What to Include in Your First Message",
+        "level": "h2",
+        "body": "Send enough information to distinguish a purchasing inquiry from a generic price request. The most useful first message includes company and project name, cooler type, quantity by size, outside dimensions, site photos, climate or fabric requirement, logo file if needed, delivery country and postal code, and the date the covers are required. If measurement is still in progress, send the unit list first and identify which fields remain open."
       }
     ]
   },

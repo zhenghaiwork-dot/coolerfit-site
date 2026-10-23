@@ -7,6 +7,7 @@ import generated from "./_generated/blog.json";
 export interface BlogPost {
   slug: string;
   title: string;
+  seoTitle?: string;
   excerpt: string;
   pillarSlug?: string;
   isPillar: boolean;

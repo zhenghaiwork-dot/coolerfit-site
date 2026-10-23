@@ -38,7 +38,7 @@ const canonicalPath = product.canonicalSlug
   : lp(`/products/${product.slug}`);
 const categoryMetaTitle = product.canonicalSlug
   ? `${product.title} — ${locale === "es" ? "término alternativo" : locale === "ar" ? "مصطلح بديل" : "alternate term"} | CoolerFit`
-  : `${product.title} | CoolerFit`;
+  : `${product.seoTitle ?? product.title} | CoolerFit`;
 
 const categoryProducts = (await getProductItemsByCategory(product.slug, locale)).map(toProductItem);
 const relatedPosts = (

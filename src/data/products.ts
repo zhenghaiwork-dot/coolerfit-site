@@ -4,6 +4,7 @@ import generated from "./_generated/categories.json";
 export interface ProductCategory {
   slug: string;
   title: string;
+  seoTitle?: string;
   description: string;
   features: string[];
   internalLinks: { label: string; path: string }[];
