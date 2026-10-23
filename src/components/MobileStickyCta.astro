@@ -1,0 +1,142 @@
+---
+import Icon from "@/components/Icon.astro";
+import { buttonVariants } from "@/components/ui/button-variants";
+import { defaultLocale, localizedPath, type Locale } from "@/i18n/locales";
+import { ui } from "@/i18n/ui";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  locale?: Locale;
+  href?: string;
+  label?: string;
+  scrollToInquiry?: boolean;
+}
+
+const {
+  locale = defaultLocale,
+  href = localizedPath(locale, "/contact"),
+  label = ui(locale).nav.contact,
+  scrollToInquiry = false,
+} = Astro.props;
+---
+
+<div
+  class="mobile-sticky-cta lg:hidden"
+  data-mobile-sticky-cta
+  data-visible="false"
+  aria-hidden="true"
+  inert
+>
+  <div class="container py-2">
+    <a
+      href={href}
+      data-inquiry-position="mobile-sticky"
+      data-scroll-inquiry={scrollToInquiry ? "" : undefined}
+      class={cn(buttonVariants({ size: "lg" }), "w-full min-h-11 shadow-lg")}
+    >
+      <span>{label}</span>
+      <Icon
+        name={scrollToInquiry ? "ChevronDown" : "ArrowRight"}
+        size={18}
+        class={scrollToInquiry ? undefined : "rtl:rotate-180"}
+      />
+    </a>
+  </div>
+</div>
+
+<script>
+  const stickyCta = document.querySelector<HTMLElement>("[data-mobile-sticky-cta]");
+
+  if (stickyCta) {
+    const mobileQuery = window.matchMedia("(max-width: 1023px)");
+    const mobileMenu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+    const blockerSelector = [
+      "main [data-mobile-cta-stop]",
+      'main a[href^="/contact"]',
+      'main a[href^="/es/contact"]',
+      'main a[href^="/ar/contact"]',
+      'main a[href="#inquiry"]',
+      "main form",
+      "footer",
+    ].join(",");
+    const blockers = Array.from(document.querySelectorAll<HTMLElement>(blockerSelector)).filter(
+      (element) => !element.closest("[data-mobile-sticky-cta]"),
+    );
+    const visibleBlockers = new Set<Element>();
+    let frame = 0;
+
+    const fieldHasFocus = () => {
+      const active = document.activeElement;
+      return active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement || active instanceof HTMLSelectElement;
+    };
+
+    const updateVisibility = () => {
+      frame = 0;
+      const passedFirstScreen = window.scrollY > Math.max(280, window.innerHeight * 0.65);
+      const menuOpen = Boolean(mobileMenu && !mobileMenu.hidden);
+      const visible = mobileQuery.matches && passedFirstScreen && visibleBlockers.size === 0 && !menuOpen && !fieldHasFocus();
+      stickyCta.dataset.visible = String(visible);
+      stickyCta.setAttribute("aria-hidden", String(!visible));
+      stickyCta.inert = !visible;
+    };
+
+    const requestUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateVisibility);
+    };
+
+    const blockerObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visibleBlockers.add(entry.target);
+          else visibleBlockers.delete(entry.target);
+        });
+        requestUpdate();
+      },
+      { threshold: 0.12 },
+    );
+
+    blockers.forEach((element) => blockerObserver.observe(element));
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate, { passive: true });
+    document.addEventListener("focusin", requestUpdate);
+    document.addEventListener("focusout", requestUpdate);
+    mobileQuery.addEventListener("change", requestUpdate);
+
+    if (mobileMenu) {
+      new MutationObserver(requestUpdate).observe(mobileMenu, { attributes: true, attributeFilter: ["hidden"] });
+    }
+
+    updateVisibility();
+  }
+</script>
+
+<style>
+  .mobile-sticky-cta {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 40;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    border-top: 1px solid hsl(var(--border) / 0.7);
+    background: hsl(var(--card) / 0.94);
+    box-shadow: 0 -8px 30px hsl(var(--foreground) / 0.1);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(110%);
+    transition: opacity 180ms ease, transform 220ms ease;
+  }
+
+  .mobile-sticky-cta[data-visible="true"] {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-sticky-cta {
+      transition: none;
+    }
+  }
+</style>

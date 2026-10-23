@@ -5,6 +5,7 @@
 import Seo from "@/components/Seo.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import MobileStickyCta from "@/components/MobileStickyCta.astro";
 import Toaster from "@/components/Toaster.astro";
 import type { JsonLd } from "@/lib/seo";
 import { defaultLocale, localeDirs, localeHtmlLang, type Locale } from "@/i18n/locales";
@@ -24,6 +25,12 @@ interface Props {
   /** Disable browser-language redirect (use on 404 / error pages). */
   skipLocaleRedirect?: boolean;
   ogType?: "website" | "article" | "product";
+  /** Mobile-only CTA; false disables it for forms and utility/error pages. */
+  mobileCta?: false | {
+    href?: string;
+    label?: string;
+    scrollToInquiry?: boolean;
+  };
 }
 
 const {
@@ -37,7 +44,10 @@ const {
   alternatePath,
   skipLocaleRedirect = false,
   ogType = "website",
+  mobileCta,
 } = Astro.props;
+
+const mobileCtaConfig = mobileCta === false ? null : (mobileCta ?? {});
 
 const dir = localeDirs[locale];
 const lang = localeHtmlLang[locale];
@@ -94,6 +104,7 @@ const lang = localeHtmlLang[locale];
       </main>
       <Footer locale={locale} />
     </div>
+    {mobileCtaConfig && <MobileStickyCta locale={locale} {...mobileCtaConfig} />}
     <Toaster />
     <script>
       import { initInquirySourceTracking } from "@/lib/inquiry-source";

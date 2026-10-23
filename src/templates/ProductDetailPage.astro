@@ -49,6 +49,7 @@ const productBreadcrumbs = breadcrumbJsonLd([
   ogType="product"
   imageUrl={gallery[0]?.src}
   jsonLd={[productJsonLd, productBreadcrumbs]}
+  mobileCta={{ href: "#inquiry", label: t.common.customizeQuote, scrollToInquiry: true }}
 >
   <div class="pt-24 md:pt-32 pb-20">
     <div class="container">

@@ -32,7 +32,8 @@ function positionFor(anchor: HTMLAnchorElement): string {
 
 export function rememberInquirySource(anchor: HTMLAnchorElement): void {
   const destination = safePath(anchor.href);
-  if (!CONTACT_PATH.test(destination)) return;
+  const isInPageInquiry = anchor.matches("[data-scroll-inquiry]") || anchor.hash === "#inquiry";
+  if (!CONTACT_PATH.test(destination) && !isInPageInquiry) return;
 
   const source: InquirySource = {
     page: safePath(window.location.href),
